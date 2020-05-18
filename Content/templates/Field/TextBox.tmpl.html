@@ -1,0 +1,65 @@
+<div style="margin-bottom: 10px;">
+    <!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+    <div data-bind="if: _.has($data, 'ChosenForEdit') ">
+        <input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.ocx_menuClear }, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+        <div style="overflow: hidden; padding-right: 0px; padding-bottom: 8px">
+
+            <!-- ko ifnot: $data.getAddFromLookupSet() == true -->
+            <input type="text" class="hprm-text-input" style="max-width: 473px; padding-bottom: 5px" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id))}, enterKey: onEnter ">
+            <!-- /ko -->
+            <!-- ko if: $data.getAddFromLookupSet() == true -->
+            <div style="display: flex">
+                <input type="text" class="hprm-text-input" style="max-width: 427px; padding-bottom: 5px" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id))}, enterKey: onEnter ">
+
+                <div class="input-group-btn" style="display: inline-block; width: 44px">
+                    <button title="button" name="button" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" style="vertical-align:text-bottom; width: 100%; height: 31px; margin-left: 2px" data-bind="click: function () { $data.showLookupItemPanel() }, attr: {title:'Edit with Lookup Items'}">
+                        <i class="kwikselect" style="display: flex; height: 14px; width: 14px; margin-left: -1px">  </i>
+                    </button>
+                </div>
+            </div>
+            <!-- /ko -->
+            
+        </div>
+    </div>
+
+    <div data-bind="ifnot: _.has($data, 'ChosenForEdit') " style="display: flex; max-width: 550px">
+
+            <!-- ko ifnot: $data.getAddFromLookupSet() == true -->
+                <!-- ko ifnot:$data.hasIcon() == true -->
+                    <input type="text" class="hprm-text-input" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id)) }, enterKey: onEnter ">
+                <!-- /ko -->
+                <!-- ko if:$data.hasIcon() == true -->
+                    <div class="control-container" >
+                        <div style="position: relative;" class="item-picker-editing" >
+                            <div style="vertical-align: middle; font-size: medium; border: solid 1px #8e8e8e;" class="itempickerBorder">
+                                <div class="item-picker-display white-back" tabindex="0" style=" width: 100%; padding: 0px; min-height: 32px;">
+                                    <!-- ko if:$data.Icon() -->
+                                    <div data-bind="attr: { 'class': ($data.Icon().Id.toLowerCase() + '_x24 media-object item-picker-raw-icon'), 'title': $data.Value() }" style="position: absolute; z-index: 100; left: 5px; margin: 0; top: 5px; "></div>
+                                    <!-- /ko -->
+                                    <div style="position:absolute;width:100%;left: 38px;">
+                                        <input type="text" class="overflowEllipsis item-picker-raw" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id)) }, enterKey: onEnter " style = "border:none;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <!-- /ko -->
+            <!-- /ko -->
+            
+            <!-- ko if: $data.getAddFromLookupSet() == true -->
+            <div style="display: flex; max-width: 550px">
+                <div class="text-container" style="width: 100%">
+                    <input type="text" class="hprm-text-input" style="width: calc(100% - 45px);" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id)) }, enterKey: onEnter ">
+                </div>
+                <div class="input-group-btn" style="display: inline-block; width: 44px; margin-left: -44px">
+                    <button title="button" name="button" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" style="vertical-align:text-bottom; width: 100%; height: 31px; margin-left: 2px" data-bind="click: function () { $data.showLookupItemPanel() }, attr: {title:'Edit with Lookup Items', id: $data.Name + '_btn'}">
+                        <i class="kwikselect" style="display: flex; height: 14px; width: 14px; margin-left: -1px">  </i>
+                    </button>
+                </div>
+            </div>
+            <!-- /ko -->
+
+        </div>
+    
+    </div>

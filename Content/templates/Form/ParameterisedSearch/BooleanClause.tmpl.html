@@ -1,0 +1,16 @@
+﻿<div class="hprm-parameterised-search-clause">
+	<!-- ko if:$data.ClauseDefinition -->
+		<div data-bind="text:ParameterCaption"></div>
+	<!-- /ko -->
+
+	<!-- ko if:"$data.Caption" -->
+	<div data-bind="text:Caption"></div>
+	<!-- /ko -->
+    
+    <!-- ko if:$data.ClauseDefinition -->
+	<div data-bind="text:ClauseDefinition.ToolTip"></div>
+	<!-- /ko -->
+	<!-- ko if:"$data.ToolTip" -->
+	<div data-bind="text:ToolTip"></div>
+	<!-- /ko -->
+</div>

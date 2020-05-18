@@ -1,0 +1,42 @@
+<div id="top-main-menu">
+    <a style="z-index:5000;" href="#" class="navbar-product-name navbar-text" id="dropdownMenu1" data-toggle="dropdown"  aria-haspopup="true" aria-expanded="false">
+        <i class="hp-icon hp-menu-skinny hp-icon-custom" data-bind="attr:{title:HP.HPTRIM.Messages.web_menuText, 'aria-label':HP.HPTRIM.Messages.web_menuText}" ><span style="margin-left:10px;font-weight:bold;font-size:12px"></span></i>
+        <!--<span data-bind="text: panelSelected"></span>-->
+    </a>
+
+	
+  
+    <ul class="dropdown-menu  row"  id="main-menu" aria-labelledby="dropdownMenu1" data-bind="foreach:mainObjectDefsMenuPanel">
+            <li class="col-sm-1" style="width:23%">
+                <ul>
+                 <li class="dropdown-header" data-bind="attr:{id:'NAV_'+$data.Id} , click: function () {if($data.Id == 'RECORDS'){$parent.showRecordsFunction($data.type);} if($data.Id == 'HOME'){$parent.showHomeFunction($data.action);} if($data.Id == 'WORKFLOW'){$parent.showWorkflowFunction($data.action);}  else{$parent.actionHandler($data.type);}  },
+                     enterKey: function () {if($data.Id == 'RECORDS'){$parent.showRecordsFunction($data.type);} if($data.Id == 'HOME'){$parent.showHomeFunction($data.action);} if($data.Id == 'WORKFLOW'){$parent.showWorkflowFunction($data.action);}  else{$parent.actionHandler($data.type);}; $('#top-main-menu').removeClass('open') }">
+                        <a>
+                            <!--ko if:Id == "USERLABEL"-->
+                            <img style="width:26px; height:26px; margin-left:-22px; padding:5px" data-bind="attr:{src:icon}" />
+                            <!--/ko-->
+
+                            <!--ko ifnot:Id == "USERLABEL"-->
+                            <img style="margin-left:-22px; padding:5px" data-bind="attr:{src:icon}" />
+                            <!--/ko-->
+                            <span tabindex="0" style="font-weight:bold" data-bind="text: Caption, attr: { title: Caption, 'aria-label': Caption }"></span>
+                        </a>
+                 </li>                
+                 <li class="menu-items-li" id="menu-items" data-bind="attr:{id:'MENU_NAV_CREATERECORD'},visible: $root.trimClient.canCreateRecord" id="MENU_NAV_CREATERECORD">
+                         <!--ko if:$data.Id == "RECORDS"-->
+                         <a tabindex="0" data-bind="text:HP.HPTRIM.Messages.web_newRecord, attr:{ title: HP.HPTRIM.Messages.web_newRecord, 'aria-label': HP.HPTRIM.Messages.web_createNewRecord }, click:function(){$parent.addRecord()}, enterKey:function(){$parent.addRecord(); $('#top-main-menu').removeClass('open'); }"></a>
+                         <!--/ko-->
+                 </li>
+                      
+                 <!--ko if:trayPages != undefined-->
+                 <!--ko foreach: {data: $data.trayPages}-->
+                 <li id="menu-items"><a tabindex="0" data-bind="text:pageCaption, attr: { title: pageCaption, 'aria-label': pageCaption }, click:function(){$parents[1].navigateToSubMenuItems($parent,$data)}, 
+                                        enterKey:function(){$parents[1].navigateToSubMenuItems($parent,$data); $('#top-main-menu').removeClass('open'); }"></a></li>
+                 <!--/ko-->
+                 <!--/ko-->
+                </ul>
+            </li>			
+        </ul>
+	
+</div>
+

@@ -1,0 +1,164 @@
+﻿<div class="panel search-builder-panel panel-body">
+    <div style="float:right; padding-right: 20px; color: #0073e7; cursor:pointer" tabindex="0" data-bind="text: HP.HPTRIM.Messages.ocx_menuClear, attr: {title: HP.HPTRIM.Messages.ocx_menuClear }, enterKey:clear, click:clear"></div>
+    <div class="search-panel-header-title" data-bind="text: title, attr: { title: title }"></div>
+    <div class="search-pills-container" id="SearchPillContainer">
+        <!-- ko template: {name : "SearchBuilderPillTemplate", data: $data} -->
+        <!-- /ko -->
+    </div>
+    
+    <div>
+        <!-- ko if: (canBuildGroup() && buildingGroup() == false)-->
+        <div style ="padding: 10px 5px 5px 5px;">        
+            <button role="button" name="button" class="btn button-primary btn-stroke" data-bind="click: startBuildingGroup, enterKey: startBuildingGroup, text:  HP.HPTRIM.Messages.web_searchBuildGroup, attr: {title:  HP.HPTRIM.Messages.web_searchBuildGroup}" tabindex="0"></button>
+        </div>
+            <!-- /ko -->
+        <!-- ko if: buildingGroup()-->
+        <div style ="padding: 10px 5px 5px 5px;">
+            <div style="padding: 0px 0px 10px 0px;"  data-bind="text: HP.HPTRIM.Messages.web_searchBuildGroupHelp"></div>
+            <button role="button" name="button" class="btn button-primary" data-bind="click: makeGroup, enterKey: makeGroup, enable:buildGroupEnabled, text:  HP.HPTRIM.Messages.web_searchCreateGroup, attr: { title:  HP.HPTRIM.Messages.web_searchCreateGroup}" tabindex="0"></button>
+            <button role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelBuildingGroup, enterKey: cancelBuildingGroup, text: HP.HPTRIM.Messages.web_cancel, attr: { title:  HP.HPTRIM.Messages.web_cancel}" tabindex="0"></button>
+        </div>
+        <!-- /ko -->
+    
+        <hr />
+
+        <div>
+             
+            <!-- ko ifnot: (partSelected() || groupSelected() || buildingGroup() || showingField() || showingObjectControls() ) -->
+                <!-- ko if:searchBuilderPartList().length > 0   -->
+                    <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchSelectMethodOrUpdate"></div>
+                <!-- /ko -->
+                <!-- ko if:searchBuilderPartList().length == 0   -->
+                    <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchAddSearchMethod"></div>
+                <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko ifnot: (showingField() || showingObjectControls())-->
+                <!-- ko if: groupSelected() -->
+                    <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchUpdateGroup"></div>
+                    <div data-bind="hprm_field:$data.negateGroupCheckbox" />
+                    <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchSelectToAddToGroup"></div>
+                <!-- /ko -->
+            <!-- /ko -->
+
+            <!-- ko if: (showingField() || showingObjectControls() || showRawField() )-->
+                <!-- ko ifnot: partSelected -->
+                    <!-- ko if: groupSelected -->
+                        <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchAddToGroup"></div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: groupSelected -->
+                        <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchAdd"></div>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: partSelected -->
+                    <div class="search-builder-h5" data-bind="text: HP.HPTRIM.Messages.web_searchUpdate"></div>
+                <!-- /ko -->
+
+                <div>
+                    <!-- ko ifnot: showRawField -->
+                    <div data-bind="attr: {class: ($data.currentClause() ? $data.currentClause().Icon.toLowerCase() + '_x16' : '')}" style="padding-bottom:10px; display: inline-block">
+
+                        <span data-bind="text: $data.currentClause().Caption"  style="padding-left:20px; padding-right:20px; display: inline; font-family:Metric-Semibold"></span>
+                        <!-- make this like a button o_O -->
+                        <div class="help_x16" style="width:20px;display: inline-block" data-bind="click: toggleClauseHelp, enterKey: toggleClauseHelp, attr: {title: HP.HPTRIM.Messages.dp_cap_Help }" tabindex="0">&nbsp;</div>
+                        <!-- ko if: showClauseHelp -->
+                        <div style="display: inline-block; max-width:550px" data-bind="text: $data.currentClause().ToolTip"></div>
+                            <!-- ko if: $data.currentClause().ParametersTooltip -->
+                            <div style="display: inline-block; color: #0073E7;display: inline-block" data-bind="text:HP.HPTRIM.Messages.web_seeMore, click: toggleClauseParamaterHelp, enterKey: toggleClauseParamaterHelp, attr: {title: HP.HPTRIM.Messages.web_seeMore }" tabindex="0"></div>
+								
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+                    <div id="negateCheckbox" data-bind="hprm_field:$data.negateCheckbox" style="padding-bottom:10px" />
+                    <!-- /ko -->
+
+                    <!-- ko if: showingObjectControls -->
+                        <div>
+                            <select id="searchStyle" style="height:31px; margin: 0 0 10px 0; max-width:250px !important;"
+                                    data-bind="value: selectedMethodValue, options: $data.inputMethods(),optionsValue: 'value', optionsText: 'text', selectedOption: $parent.selectedMethod"></select>
+                        </div>
+                
+                        <!-- ko if: (selectedMethodValue() == itemMethod.value) -->
+                            <div style="max-width: 400px">
+                                <!-- ko ifnot: showingLookupSet -->
+                                <!-- ko hprm_field: $data.currentItemPicker --><!-- /ko -->
+                                <!-- /ko -->
+                                <!-- ko if: showingLookupSet -->
+                                <!-- ko hprm_field: $data.currentLookupSetField --><!-- /ko -->
+                                <!-- /ko -->
+
+
+
+                                <!-- ko if: showIsRecursive-->
+                                <div data-bind="hprm_field:$data.recursiveCheckbox" style="padding-bottom:10px" />
+                                <!-- /ko -->
+                            </div>
+                        <!-- /ko -->
+
+                        <!-- ko if: (selectedMethodValue() == subSearchMethod.value) -->
+                            <div style="max-width: 250px; display:inline-block; font-size:0px">
+                                <div style="max-width: 222px; display:inline-block; vertical-align: bottom;"  data-bind="hprm_field: $data.subQueryDecorator"></div>
+                                <div style="width: 28px; display:inline-block;">
+                                    <button tabindex=" 0" role="button" name="button" id="id" class="btn" data-bind="click: editSubQueryClick, attr: { title: HP.HPTRIM.Messages.web_searchComposeSubSearch}" style="padding: 0px 0px 0px 2px; color: #595959; margin-bottom:10px; background-color: #fff; width: 32px;min-width:32px; border-color: #cfcfcf;">
+                                            <span style="height: 24px; width: 24px;" class="subsearch_x24 media-object"></span>
+                                    </button>
+                                </div>
+                            </div>
+                        <!-- /ko -->
+                            
+
+                        <!-- ko if: showParamaterHelp -->
+                            <div style="padding: 5px 5px 5px 5px; max-width:250px; overflow-wrap:break-word">
+                                <pre data-bind="text: $data.currentClause().ParametersTooltip"></pre>
+                            </div>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                
+                    <!-- ko if: showRawField() -->
+                    <div style="max-width: 250px">
+                        <!-- ko hprm_field: $data.rawField --><!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+
+                    <!-- ko if: showingField() -->
+
+                        <div data-bind="style: {width: currentFieldIsDate() ? '500px' : '400px' }">
+                            <!-- ko hprm_field: $data.currentField --><!-- /ko -->
+                        </div>
+
+                        <!-- ko if: showParamaterHelp -->
+                            <div style="border: 1px solid grey; padding: 5px 5px 5px 5px; max-width:550px; overflow-wrap:break-word">
+                                <pre data-bind="text: $data.currentClause().ParametersTooltip"></pre>
+                            </div>
+                        <!-- /ko-->
+
+                        <!-- ko if: showGroupWordsCheckbox -->
+                            <div data-bind="hprm_field:$data.groupWordsCheckbox" style="padding-bottom:10px" />
+                        <!-- /ko -->
+                    <!-- /ko -->
+
+                </div>
+            <!-- /ko -->
+
+        
+            <!-- ko if: !partSelected() && (showingField() || showingObjectControls())-->
+                <hr />
+                <div style="margin-top: 10px">
+                    <button role="button" name="button" class="btn button-primary" data-bind="click: addNewPart, text: HP.HPTRIM.Messages.web_addSearchClause, attr: { title: HP.HPTRIM.Messages.web_addSearchClause,id :'web_addSearchClause'}" tabindex="0"></button>
+                    <button role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelAddNewPart, text: HP.HPTRIM.Messages.web_cancel, attr: {title: HP.HPTRIM.Messages.web_cancel, id :'web_cancelSearchClause'}" tabindex="0"></button>
+                </div>
+            <!-- /ko -->
+    
+
+            <!-- ko if: (partSelected() || groupSelected()) -->
+                <hr />
+                <div style="margin-top: 10px">
+                    <button role="button" name="button" class="btn button-primary" data-bind="click: finishUpdating, text: HP.HPTRIM.Messages.web_searchFinishUpdatingPart, attr: {title: HP.HPTRIM.Messages.web_searchFinishUpdatingPart,}" tabindex="0"></button>
+                </div>
+            <!-- /ko -->
+
+        </div>
+
+    </div>
+</div>
+

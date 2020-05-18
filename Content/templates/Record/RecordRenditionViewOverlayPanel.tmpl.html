@@ -1,0 +1,15 @@
+﻿<div id="recordRenditionViewOverlayContainerDiv" data-bind="attr: { 'class': cssClass() + ' record-view-overlay-container'}, slideVisible: true">
+	<div class="HPRM-overlay-view-panel alignItemsMiddle">
+		<!-- ko if:$parents[3].isLoading -->
+			<span data-bind="text: HP.HPTRIM.Messages.web_loadingMask"></span>
+		<!-- /ko -->
+		<!-- ko if: $parents[3].recordHtml() == "" -->
+		<h3 data-bind="text: HP.HPTRIM.Messages.web_unableToViewDocumentsOfThisType"></h3>
+		<p data-bind="text: HP.HPTRIM.Messages.web_downloadElectronicAttachmentToYourDevice"></p>
+		<!-- /ko -->
+		<!-- ko ifnot: $parents[3].recordHtml() == "" -->
+		<div class="HPRM-overlay-content" data-bind="htmlAsync: $parents[3].recordHtml, attr: { style: $parents[3].minWidthString }">
+		</div>
+		<!-- /ko -->
+	</div>
+</div>

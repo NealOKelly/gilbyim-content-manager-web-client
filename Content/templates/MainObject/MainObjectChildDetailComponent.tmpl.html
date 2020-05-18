@@ -1,0 +1,45 @@
+﻿<div id="childDetailsCmpt" class="col-md-12" style="margin-left: 0; border: 0; border-top: 1px solid #d7d7d7; padding-bottom: 0; margin-bottom: 0; width: 100%;">
+    <div style="width:100%;">
+
+        <!-- Update button goes here.... -->
+        <div style="height: auto;">
+            <!-- ko if: detailComponent.canUpdate -->
+            <button role="button" name="update" class="btn button-primary" data-bind="click: detailCompnent.updateButtonClick, attr: { title: '' }, text: HP.HPTRIM.Messages.web_update"></button>
+            <!-- /ko -->
+            <!-- ko detailComponent.canDelete -->
+            <button role="button" name="delete" id="DeleteButton" class="btn button-primary" data-bind="click: detailComponent.deleteButtonClick, attr: { title: HP.HPTRIM.Messages.web_delete }, text: HP.HPTRIM.Messages.web_delete"></button>
+            <!-- /ko -->
+            <!-- Update tasks -->
+            <!-- Use parent to get out of foreach context -->
+            <!-- ko foreach: detailComponent.visibleUpdateTasks -->
+            <!-- ko if: $data.icon -->
+			<button role="button" name="button" id="id" data-bind="click: $parent.detailComponent.handleUpdateTaskClick, clickBubble: false, attr: { title: caption,  class: 'btn btn-default quaternary-button ' + (disabled? 'disabled' : '')}" style="padding: 0 0 0 7px;">
+				<span style="height: 24px; width: 24px; " data-bind="attr: { class: $data.icon + ' media-object'}" />
+			</button>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.icon -->
+            <button role="button" name="button" id="id" data-bind="click: $parent.detailComponent.handleUpdateTaskClick, attr: { title: caption, class: 'btn button-primary' }, text: caption"></button>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- Navigation tasks -->
+            <!-- Use parent to get out of foreach context -->
+            <!-- ko foreach: detailComponent.navigationTasks -->
+            <!-- ko if: $parent.detailComponent.navTaskVisible($data) -->
+			<button role="button" name="button" id="id" class="btn quaternary-button " data-bind="click: $parent.detailComponent.doNavTask, clickBubble: false, attr: { title: caption }" style="padding: 0 0 0 7px;">
+				<span style="height: 24px; width: 24px; " data-bind="attr: { class: $data.icon + ' media-object'}" />
+			</button>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- End action buttons. -->
+        </div>
+
+        <!-- Action Results -->
+        <div style="margin-left: 0; margin-top: 10px; min-height:30px;" class="col-md-12">
+            <div class="HPRM-deluxe-list-item-data pull-left" data-bind="if: detailComponent.actionResultDisplay">
+                <span class="label label-primary" id="recordRequestsInformationLabel" data-bind="text: detailComponent.actionResult"></span>
+            </div>
+        </div>
+
+
+    </div>
+</div>

@@ -1,0 +1,11 @@
+<div style="float:left;width:100%;margin:10px" >
+	<div data-bind="if:$data instanceof Array">							
+		<div>
+		<!-- ko foreach:$data -->
+				<div>
+					<a class="text-white" data-bind="text: $data, attr: { href: '#' + $data }, event: { click: $parents[1].stayhere }" href="#"></a>			
+				</div>
+			<!-- /ko  -->	
+		</div>				
+	</div>
+</div>

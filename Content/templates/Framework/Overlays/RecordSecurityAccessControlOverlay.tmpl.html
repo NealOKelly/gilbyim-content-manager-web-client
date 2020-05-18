@@ -1,0 +1,28 @@
+﻿<div tabindex="-1" aria- data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_showSecurityAccess"></div>
+    </div>
+
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+
+    <div class="modal-body hprm-modal-body" id="RecordSecurityAccessControlOverlay">
+        <!-- ko if: recordSecurityDecorator() -->
+        <div data-bind="hprm_field:recordSecurityDecorator"></div>
+        <!-- /ko -->
+        <!-- ko if: recordAccessControlDecorator() -->
+        <div style="padding-top:10px" data-bind="hprm_field:recordAccessControlDecorator"></div>
+        <!-- /ko -->
+    </div>
+
+    <div class="hprm-modal-footer modal-footer ">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: isMultipleOperation()? doUpdateMultiple:doUpdate, text:HP.HPTRIM.Messages.web_save, attr: {'alt': HP.HPTRIM.Messages.web_save, 'title': HP.HPTRIM.Messages.web_save}"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>

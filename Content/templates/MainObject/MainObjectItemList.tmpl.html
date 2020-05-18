@@ -1,0 +1,97 @@
+﻿<div class="itemlist-container">
+
+    <div class="itemlist-header"  data-bind="attr:{id:owningPanel.id +'_itemlistHeader'  }" style="width:100%">
+        <div>
+            <div class="itemlist-header-result-size">
+                <!-- ko if: owningPanel.displayQuery -->
+                <div class="listPadding">
+                    <div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+                        <span data-bind="text: owningPanel.queryDisplayString" style="overflow-wrap: break-word;"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: owningPanel.displayQuery -->
+                <div class="listPadding">
+                    <div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+                        <span>&nbsp;</span>
+                    </div>
+                </div>
+                <!-- /ko -->
+                <!-- ko if: owningPanel.searching() && owningPanel.searchingString() -->
+                <div class="listPadding">
+                    <div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+                        <span>
+                            <img alt="progress_indicator" style="height: 16px; width: 16px; display: inline-block" data-bind="attr:{'src': HP.HPTRIM.Icons.progressLoading}" />
+                        </span>
+                        <span data-bind="text: owningPanel.searchingString"></span>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+
+            <div class="itemlist-header-paging-control">
+                <!-- Show the select all only if we are showing selections, there are results and we aren't searching -->
+                <!-- ko if: ( !owningPanel.noResults() && !owningPanel.searching() ) -->
+
+                <div style="width:100%; height: 100%;">
+                    <div class="alignItemsCenter customCheck" style="vertical-align: top; display:inline-block;">
+                        <!-- ko if: ( owningPanel.showSelected()) -->
+                        <input type="checkbox" data-bind="checked: owningPanel.selectAllCheckbox, attr:{id: owningPanel.id +'_selectAll'}" style="margin-left: -2px !important;" />
+                        <label data-bind="attr: { title: HP.HPTRIM.Messages.web_selectDeselectAllByPage, 'aria-label': HP.HPTRIM.Messages.web_selectDeselectAllByPage, for: owningPanel.id +'_selectAll' }" style="height: 26px; width: 30px;">&nbsp;</label>
+                        <!-- /ko -->
+                        <!-- ko if: ( !owningPanel.showSelected()) -->
+                        <div style="height: 26px; width: 42px;">&nbsp;</div>
+                        <!-- /ko -->
+                    </div>
+
+                    <div style="display: inline-block;position: absolute;background: white; height:35px;width: 80%;">
+
+                        <!-- ko template:{ name: $parent.plugin.templateName(),  data: $parent.plugin} --> <!-- /ko -->
+                        <a style="position:absolute; margin-left:10px; margin-top:3.5px" data-bind="event: {click:function() { owningPanel.getCount(); } }, visible:owningPanel.countEnabled()">Count</a>
+                        <span style="position:absolute; margin-left:10px; margin-top:3.5px" data-bind="text:owningPanel.count, visible:!(owningPanel.countEnabled())"></span>
+                        <span style="position:relative; margin-left:60px; margin-top:3.5px" class="loading" data-bind="visible: owningPanel.isLoading()"> Counting <i class="fa fa-spinner fa-spin" style="font-size:20px"></i> </span> 
+
+
+                    </div>
+                </div>
+
+                <!-- /ko -->
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="no-results-container">
+        <!-- ko if: owningPanel.noResults -->
+        <div class="listPadding">
+            <div style="margin-top: 10px">
+                <div style="height: 48px; width: 48px; margin-top: 5px; display: inline-block" data-bind="attr:{title: HP.HPTRIM.Messages.web_noRecordsFound}" class="information_x32 col-md-2">
+                </div>
+                <div class="text-black" style="display: inline-block; vertical-align: top; font-size: 14pt; margin: 10px 0 10px 0;" data-bind="text: noBaseObjectFound"></div>
+            </div>
+            <div class="text-black" style="display: inline-block; vertical-align: top; font-size: 12pt; margin: 10px 0 10px 0;" data-bind="text: noResultsTitle"></div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+
+
+
+
+
+    <!-- ko template: {name : "MainObjectItemListTemplate", data: $data  } -->
+    <!-- /ko -->
+
+    <div class="search-result-footer" style="z-index:999999;">
+        <div style="text-align:center" data-bind="if: $parent.plugin.isLoading()">
+            <span data-bind="text:HP.HPTRIM.Messages.web_loading+'...'"></span>
+            <img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" />
+
+        </div>
+    </div>
+
+</div>
+

@@ -1,0 +1,22 @@
+﻿<div style="width: 100%; min-height:25px;">
+	<div style="display:inline-block">
+		<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+	</div>
+</div>
+<div class="row" data-bind="template: {afterRender: doAfterRender()}">
+	<div class="col-lg-6" style="padding:0px; width:45%; display:inline-block">
+		<span class="fromNumberRange" data-bind="text: HP.HPTRIM.Messages.web_From_Date"></span>
+		<div class='input-group date' data-bind="attr: {id: Id + '_from_container' }" style="width:87%;">
+			<input type='number' class="form-control hprm-text-input" style="height: 34px; padding: 6px;" data-bind="value: ValueFrom, event: { focus: focusCallback, blur: onblur }, disable: isDisable()" />
+		</div>
+	</div>
+
+	<div class="col-lg-6" style="width:45%; display:inline-block">
+		<span class="toNumberRange" data-bind="text: HP.HPTRIM.Messages.web_To_Date">
+		</span>
+		<div class='input-group date' data-bind="attr: {id: Id + '_to_container' }" style="width:87%;">
+			<input type='number' class="form-control hprm-text-input" style="height: 34px; padding: 6px;" data-bind="value: ValueTo, event: { focus: focusCallback, blur: onblur }, disable: isDisable()" />
+		</div>
+	</div>
+</div>
+

@@ -1,0 +1,24 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text:customiseAccess"></div>
+        <!-- ko if: showMessage -->
+        <div class="hprm-modal-error alert" style="max-width: 600px">
+        </div>
+        <!-- /ko -->
+
+    </div>
+    <div class="create-location-overlay-body">
+        <div class="modal-body" data-bind="text: HP.HPTRIM.Messages.web_selectAccessLocations"></div>
+
+        <div style="padding:5px 25px 10px 25px">
+            <div data-bind="hprm_field:locationPicker"></div>
+        </div>
+    </div>
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" type="submit" data-bind='click: ok, text: HP.HPTRIM.Messages.web_save' class="btn btn-flat btn-primary"></button>
+            <button id="cancelBtn" role="button" name="button" type="button" data-bind='click: cancel , text: HP.HPTRIM.Messages.web_dp_cancelText' class="btn btn-flat btn-secondary"></button>
+        </div>
+    </div>
+</div>

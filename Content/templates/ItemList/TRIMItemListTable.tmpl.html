@@ -1,0 +1,34 @@
+﻿<!-- ko if: (!$data.getPlugin('fieldchooser') || !$data.getPlugin('fieldrenderer')) -->
+<div class="alert alert-danger">
+	<strong>Error</strong> This template can only be used with an ItemList that has the FieldChooser and FieldRenderer plugins.
+</div>
+<!-- /ko -->
+
+<!-- ko if: ($data.getPlugin('fieldchooser') && $data.getPlugin('fieldrenderer')) -->
+<table class="table as-itemlist">
+	<thead>
+		<tr>
+			<th style="width:20px;" class="as-itemlist-selection"></th>
+			<!-- ko foreach: $data.getPlugin('fieldchooser').selectedFields -->
+			<th data-bind="css: 'as-itemlist-field-' + $data.InternalName">
+				<!-- ko template: {name: 'templates/Framework/ItemList/ColumnHeader', data: {field: $data, itemList: $parent }}--><!-- /ko  -->
+			</th>
+			<!-- /ko -->
+		</tr>
+	</thead>
+	<tbody data-bind="foreach: items">
+		<tr>
+			<td class="as-itemlist-selection">
+				<!-- ko if: $parent.getPlugin('selection') && $data.Fields[$parent.getPlugin('selection').keyField] -->
+				<input type="checkbox" data-bind = "checked: $data.isSelected" />
+				<!-- /ko -->                    
+			</td>
+			<!-- ko foreach: $parent.getPlugin('fieldchooser').selectedFields -->
+			<td data-bind="css: 'as-itemlist-field-' + $data.InternalName">
+				<!-- ko template: {name: 'templates/Framework/ItemList/FieldValue', data: {field: $data, itemList: $parents[1], item: $parent }}--><!-- /ko  -->
+			</td>
+			<!-- /ko -->
+		</tr>
+	</tbody>
+</table>
+<!-- /ko -->

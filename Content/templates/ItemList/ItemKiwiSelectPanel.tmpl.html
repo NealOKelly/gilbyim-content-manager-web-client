@@ -1,0 +1,32 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: itemTitle()"></div>
+    </div>
+
+    <div class="hprm-modal-header modal-header">
+        <input type="text" id="global-search-input" style="width: 432px; min-width: 0px; border: solid 1px #757575 " data-bind="value: searchField, enterKey: onSearchEnter, escapeKey: onSearchEscape, valueUpdate:'afterkeydown', attr:{'placeholder': HP.HPTRIM.Messages.web_enterSearchQuery, title: HP.HPTRIM.Messages.web_enterSearchQuery, 'aria-label': HP.HPTRIM.Messages.web_enterSearchQuery, class: searchFieldClass() }" />
+        <!-- Pull right will bring it across on the same line as the search field. -->
+        <button type="submit" class="btn button-primary global-search-btn pull-right" data-bind="click: $data.executeSearch, clickBubble: false, attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }" style="border-radius:3px;min-width: 60px;padding-top: 2px;margin:0 36px 3px -3px !important">
+            <div class="search_24" style="height: 24px; width: 24px;" data-bind="attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }"></div>
+        </button>            
+    </div>
+    <div class='hprm-modal-body modal-body'>
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;margin-top:20px">
+            <!-- ko if: $data.itemScrollListPanel -->            
+                <div class="as-spa-content-main clsScrollListPanel">
+                    <!--ko as_panel: $data.itemScrollListPanel  --><!-- /ko-->
+                </div>
+            <!-- /ko-->
+        </div>
+    </div>
+    <div class="hprm-modal-footer modal-footer">
+        <div>
+
+            <button role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: okHandler, text: HP.HPTRIM.Messages.web_ok"></button>
+            <button role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>
+<!-- object properties! -->
+<!-- ko as_panel: $data.objectPropertiesPanel --><!-- /ko -->
+

@@ -1,0 +1,12 @@
+
+<div class="btn-group hidden-xs visible-lg visible-md visible-sm" style="display: inline-block !important; float: left; width: 10%; margin-top: 1px;">
+	<button role="button" name="button" class="btn btn-stroke btn-medium dropdown-toggle hp-icon hp-add color-blue  hidden-xs visible-lg visible-md visible-sm" data-toggle="dropdown" style="height: 28px; width: 50px; border-radius: 0px; border-top: 0; border-bottom: 0px;"></button>
+    <ul class="dropdown-menu hprm-dropdown-new-location">
+        <!-- ko foreach:enumValues -->
+        <li>
+            <a href="#" data-bind="	click: function () { $parent.onClick( $parent, $data ) }"><div data-bind="	text: caption, attr: { class: icon }" style="padding-left:20px; margin-left:-10px" /></a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>
+

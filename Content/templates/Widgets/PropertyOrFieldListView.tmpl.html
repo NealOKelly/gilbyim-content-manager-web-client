@@ -1,0 +1,53 @@
+﻿<div data-bind="foreach: propertyOrFields" id="listContainer">
+    
+    <div tabindex="0" class="propertyContainer">
+
+        <!--     
+            Caption: string,
+			isSimpleValue: boolean,
+			displayValue: string,
+			isLink: boolean,
+			url: string,
+			isSupportedObject: boolean,
+			Uri: string
+			objectType: string,
+			isGps: boolean,
+			gpsValue: string,
+			isEmailAddress: boolean,
+        -->
+
+        <div>
+            <label class="propCaption" data-bind="text: Caption + ':' "> </label>
+        </div>
+        
+        <!-- ko if: $data.isSupportedObject -->
+        <div class="propValue" >
+                <a data-bind="text: displayValue, click: $parents[2].search, clickBubble:false, attr: { href: url }" />
+        </div>
+        <!-- /ko -->
+        <!-- ko if: $data.isLink -->
+        <div class="propValue">
+            <a data-bind="text: $data.displayValue, attr: { href: $data.url, target:'_blank' }" />
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $data.isEmailAddress -->
+        <div class="propValue">
+            <a data-bind="text: $data.displayValue, attr: { href: $data.url, target:'_blank' }" />
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $data.isGps-->
+        <div class="propValue">
+            <!-- ko if: $data.displayValue -->
+            <a data-bind="text: $data.displayValue, click: $parents[2].showMap, clickBubble:false, attr: { href: url }" />
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+
+        <!-- ko if: $data.isSimpleValue -->                                
+            <div class="propValue" style="white-space:pre-wrap; word-wrap:break-word" data-bind="text: $data.renderer.format()" />
+        <!-- /ko -->
+    </div>
+    
+</div>

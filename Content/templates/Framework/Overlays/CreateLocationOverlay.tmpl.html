@@ -1,0 +1,26 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:close">
+<div class="hprm-modal-header modal-header">
+	<div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_createLocationFormTitle + ' ' + typeOfLocation()"></div>
+    <!-- ko if: showMessage -->
+	<div class="hprm-modal-error alert" style="max-width: 600px">
+		<span data-bind="text: message"></span>
+	</div>
+    <!-- /ko -->
+</div>
+<div class="create-location-overlay-body">
+    <div class='hprm-modal-body createLocOvrLy'>
+        <div data-bind="if: $data.locationDataEntryForm() !== null" class="listPadding listPaddingRight" style="max-width: 575px">
+
+            <!-- ko as_panel: $data.locationDataEntryForm() -->
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<div class="modal-footer hprm-modal-footer">
+    <div style="max-width: 575px;">
+		<button id="saveBtn" role="button" name="button" type="submit" data-bind='click: submit, text: HP.HPTRIM.Messages.web_save' class="btn btn-flat btn-primary"></button>
+		<button id="cancelBtn" role="button" name="button" type="button" data-bind='click: close, text: HP.HPTRIM.Messages.web_dp_cancelText' class="btn btn-flat btn-secondary"></button>
+    </div>
+</div>
+</div>
+

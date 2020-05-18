@@ -1,0 +1,32 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:finishHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_uncomplete + ' ' + HP.HPTRIM.Messages.web_activity"></div>
+
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body" id="uncompleteActivityOverlay">
+        <div style="display: inline-block; width: 50%; min-width: 360px; margin-top: 10px;">
+
+            <div>
+                <div style="margin-bottom: 10px;">
+
+                    <!-- ko template: {name: reasonField.template, data : $data.reasonField } -->
+                    <!-- /ko  -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <!--<button role="button" name="button" class="btn button-primary" data-bind="click: checkIn, text: HP.HPTRIM.Messages.web_uncomplete"></button>-->
+            <button id="uncmpBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: onUncomplete, text: HP.HPTRIM.Messages.web_uncomplete"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: finishHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>

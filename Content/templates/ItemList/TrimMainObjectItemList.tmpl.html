@@ -1,0 +1,50 @@
+﻿<ul class="HPRM-deluxe-list listPadding listPaddingRight panel-group" data-bind="foreach: { data: items, as: 'item' }" id="MainObjectAccordion">
+
+	<li data-bind="with:Fields" class="HPRM-deluxe-media panel panel-default" style="height: 100%; background-color: none;">
+
+		<a data-toggle="collapse" data-parent="#MainObjectAccordion" data-bind="attr:{'href': '#' + Uri}">
+			<div style="height: 100%; display: inline-table; width: 100%;" data-bind="attr: { 'class':  'deluxeDataRow' }, style: { background:  '#eaeaea' } ">
+				<div>
+					<!-- The icon -->
+					<div class="pull-left HPRM-deluxe-media-object" style="height: 64px">
+						<!-- ko if: Icon -->
+						<span style="height: 32px; width: 32px; margin-bottom: 5px" data-bind="attr: { 'class': (Icon.Id.toLowerCase() + '_x24 media-object'), 'title': NameString }" />
+						<!-- /ko -->
+					</div>
+					<div class="HPRM-deluxe-media-body" style="height: 100%">
+						<div style="height: 100%; min-height: 75px;">
+							<div class="HPRM-record-list-item-header">
+								<div data-bind="text: Uri" class="pull-left listPadding HPRM-deluxe-header-left"></div>
+							</div>
+							<div data-bind="text: NameString" class="HPRM-deluxe-title listPadding overflowEllipsis"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</a>
+		<!-- The Detail Component -->
+		<div>
+			<div data-bind="attr:{'id': Uri}" class="panel-collapse collapse">
+				<div class="panel-body" style="padding:0">
+					<div style="position: relative; overflow: visible; min-height: 50px;">
+						<div class="pull-left HPRM-deluxe-media-object mediaObject" style="position: absolute; cursor: pointer; height: 100%">
+							<!-- Extension of the icon part of the top card -->
+						</div>
+						<div class="HPRM-deluxe-media-body" style="margin-left: 75px; overflow: visible">
+							<div id="MainObjectDetailsCmpt" class="col-md-12" style="display: inline-flex; margin-left: 0; border: 0; border-top: 1px solid #d7d7d7; padding-bottom: 0; margin-bottom: 0; width: 100%;">
+								<div style="margin-left: 2.5641%; padding-right: 2.5641%; display:inline-block; padding-top:10px;">
+									<button role="button" name="button" class="btn button-primary" data-bind="attr: { title: HP.HPTRIM.Messages.web_openInClassicMode }, text: HP.HPTRIM.Messages.web_openInClassicMode, event:{click:function(){ HP.HPTRIM.TrimHelper.openInClassicMode(Uri, TrimType);} } "></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+	</li>
+
+
+</ul>

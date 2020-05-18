@@ -1,0 +1,33 @@
+﻿<!-- A list of all record additional fields -->
+<div class="hprm-modal-header modal-header">
+	<div style="max-width: 575px;">
+		<div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_recordAdditionalField"></div>
+	</div>
+	
+	<!-- ko if: showMessage -->
+	<div class="hprm-modal-error alert" style="max-width: 600px">
+		<span data-bind="text: message"></span>
+	</div>
+	<!-- /ko -->
+</div>
+<!-- ko ifnot: showMessage -->
+<div class="create-location-overlay-body">
+	<div class='hprm-modal-body createLocOvrLy'>
+
+		<div data-bind="with: formDefinition()" class="listPadding listPaddingRight" style="max-width: 575px">
+			<!-- ko foreach:$data.Pages -->
+			<!-- ko template: {name: 'templates/Form/Page', data : $data, afterRender: function() { $data.init() ;} } -->
+			<!-- /ko  -->
+			<!-- /ko -->
+		</div>
+	</div>
+</div>
+<!-- /ko -->
+<div class="modal-footer hprm-modal-footer">
+	<div style="max-width: 575px;">
+		<!-- ko ifnot: showMessage -->
+		<button id="saveBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="event: {click: saveAllChanges}, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, attr: {title: HP.HPTRIM.Messages.web_save}, enabled: buttonsEnabled"></button>
+		<!-- /ko -->
+		<button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="event: {click: cancelHandler}, text: HP.HPTRIM.Messages.web_dp_cancelText, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText}, enabled: buttonsEnabled"></button>
+	</div>
+</div>

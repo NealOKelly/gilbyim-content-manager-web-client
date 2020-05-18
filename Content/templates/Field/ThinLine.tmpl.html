@@ -1,0 +1,17 @@
+<!-- ko if: $parents[5].allChosenAdditionalFields.length < 1 -->
+<div class="h4 small HPRM-page-heading" style="pointer-events: none; padding-top: 0px" data-bind="text: HP.HPTRIM.Messages.web_selectAdditionalFieldsForUpdate"></div>
+<!-- /ko -->
+
+<div class="horizontal_separator" style="margin-top: 20px; margin-bottom:0; cursor: pointer;"></div>
+
+<div class="h3 small HPRM-page-heading" style="pointer-events: none;" data-bind="text: HP.HPTRIM.Messages.web_additional_Fields"></div>
+
+<div class="modal-footer hprm-modal-footer">
+	<div style="max-width: 575px;">
+
+		<button style="float: left" role="button" id="alphabeticAll" name="button" data-bind="event: {click: function(){ $parents[5].changeAdditionalFieldOrder('alphabeticAll'); }}, text: HP.HPTRIM.Messages.web_alphabetic, enabled: true, attr: {title: HP.HPTRIM.Messages.web_UDFalphabeticOrderTooltips, class: $parents[5].listOrderType() == 1? 'btn button-primary':'btn btn-default' }"></button>
+		<button style="float: left" role="button" id="alphabeticSection" name="button" data-bind="event: {click: function(){ $parents[5].changeAdditionalFieldOrder('alphabeticSection'); }}, text: HP.HPTRIM.Messages.web_section, enabled: true, attr: {title: HP.HPTRIM.Messages.web_UDFalphabeticSectionOrderTooltips, class: $parents[5].listOrderType() == 2? 'btn button-primary':'btn btn-default' }"></button>
+		<button style="float: left" role="button" id="addFieldCategory" name="button" data-bind="event: {click: function(){ $parents[5].changeAdditionalFieldOrder('addFieldCategory'); }}, text: HP.HPTRIM.Messages.dbp_category, enabled: true, attr: {title: HP.HPTRIM.Messages.web_UDFcategoryOrderTooltips, class: $parents[5].listOrderType() == 3? 'btn button-primary':'btn btn-default' }"></button>
+
+	</div>
+</div>

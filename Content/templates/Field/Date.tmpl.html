@@ -1,0 +1,37 @@
+
+<div data-bind="if: _.has($data, 'ChosenForEdit') ">
+	<div style="margin: 0 0 10px 0;position:relative" data-bind="template: {name: '', afterRender: doAfterRender()}">
+
+		<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} -->
+		<!-- /ko -->
+		<input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+		<div style="overflow: hidden; padding-right: 0px; width: 240px; padding-bottom: 8px">
+			<div class='input-group date' data-bind="attr: {id: Id + '_container' }">
+				<input type='text' class="form-control" style="height: 34px; padding-left: 10px;" data-bind="value: computedValue, event: { focus: focusCallback, blur: onblur }, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, placeholder:dateTimeFormatPlaceHolder}" />
+				<span class="input-group-addon">
+					<span class="hp-icon hp-calendar"></span>
+				</span>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<div data-bind="ifnot: _.has($data, 'ChosenForEdit') ">
+
+	<div style="display: inline-block; margin: 0 10px 10px 0;position:relative" data-bind="template: {name: '', afterRender: doAfterRender()}">
+
+		<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} -->
+		<!-- /ko -->
+
+		<div class='input-group date' style="width: 240px" data-bind="attr: {id: Id + '_container' }">
+			<input type='text' class="form-control" style="height: 34px; padding-left: 10px;" data-bind="value: computedValue, event: { focus: focusCallback, blur: onblur }, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, placeholder:dateTimeFormatPlaceHolder}" />
+			<span class="input-group-addon">
+				<span class="hp-icon hp-calendar"></span>
+			</span>
+		</div>
+
+	</div>
+</div>
+
+

@@ -1,0 +1,84 @@
+﻿<div  style="width: 100%;">
+	<div style="padding:10px 0 10px 0;">
+		
+	
+		<!-- Show the buttons if this activity is selected...-->
+		<div class="">
+			<div style="display:block; width: 100%">
+				<!-- ko if:activityDetailComponent.hasWorkflowModifyPrm -->
+				<div style="display: inline-block; margin-top:10px;" data-bind="ifnot: activityDetailComponent.activityCompleted()">
+					<button role="button" name="button" class="btn button-primary" data-bind="click: activityDetailComponent.modifyActivityClick, attr: { title: HP.HPTRIM.Messages.web_update }, text: HP.HPTRIM.Messages.web_update"></button>
+				</div>
+				<!-- /ko -->
+				<!-- Reassign -->
+                <!-- ko if:activityDetailComponent.canReassign --> 
+				<div style="display: inline-block;" data-bind="ifnot: activityDetailComponent.activityHasSubActivities() || activityDetailComponent.activityCompleted()">
+					<button role="button" name="button" class="btn quaternary-button show" data-bind="click: activityDetailComponent.reassignActivityClick, attr: {title: HP.HPTRIM.Messages.web_reassign }, clickBubble: false" style="padding: 0">
+						<!-- Convert this to an image. -->
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAFqSURBVEhLY/j//z9NMYTotv5PCzxqAUE8asF/zn6n/8aLkv4bLkz8z97ngCFPkQU1h2f9//jzC8gQMHj/4/P/kgNT/jP32MLVAAF5FnSfWvb/HxCiA5BY07H5cHVAQLoFKrPD///++wekGSv4+efXf5kZgWC1QEC6BTl7+kAa8YK4bc1gtUBAugVlB6eBNOIF+XsngNUCAekW+KwrBWnECxxW5IDVAgHpFjB22/y/9uY+SDNWcO7lTXhKAgLiLdCdH/c/aUfbfyagZuEpXv8ffHwOMgAFHH5y8T/PBJf/gpM9/qfu7AQJEWeBxtyo/19/fQdp+P8BmN4nn1vzX2CSO4Y6kO/aTyz+/+nnV7BaICDOgnIsEfvn39//z7+8/X/g0fn/hx5f+P/y67v/f4FiaIA4CzpOLoEoJx0QZ0HjsXkQ5aQD4iwAZRwyAXEW6C2IA4c5GYA4C1h77f8//vQSooU0ALGAdvg/AwBjtbCP8BbZtwAAAABJRU5ErkJggg=="
+							 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_reassign, 'title': HP.HPTRIM.Messages.web_reassign}" />
+					</button>
+				</div>
+                <!-- /ko -->
+				<!-- Complete -->
+				<!-- ko if:activityDetailComponent.canComplete --> 
+				<div style="display: inline-block;" data-bind="if: activityDetailComponent.activityReadyForCompletion() && ! activityDetailComponent.activityCompleted() ">
+					<button role="button" name="button" class="btn quaternary-button show" data-bind="click: activityDetailComponent.completeActivity, attr: {title: HP.HPTRIM.Messages.trm_reindexStateComplete }, clickBubble: false" style="padding: 0">
+						<!-- Convert this to an image. -->
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGsSURBVEhLY/j//z9NMZjwl6//Tws8agEc57tP+9+Vtep/iFozijhVLKgMnff/54/fIMP+Xz5+H0UOZDZFFsSbdP9/++LT/79//4Hxn99/gb5ogstTZEGAYsP/i0fuggwBGw4CB9ZdRFEDBORbsKBtF8gAMABZ8OLhu/+ROm0oaoCAPAsKPKeDwx0WNL9//flfGjAbQx1WC8I1W//PqN3yvz5mEYpiGA5Sbvx/7+pzeLCAwJLuvVjVAgGmBfvWXoC7bMOso/8DFFA1Le7eA5cH4etnHv0PUmpEUQPDWC24ef4xWCMM7F557n8gMEJBcpkOk/7//P4LLA5SA2JnOU6G60XHQIBpQU/uGhQLQOwjm6/8D1Ft/n/2wG24HIhe2LEbxUB0DATYI3n1lEMgSTCAGQhKJf/+QYIFBEDxgCtoYBgIsFsAwiBLQIZhw6AMhS3VoGO8FoDw0t59YAORAYi/Y+lprOrRMRDgtwCE5zZtBwcNDLx//fl/tH4HVrXoGAgIWwDCM2q2gIMF5Pr+grVY1WDDRFsAwqDcWx40B6scLkySBeTgYWQB7fB/BgCAil0kCFmmewAAAABJRU5ErkJggg=="
+							 data-bind="attr: {'alt': HP.HPTRIM.Messages.trm_reindexStateComplete, 'title': HP.HPTRIM.Messages.trm_reindexStateComplete}" />
+					</button>
+				</div>
+				<!-- /ko -->
+				<!-- UnComplete -->
+				<!-- ko if:activityDetailComponent.canUnComplete --> 
+				<div style="display: inline-block;" data-bind="if:activityDetailComponent.activityCompleted()">
+					<button role="button" name="button" class="btn quaternary-button show" data-bind="click: activityDetailComponent.uncompleteActivity, attr: {title: HP.HPTRIM.Messages.web_uncomplete }, clickBubble: false" style="padding: 0">
+						<!-- Convert this to an image. -->
+						<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAD5SURBVEhL7ZI/C8IwEMXrxxV0cnN3V/yziFI3Fye1U3UTwYKCoig46OjkF7A9c2lSLm2lNKaD4IOXlrvj/UquFgAU6vDonaAI/wGZ/h1AqblNrRsDlIdzePkBTD21bgRQsR3wgyAy7X0NkOFSfXej9Jn0AdWRgwERYLDwEjNMeoD4tUThnYNiLQCGUyGgMVlCzZ4lzJQfQL88y1oA/B2pRBCXfCe1nIDWjj8pBMMSc8JMGksmEAxHry/3sNc9KrN6AGIJQaVBeDY/REHH9LpW55vSY/oSENtJfB88mx+kmNsCcn08oT52lZ4ZALq9T62bA3xwBCjOYL0BQLEHE38jYhcAAAAASUVORK5CYII="
+							 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_uncomplete, 'title': HP.HPTRIM.Messages.web_uncomplete}" />
+					</button>
+				</div>
+				<!-- /ko -->
+			</div>
+		</div>
+
+		<div style="width: 100%; display: inline-block; margin-top: 10px;">
+			<!-- Nav tabs -->
+			<ul class="nav nav-tabs" style="border-bottom: 0; display: block;">
+				<li>
+					<button role="button" class="btn btn-accent dark-grey-button" style="display: inline-block;margin: 0 5px 0 0;" data-bind="click: activityDetailComponent.showDocuments, attr: { title: HP.HPTRIM.Messages.td_DocumentView }">
+						<!-- ko if: activityDetailComponent.mandatoryPlaceholers() > 0  -->
+						<span class="badge" style="color: #000; width: 15px; height: 15px; padding:1px;" data-bind="text: '!'"></span>
+						<!-- /ko -->
+						<span style="color: #000;" data-bind="text: HP.HPTRIM.Messages.td_DocumentView"></span>
+					</button>
+				</li>
+				<li style="background-color:white" data-bind="if: activityDetailComponent.hasResults() ">
+					<button class="btn btn-accent dark-grey-button" style="display: inline-block;margin: 0 5px 0 0;" href="#results" data-toggle="tab" data-bind="attr:{title: HP.HPTRIM.Messages.web_results}, text: HP.HPTRIM.Messages.web_results, click: activityDetailComponent.toggleResults"></button>
+				</li>
+				<li style="background-color:white">
+					<button role="button" class="btn btn-accent dark-grey-button" style="display: inline-block;margin: 0 5px 0 0;" href="#notes" data-toggle="tab" data-bind="attr:{title: HP.HPTRIM.Messages.web_notes},text: HP.HPTRIM.Messages.web_notes, click: activityDetailComponent.toggleNotes"></button>
+				</li>
+			</ul>
+		</div>
+        
+        <!-- ko if: activityDetailComponent.actionResultDisplay -->
+        <div class="HPRM-deluxe-list-item-data" style="margin-top:10px; display:block; width: 100%; height: 22px">
+            <span class="label label-primary" data-bind="text: activityDetailComponent.actionResult"></span>
+        </div>
+        <!-- /ko -->
+
+		<!-- Tab panes -->
+		<div style="display:inline-block; height:auto; margin-bottom:10px; width:100%" class="tab-content">
+			<div class="tab-pane hide" id="results">
+				<div data-bind="if: activityDetailComponent.hasResults()">
+					<!-- ko as_panel: activityDetailComponent.activityResultsComponent  --><!-- /ko  -->
+				</div>
+			</div>
+			<div style="padding: 10px;" class="tab-pane hide" id="notes">
+				<!-- ko as_panel: activityDetailComponent.activityNotesComponent  --><!-- /ko  -->
+			</div>
+		</div>
+	</div>
+</div>

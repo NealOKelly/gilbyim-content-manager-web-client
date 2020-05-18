@@ -1,0 +1,10 @@
+<div style="margin-bottom: 10px;">
+	<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+
+	<input type="text" autocomplete="off" class="hprm-text-input menu__filter-textbox" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur, keyup:onKeyUp}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id)) }, enterKey: onEnter " style='padding-left:20px;"'>
+
+
+
+
+</div>

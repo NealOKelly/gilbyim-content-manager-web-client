@@ -1,0 +1,11 @@
+﻿<div data-bind="attr: {'class': cssClass}, fadeVisible: visible">
+    <div class="">
+        <a href="#" class="btn" data-bind="click: function(){ $data.visible(false);}">
+            <i class="icon-remove-circle icon-2x"></i>
+        </a>
+    </div>
+    <div style="clear: both;"></div>
+    <div data-bind="foreach: panels">
+        <!-- ko as_panel: $data--><!-- /ko  -->
+    </div>
+</div>

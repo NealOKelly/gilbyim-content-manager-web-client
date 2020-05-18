@@ -1,0 +1,30 @@
+﻿<div class="panel search-filter-panel" tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:$parent.dismiss">
+    <h4 data-bind="text: title"></h4>
+
+    <div style="overflow-y: auto; max-height: 450px; background-color:#f8f8f8; padding:10px; margin-right:10px">
+        <!-- ko foreach: filterList -->
+        <div style="display:block; float: left; padding: 10px 10px 10px 10px; width:400px">
+            <div style="margin-bottom: 5px; font-weight: bold; color: #000;" data-bind="text: $data.caption"></div>
+            <!-- ko if:  $data.errorVisible() -->
+                <label class="field-error-display" style="color:#FF454F !important" data-bind="text:  $data.alertDetails, attr: { title: HP.HPTRIM.Messages.vb_tio_Error }"></label>
+            <!-- /ko -->
+            <!-- ko if: hasOptions -->
+            <div data-bind="foreach: $data.options">
+                <div data-bind="hprm_field:$data"></div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: hasField -->
+            <div data-bind="hprm_field:$data.filterField"></div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+    <hr />
+    <!-- ko if: showSaveFiltersAsDefault -->
+    <div data-bind="hprm_field:saveFiltersAsDefaultCheckbox" ></div>
+    <!-- /ko -->
+    <div style="padding:20px 0px 20px 0px">
+        <button role="button" name="button" class="btn button-primary" data-bind="click: reset, text: resetToDefaultCaption, attr: {'title': resetToDefaultCaption }" tabindex="0"></button>
+    </div>
+
+</div>

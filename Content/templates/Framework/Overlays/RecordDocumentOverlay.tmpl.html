@@ -1,0 +1,32 @@
+<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: $data.taskCaption()"></div>
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body">
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <!-- ko foreach:$data.fieldDecorators -->
+				<!-- ko template: {name: '/templates/Form/PageItem', data : $data} -->
+				<!-- /ko  -->
+            <!-- /ko -->
+            <div data-bind="text:$data.completedMessage()"></div>
+            <div>
+                <button id="useTimestampBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doUseTimeStamp, text: HP.HPTRIM.Messages.web_useStamp, enabled: buttonsEnabled"></button>
+                <button id="useNote" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doUseNote, text: HP.HPTRIM.Messages.web_addNotes, enabled: buttonsEnabled"></button>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button"  data-bind="click: doTask, text: HP.HPTRIM.Messages.dp_cap_SaveConfig ,attr: { class: 'btn btn-flat btn-primary ' + $data.saveBtnClass() }, enabled: saveEnabled"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, enabled: buttonsEnabled"></button>
+            <button id="viewBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doView, text: HP.HPTRIM.Messages.vwr_tbar_view, enabled: buttonsEnabled"></button>
+        </div>
+    </div>
+</div>

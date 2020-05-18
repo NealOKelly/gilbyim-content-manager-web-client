@@ -1,0 +1,5 @@
+﻿<div class="alert alert-success alert-fixed-top" data-bind="attr: { 'class': 'alert ' + currentNotification().type }, visible: currentNotification().caption">
+	<!--  <button type="button" class="close" data-dismiss="alert">&times;</button>-->
+	<strong data-bind="text: currentNotification().caption"></strong>
+	<p data-bind="text: currentNotification().message"></p>
+</div>

@@ -1,0 +1,34 @@
+﻿<form role="search" data-bind="ifnot: $data.template" >	
+	<section data-bind="attr: { id: $data.Caption }">
+		
+		<div data-bind='click: toggle' >
+			
+			
+			<div style="display: inline-block">
+				<h3 data-bind="text: $data.Caption" ></h3>	
+			</div>
+
+			<div style="display:inline;" >
+				<i class="hp-icon hp-chevron-up hp-2x pull-right" style="margin:15px" data-bind="visible: visible(), attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></i>
+				<i class="hp-icon hp-chevron-down hp-2x pull-right" style="margin:15px" data-bind="visible: !visible(), attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></i>		
+			</div>
+				
+				
+		</div>		
+		<div data-bind="visible: visible()" >
+		
+			<!-- ko foreach:$data.PageItems -->		
+				<!-- ko template: {name: '/templates/Form/PageItem', data : $data} -->
+				<!-- /ko  -->
+			<!-- /ko -->
+		</div>
+	</section>
+</form>
+
+
+<div data-bind="if: $data.template" >
+	<section data-bind="attr: { id: $data.Caption }">
+		<h3 data-bind="text: $data.Caption" ></h3>	
+		<!-- ko template: {name: $data.template, data : $data} -->  <!-- /ko  -->
+	</section>
+</div>

@@ -1,0 +1,25 @@
+﻿<div class="commandPanel">
+    <!-- ko if: selectWorkflowTemplate() -->
+    <div class="listPaddingRight">
+        <div>
+			<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_initiate"></div>
+        </div>
+    </div>
+
+    <div data-bind="if: $data.wrkTmplField !== null" style="margin-top: 10px;">
+        <div>
+            <!-- ko template: {name: $data.wrkTmplField.template, data : $data.wrkTmplField} -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: selectWorkflowTemplate() -->
+    <div class=" listPaddingRight">
+        <div>
+			<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_modifyWorkflow"></div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+
+</div>

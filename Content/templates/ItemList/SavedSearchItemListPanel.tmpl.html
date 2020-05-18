@@ -1,0 +1,24 @@
+﻿<div data-bind="attr: { 'class': $data.cssClass, id: 'panel_' + $data.id }, visible: visible">
+	<div  style="display:none;">
+		<div class="col-md-6">
+			<!-- ko if: $data.itemList.getPlugin('searching') -->
+			<!-- ko as_panel: $data.itemList.getPlugin('searching') --><!-- /ko  -->
+			<!-- /ko -->
+		</div>
+		<div class="col-md-6">
+			<!-- ko if: $data.itemList.getPlugin('selection') -->
+			<!-- ko as_panel: $data.itemList.getPlugin('selection') --><!-- /ko  -->
+			<!-- /ko -->      
+		</div>
+	</div>
+	<div >
+		<div>
+			<!-- ko as_panel: $data.itemList --><!-- /ko  -->        
+		</div>
+	</div>    
+	<!-- ko if: $data.itemList.getPlugin('paging') -->
+	<div style="min-height: 100px;">
+			<!-- ko as_panel: $data.itemList.getPlugin('paging')--><!-- /ko  -->
+	</div>	
+	<!-- /ko -->
+</div>

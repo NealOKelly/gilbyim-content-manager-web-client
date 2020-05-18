@@ -1,0 +1,218 @@
+﻿<div class="itemlist-container">
+	<!-- Set knockout scope to panel owning the item list, this will be parents[4] -->
+	<!-- ko with: $parents[4] -->
+	<div class="itemlist-header">
+		<div>
+
+			<div class="itemlist-header-result-size">
+				<!-- ko if: displayQuery -->
+				<div class="listPadding">
+					<div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+						<span data-bind="text: queryDisplayString"></span>
+					</div>
+				</div>
+				<!-- /ko -->
+				<!-- ko ifnot:displayQuery -->
+				<div class="listPadding">
+					<div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+						<span>&nbsp;</span>
+					</div>
+				</div>
+				<!-- /ko -->
+				<!-- ko if:searching() && searchingString() -->
+				<div class="listPadding">
+					<div class="HPRM-search-list-header" style="margin-bottom: 5px;">
+						<span><img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" /></span>
+						<span data-bind="text: searchingString"></span>
+					</div>
+				</div>
+				<!-- /ko -->
+			</div>
+
+			<div class="itemlist-header-paging-control">
+				<!-- Show the select all only if we are showing selections, there are results and we aren't searching -->
+	
+				<div style="width:100%; height: 100%; display: inline-block;">
+
+                    <div class="alignItemsCenter customCheck" style="vertical-align: top; display:inline-block;">
+                        <div style="height: 26px; width: 20px;">&nbsp;</div>
+                    </div>
+
+                    <!-- paging -->
+                    <!-- The current context is  the trim item list component, it's parent is the item list that has a reference to the paging plugin; use $parent.pagingPlugin to get the paging control. -->
+					<div style="width:95%; display: inline-block;">
+						<div class="alignItemsCenter" style="display:inline-block">
+							<div style="display:inline-block">
+								<div data-bind="fadeVisible: !$parent.plugins[0].itemList.loading()" style="display: inline-block; margin-bottom: 0">
+									<div data-bind="visible: $parent.plugins[0].pages().length > 1">
+										<div id="pagSizeOptions">
+
+											<ul data-bind="foreach: $parent.plugins[0].buttons" class="pagination" style="margin: 0">
+												<!-- ko if: $index() < 9 -->
+												<li class="pagination_item" data-bind="visible: visible, css: { 'active': $index() == 4 }">
+                                                    <a href="#" data-bind="attr: { title: title }, text: text, click: function (data) { $parents[2].pagingPlugin.currentPage(data.pageNo); $parents[2].pagingPlugin.generateEvent(data.pageNo); }"></a>
+												</li>
+												<!-- /ko -->
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div data-bind="text: $parent.plugins[0].pageSummary" class="pagination-summary" style="display: inline-block; margin-left: auto; vertical-align: top; margin: 7px 0 0 20px;"></div>
+
+						</div>
+
+						<!-- ko if: 1 == 0 -->
+						<div style="display: inline-block; vertical-align: top; margin-left: 10px">
+							<button role="button" name="button" id="BulkSelectButton" class="btn button-primary" data-bind="click: owningPanel.bulkSelect, text: HP.HPTRIM.Messages.web_bulkSelection, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_bulkSelection}"></button>
+						</div>
+						<!-- /ko -->
+
+						
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="no-results-container">
+
+		<!-- ko if: noResults -->
+		<div class="listPadding">
+			<div style="margin-top: 10px">
+				<div style="height: 48px; width: 48px; margin-top: 5px; display: inline-block" data-bind="attr:{title: HP.HPTRIM.Messages.web_noWorkflowsFound}" class="information_x32 col-md-2">
+				</div>
+				<div class="text-black" style="display: inline-block; vertical-align: top; font-size: 12pt; margin: 10px 0 10px 0;" data-bind="text: $parent.noResultString"></div>
+			</div>
+		</div>
+		<!-- /ko -->
+
+	</div>
+
+	<!-- End scope of owning panel -->
+	<!-- /ko -->
+
+	<ul class="itemlist-ul" data-bind="foreach: { data: items, as: 'item' }">
+
+		<li class="itemlist-li" data-bind="attr:{ id: $data.Fields.Uri + '_li', 'class': ($parent.owningPanel.workflowDetailComponent.details() && $parent.owningPanel.selectedUri() == $data.Fields.Uri) ? 'itemlist-li active' : 'itemlist-li' }">
+			<!-- ko with: $parents[5] -->
+
+			<div class="item-container" style="margin-left: 20px">
+
+				<div class="attachment-container">
+					<!-- ko if: item.Fields.Icon -->
+					<span style="height: 32px; width: 32px; margin-bottom: 5px" data-bind="attr: { 'class': (item.Fields.Icon.Id.toLowerCase() + '_x32 media-object'), 'title': item.Fields.WorkflowName }" />
+					<!-- /ko -->
+				</div>
+
+				<div class="data" data-bind="event: { click: (workflowDetailComponent.details() && selectedUri() == item.Fields.Uri) ? closeDetails : koShowItem(item) }">
+					<div class="data-row">
+						<div class="HPRM-record-list-item-header">
+							<!-- ko if: item.Fields.WorkflowWorkflowPriority  -->
+							<div data-bind="text: getPriorityName(item.Fields.WorkflowWorkflowPriority).toUpperCase()" class="pull-left HPRM-deluxe-header-left"></div>
+							<!-- /ko -->
+							<!-- ko if: workflowDetailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+							<div class="pull-right alignItemsCenter upChevronContainer">
+								<div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-down" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+							</div>
+							<!-- /ko -->
+							<!-- ko ifnot: workflowDetailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+							<div class="pull-right downChevronContainer">
+								<div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-left" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+							</div>
+							<!-- /ko -->
+							<!-- ko if: (typeof item.Fields.WorkflowPercentageCompleted.Value != 'undefined')-->
+							<div data-bind="text: item.Fields.WorkflowPercentageCompleted.Value + '%' " class="pull-right HPRM-deluxe-header-right listPaddingRight"></div>
+							<!-- /ko -->
+							<!-- ko ifnot: (typeof item.Fields.WorkflowPercentageCompleted.Value != 'undefined')-->
+							<div data-bind="text: item.Fields.WorkflowPercentageCompleted + '%' " class="pull-right HPRM-deluxe-header-right listPaddingRight"></div>
+							<!-- /ko -->
+
+						</div>
+					</div>
+					<div class="data-row">
+						<div class="HPRM-record-list-item-header">
+							<!-- ko if: item.Fields.WorkflowName -->
+							<div data-bind="text: item.Fields.WorkflowName" class="HPRM-deluxe-title overflowEllipsis"></div>
+							<!-- /ko -->
+							<!-- ko ifnot: item.Fields.WorkflowName -->
+							<div data-bind="text: HP.HPTRIM.Messages.web_unknownWorkflowTitle" class="HPRM-deluxe-title overflowEllipsis"></div>
+							<!-- /ko -->
+						</div>
+					</div>
+					<div class="data-row ">
+						<div class="HPRM-record-list-item-header">
+							<!-- DUE DATE - TOP RIGHT -->
+							<!-- ko if: item.Fields.WorkflowDateDue  -->
+							<!-- ko if: item.Fields.WorkflowDateDue.IsClear  -->
+							<div data-bind="text: item.Fields.WorkflowDueDate" class="pull-left HPRM-deluxe-header-right"></div>
+							<!-- /ko -->
+							<!-- ko ifnot: item.Fields.WorkflowDateCompleted.IsClear  -->
+							<div data-bind="text: HP.HPTRIM.Messages.web_dateDue + formatDate(item.Fields.WorkflowDueDate)" class="pull-left HPRM-deluxe-header-right"></div>
+							<!-- /ko -->
+							<!-- /ko -->
+							<!-- ko if: item.Fields.WorkflowDateCompleted == undefined  -->
+							<div data-bind="text: HP.HPTRIM.Messages.WorkflowNoDueDate" class="pull-left HPRM-deluxe-header-right"></div>
+							<!-- /ko -->
+						</div>
+					</div>
+				</div>
+				<!-- ko if: workflowDetailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+				<div class="detail-component" data-bind="clickBubble: false">
+					<div style="position: relative; overflow: visible;">
+						<div class="template" data-bind="template: { name: workflowDetailComponent.detailsTemplate, data: $data, afterRender: workflowDetailComponent.postProcessingLogic }"></div>
+					</div>
+				</div>
+				<!-- /ko  -->
+
+			</div>
+
+			<!-- /ko -->
+		</li>
+	</ul>
+
+	<div class="paging-footer">
+		<div style="width:100%; height: 100%; display: inline-block;">
+
+            <div class="alignItemsCenter customCheck" style="vertical-align: top; display:inline-block;">
+                <div style="height: 26px; width: 20px;">&nbsp;</div>
+            </div>
+
+            <!-- The current context is  the trim item list component, it's parent is the item list that has a reference to the paging plugin; so use $parent.pagingPlugin to get the paging control. -->
+			<div style="width:95%; display: inline-block;">
+				<div class="alignItemsCenter" style="display:inline-block">
+					<div style="display:inline-block">
+						<div data-bind="fadeVisible: !$parent.pagingPlugin.itemList.loading()" style="display: inline-block; margin-bottom: 0">
+							<div data-bind="visible: $parent.pagingPlugin.pages().length > 1">
+								<div id="pagSizeOptions">
+
+									<ul data-bind="foreach: $parent.pagingPlugin.buttons" class="pagination" style="margin: 0">
+										<!-- ko if: $index() < 9 -->
+										<li class="pagination_item" data-bind="visible: visible, css: { 'active': $index() == 4 }">
+                                            <!-- In a loop, so use $parent to get to the trim item list component, it's parent is the item list that has a reference to the paging plugin; so use $parents[2].pagingPlugin to get the paging control. -->
+                                            <a href="#" data-bind="attr: { title: title, 'aria-label': title }, text: text, click: function (data) { $parents[2].pagingPlugin.currentPage(data.pageNo); $parents[2].pagingPlugin.generateEvent(data.pageNo); }"></a>
+										</li>
+										<!-- /ko -->
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div data-bind="text: $parent.pagingPlugin.pageSummary" class="pagination-summary" style="display: inline-block; margin-left: auto; vertical-align: top; margin: 7px 0 0 20px;"></div>
+
+				</div>
+
+				<!-- ko if: 1 == 0 -->
+				<div style="display: inline-block; vertical-align: top; margin-left: 10px">
+					<button role="button" name="button" id="BulkSelectButton" class="btn button-primary" data-bind="click: owningPanel.bulkSelect, text: HP.HPTRIM.Messages.web_bulkSelection, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_bulkSelection}"></button>
+				</div>
+				<!-- /ko -->
+
+				
+			</div>
+		</div>
+	</div>
+
+</div>

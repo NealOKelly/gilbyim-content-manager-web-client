@@ -1,0 +1,191 @@
+﻿<div id="recordDetailsCmpt" data-bind="clickBubble:false">
+	<div style="display:block" class="listPaddingRight">
+
+
+		<!-- ko if: loading() -->
+		<div style="display: inline-block; margin-top:10px;">
+			<span>
+				<img alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block"
+					 data-bind="attr:{src: HP.HPTRIM.Icons.progressLoading }" />
+			</span>
+			<div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_loading" style="display: inline-block"></div>
+		</div>
+		<!-- /ko -->
+		<!-- ko ifnot: loading() -->
+
+		<div style="display: inline-block; margin-top:10px;" id="recordDetailButton">
+			<!-- ko if: canEditRecord() -->
+			<!-- ko if: showActions()  -->
+			<button role="button" name="button" id="RecordEditButton" class="btn btn-primary" data-bind="click: editDetails, attr: { title: HP.HPTRIM.Messages.web_update }, text: HP.HPTRIM.Messages.web_update" style="margin-left:0;font-size:13px;"></button>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if: showActions() -->
+			<!-- ko if: showNewRecordMenu()  -->
+		
+			<!-- ko template: {name: newDropDown.templateName(), data: newDropDown } --> <!-- /ko -->
+
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko ifnot: canEditRecord() -->
+			<!-- ko if: showActions()  -->
+			<button role="button" name="button" id="RecordEditButton" class="btn btn-primary" data-bind="click: editDetails, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_update }, text: HP.HPTRIM.Messages.web_update" style="margin-left:0;font-size:13px;"></button>
+			<!-- /ko -->
+			<!-- /ko -->
+			<!-- Use the ko computed to figure out whether to show the select button! -->
+			<!-- ko if: showSelectButton -->
+			<button role="button" name="button" id="RecordSelectButton" class="btn btn-flat btn-primary" data-bind="click: selectRecord(uri, recordTitle(), recordNumber()), clickBubble: false, attr: { title: HP.HPTRIM.Messages.rec_select }, text: HP.HPTRIM.Messages.rec_select" style="font-size:13px;"></button>
+			<!-- /ko -->
+			<!-- ko if: canDetachFromActivity() -->
+			<button role="button" name="button" id="detach"
+					class="btn btn-flat btn-primary"
+					data-bind="visible: canDetachFromActivity(), click: function() { detach($index) }, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_detach }, text: HP.HPTRIM.Messages.web_detach" style="font-size:13px;"></button>
+			<!-- /ko -->
+			<!-- ko if: showActions() -->
+			<!-- ko ifnot: isAniOSDevice() -->
+			<button role="button" name="button" id="checkIn" 
+					class="btn btn-flat btn-primary"
+					data-bind="visible: canCheckIn(), click: checkIn, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_checkIn }" style="padding: 0;width:30px;font-size:13px;">
+				<img id="checkRecIn"
+					 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_checkIn, 'title': HP.HPTRIM.Messages.web_checkIn, src:HP.HPTRIM.Icons.checkIn_x24}" />
+			</button>
+
+
+			<!-- ko if:  HPRMWebConfig.disableDownloadDocument == false -->
+			<button role="button" name="button" id="checkOut"
+					class="btn btn-flat btn-primary"
+					data-bind="visible: canCheckOut(), click: checkOut, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_checkOutTitleNoSubstitute }" style="padding: 0;width:30px;font-size:13px;">
+				<img id="checkRecOut"
+					 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_checkOutTitleNoSubstitute, 'title': HP.HPTRIM.Messages.web_checkOutTitleNoSubstitute, src:HP.HPTRIM.Icons.checkOut_x24}" />
+			</button>
+			<!-- /ko -->
+
+            <button role="button" name="button" id="onlineEdit"
+                    class="btn btn-flat btn-primary"
+                    data-bind="visible: canOnlineEdit(), click: editDocument, clickBubble: false, attr: { title: onlineEditTitle }" style="padding: 0;font-size:13px;">
+                <img id="checkRecOutEdit"
+                     data-bind="attr: {'alt': onlineEditTitle(), 'title': onlineEditTitle(), src: onlineEditImage()}" />
+            </button>
+			<!-- /ko -->
+			<!-- /ko -->
+			
+			
+
+		</div>
+		<div style="display: inline-block; margin-top:10px;">
+
+			<!-- ko if: showActions() -->
+			<!-- ko if: showLocationActions() -->
+
+				<!-- ko template: {name: locationDropDown.templateName(), data: locationDropDown} --> <!-- /ko -->
+			
+			<!-- /ko -->
+			<!-- ko if: showActions() -->
+			<!-- ko if: showRequestAction() && showAddRequest() -->
+			<div class="btn-group"
+				 data-bind="visible: canRequest()">
+				<button id="RequestRecordBtn"
+						style="position: relative; padding: 0;font-size:13px;"
+						class="btn btn-flat btn-primary"
+						data-bind="click: canRequest ? requestRecord : { 'class': 'btn btn-flat btn-primary disabled' }, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_requestThisRecord }">
+					<img id="unrequestedImg"
+						 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_requestThisRecord, 'title': HP.HPTRIM.Messages.web_requestThisRecord, 'src':HP.HPTRIM.Icons.truckWithoutLoad_x24}" />
+				</button>
+
+				<button id='request-popover'
+						style="border-left: 1px solid #f5f5f5; width: 25px !important; padding: 0;font-size:13px;"
+						class="btn btn-flat btn-primary dropdown-toggle"
+						data-bind='click: showAdditionalRequestRecord, attr: { title: HP.HPTRIM.Messages.web_additionalRequestTooltip }, clickBubble: false'>
+					<span class="caret"></span>
+				</button>
+			</div>
+			<button id="disabledRequestButton"
+					style="position: relative; display: inline-block; padding: 0; font-size:13px;"
+					class="btn btn-flat btn-primary disabled disabledRequestButton"
+					data-bind="visible: !canRequest()">
+				<img id="requestedImg"
+					 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_thisRecordHasBeenRequested, 'title': HP.HPTRIM.Messages.web_thisRecordHasBeenRequested, src:HP.HPTRIM.Icons.truckWithLoad_x24}, clickBubble: false" />
+			</button>
+			<!-- /ko -->
+			<!-- Show if feature enabled and at least one action is available... -->
+			<!-- ko if: showAdvancedRequestActions() && showAdvancedRequestEnabledActions()-->
+				<!-- ko template: {name: requestDropDown.templateName(), data: requestDropDown} --> <!-- /ko -->
+			<!-- /ko -->
+			<!-- /ko -->			
+			<!-- /ko -->
+
+			<!-- ko if: showActions() -->
+			<!-- ko if: showDetailsAction() -->
+			<!-- ko template: {name: detailsDropDown.templateName(), data:detailsDropDown} --> <!-- /ko -->
+			<!-- /ko -->
+			<!-- /ko -->
+			
+
+
+			<!-- ko if: showActions() -->
+				<!-- ko if: showNavigationActions()-->
+					<!-- ko template: {name: navigationDropDown.templateName(), data: navigationDropDown} --> <!-- /ko -->
+				<!-- /ko -->
+			<!-- /ko -->
+
+
+            <!-- ko if: showActions() -->
+                <!-- ko if: showWorkflowActions() -->
+                    <!-- ko template: {name: navigationDropDown.templateName(), data: workflowDropDown} --> <!-- /ko -->
+                <!-- /ko -->
+            <!-- /ko -->
+
+			<!-- ko if: showActions() -->
+				<!-- ko if: showAddRemoveActions() -->
+					<!-- ko template: {name: addRemoveDropDown.templateName(), data: addRemoveDropDown} --> <!-- /ko -->
+				<!-- /ko -->
+			<!-- /ko -->
+
+
+			<!-- ko if: showActions() -->
+			<!-- ko if: showMoreActions()-->
+			<!-- ko template: {name: moreDropDown.templateName(), data: moreDropDown} --> <!-- /ko -->
+			<!-- /ko -->
+			<!-- /ko -->
+
+            <!-- ko if: showActions() -->
+            <!-- ko if: showDocumentReview()-->
+            <!-- ko template: {name: documentReviewDropDown.templateName(), data: documentReviewDropDown} --> <!-- /ko -->
+            <!-- /ko -->
+            <!-- /ko -->
+
+            
+	
+		</div>
+
+
+		<!-- ko if: actionResultDisplay -->
+		<div class="HPRM-deluxe-list-item-data" style="margin-top:10px; display:block; width: 100%; height: 22px">
+			<span class="label label-primary" id="recordInformationLabel" data-bind="text: actionResult"></span>
+		</div>
+		<!-- /ko -->
+
+		<div style="display:block; width:100%; padding: 10px 0 10px 0;">
+			<div class="propertyListItem">
+				<div class="HPRM-deluxe-list-item text-capitalize" data-bind="text: CaptionRecordAssignee"></div>
+				<div class="HPRM-deluxe-list-item-data" style="" data-bind="text: assigneeName"></div>
+			</div>
+
+			<div class="propertyListItem">
+				<div class="HPRM-deluxe-list-item text-capitalize" data-bind="text: CaptionRecordDateRegistered"></div>
+				<div class="HPRM-deluxe-list-item-data" style="" data-bind="text: dateRegistered"></div>
+			</div>
+
+			<!-- ko if: showDocumentStatus() -->
+			<div class="propertyListItem">
+				<div class="HPRM-deluxe-list-item text-capitalize" data-bind="text: CaptionDocumentStatus"></div>
+				<div class="HPRM-deluxe-list-item-data" style="" data-bind="text: documentStatus"></div>
+			</div>
+			<!-- /ko -->
+		</div>
+
+		<!-- /ko -->
+
+		<!--<hr />-->
+
+	</div>
+</div>

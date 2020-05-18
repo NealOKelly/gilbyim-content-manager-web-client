@@ -1,0 +1,15 @@
+﻿<div data-bind="attr: { 'class': cssClass, id: $data.id }">
+
+	<!-- ko  foreach: panels -->
+	    <!-- ko as_panel: $data --><!-- /ko  -->
+	<!-- /ko -->
+	<!-- ko if: 1 == 0 -->
+    <div>
+        <!-- ko as_panel: $data.trimGlobalSearchPanel --><!-- /ko  -->
+    </div>
+    <div>
+        <!-- ko as_panel: $data.trimNavPanel --><!-- /ko  -->
+        <!-- ko as_panel: $data.trimBodyPanel --><!-- /ko  -->
+    </div>
+	<!-- /ko -->
+</div>

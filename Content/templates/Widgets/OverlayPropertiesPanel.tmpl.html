@@ -1,0 +1,67 @@
+﻿<div style="width:100%;display:inline-block; border-bottom:2px solid #f8f8f8">
+    <!-- ko if: $parent.propertyOrFieldList && $parent.propertyOrFieldList.propertyOrFields().length > 0 -->
+    <i tabindex="0" class="doublechevron_left pull-left text-white" style="margin:8px 0 0 3px;height:30px;width:24px"
+       data-bind="enterKey: toggleVisible, click: toggleVisible, event: { touchStart: toggleVisible }, attr:{title:HP.HPTRIM.Messages.web_togglePropertiesPanel}"></i>
+    <i tabindex="0" class="doublechevron_right pull-left text-white" style="margin:8px 0 0 3px;height:30px;width:24px;"
+       data-bind="enterKey: toggleVisible, click: toggleVisible, event: { touchStart: toggleVisible }, attr:{title:HP.HPTRIM.Messages.web_togglePropertiesPanel}"></i>
+
+    <button tabindex="0" style="margin:3px 8px 0 0; color:#0073E7;text-transform:uppercase;font-size: 13px;font-weight: 700;" class="btn-properties pull-right" data-bind="enterKey: function() { updateAndShowPropertiesOverlay() }, click: function () { updateAndShowPropertiesOverlay() }, 
+        attr:{title:HP.HPTRIM.Messages.web_togglePropertiesSettings}">
+        <div class="select_properties" style="height: 16px; width: 16px;display:inline-block;margin: 9px 3px 0px 0px"></div>
+        <span data-bind="text: HP.HPTRIM.Messages.web_selectPropertiesCaption" style="vertical-align:super"></span>
+    </button>
+    <!-- /ko -->
+    <!-- Figure out if we are in a record view overlay panel somehow, if so show some commands... -->
+    <!-- ko if: $parent.showingRevisions -->
+    <div>
+        <!-- ko if (revisionActionsVisible()) -->
+        <button data-bind="enable: (revisionActionsEnabled() && promoteRevisionEnabled()),
+            click: promoteRevision,
+            attr:{title: HP.HPTRIM.Messages.web_revisionPromote_tooltip, 
+                'class': revisionActionsEnabled() && promoteRevisionEnabled() ? 'revision_promote_24 btn btn quaternary-button' : 'revision_promote_disabled_24 btn btn quaternary-button' }" 
+            style="background-position:center !important; margin-top:8px; margin-left:8px; min-width:10px;" type="button"></button>
+        <button data-bind="enable: (revisionActionsEnabled() && deleteEnabled()),
+            click: deleteRevision,
+            attr:{title: HP.HPTRIM.Messages.web_revisionDelete_tooltip,
+                'class': revisionActionsEnabled() && deleteEnabled() ? 'revision-delete_24 btn btn quaternary-button' : 'revision_delete_disabled_24 btn btn quaternary-button' }" 
+            style="background-position:center !important; margin-top:8px; align-content:center; min-width:10px;" type="button" ></button>
+        <button data-bind="enable: revisionActionsEnabled,
+            click: showCurrentDocument,
+            attr:{ title: HP.HPTRIM.Messages.web_revisionCurrent_tooltip,
+                'class': revisionActionsEnabled() ? 'revision_latest_24 btn btn quaternary-button' : 'revision_latest_disabled_24 btn btn quaternary-button' }" 
+            style="background-position:center !important; margin-top:8px; align-content:center; min-width:10px;" type="button"></button>
+        <!-- /ko-->
+        <button type="button" class="panelclose-dk-grey"
+                style="float: right; background-color: transparent; border:none; margin-top: 15px; margin-right: 20px; margin-bottom:5px; padding-right: 10px; min-width:10px; min-height:15px;"
+                data-bind="click: toggleVisible, event: { touchStart: toggleVisible }, attr:{title:HP.HPTRIM.Messages.web_close }">
+        </button>
+    </div>
+    <!-- /ko -->
+    <!-- Determine if we belong to a docuemnt view panel (ie we are revisions) Then, if we are, do some stuff... -->
+    <!-- ko if: 1 == 0 -->
+    <div data-bind="text: $data.constructor.name"></div>
+    <div data-bind="text: $parent.constructor.name"></div>
+    <div data-bind="text: $parents[1].constructor.name"></div>
+    <div data-bind="text: $parents[2].constructor.name"></div>
+    <div data-bind="text: $parents[3].constructor.name"></div>
+    <div data-bind="text: $parents[4].constructor.name"></div>
+    <div data-bind="text: $parents[5].constructor.name"></div>
+    <div data-bind="text: $parents[6].constructor.name"></div>
+    <!-- /ko -->
+</div>
+
+<!-- ko ifnot: $parent.showingRevisions -->
+<div id="overlayPropOvrly" class="overlayPropOvrly" style="visibility:hidden;margin-top:10px;margin-bottom:20px;">
+
+    <div tabindex="0" class="overlayPropertyList" style="padding-left:15px">
+        <span data-bind="attr: {class:iconClass}">  </span>
+        <span style="color:black;padding-left:5px;font-size:18px;vertical-align:top" data-bind="text:nameString"> NameString</span>
+    </div>
+
+    <div class="overlayPropertyList">
+        <!-- ko template:{name:propertyOrFieldList.templateName(), data: propertyOrFieldList} -->
+        <!-- /ko -->
+    </div>
+
+</div>
+<!-- /ko -->

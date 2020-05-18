@@ -1,0 +1,28 @@
+<div style="margin-bottom:10px;">
+	<!-- ItemPicker -->
+	<!-- ko template: {name : addChildObjectTemplateName , data: $data } -->
+	<!-- /ko -->
+	<!-- Add Button -->
+	<!--<button data-bind="click:add,text:HP.HPTRIM.Messages.web_Add" type="button" class="btn button-accent"> </button>-->
+</div>
+<div data-bind="if:(childObjects().length > 0)">
+	<div data-bind="text: HP.HPTRIM.Messages.web_attachedTerms">
+	</div>
+	<table style='background-color:white;color:black; border: solid 1px #8e8e8e; max-width: 550px;' class="table table-hover">
+		<tbody data-bind="foreach: {data: childObjects, as: 'child' } ">
+			<!-- ko if:child.Visible -->
+			<tr>
+				<!-- ko foreach: { data :$parent.trimProperties, as :'property'} -->
+				<!-- ko if:property.renderer -->
+				<td style="border-top:none" data-bind="html:renderer.render(child[id])"></td>
+				<!-- /ko -->
+				<!-- ko ifnot:property.renderer -->
+				<td style="border-top:none" data-bind="text:child[id]"></td>
+				<!-- /ko -->
+				<!-- /ko -->
+				<td style="border-top:none; width: 1rem" data-bind="click:$parent.remove, title: HP.HPTRIM.Messages.web_remove"> <i style="cursor:pointer; color: #888" class="hp-icon hp-remove"></i> </td>
+			</tr>
+			<!-- /ko  -->
+		</tbody>
+	</table>
+</div>

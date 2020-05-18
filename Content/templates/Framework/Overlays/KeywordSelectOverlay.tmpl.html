@@ -1,0 +1,63 @@
+﻿
+<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.BaseObjectTypes.Keyword.CaptionPlural"></div>
+    </div>
+
+
+    <!-- ko hprm_field: $data.m_alert() --> <!-- /ko -->
+
+    <div style="padding-left:15px" data-bind="css: { 'iso-titling' : titlingMethod == HP.HPTRIM.TitlingMethods.Keyword_ISO } ">
+        <label data-bind="text:HP.HPTRIM.Messages.web_attachedTerms"></label>
+        <span data-bind="if:isRemoveAllVisible">
+            <a style="margin-left:90%" data-bind="event: { click: clear }, text:HP.HPTRIM.Messages.ocx_menuClear"></a>
+        </span>
+
+
+        <ul class="list-group" style="margin-right:10px" data-bind="foreach: selectedKeywords">
+            <li class="list-group-item" style="padding:5px 10px">
+                <div data-bind="attr: { 'class': 'list-level-' + $index() }">
+                    <span style="width:16px;height:16px;display:inline-block" data-bind="attr: { 'class': (iconId.toLowerCase() + '_x16 itempicker-icon') }"></span>
+                    <span style="margin-top:2px" data-bind="title: displayValue, text: displayValue"></span>
+                    <span class="pull-right" style="width: 1rem" data-bind="click:function(){ $parent.remove($data.displayValue, $index()) }, title: HP.HPTRIM.Messages.web_remove"> <i style="cursor:pointer; color: #888" class="hp-icon hp-remove"></i> </span>
+
+
+                </div>
+            </li>
+        </ul>
+
+
+        <div style="font-size:15px;" data-bind="if: promptTerm()">
+            <label data-bind="text:promptTermPrompt"></label> <br />
+            <input type="text" id="keywordPromptInput" style="width:300px" data-bind="value:  ''" />
+            <a tabindex="0" data-bind="text:HP.HPTRIM.Messages.web_Add,  event: { click: addPromptTerm } "></a>
+            <a tabindex="0" data-bind="text: HP.HPTRIM.Messages.web_cancel , event: { click: cancelAddPromptTerm } "></a>
+        </div>
+    </div>
+
+    <hr />
+    <div>
+        <div class="padding-10px" style="width:75%;display:inline-block" data-bind="if:keywordNotes() !== ''">
+            <i class="fa fa-info-circle" aria-hidden="true"></i> <span data-bind="text: keywordNotes"> </span>
+        </div>
+
+        <!-- ko if: isActionPanelVisible -->
+        <div class="content action-panel pull-right thesaurus-action">
+            <div class="content action" data-bind="as_panel: actionPanel" style="margin-top:-5px;margin-left:10px"></div>
+        </div>
+        <!-- /ko -->
+
+    </div>
+    <div class="keyword-tree-container">
+        <div data-bind="as_panel: $data.keywordTreePanel">Loading...</div>
+    </div>
+
+
+    <div class="modal-footer hprm-modal-footer">
+        <div>
+            <button id="okBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: okHandler, text: HP.HPTRIM.Messages.web_ok"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+
+        </div>
+    </div>
+</div>

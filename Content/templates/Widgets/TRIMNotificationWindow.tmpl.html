@@ -1,0 +1,15 @@
+﻿<div data-bind="attr: { 'class': cssClass, id: $data.id }, visible: visible" role="alert">
+	<div style="display:inline-block;height: 100%" class="error col-xs-8">
+		<div class="h4 listPadding" data-bind="text: messageHeader">&nbsp;</div>
+		<!-- ko if: messageBody -->
+		<div class="listPadding" data-bind="text: messageBody" style="color: white;"></div>
+		<!-- /ko -->
+		<!-- ko foreach: messages -->
+		<div class="listPadding" data-bind="text: $data" style="color: white;"></div>
+		<!-- /ko -->
+	</div>
+	<button class="close" type="button" data-bind="click: hideNotification, attr:{ 'aria-label': HP.HPTRIM.Messages.web_close, title: HP.HPTRIM.Messages.web_close }">
+		<span aria-hidden="true">×</span>
+		<span class="sr-only" data-bind="text: HP.HPTRIM.Messages.web_close"></span>
+	</button>
+</div>

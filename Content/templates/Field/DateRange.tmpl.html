@@ -1,0 +1,42 @@
+﻿<div style="width: 100%; height:55px; padding-top: 15px">
+	<div style="display:inline-block">
+		<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+	</div>
+
+	<div style="display:inline-block; padding-left: 5px">
+		<select class="date-control" style="height:31px; margin: 0 0 10px 0"
+				data-bind="value: selectedMethodValue,disable: isDisable(), options: $data.inputMethods(),optionsValue: 'value', optionsText: 'text', selectedOption: $parent.selectedMethod, attr: { id:Id, title: Id  }"></select>
+	</div>
+</div>
+<div data-bind="visible: (selectedMethodValue() == dateMethod.value)">
+	<div class="row" data-bind="template: {afterRender: doAfterRender()}">
+		<div class="col-lg-6" style="padding:0px; width:45%; display:inline-block">
+			<span class="formdateRange" data-bind="text: HP.HPTRIM.Messages.web_From_Date"></span>
+			<div class='input-group date' data-bind="attr: {id: Id + '_from_container' }" style="width:87%; float:right">
+				<input type='text' class="form-control date-picker" style="height: 34px; padding: 6px;" data-bind="value: computedValueFrom, event: { focus: focusCallback, blur: onblur }, disable: isDisable(), attr:{ id: Id, placeholder:dateTimeFormatPlaceHolder}" />
+				<span class="input-group-addon">
+					<span class="hp-icon hp-calendar"></span>
+				</span>
+			</div>
+		</div>
+
+		<div class="col-lg-6" style="padding:0px; width:45%; display:inline-block">
+			<span class="todateRange" data-bind="text: HP.HPTRIM.Messages.web_To_Date">
+			</span>
+			<div class='input-group date' data-bind="attr: {id: Id + '_to_container' }" style="width:87%; float:right">
+				<input type='text' class="form-control date-picker" style="height: 34px; padding: 6px;" data-bind="value: computedValueTo, event: { focus: focusCallback, blur: onblur }, disable: isDisable(), attr:{ id: Id, placeholder:dateTimeFormatPlaceHolder}" />
+				<span class="input-group-addon">
+					<span class="hp-icon hp-calendar"></span>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+<div id="dateString" data-bind="visible: (selectedMethodValue() == stringMethod.value)">
+	<input type="text" class="hprm-text-input" data-bind="value: dateString, valueUpdate:'afterkeydown', disable: isDisable(), attr:{ id: Id, title: Id }">
+</div>
+

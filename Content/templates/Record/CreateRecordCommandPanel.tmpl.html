@@ -1,0 +1,36 @@
+﻿<div data-bind="escapeKey: $data.dataEntryPanel.cancel" tabindex="-1">
+    <div class="listPaddingRight commandPanel">
+        <div>
+            <div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_record"></div>
+        </div>
+        <div>
+            <span class="h3 small HPRM-action-panel-caption" data-bind="text: $data.createOrEdit"></span>
+            <a tabindex="0" class="cancel" style="display:block" data-bind="text:HP.HPTRIM.Messages.web_cancel.toLowerCase(), event: { click: function() { $data.dataEntryPanel.cancel() }  }, enterKey: $data.dataEntryPanel.cancel"> </a>
+        </div>
+    </div>
+    <hr class="hr-on-white">
+    <!-- ko if: $data.showingRecordTypeField -->
+    <div data-bind="if: rtyField !== null" style="margin-left: 10px; margin-right: 10px; margin-top: 10px;">
+        <hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #fff;">
+        <div>
+            <!-- ko hprm_field: $data.rtyField --> <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: showLink -->
+    <div class="listPadding" style="margin-top: 50px;">
+        <hr class="listPadding listPaddingRight" style="margin-top: 0; border-top: 1px solid #fff;">
+        <button role="button" name="button" id="URL_Copy_Button_Create" data-bind="event:{click: toggleURLView }, attr:{title:HP.HPTRIM.Messages.web_urlLink}" type="button" class="btn btn-flat btn-secondary">
+            <div class="url_link_viewer_select_16_black" style="height: 16px; width: 16px; display: inline-block" />
+            <div style="display: inline-block;vertical-align: top;font-weight:700;font-size: 14px;margin-top:3px;" data-bind="text:HP.HPTRIM.Messages.web_showURLLink"></div>
+        </button>
+    </div>
+    <br />
+    <!-- URL Link -->
+    <div id="URL" class="listPadding listPaddingRight" data-bind="visible: showUrl">
+        <input style="width:100%;" id="URL_Link_Create" type="url" data-bind="value:  url" />
+        <label style="margin-bottom: 0 !important; font-weight: normal !important;" for="URL_Link_Create" aria-labelledby="URL_Link_Create"></label>
+    </div>
+    <!-- /ko -->
+    <hr class="listPadding listPaddingRight" style="margin-top: 0; border-top: 1px solid #fff;">
+</div>

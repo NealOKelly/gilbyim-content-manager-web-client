@@ -1,0 +1,23 @@
+﻿<!-- ko if: items().length == 0 -->
+<span class="listPadding" data-bind="text: HP.HPTRIM.Messages.web_noChildLocations"></span>
+<!-- /ko  -->
+<!-- ko ifnot: items().length == 0 -->
+<div class="ready-search-container">
+	<ul class="ready-search-media-list" data-bind="foreach: items">
+		<li class="ready-search-media">
+			<!-- ko if:$parents[1].isLoading -->
+			<span data-bind="text: HP.HPTRIM.Messages.web_loading"></span>
+			<!-- /ko -->
+
+			<div class="ready-search-media-body">
+				<div class="customCheck" style="vertical-align: top; display:inline-block;">
+					<input style="height: 26px; width: 30px;vertical-align:top" type="checkbox" data-bind="value: $data.Fields.Uri, checked: $parents[1].selections, attr:{id: $data.Fields.Uri}" />
+					<label data-bind="attr: { 'for': $data.Fields.Uri }" style="height: 25px"></label>
+					<div style="display: inline-block; width:160px; vertical-align: inherit;" data-bind="text: $data.Fields.RecordLocationTypeOfContact"></div>
+					<div style="display: inline-block; vertical-align: inherit;" data-bind="text: $data.Fields.RecordLocationName"></div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- /ko  -->

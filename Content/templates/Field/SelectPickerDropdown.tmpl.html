@@ -1,0 +1,12 @@
+﻿<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+    <div>
+        <div style="display: flex; max-width: 550px" class="selectOption">
+            <select class="selectpicker" name="testName" data-style="btn-select" style="height:31px;margin: 0 0 10px 0;" data-bind="value:Value, attr: { id:Id }, event: { focus: focusCallback, blur: onblur }">
+                <!--ko foreach:$data.items()-->
+                <option style="text-align:left" data-bind="value:Name,text:Caption,attr: {'class':  Name.toLowerCase().replace(/[_]/g,'')+'_x16'}"></option>
+                <!--/ko-->
+            </select>
+        </div>
+    </div>
+<div data-bind="template:{afterRender: initializeSelect($data)}" />
+

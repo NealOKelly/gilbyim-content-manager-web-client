@@ -1,0 +1,37 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <!-- ko if: titleNotes() -->
+            <div class="h3 small" data-bind="text: titleNotes()"></div>
+        <!-- /ko -->
+    </div>
+
+
+    <div class="modal-body hprm-modal-body" id="notesOverlay">
+
+        <!-- ko if: errorVisible() -->
+        <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+            <span data-bind="text: alertDetails"></span>
+        </div>
+        <!-- /ko -->
+
+        <div>
+            <div data-bind="hprm_field:$data.existingNotesField"></div>
+            <hr />
+
+            <div data-bind="hprm_field:$data.newNotesField" />
+        </div>
+
+        <div data-bind="hprm_field:$data.setToTopCheckBox" />
+        <div data-bind="hprm_field:$data.setToBottomCheckBox" />
+        <div data-bind="hprm_field:$data.addUserStampCheckBox" />
+
+    </div>
+
+    <div class="hprm-modal-footer modal-footer ">
+        <div style="max-width: 575px;">
+            <button role="button" name="button" class="btn btn-flat btn-primary" data-bind="enable: submitEnabled, click: addToNotes, text:HP.HPTRIM.Messages.web_addToNotes, attr: {'alt': HP.HPTRIM.Messages.web_addToNotes, 'title': HP.HPTRIM.Messages.web_addToNotes} "></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+<div>
+	<div data-bind="visible:forObjectUri > -1">
+		<a style="text-decoration:none;" href='#' data-bind='visible:clickToDisplayVisible, click:loadNotes, text: HP.HPTRIM.Messages.web_clickToDisplay'> </a>
+	</div>
+
+	<div data-bind="if:originalNotes">
+		<label for="original-notes" style="margin-bottom: 0 !important; font-weight: normal !important;" data-bind="attr:{'aria-label': HP.HPTRIM.Messages.bob_selectDlgNotes}"></label>
+		<textarea style="background-color:lightgrey" class="textarea-notes" readonly id="original-notes" data-bind="text:originalNotes,attr:{'aria-label': HP.HPTRIM.Messages.bob_selectDlgNotes}" rows="4" cols="40"> </textarea>
+	</div>
+	<div>
+		<label style="margin-bottom: 0 !important; font-weight: normal !important;" for="notes" data-bind="attr:{'aria-label': HP.HPTRIM.Messages.bob_selectDlgNotes}"></label>
+		<textarea class="textarea-notes" id="notes" data-bind="value: newNotesValue, valueUpdate:'afterkeydown', attr:{'aria-label': HP.HPTRIM.Messages.bob_selectDlgNotes} " rows="4" cols="40"></textarea>
+	</div>
+</div>

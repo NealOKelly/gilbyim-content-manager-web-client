@@ -1,0 +1,20 @@
+﻿
+<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+    <div style="display:inline-block; width:100%">
+        <div class="hprm-modal-header modal-header">
+            <div class="h3 small" data-bind="text: title "></div>
+        </div>
+        <div class='searchEditorOverlay'>
+            <div id="searchFilterPanel" class="search-builder-content">
+                <!-- ko as_panel: searchFilterPanel --><!-- /ko -->
+            </div>
+        </div>
+        <div class="hprm-modal-header modal-footer">
+            <div class="pull-right">
+                <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_ok, attr: {title: HP.HPTRIM.Messages.web_ok,disabled: searchFilterPanel.showSaveOk() == true } "></button>
+                <button role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText } "></button>
+            </div>
+        </div>
+
+    </div>
+</div>

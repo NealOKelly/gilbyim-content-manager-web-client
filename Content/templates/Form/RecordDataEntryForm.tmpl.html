@@ -1,0 +1,30 @@
+<div role="form" style=" width: 100%">
+	<!-- ko template:{name:'templates/Form/Form', data:$data } --> <!-- /ko -->
+	<!-- ko if: showFileUploader -->
+	<div role="group" class="accordion-group panel-body" style="border:none; height:auto;">
+		<div data-bind="if: formDefinition().SupportsElectronicDocs" style="height: auto; width: 300px;">
+
+			<div class="control-container">
+				<div>					
+					<!-- ko template: {name: fileUploader.templateName, data : fileUploader} -->
+					<!-- /ko  -->
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	<!-- ko if: showFilePreSpecData -->
+	<!-- ko if: fileNameToDisplay() -->
+	<div class="accordion-group listPadding" style="border:none;">
+		<div data-bind="if: formDefinition().SupportsElectronicDocs" style="height: auto; width: 300px;">
+			<div class="control-container" style="margin-top: 20px">
+				<div class="HPRM-deluxe-list-header" style="margin-bottom: 10px;">
+					<div data-bind="text: HP.HPTRIM.Messages.web_attachElectronicDocument.toUpperCase()"></div>
+				</div>
+				<div class="HPRM-deluxe-list-header" data-bind="text: fileNameToDisplay()"></div>
+			</div>
+		</div>
+	</div>
+	<!-- /ko -->
+	<!-- /ko -->
+</div>

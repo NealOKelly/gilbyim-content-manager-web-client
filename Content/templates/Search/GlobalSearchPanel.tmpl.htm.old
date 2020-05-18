@@ -1,0 +1,231 @@
+﻿
+<div data-bind="attr: { 'class': cssClass }" style="z-index: 102 !important">
+    <div id="globalSearchPanel">
+        <div id="globalSearch" class="global-search-container">
+            <div class="Searchbar-logo-toggle" style="width:222px;">
+                <a class="navbar-logofix" href="#">
+                    <!--<span style="height: 56px; width: 56px;" class="trim_x56 media-object"></span>-->
+                    <img data-bind="attr:{src:cmLogo}" style="height: 56px; width: 56px;"/>
+                </a>
+                
+                <!-- ko as_panel: $root.trimMenuNavPanel --><!-- /ko  -->
+
+            </div>
+            <!--<span class="hack-span-padding"></span>-->
+            <div class="search-input-container">
+                <!-- Search input - NARROW STYLE -->
+                <div class="search-control">
+                        <div id="globalSearchWrapper">
+                            <div class="btn-group" style="float:left;width:100px;">
+                                <button type="button" class="btn global-search-finder-btn dropdown-toggle object_selector pull-left" data-toggle="dropdown" aria-expanded="false" tabindex="0" data-bind="attr:{title: selectedType().Caption}" style="text-transform:uppercase;box-shadow:none;margin-top:0px;float:right!important;">
+                                    <div class="overflowEllipsis" style="max-width: 90px; display: inline">
+                                        <span class="overflowEllipsis" style="max-width: 96px" aria-expanded="false" id="object_selector" data-bind="text: selectedType().Caption"></span>
+                                    </div>
+                                    <span data-bind="attr:{title: HP.HPTRIM.Messages.web_searchQueryLabel}" class="caret" style="vertical-align: super; margin-left: 5px;"></span>
+                                </button>
+
+                                <ul class="dropdown-menu" role="menu" style="left: auto;margin-top:-8px;">
+                                    <!-- ko foreach: topTypes -->
+                                    <li><a href="#" data-bind="click: function() {$parent.setType($data)}, attr: {title: Caption}, text: Caption"></a></li>
+                                    <!-- /ko -->
+                                    <!-- ko foreach: supportedTypes -->
+                                    <li><a href="#" data-bind="click: function() {$parent.setType($data)}, attr: {title: Caption}, text: Caption"></a></li>
+                                    <!-- /ko -->
+                                </ul>
+                            </div>
+                            <div class="btn-group" style="float:left">
+                                <!-- ko if: smallFormSearchActions().length > 0 || smallFilterSortActions().length > 0 -->
+                                <button type="button" class="btn global-search-finder-btn dropdown-toggle option_selector pull-left" data-toggle="dropdown" aria-expanded="false" data-bind="attr:{title: HP.HPTRIM.Messages.web_options }" style="text-transform:uppercase;box-shadow:none;border-left:1px solid #FFFFFF   !important;margin-right:3px;margin-bottom:1px;">
+                                    <span aria-expanded="false" id="option_selector" data-bind="text: HP.HPTRIM.Messages.web_options"></span>
+                                    <span data-bind="attr:{title: HP.HPTRIM.Messages.web_options}" class="caret" style="vertical-align: super; margin-left: 5px;"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" style="left: auto;">
+                                    <!-- ko foreach: $data.smallFilterSortActions -->
+                                    <!-- ko if: $data.visible -->
+                                    <li data-bind="css: {'divider': $data.caption=='-', 'disabled': !$data.enabled() }, attr: {id: id}" class="divider" id="divider">
+                                        <a href="#" data-bind="click: function () { if ($data.enabled()) { $data.actionHandler($data); } }, visible: $data.caption != '-', css: {}, attr: { 'title': $data.tooltip }" style="display: none;">
+                                            <i data-bind="attr: { 'class': $data.icon() ? $data.icon() : 'icon-blank' }" class="icon-blank"></i>
+                                            <!-- ko text: $data.caption -->-<!-- /ko -->
+                                        </a>
+                                    </li>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- ko if: smallFormSearchActions().length > 0 -->
+                                    <li class="divider" id="divider"></li>
+                                    <!-- /ko -->
+                                    <!-- ko foreach: $data.smallFormSearchActions -->
+                                    <!-- ko if: $data.visible -->
+                                    <li data-bind="css: {'divider': $data.caption=='-', 'disabled': !$data.enabled() }, attr: {id: id}">
+                                        <a href="#" data-bind="click: function () { if ($data.enabled()) { $data.actionHandler($data); } }, visible: $data.caption != '-', css: {}, attr: { 'title': $data.tooltip }">
+                                            <i data-bind="attr: { 'class': $data.icon() ? $data.icon() : 'icon-blank' }"></i>
+                                            <!-- ko text: $data.caption -->-<!-- /ko -->
+                                        </a>
+                                    </li>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </ul>
+                                <!-- /ko -->
+                            </div>
+
+                            <div class="global-search-input-container" style="float:left;">
+                                <input type="search" id="global-search-input" autocomplete="off"
+                                       data-bind="value: searchField, enterKey: onSearchEnter, valueUpdate:'afterkeydown',
+                                             attr:{'placeholder': HP.HPTRIM.Messages.web_enterSearchQuery, title: HP.HPTRIM.Messages.web_enterSearchQuery, 'aria-label': HP.HPTRIM.Messages.web_enterSearchQuery, class: searchFieldClass() }"
+                                       data-toggle="dropdown" />
+
+                                <!-- ko if: currentSearchHistory().length > 0 -->
+                                <ul id="search-history-container" class="dropdown-menu" role="menu">
+                                    <!-- ko foreach: currentSearchHistory -->
+                                    <li>
+                                        <div class="pull-right" style="padding-right: 8px"><span style="padding-left: 3px; width:12px; height:12px; cursor: pointer;" data-bind="click: function() { $data.removeHandler() }, enterKey:function() { $data.removeHandler() }, clickBubble:false, attr: {title: HP.HPTRIM.Messages.web_remove}" tabindex="0" class="panelclose-grey" aria-hidden="true"></span></div>
+                                        <div class="overflowEllipsis">
+                                            <a href="#" data-bind="click: function() { $data.actionHandler() }, text: $data.friendlyString, attr: {'title': $data.friendlyString}"></a>
+                                        </div>
+                                    </li>
+                                    <!-- /ko -->
+                                </ul>
+                                <!-- /ko -->
+                            </div>
+                            <!-- Pull right will bring it across on the same line as the search field. -->
+                            <button type="submit" class="btn button-primary global-search-btn " data-bind="click: executeSearch, clickBubble: false, attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }" style="box-shadow:none;min-width:10px;">
+                                <div class="search_24" style="height: 24px; width: 24px;" data-bind="attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }"></div>
+                            </button>
+                            <!-- ko if: saveSearchButtonEnabled() -->
+                            <button type="button" style="border-left:1px solid #8b8b8b; border-right:1px solid #8b8b8b;" id="show-saved-searches" data-bind="click: saveSearch, attr:{title: HP.HPTRIM.Messages.web_save,'aria-label': HP.HPTRIM.Messages.web_save, class: 'btn save-search-btn if-narrow-less-margin'}">
+                                <span data-bind="attr:{title: HP.HPTRIM.Messages.web_save,'aria-label': HP.HPTRIM.Messages.web_save }, text: HP.HPTRIM.Messages.web_save"></span>
+                            </button>
+                            <!-- /ko -->
+                        </div>
+                </div>
+                <div class="master-icons-div">
+                    <!-- Search input - WIDE STYLE -->
+                    <div class="search-control" style="display: none">
+                        <button type="button" class="btn global-search-finder-btn dropdown-toggle object_selector pull-left" data-toggle="dropdown" aria-expanded="false" data-bind="attr:{title: selectedType().Caption}" style="box-shadow:none;border-left:1px solid #FFFFFF   !important;margin-right:2px">
+                            <span aria-expanded="false" id="object_selector" data-bind="text: selectedType().Caption"></span>
+                            <span data-bind="attr:{title: HP.HPTRIM.Messages.web_searchQueryLabel}" class="caret" style="vertical-align: super; margin-left: 5px;"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" style="left: auto;">
+                            <!-- ko foreach: topTypes -->
+                            <li><a href="#" data-bind="click: function() {$parent.setType($data)}, attr: {title: Caption}, text: Caption"></a></li>
+                            <!-- /ko -->
+                            <!-- ko foreach: supportedTypes -->
+                            <li><a href="#" data-bind="click: function() {$parent.setType($data)}, attr: {title: Caption}, text: Caption"></a></li>
+                            <!-- /ko -->
+                        </ul>
+
+
+                        <!-- ko if: formSearchDropdown() -->
+                        <!-- ko as_panel: formSearchDropdown --> <!-- /ko -->
+                        <!-- /ko -->
+                        <!-- ko if: filterSortDropdown() -->
+                        <!-- ko as_panel: filterSortDropdown --> <!-- /ko -->
+                        <!-- /ko -->
+
+                        <div class="global-search-input-container" style="display: inline-block">
+                            <input type="search" id="global-search-input" autocomplete="off"
+                                   data-bind="value: searchField, enterKey: onSearchEnter, valueUpdate:'afterkeydown',
+                                             attr:{'placeholder': HP.HPTRIM.Messages.web_enterSearchQuery, title: HP.HPTRIM.Messages.web_enterSearchQuery, 'aria-label': HP.HPTRIM.Messages.web_enterSearchQuery, class: searchFieldClass() }"
+                                   data-toggle="dropdown" />
+                            <!-- ko if: currentSearchHistory().length > 0 -->
+                            <ul id="search-history-container" class="dropdown-menu" role="menu">
+                                <!-- ko foreach: currentSearchHistory -->
+                                <li>
+                                    <div class="pull-right" style="padding-right: 8px"><span style="padding-left: 3px; width:12px; height:12px; cursor: pointer;" data-bind="click: function() { $data.removeHandler() }, enterKey:function() { $data.removeHandler() }, clickBubble:false, attr: {title: HP.HPTRIM.Messages.web_remove}" tabindex="0" class="panelclose-grey" aria-hidden="true"></span></div>
+                                    <div class="overflowEllipsis">
+                                        <a href="#" data-bind="click: function() { $data.actionHandler() }, text: $data.friendlyString, attr: {'title': $data.friendlyString}"></a>
+                                    </div>
+                                </li>
+                                <!-- /ko -->
+                            </ul>
+                            <!-- /ko -->
+                        </div>
+                        <!-- Pull right will bring it across on the same line as the search field. -->
+                        <button type="submit" class="btn button-primary global-search-btn " data-bind="click: executeSearch, clickBubble: false, attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }" style="box-shadow:none; margin:0 0 3px -3px !important">
+                            <div class="search_24" style="height: 24px; width: 24px;" data-bind="attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }"></div>
+                        </button>
+
+                        <!-- ko if: saveSearchButtonEnabled() -->
+                        <button type="button" style="border-left:1px solid #8b8b8b" id="show-saved-searches" data-bind="click: saveSearch, attr:{title: HP.HPTRIM.Messages.web_save,'aria-label': HP.HPTRIM.Messages.web_save, class: 'btn save-search-btn if-narrow-less-margin'}">
+                            <span data-bind="attr:{title: HP.HPTRIM.Messages.web_save,'aria-label': HP.HPTRIM.Messages.web_save }, text: HP.HPTRIM.Messages.web_save"></span>
+                        </button>
+                        <!-- /ko -->
+                    </div>
+
+                    <div class="pull-right" style="padding-top:12px;">
+                        <div class="divider-right">
+                            <div class="dropdown profile-element div-profile-header">
+                                <div data-toggle="dropdown" class="dropdown-toggle" style="text-decoration: none !important; cursor: pointer;">
+                                    <div class="clear">
+                                        <div class="block m-t-xs" id="profile-user-details" style="display: inline-block;">
+                                            <div class="location_24" style="height: 24px; width: 24px;" data-bind="attr: {title:profileUsername,'aria-label':HP.HPTRIM.Messages.web_profile}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="dropdown-menu" role="menu" style="-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; background-color: white;left:-178px;top:35px;min-width:205px;">
+                                    <li style="padding-left: 8px;border-bottom:1px solid #ddd;"><div><span style="color:black;font-weight:600;font-size:14px;" data-bind="text:profileUsername"></span></div></li>
+                                    <li style="padding-left: 8px;"><div style="background-color:inherit; color: black; display:block;font-weight: 600" data-bind="text: HP.HPTRIM.Messages.tnt_workgroup" class="h6"></div><span style="color:black;" data-bind="text:profileServerName"></span></li>
+                                    <li style="padding-left: 8px;background-color:inherit; margin: 5px 0 5px 0;"><div style="color: black; display:block; font-weight: 600" data-bind="text: HP.HPTRIM.Messages.web_datasetId" class="h6"></div><span style="color: black;" data-bind="text:profileDatasetId"></span></li>
+                                    <li style="padding-left: 8px;"><div style="background-color:inherit; color: black; display:block;font-weight: 600" data-bind="text: HP.HPTRIM.Messages.evt_licenseHdrUserType" class="h6"></div><span style="color:black;" data-bind="text:profileUserType"></span></li>
+                                    <!-- ko if: showLogout -->
+                                    <li class="divider"></li>
+                                    <li><a data-bind="text: HP.HPTRIM.Messages.web_logout, attr: {href: logoutLocation}"></a></li>
+                                    <!-- /ko -->
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Show the standard size -->
+                    <div class="global-search-options-wide" style="padding-top:12px;text-align: right;float: right;">
+                        <div class="divider-left">
+                            <button type="button" id="show-help-btn" class="btn hprm-utils-btn" style="margin: 0 15px 0 15px; padding: 0" data-bind="click: showHelp, attr:{ title: HP.HPTRIM.Messages.dp_cap_Help, 'aria-label': HP.HPTRIM.Messages.dp_cap_Help}">
+                                <span class="application_help" style="top: 3px; left: 3px; position: absolute;width:28px;height:28px" data-bind="attr:{ title: HP.HPTRIM.Messages.dp_cap_Help, 'aria-label': HP.HPTRIM.Messages.dp_cap_Help}"></span>
+                            </button>
+                            <button type="button" id="show-settings-btn" class="btn hprm-utils-btn" style="margin: 0 15px 0 0; padding: 0;width:38px;height:28px" data-bind="click: showSettings, attr:{ title: HP.HPTRIM.Messages.web_setting, 'aria-label': HP.HPTRIM.Messages.web_setting}">
+                                <span class="application_settings" style="top: 0px; left: 3px; position: absolute;width:28px;height:28px" data-bind="attr:{ title: HP.HPTRIM.Messages.web_setting, 'aria-label': HP.HPTRIM.Messages.web_setting}"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- show the narrow one -->
+                    <div class="global-search-options-narrow" style="padding-top:12px;float: right;margin-right: 10px;">
+                        <div class="divider-left">
+                            <button type="button" id="small-options-button" class="btn hprm-utils-btn" style="margin: 0 15px 0 15px; padding: 0" data-toggle="dropdown">
+                                <span class="application_help elipses_white_24" style="width:24px;height:24px;top: 3px; left: 3px; position: absolute;" data-bind="attr:{ title: HP.HPTRIM.Messages.web_more, 'aria-label': HP.HPTRIM.Messages.web_more}"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" style="left:-65px; min-width: 0px;">
+                                <li>
+                                    <a href="#" class="application_help-grey_16" data-bind="click: showHelp,
+                               attr: {title:  HP.HPTRIM.Messages.dp_cap_Help}, text:  HP.HPTRIM.Messages.dp_cap_Help;" style="padding-left:25px;"></a>
+                                </li>
+                                <li>
+                                    <a href="#" class="application_settings-grey_16" data-bind="click: showSettings,
+                               attr: {title: HP.HPTRIM.Messages.web_setting}, text: HP.HPTRIM.Messages.web_setting;" style="padding-left: 25px;"></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                        
+                    <!--<div class="pull-right global-search-options-wide">
+                        <span class="divider-left">
+                            <div class="dropdown profile-element div-profile-header">
+                                <ul class="dropdown-menu" style="-moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; background-color: white;left:-30px;top:35px;min-width:145px;">
+                                    <li style="padding-left: 8px;"><div style="background-color:inherit; color: black; display:block;font-weight: 600" data-bind="text: HP.HPTRIM.Messages.tnt_workgroup" class="h6"></div><span style="color:black;" data-bind="text:profileServerName"></span></li>
+                                    <li style="padding-left: 8px;background-color:inherit; margin: 5px 0 5px 0;"><div style="color: black; display:block; font-weight: 600" data-bind="text: HP.HPTRIM.Messages.web_datasetId" class="h6"></div><span style="color: black;" data-bind="text:profileDatasetId"></span></li>
+                                    <li style="padding-left: 8px;"><div style="background-color:inherit; color: black; display:block;font-weight: 600" data-bind="text: HP.HPTRIM.Messages.evt_licenseHdrUserType" class="h6"></div><span style="color:black;" data-bind="text:profileUserType"></span></li>-->
+
+
+                                    <!-- ko if: showLogout -->
+                                    <!--<li class="divider"></li>
+                                    <li><a data-bind="text: HP.HPTRIM.Messages.web_logout, attr: {href: logoutLocation}"></a></li>-->
+                                    <!-- /ko -->
+                                <!--</ul>
+
+                            </div>
+                        </span>
+                    </div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

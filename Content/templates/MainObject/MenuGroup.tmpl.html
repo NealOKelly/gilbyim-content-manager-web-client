@@ -1,0 +1,14 @@
+﻿<li tabindex=""  data-bind="if:menuText" >
+	
+		<div class="menu-group" >
+			<form>
+				<span  data-bind="text:menuText,  click: onclick"></span>
+				<span class="pull-right" style="margin-right:5px"> > </span>
+			</form>				
+		</div>
+	
+			<ul data-bind="foreach: items" style="list-style:none;-webkit-padding-start:unset" >
+				<!-- ko template: {name: templateName, data: $data} --> <!-- /ko -->
+			</ul>
+</li>
+

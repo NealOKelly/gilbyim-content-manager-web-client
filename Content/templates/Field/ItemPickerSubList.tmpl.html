@@ -1,0 +1,14 @@
+﻿<div class="item">
+    <!-- ko if:$data.selectedListItem() -->
+    <!-- ko template: {name: "templates/Field/ItemPickerRootList", data: {carouselId : $data.carouselId, hasMoreResults:ko.observable(false),items: $data.selectedListItem().children } } --><!-- /ko-->
+    <!-- /ko -->
+
+    <ul class="itempicker-ul">
+        <li class="loadMore alignItemsMiddle" data-bind="if: hasMoreResults() && items().length > 0">
+            <div data-bind="click: loadMore">
+                <span data-bind="text: HP.HPTRIM.Messages.web_more + ' ...'" style="color:#000"></span>
+                <span class="spinner-container" data-bind="if: isLoading()"><i class="fa fa-spinner fa-spin"></i></span>
+            </div>
+        </li>
+    </ul>
+</div>

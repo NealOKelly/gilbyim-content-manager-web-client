@@ -1,0 +1,78 @@
+﻿
+<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_formSearchCap"></div>
+        <!-- ko if: showMessage && message -->
+        <div class="hprm-modal-error alert" style="max-width: 600px">
+            <span data-bind="text: message"></span>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="create-location-overlay-body">
+        <div class='hprm-modal-body searchEditorOverlay'>
+
+
+
+
+			<div role="tabpanel" class="tabbable tabs-below">
+				<!-- Tab UI -->
+				<ul class="nav nav-tabs" role="tablist">
+
+					<li role="presentation" class="active">
+						<a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'formSearchFields'}, text: HP.HPTRIM.Messages.web_formSearchCap"></a>
+					</li>
+					<!-- ko if: showFilter -->
+					<li role="presentation">
+						<a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'formSearchFilter'}, text: 'Filter' "></a>
+					</li>
+					<!-- /ko -->					
+					<!-- ko if: showRecordTypeFilter -->
+					<li role="presentation">
+						<a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'formSearchRecordTypeFilter'}, text:  HP.HPTRIM.Messages.web_recordType"></a>
+					</li>
+					<!-- /ko -->
+				
+
+				</ul>
+
+				<!-- Tab Content -->
+				<div class="tab-content">
+
+					
+					<div role="tabpanel" style="margin:20px" class="tab-pane fade in active" data-bind="attr: { id: 'formSearchFields' }">
+						<div data-bind="with: formDefinition()" class="listPadding listPaddingRight" style="max-width: 575px">
+							<!-- ko foreach:$data.Pages -->
+							<!-- ko template: {name: 'templates/Form/Page', data : $data, afterRender: function() { $data.init() ;} } -->
+							<!-- /ko  -->
+							<!-- /ko -->
+						</div>
+					</div>
+					<!-- ko if: showFilter -->
+						<div role="tabpanel" style="margin-left:20px" class="tab-pane fade" data-bind="attr: { id: 'formSearchFilter'}">
+							<!-- ko template: { name: $data.searchFilterPanel.templateName(), data: $data.searchFilterPanel } --> <!-- /ko -->
+						</div>
+					<!-- /ko -->
+					<!-- ko if: showRecordTypeFilter -->
+						<div role="tabpanel" style="margin-left:20px" class="tab-pane fade" data-bind="attr: { id: 'formSearchRecordTypeFilter'}">
+							<!-- ko template: { name: $data.searchRecordTypeFilterPanel.templateName(), data: $data.searchRecordTypeFilterPanel } --> <!-- /ko -->
+						</div>
+					<!-- /ko -->
+				</div>
+
+			</div>
+
+
+
+
+         
+        </div>
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+
+        <div style="max-width: 575px;">
+            <button role="button" name="button" class="btn btn-flat btn-primary" data-bind="event: { click: finaliseQuery }, attr: { title: HP.HPTRIM.Messages.web_initiateYourSearch }, text: HP.HPTRIM.Messages.web_search"></button>
+            <button role="button" name="button" class="btn btn-flat btn-secondary" data-bind="event: { click: cancel }, attr: { title: HP.HPTRIM.Messages.web_dp_cancelText }, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>

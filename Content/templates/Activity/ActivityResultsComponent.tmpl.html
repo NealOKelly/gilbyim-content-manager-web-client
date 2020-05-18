@@ -1,0 +1,19 @@
+﻿<!-- ko if: $data.showResultsOnMobile() -->
+<button class="btn btn-stroke btn-stroke mobileWideButtons" data-bind="visible: $data.showResultsOnMobile, click: returnAction, text: HP.HPTRIM.Messages.vb_nts_Back"></button>
+<!-- /ko -->
+
+<!-- ko if: errorVisible() -->
+<div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+    <span data-bind="text: alertDetails"></span>
+</div>
+<!-- /ko -->
+<ul class="attach-record-type-list" data-bind="foreach: results()">
+    <li>
+        <div class="customCheck">
+            <input style="width:100%" type="checkbox" data-bind="value: name, enable: $parent.saveEnabled(), attr: {'id': name}, checked: isSelected" />
+            <label data-bind="text:name, attr: {'for': name}" style="text-transform:capitalize"></label>
+        </div>
+    </li>
+</ul>
+<!--<button role="button" name="button" class="btn button-primary" data-bind="click: save, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enable: saveEnabled"></button>-->
+

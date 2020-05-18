@@ -1,0 +1,46 @@
+﻿@{
+	ViewBag.Title = "Setup Information";
+}
+@Styles.Render("~/Content/styles")
+
+<script>
+    var HPRMWebConfig = {        
+    	
+        softwareVersion: "@HP.HPTRIM.Web.SoftwareVersion.AssemblyVersion",
+	    virtualDirectory: '@Url.Content("~")'
+	}
+
+</script>
+
+<body class="as-spa" style="background-color:#FFFFFF">
+	<div class="branding-border-top"></div>
+	<div style="background-color:#0073E7">
+		<img data-bind="attr:{alt: HP.HPTRIM.Messages.web_HPRM}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADgAAAA4CAMAAACfWMssAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAOVBMVEUAAAAAZFr///+gxcJwqKJQlY7w9vUwgXng7OsQbmTQ4uFAi4OAsq37+/tgnpiwz8wgd2/A2daQvLc2aK3KAAAAAXRSTlMAQObYZgAAAAFiS0dEAmYLfGQAAAAHdElNRQfiBwQULhc54dwpAAAAyklEQVRIx+3U7Q6DIAwFUCm2yKeT93/Y6aIGDYPQbGbJvH+QJkcFGjrBTHfDG66BQ+aC5ELoL4eAXEiKCWHQmgfBmFaIhfUVoTHIg+k/XwglWsuA5v0pFqHRwtE8kmuESpvtFS3QS+H2iWuBKGifUAu0aeG3Yc9Yo18S2nd13CrHc1RYgw89wBTj3KV75yDGASAUIZEI65PE18VhF3TuoA9C75NdOaX2RWRBAK3aYBLiwjHvqApDHk5VqPPQfQ8KmYW2Duu54b9Dbp6HZxLMCRqBOAAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAxOC0wNy0wNFQxNTo0NjoyMyswNTowMCTBAnEAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMTgtMDctMDRUMTU6NDY6MjMrMDU6MDBVnLrNAAAAAElFTkSuQmCC" />
+        <h2 style="color:#fff;display:inline;vertical-align: middle;margin-left: 13px;">Content Manager Setup Information</h2>
+	</div>
+	<table class="table" style="margin:25px;">
+		<thead>
+			<tr>
+				<th>Property</th>
+				<th>Value</th>
+			</tr>
+		</thead>
+
+		<tbody>	
+		<!-- ko foreach:properties() -->
+			<tr>
+				<td data-bind="text: caption">Caption</td>
+				<td data-bind="text: value">Value</td>
+			</tr>
+		<!-- /ko -->
+		</tbody>
+	</table>
+	<div class="branding-border-bottom"></div>
+</body>
+
+@Scripts.Render("~/bundles/HPRM")
+
+<script>
+	var setupInfo = new HP.HPTRIM.Setup.SetupInfo();
+	ko.applyBindings(setupInfo);
+</script>

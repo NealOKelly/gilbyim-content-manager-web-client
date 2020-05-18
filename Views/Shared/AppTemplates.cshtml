@@ -1,0 +1,1141 @@
+<!-- Disable the loading status-->
+<script>
+    var el = document.getElementById('loading-status');
+    if (el) {
+        el.style.display = "none";
+    }
+</script>
+
+
+
+<!-- Client Matter Role Add Control -->
+<script type="text/html" id="AddClientMatterRoleTemplate">
+    <div data-bind="hprm_field:roleLoc"></div>
+    <div data-bind="hprm_field:roleType"></div>
+</script>
+
+
+<!-- Client Matter Party Field Add Control -->
+<script type="text/html" id="AddClientMatterPartyTemplate">
+    <div data-bind="hprm_field:partyLocation"></div>
+    <div data-bind="hprm_field:partyType"></div>
+    <div data-bind="hprm_field:interestTypes"></div>
+
+</script>
+
+<!-- Keywords / Thesaurus Field -->
+<script type="text/html" id="KeywordsPageTemplate">
+    <div data-bind="hprm_field:keywordPicker"></div>
+</script>
+
+<script type="text/html" id="RecordActionComponentRecordAction">
+    <tr tabindex="0" class="actionTrackingTableRow" data-bind="click: owningPanel.selectItem, enterKey: function() {owningPanel.selectItem($data)},">
+        <!-- Indent, Icon, title Column-->
+        <td style="width:40%; height: 30px" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <!-- ko if: (nodeDepth == 0)-->
+            <!-- Parent node - colour / expand here. -->
+            <div style="width: 20px; height:30px; display:inline-block; vertical-align: middle" data-bind="style:{ background: owningPanel.getTaskUIClass($data) }">
+                <!-- ko if: ChildActions.length  > 1 -->
+                <div tabindex="0" style="width:100%; height: 100%" data-bind="click: owningPanel.toggle, enterKey: function() {owningPanel.toggle($data); return false}, clickBubble:false, attr: { class: showingChildren() ?'minimise-white media-object':'maximise-white media-object' } "></div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- ko if: (nodeDepth > 0)-->
+            <!-- Non parent node. First 20 px white. -->
+            <div style="width: 10px;  height:30px; display:inline-block; vertical-align: middle"></div>
+            <!-- ko if: ChildActions.length  > 1 -->
+            <div tabindex="0" style="width: 20px; height:30px; display:inline-block; vertical-align: middle" data-bind="click: owningPanel.toggle, enterKey: function() {owningPanel.toggle($data); return false}, clickBubble:false,attr: { class: showingChildren() ?'minimise media-object':'maximise media-object' } "></div>
+            <!-- /ko -->
+            <!-- ko ifnot: ChildActions.length  > 1 -->
+            <div style="width: 20px; height:30px; display:inline-block; vertical-align: middle"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: (nodeDepth > 1)-->
+            <!-- ko foreach: new Array(nodeDepth - 1)-->
+            <!-- Add a blank 10px space. -->
+            <div style="width: 10px; height:30px; display:inline-block; vertical-align: middle"></div>
+            <!-- /ko -->
+            <!-- ko if: ChildActions.length  > 1 -->
+            <div tabindex="0" style="width: 20px; height:30px; display:inline-block; vertical-align: middle" data-bind="click: owningPanel.toggle, enterKey: function() {owningPanel.toggle($data); return false}, clickBubble:false,attr: { class: showingChildren() ?'minimise media-object':'maximise media-object' } "></div>
+            <!-- /ko -->
+            <!-- ko ifnot: ChildActions.length  > 1 -->
+            <div style="width: 20px; height:30px; display:inline-block; vertical-align: middle"></div>
+            <!-- /ko -->
+            <!-- /ko -->
+
+
+            <div data-bind="attr: { 'class': (Icon.Id.toLowerCase() + '_x16 media-object item-picker-raw-icon'), 'title': RecordActionActionName + ' ' + RecordActionStatus}"></div>
+            <div data-bind="attr:{ title: RecordActionActionName} , text: RecordActionActionName" id="recActName" class="overflowEllipsis" style="display:inline-block; vertical-align: middle; overflow: hidden; max-width:200px"></div>
+
+        </td>
+
+        <!-- Responsible location column-->
+        <td style="width:30%;" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <div data-bind="attr: { 'class': (RecordActionResponsibility.Icon ? (RecordActionResponsibility.Icon.Id.toLowerCase() + '_x24 media-object item-picker-raw-icon'): ''), 'title': RecordActionResponsibility ? RecordActionResponsibility.LocationFormattedName.Value : '' }"></div>
+            <div data-bind="text: RecordActionResponsibility ? RecordActionResponsibility.LocationFormattedName.Value : ''" id="recActRes" style="display:inline-block; vertical-align: middle;"></div>
+        </td>
+
+        <td style="width:30%;" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <div data-bind="text: RecordActionDueDate? owningPanel.formatDate(RecordActionDueDate) : ''" id="recActDate" style="display:inline-block; vertical-align: middle; padding-left: 5px"></div>
+        </td>
+    </tr>
+    <!-- ko if: showingChildren -->
+    <!-- ko foreach: ChildActions -->
+    <!-- ko template: {name : "RecordActionComponentRecordAction", data: $data} -->
+    <!-- /ko -->
+    <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+
+<script type="text/html" id="SearchEditorSearchEditorPanel">
+
+    <!-- ko if: $data.childPanel -->
+    <div style="border-radius:5px" data-bind="escapeKey: $data.dismiss" tabindex="-1">
+        <div class="h3 small search-modal-header" data-bind="text: title"></div>
+        <div style="padding-left: 15px; padding-top: 5px; padding-right:5px; padding-bottom: 5px">
+            <div style="border: 1px solid black; border-radius: 5px; background-color:white; box-shadow:  -10px -10px 50px #888888;">
+                <!-- ko template: {name : "SearchEditorSearchEditorPanel", data: $data.childPanel } -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot : $data.childPanel -->
+    <div data-bind="escapeKey: $data.dismiss" tabindex="-1">
+        <div class="hprm-modal-header search-modal-header">
+            <div class="h3 small" data-bind="text: title"></div>
+        </div>
+        <div class='searchEditorOverlay'>
+            <div class="tabbable tabs-below">
+                <ul class="nav nav-tabs" style="padding-left:10px">
+                    <li class="active"><a data-toggle="tab" href="#searchBuilderPanel" data-bind="text: searchTabTtitle, attr: { title:searchTabTtitle } "></a></li>
+                    <!-- ko if: showFilter -->
+                    <li><a data-toggle="tab" href="#searchFilterPanel" data-bind="text: filterTabTtitle, attr: { title: filterTabTtitle} "></a></li>
+                    <!-- /ko -->
+                    <!-- ko if: showRecordTypeFilter -->
+                    <li><a data-toggle="tab" href="#searchRecordTypeFilterPanel" data-bind="text: recordTypesTabTtitle, attr: { title:recordTypesTabTtitle } "></a></li>
+                    <!-- /ko -->
+                    <!-- ko if: showSort-->
+                    <li><a data-toggle="tab" href="#searchSortPanel" data-bind="text: sortTabTtitle, attr: { title:sortTabTtitle } "></a></li>
+                    <!-- /ko -->
+                    <!-- ko if: showOption-->
+                    <li><a data-toggle="tab" href="#searchOptionPanel" data-bind="text: optionTabTitle, attr: { title:optionTabTitle } "></a></li>
+                    <!-- /ko -->
+                </ul>
+                <div class="tab-content">
+                    <div id="searchBuilderPanel" class="tab-pane fade in active search-builder-content searchBuilderPanelScroll">
+                        <!-- ko as_panel: clauseFinder --><!-- /ko -->
+                        <!-- ko as_panel: searchBuilderPanel--><!-- /ko -->
+                    </div>
+                    <!-- ko if: showFilter -->
+                    <div id="searchFilterPanel" class="tab-pane fade search-builder-content">
+                        <!-- ko as_panel: searchFilterPanel --><!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: showRecordTypeFilter -->
+                    <div id="searchRecordTypeFilterPanel" class="tab-pane fade search-builder-content">
+                        <!-- ko as_panel: searchRecordTypeFilterPanel --><!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko if: showSort-->
+                    <div id="searchSortPanel" class="tab-pane fade search-builder-content">
+                        <!-- ko as_panel: searchSortPanel --><!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                     <!-- ko if: showOption-->
+                    <div id="searchOptionPanel" class="tab-pane fade search-builder-content">
+                        <!-- ko as_panel: searchOptionFilterPanel --><!-- /ko -->
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <div class="hprm-modal-header modal-footer">
+            <div class="pull-right">
+                <!-- ko if: showSearchButton -->
+                    <!-- ko ifnot: isChild -->
+                        <!-- ko if: showFilter -->
+                            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_search, attr: {title: HP.HPTRIM.Messages.web_search,disabled: searchFilterPanel.showSaveOk() == true }"></button>
+                        <!-- /ko -->
+                        <!-- ko ifnot: showFilter -->
+                            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_search, attr: {title: HP.HPTRIM.Messages.web_search}"></button>
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko if: isChild -->
+                    <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_ok, attr: {title: HP.HPTRIM.Messages.web_ok }"></button>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <button role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText} "></button>
+            </div>
+        </div>
+
+    </div>
+    <!-- /ko -->
+
+
+</script>
+
+
+<script type="text/html" id="RecordAdditionalFieldsList">
+    <tr class="actionTrackingTableRow" data-bind="click: owningPanel.selectItem">
+        <!-- Indent, Icon, name Column-->
+        <td style="width:30%; height: 30px" data-bind="click: owningPanel.selectItem, attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <div data-bind="attr: { 'class': (Icon.Id.toLowerCase() + '_x16 media-object item-picker-raw-icon'), 'title': name}"></div>
+            <div data-bind="text: name" class="overflowEllipsis" style="display:inline-block; vertical-align: middle; overflow: hidden"></div>
+        </td>
+
+        <!-- Type column-->
+        <td style="width:30%;" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <div data-bind="attr: { 'title': ObjectType }"></div>
+            <div data-bind="text: ObjectType" style="display:inline-block; vertical-align: middle;"></div>
+        </td>
+
+        <!-- Value column-->
+        <td style="width:30%;" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <div data-bind="attr: { 'title': value }"></div>
+            <div data-bind="text: value" style="display:inline-block; vertical-align: middle;"></div>
+        </td>
+
+        <td style="width:10%;" data-bind="attr:{class: 'actionTrackingTableCell overflowEllipsis ' + (selected()? 'actionTrackingTableCellSelected' : '') }">
+            <!--  Command column -->
+            <!-- ko if: selected -->
+            <div style="width: 100%; height:30px; background-color: #e9e9f4">
+                <button role="button" name="button" id="id" data-bind="click: $parent.owningPanel.editAdditionalField, attr: { class: 'btn button-primary' }, text: 'Set/Change'"></button>
+            </div>
+            <!-- /ko -->
+        </td>
+    </tr>
+</script>
+
+
+<!-- Display Error  -->
+<script type="text/html" id="overlay-error-template">
+
+    <div class="hprm-modal-header modal-header grey-back">
+        <div class="alert alert-danger" data-bind="text: errorMessage"></div>
+    </div>
+
+
+    <div class="modal-footer hprm-modal-footer grey-back">
+        <div style="max-width: 575px;">
+
+            <div class="pull-right">
+                <button role="button" name="button" type="button" class="btn button-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_ok"></button>
+            </div>
+        </div>
+    </div>
+
+</script>
+
+
+
+
+
+<!-- Date Format Settings -->
+<script type="text/html" id="DateFormatDropDown">
+    <div>
+        <label data-bind="text: HP.HPTRIM.Messages.dp_cap_DateFormat, attr:{ 'for': dateFormatId }" style="font-weight: normal;"> </label>
+    </div>
+    <div>
+        <select data-bind="value:selectedValue, options:dateOptions,attr:{id:dateFormatId}" style="height: 31px;margin: 0 0 10px 0;"></select>
+    </div>
+    <div>
+        <label data-bind="text: HP.HPTRIM.Messages.rp_sepCap, attr:{ 'for': dateSeparatorId }" style="padding-top:5px; font-weight: normal;"> </label>
+    </div>
+    <div>
+        <select data-bind="value: dateSeparator,attr:{id:dateSeparatorId}" style="height: 31px;margin: 0 0 10px 0;">
+            <option value="/">/</option>
+            <option value="-">-</option>
+            <option value=".">.</option>
+        </select>
+    </div>
+</script>
+
+
+
+
+<!-- Generic Multi Item Picker -->
+<script type="text/html" id="MultiSelectItemPicker">
+
+    <!-- ko foreach:items -->
+    <table style="display: table; width: 100%;">
+        <tbody style="width: 100%;">
+            <tr style="vertical-align: middle;" class="pickerInputTableRow">
+                <td>
+                    <!-- ko template: {name:$parent.itemTemplate(), data :{ itemPicker: $parent, value: $data } } --> <!-- /ko -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- /ko -->
+</script>
+
+<!-- MultiItemPicker Item Template for CheckboxItemtemplate-->
+<script type="text/html" id="MultiSelectItemPicker-CheckboxItemTemplate">
+    <span style="display:inline-block">
+        <span style="padding:4px">
+
+            <!-- ko if: itemPicker.isSelected(value) -->
+            <i class="fa fa-check-square-o"></i>
+            <!-- /ko-->
+            <!-- ko ifnot: itemPicker.isSelected(value) -->
+            <i class="fa fa-square-o"></i>
+            <!-- /ko -->
+        </span>
+        <span data-bind="text: value,click: function() { $data.itemPicker.toggleSelectItem($data.value); }" style="text-align:left;width:100%;"></span>
+    </span>
+</script>
+
+<!-- MultiItemPicker Item Template for ToggleItemTemplate-->
+<script type="text/html" id="MultiSelectItemPicker-ToggleItemTemplate">
+    <span class="recordPropertySelectionBtn" data-bind="click: function() { itemPicker.toggleSelectItem(value); } ">
+        <button role="button" name="button" type="button" class="btn btn-stroke recPropBtn " data-bind="text: value, 'css': {active : itemPicker.isSelected(value)} " style="text-align:left;width:100%;"></button>
+    </span>
+</script>
+
+
+
+<!-- Alert Template , currently used for inline alert in Settings panel-->
+<script type="text/html" id="Alert-Template">
+
+    <!-- ko if: isError  -->
+    <div class="pull-right" style="cursor:pointer;color:white;padding:10px;" data-bind="event:{ click : clear }, text:'X'"> </div>
+    <div class="hprm-modal-error alert" style="max-width: 600px" data-bind="visible:isVisible">
+        <div data-bind="text : message"></div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if:isWarning-->
+    <div class="hprm-modal-error label-warning" style="max-width: 600px;padding:20px" data-bind="visible:isVisible">
+        <div style="color:black" data-bind="text : message"></div>
+        <div class="padding-3px">
+            <button class="btn-alert-ok" data-bind="click: onOk">Yes</button>
+            <button class="btn-alert-cancel" data-bind="click: onCancel">Cancel</button>
+        </div>
+    </div>
+    <!-- /ko -->
+
+</script>
+
+<!-- Inline error report template -->
+<script type="text/html" id="FieldErrorReportTemplate">
+
+    <div style="display: block; border-top-width: 2px; border-right-width: 2px; border-bottom-width: 2px; border-style: solid solid solid none; border-top-color: rgb(146, 73, 73); border-right-color: rgb(146, 73, 73); border-bottom-color: rgb(146, 73, 73); padding: 5px; min-width: 150px; max-width: 250px; background: rgb(243, 230, 230);"><%= errorString %>.</div>
+    <div> Hello this is a help information click here for more info</div>
+
+</script>
+
+
+<script type="text/html" id="DocumentViewerHeaderActionTemplate">
+    <div style="margin-left:20px;" class="btn-group pull-left" data-bind="foreach: $data.actions">
+        <!-- ko if:icon() -->
+        <button style="margin-right: 8px; min-width:10px;"
+                data-bind="enable: $data.enabled,
+                        attr: { 'class': $data.icon() +' command-action btn btn-revision', 'title': $data.tooltip},
+                        visible: $data.visible,click: function () { if ($data.enabled()) { $data.actionHandler($data); } }"
+                tabindex="0"></button>
+        <!-- /ko -->
+        <!-- ko ifnot:icon() -->
+        <div style="display:inline-block;padding:0;margin:0 10px 0 0" class="nav_buttons">
+            <button style="min-width:10px;"
+                    data-bind="text: caption,
+                           enable: $data.enabled,
+                           attr: { 'class': 'btn btn-revision btn-revision btn-revision-textOnly', 'title': $data.tooltip},
+                           visible: $data.visible,
+                           enable: $data.enabled,
+                           click: function () { if ($data.enabled()) { $data.actionHandler($data); } }"
+                    tabindex="0"></button>
+            </div>
+            <!-- /ko -->
+        </div>
+	<span class="HPRM-deluxe-list-item-data" style="margin-top:10px; display:inline;position:absolute; width: 100%; height: 22px">
+		<span class="label label-info" id="documentViewerInfo"></span>
+	</span>
+</script>
+
+
+<script type="text/html" id="DocumentViewerNewHeaderActionTemplate">
+    <!-- ko foreach: $data.actions -->
+        <!-- ko if: $data.visible -->
+            <div style="margin-right:0px" class="btn-group pull-left clsDocumentViewButton" >
+                <!-- ko if:icon() -->
+                <a href="#" data-bind="enable: $data.enabled,visible: $data.visible,click: function () { if ($data.enabled()) { $data.actionHandler($data); } },attr: { 'class': $data.icon() +' command-action btn-revision', 'title': $data.tooltip}">
+                </a>                
+                <!-- /ko -->
+                <!-- ko ifnot:icon() -->
+                <a href="#" data-bind="text: caption,enable: $data.enabled,visible: $data.visible,click: function () { if ($data.enabled()) { $data.actionHandler($data); } },attr: { 'id':$data.id,'class': 'btn btn-revision nav_buttons', 'title': $data.tooltip}">
+                </a>
+                <!-- /ko -->                
+            </div>   
+        <!-- /ko -->
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="RenditionDocumentViewerHeaderActionTemplate">
+    <div style="margin-left:20px;" class="btn-group pull-left" data-bind="foreach: $data.actions">
+        <!-- ko if:icon() -->
+        <button style="margin-right: 8px; min-width:10px;"
+                data-bind="enable: $data.enabled,
+                           attr: { 'class': $data.icon() +' command-action btn btn-revision', 'title': $data.tooltip},
+                           visible: $data.visible,click: function () { if ($data.enabled()) { $data.actionHandler($data); } }"
+                tabindex="0"></button>
+        <!-- /ko -->
+        <!-- ko ifnot:icon() -->
+        <div style="display:inline-block;padding:0;margin:0 10px 0 0" class="nav_buttons">
+            <button style="min-width:10px;"
+                    data-bind="text: caption,
+                               enable: $data.enabled,
+                               attr: { 'class': 'btn btn-revision btn-revision btn-revision-textOnly', 'title': $data.tooltip},
+                               visible: $data.visible,
+                               click: function () { if ($data.enabled()) { $data.actionHandler($data); } }"
+                    tabindex="0"></button>
+        </div>
+        <!-- /ko -->
+    </div>
+    <span class="HPRM-deluxe-list-item-data" style="margin-top:10px; display:inline;position:absolute; width: 100%; height: 22px">
+        <span class="label label-info" id="renditionDocumentViewerInfo"></span>
+    </span>
+</script>
+
+
+<script type="text/html" id='ActionIconTemplate'>
+
+    <div class="btn-group pull-right" data-bind="foreach: $data.actions">
+        <button tabindex="0" data-bind="enable: $data.enabled, attr: { 'class': $data.icon() +' command-action btn', 'title': $data.tooltip}, visible: $data.visible,click: function () { if ($data.enabled()) { $data.actionHandler($data); } }"></button>
+    </div>
+</script>
+
+ 
+<!-- CollapsiblePanel template -->
+<script type="text/html" id="CollapsiblePanel-Template">
+    <div class="command-panel" data-bind="attr: {  id: $data.id }, visible: visible">
+        <span class="panel-command-button panelexpand-white "></span>
+        <div tabindex="0" class="panel-header">
+            <div style="margin-top:5px">
+                <span tabindex="0" class="panel-command-button panelclose-white content" data-bind="event: { 'click': function() {$data.close($data.id)}, 'keyup': function () {$parent.keybordXEnterKey('close')} }"></span>
+                <span tabindex="0" class="panel-command-button panelexpand-white content" data-bind="event: { click: function(context,event) {$data.maximize(event)}, 'keyup': function () {$parent.keybordXEnterKey('maximize')}  }"></span>
+                <span tabindex="0" class="panel-command-button panelminimise-white content" data-bind="event: { click: function(context,event) {$data.minimize($data.id, event)}, 'keyup': function () {$parent.keybordXEnterKey('minimize')}  }"></span>
+            </div>
+
+            <div class="panel-label">
+                <h5 style='padding-left:5px' data-bind="text:label"></h5>
+            </div>
+        </div>
+
+        <!-- ko if: actionPanel -->
+        <div class="content action-panel">
+            <div class="content action" data-bind="as_panel: actionPanel"></div>
+        </div>
+        <!-- /ko -->
+
+        <div class="content" style="height:90%; overflow-x:hidden">
+            <!-- ko template: {name: contentTemplateName, data : $data} --> <!-- /ko -->
+        </div>
+    </div>
+</script>
+
+
+<!-- BrowseViaClassification template -->
+<script type="text/html" id="BrowseViaClassificationTree-Template">
+
+
+    <div class="btn-group">
+        <button role="button" type="button" data-bind="click:selectTop, text: HP.HPTRIM.Messages.loc_searchAll, attr:{class: topButtonClass}" tabindex="0"></button>
+        <button role="button" type="button" data-bind="click:selectFavorite, text: HP.HPTRIM.Messages.web_favorites, attr:{class: favoriteButtonClass}" tabindex="0"></button>
+    </div>
+
+    <div data-bind="attr:{id: 'BrowseViaClassificationTree' + $data.id }" class="gtreetable table"></div>
+</script>
+
+<script type="text/html" id="BrowseViaUserLabelTree-Template">
+    <div data-bind="attr:{id: 'BrowseViaUserLabelTree' + $data.id }" class="gtreetable table"></div>
+</script>
+
+
+<script type="text/html" id="ThesaurusTree-Template">
+    <div data-bind="attr:{id: 'ThesaurusTree' + $data.id }" class="gtreetable table" style="padding:20px"></div>
+</script>
+
+<script type="text/html" id="PlaceHolder-Template">
+    <div data-bind="text:$data"></div>
+</script>
+
+<!-- Multiple Jurisdiction template -->
+<script type="text/html" id="MultipleJurisdiction-Template">
+    <div data-bind="attr:{id: 'MultipleJurisdictionTree' + $data.id }" class="gtreetable table"></div>
+</script>
+
+<!-- Multiple Lookup Item template -->
+<script type="text/html" id="MultipleLookupItem-Template">
+    <div data-bind="attr:{id: 'MultipleLookupItemTree' + $data.id }" class="gtreetable table"></div>
+</script>
+
+<!-- Search Builder Pills -->
+<script type="text/html" id="SearchBuilderPillTemplate">
+
+
+    <ul class="search-builder search-pills" data-bind="foreach:$data.searchBuilderPartList">
+        <li data-bind="attr:{ class:  ( $data.isRawString() ? 'raw-pill' : '' )}">
+            <!-- ko if: isOperator() -->
+            <!-- Since there may be a group or something that has clickBubble:false, we cant't use dropdown toggle; instead, onSelected show the sub panel.-->
+            <div id="operators" data-bind="attr: {class: 'btn-group' + (selected() ? ' open active' : ''), title: tooltip}, clickBubble:false, click:toggleSelect, enterKey:toggleSelect, enterKeyBubble:false" tabindex="0">
+                <span data-bind="text:operatorCaption"></span>
+                <ul class="dropdown-menu" style="min-width: 60px">
+                    <li>
+                        <a href="#" data-bind="click: makeOr, enterKey:makeOr, enterKeyBubble:false, attr: { 'title': HP.HPTRIM.Messages.web_changeToOr }, text: HP.HPTRIM.Messages.web_changeToOr ">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-bind="click: makeAnd, enterKey:makeAnd, enterKeyBubble:false, attr: { 'title': HP.HPTRIM.Messages.web_changeToAnd }, text: HP.HPTRIM.Messages.web_changeToAnd ">
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: isOperator() -->
+            <div data-bind="attr: {class: (selected() ? 'active ' : '') + (isGroup() ? 'group' : '')},  clickBubble:false, click:toggleSelect, enterKey:toggleSelect, enterKeyBubble:false" tabindex="0">
+
+                <!-- ko if: isRawString() -->
+                <!-- ko if: isNegated() -->
+                <span data-bind="text:HP.HPTRIM.Messages.web_Not"></span>&nbsp;
+                <!-- /ko -->
+                <span data-bind="text:rawValue"></span>
+                <span>&nbsp;</span>
+                <span style="padding-left: 3px; display:inline-block; width:12px; height:12px; cursor: pointer;" data-bind="click:remove, enterKey:enterRemove($data), clickBubble:false" tabindex="0" class="panelclose-grey" aria-hidden="true"></span>
+
+
+                <!-- /ko -->
+                <!-- ko if: isClause() -->
+                <!-- ko if: isNegated() -->
+                <span data-bind="text:HP.HPTRIM.Messages.web_Not"></span>&nbsp;
+                <!-- /ko -->
+                <div style="display:inline-block" data-bind="attr:{title:clauseCaption}">
+                    <span data-bind="text:clauseCaption"></span>
+                    <!-- ko if: hasStringValue -->
+                    <!-- ko ifnot: hasQueryValue -->
+                    <span>:</span>
+                    <!-- /ko -->
+                    <!-- ko if: groupWords -->
+                    <span>"</span>
+                    <!-- /ko -->
+
+                    <span data-bind="text:stringValue"></span>
+
+                    <!-- ko if: groupWords -->
+                    <span>"</span>
+                    <!-- /ko -->
+                    <!-- ko if: isRecursive -->
+                    <span>+</span>
+                    <!-- /ko -->
+                    <!-- /ko -->
+
+                </div>
+                <span>&nbsp;</span>
+                <span style="padding-left: 3px; display:inline-block; width:12px; height:12px; cursor: pointer;" data-bind="click:remove, enterKey:enterRemove($data), clickBubble:false" tabindex="0" class="panelclose-grey" aria-hidden="true"></span>
+
+                <!-- /ko -->
+                <!-- ko if: isGroup() -->
+                <div data-bind="click:toggleSelect, enterKey: toggleSelect, clickBubble:false" style="display:inline-block">
+                    <!-- ko if: isNegated() -->
+                    <span data-bind="text:HP.HPTRIM.Messages.web_Not"></span>&nbsp;
+                    <!-- /ko-->
+                    <!-- ko template: {name : "SearchBuilderPillTemplate", data: $data} --><!-- /ko -->
+                </div>
+                <!-- show the left margin and x button -->
+                <div class="group-close">
+                    <div data-bind="click:remove, enterKey:enterRemove($data), clickBubble:false" tabindex="0" style="vertical-align:middle; width:12px; height:12px" class="panelclose-grey" aria-hidden="true"></div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+
+        </li>
+    </ul>
+
+</script>
+
+
+
+
+<script type="text/html" id="AclSearchFieldTemplate">
+
+    <div data-bind="hprm_field:aclComboBox"></div>
+    <div data-bind="hprm_field:searchByLocation"></div>
+
+
+</script>
+
+<script type="text/html" id="RecordRevisionTemplate">
+    <!-- ko if childObjects -->
+    <div style="height:80%; overflow-y: auto !important" class="child-object" data-bind="foreach:{data: childObjects(), as: 'child'} ">
+        <div tabindex="-1" class="child-object--selectable" style="padding-left:8px; color:#333;" data-bind="css: { 'selected-child-object' : Uri == $parent.selectedChildUri() }">
+            <!-- ko foreach: $parent.titleProperties -->
+
+            <div data-bind="clickBubble:false, click: function() { $parents[1].select(child) } " class="property" style="font-family: Metric-Semibold">
+                <span class="propertyCaption" data-bind="text:child[$data].Caption" />
+                <span class="propValue" style="white-space:pre-wrap; word-wrap:break-word" data-bind="text: child[$data].renderer.format()" />
+            </div>
+            <!-- /ko -->
+            <!-- ko foreach: $parent.properties -->
+            <div data-bind="clickBubble:false, click: function() { $parents[1].select(child) } " class="property">
+                <span class="propertyCaption" data-bind="text:child[$data].Caption" />
+                <span>:</span>
+                <span class="propValue" style="white-space:pre-wrap; word-wrap:break-word" data-bind="text: child[$data].renderer.format()" />
+            </div>
+            <!-- /ko -->
+            <!-- ko foreach: $parent.checkboxProperties -->
+            <div class="property">
+                <div class="customCheck" style="margin-left:5px">
+                    <input type="checkbox" tabindex="0" style="margin-left: -40px !important" data-bind="attr: { id: child.Uri}, checked: child[$data].RawValue, click: function() {$parents[1].preserveRevision(child) }, onEnter: function() { $parents[1].preserveRevision(child) }, clickBubble:false">
+                    <label style="margin-left: 19px !important" data-bind="attr: { 'for': child.Uri, 'title': child[$data].Caption }, text:child[$data].Caption, click: function() {$parents[1].preserveRevision(child) }, clickBubble:false"></label>
+                </div>
+            </div>
+            <!-- /ko -->
+            <hr style="margin-top:5px; margin-bottom:5px !important" />
+        </div>
+    </div>
+    <!-- /ko -->
+</script>
+
+<script type="text/html" id="RecordRenditionTemplate">
+    <!-- ko if childObjects -->
+        <div style="height:80%; overflow-y: auto !important" class="child-object" data-bind="foreach:{data: childObjects(), as: 'child'} ">
+            <div tabindex="-1" class="child-object--selectable" style="padding-left:8px; color:#333;" data-bind="css: { 'selected-child-object' : Uri == $parent.selectedChildUri() }">
+                <!-- ko foreach: $parent.titleRenditionProperties -->
+
+                <div data-bind="clickBubble:false, click: function() { $parents[1].select(child) } " class="property" style="font-family: Metric-Semibold">
+                    <span class="propertyCaption" data-bind="text:child[$data].Caption" />
+                    <span>:</span>
+                    <span class="propValue" style="white-space:pre-wrap; word-wrap:break-word" data-bind="text: child[$data].renderer.format()" />
+                </div>
+                <!-- /ko -->
+                <!-- ko foreach: $parent.renditionProperties -->
+                <div data-bind="clickBubble:false, click: function() { $parents[1].select(child) } " class="property">
+                    <span class="propertyCaption" data-bind="text:child[$data].Caption" />
+                    <span>:</span>
+                    <span class="propValue" style="white-space:pre-wrap; word-wrap:break-word" data-bind="text: child[$data].renderer.format()" />
+                </div>
+                <!-- /ko -->
+                <hr style="margin-top:5px; margin-bottom:5px !important" />
+            </div>
+        </div>
+    <!-- /ko -->        
+</script>
+
+<script type="text/html" id="MainObjectItemListTemplate">
+
+
+    <ul class="itemlist-ul" data-bind="foreach: { data: items, as: 'item'}">
+
+
+        <div data-bind="attr:{id:owningPanel.id+ '_section_'+ $index() }"></div>
+
+        <li class="itemlist-li" data-bind="attr:{ id: $data.Fields.Uri + '_li','class': ($data.owningPanel.detailComponent.details() && $data.owningPanel.selectedUri() == $data.Fields.Uri) ? 'itemlist-li active' : 'itemlist-li' }">
+            <!-- ko with: item.owningPanel -->
+            <div class="selection-container">
+                <!-- ko if:showSelected -->
+                <div class="customCheck">
+
+                    <input type="checkbox" data-bind="value: item.Fields.Uri, attr: { 'id': id + '_' + item.Fields.Uri }, checked: selections" style="margin-left: -2px !important;" />
+                    <label data-bind="attr: { 'for': id + '_' + item.Fields.Uri, title: HP.HPTRIM.Messages.rec_select, 'aria-label': HP.HPTRIM.Messages.rec_select }" style="height: 26px; width: 30px;"></label>
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot:showSelected -->
+                <div class="customCheck">
+                    <label style="height: 26px; width: 30px;"></label>
+                </div>
+                <!-- /ko -->
+
+            </div>
+
+            <!-- ko if: item.owningPanel.hasHierachy  -->
+            <div class="expander-container">
+                <!-- MAXIMUM INDENT IS 5; DO NOT ALLOW EXPANDING IF THERE ARE MORE 4 OR MORE PARENTS -->
+                <!-- ko if: item.Fields.PossiblyHasSubordinates && item.ParentUris.length < 4 -->
+                <!-- ko if: item.Expanding -->
+                <div data-bind="attr: {'aria-label': HP.HPTRIM.Messages.web_loading, title: HP.HPTRIM.Messages.web_loading}">
+                    <img alt="progress_indicator" style="height: 16px; width: 16px; display: inline-block" data-bind="attr:{'src': HP.HPTRIM.Icons.progressLoading}, style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: item.Expanding -->
+                <!-- ko ifnot: item.NoChildren -->
+                <!-- ko if: item.Expanded -->
+                <div class="minimise media-object" tabindex="0" style="cursor: pointer; height: 16px; width: 16px;"
+                     data-bind="click: function() {handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                        enterKey: function() {handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                        attr: {'aria-label': HP.HPTRIM.Messages.web_Collapse, title: HP.HPTRIM.Messages.web_Collapse},
+                                        style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}
+                                        " />
+                <!-- /ko -->
+                <!-- ko ifnot: item.Expanded -->
+                <div class="new_light_x16  media-object" tabindex="0" style="cursor: pointer; height: 16px; width: 16px;"
+                     data-bind="click: function() {handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                     enterKey: function() {handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                     attr: {'aria-label':HP.HPTRIM.Messages.web_Expand, title: HP.HPTRIM.Messages.web_Expand },
+                                     style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko-->
+
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((70 + (item.ParentUris.length * 20)) + 'px') : '70px'}">                
+				<div class="attachment-container">
+                    <span style="height: 32px; width: 32px; cursor: pointer; " data-bind="event:{ click: getIconClickHandler(item) },  attr: {class: getIcon(item) + ' media-object', title: getType(item), 'aria-label': getType(item)}" />					
+                </div>
+
+                <div class="icon-container">
+                    <!-- ko if: detailComponent.viewTaskVisible -->
+                    <div style="cursor: pointer; height: 100%"
+                         data-bind="click: detailComponent.doViewTask, attr:{title: HP.HPTRIM.Messages.vwr_tbar_view}">
+                        <span style="height: 24px; width: 24px; margin: 0;" class="attach_24 attachmentIcon" />
+                        <div class="HPRM-recExt" data-bind="text: getExtension(item), style: { display: detailComponent.viewTaskVisible() ? 'inline-block' : 'none' }"></div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: detailComponent.viewTaskVisible -->
+                    <div style="height: 100%">
+                    </div>
+                    <!-- /ko -->
+                </div>
+
+                <div class="data" tabindex="0" data-bind="clickBubble: false, event: { click: (detailComponent.details() && selectedUri() == item.Fields.Uri) ? closeDetails : koShowItem(item) },
+                            enterKey:  (detailComponent.details() && selectedUri() == item.Fields.Uri) ? closeDetails : koShowItem(item)">
+                    <div class="data-row" id>
+                        <div class="HPRM-record-list-item-header">
+                            <!-- ko if: detailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+                            <div class="pull-right alignItemsCenter upChevronContainer">
+                                <div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-down" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: detailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+                            <div class="pull-right downChevronContainer">
+                                <div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-left" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- TOP RIGHT -->
+                            <!-- ko if: hasTopRight -->
+                            <div data-bind="text: getTopRight(item), attr: {title: getTopRightToolTips(item), class: 'pull-right listPaddingRight HPRM-deluxe-header-right ' + getTopRightHighlight(item) }"></div>
+                            <!-- /ko -->
+                            <!-- TOP LEFT -->
+                            <!-- ko if: hasTopLeft -->
+                            <div data-bind="text: getTopLeft(item).toUpperCase(), attr: {title: getTopLeftToolTips(item), class: 'pull-left HPRM-deluxe-header-left' + getTopLeftHighlight(item) } "></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <div class="data-row">
+                        <div class="HPRM-record-list-item-header">
+                            <div data-bind="text: getTitle(item), attr:{title: getTitleToolTips(item)}" class="HPRM-deluxe-title" style="color:#20262d"></div>
+                        </div>
+                    </div>
+                    <!-- ko foreach: getData(item) -->
+                    <!-- ko if: item.Fields.Uri == item.owningPanel.selectedUri() || $data.onlyShownInDetailPanel !== true  -->
+                    <!-- $data here is a IRenderData object -->
+                    <div class="data-minor-row">
+                        <div class="HPRM-record-list-item-header">
+                            <!-- ko ifnot: $data.isEmail -->
+                            <div data-bind="text: $data.text, attr: {title: $data.text,  'class' : 'HPRM-deluxe-header-left overflowEllipsis ' + $data.highlight}" style="max-width:100%"></div>
+                            <!-- /ko -->
+                            <!-- ko if: $data.isEmail -->
+                            <!-- ko if: $data.text -->
+                            <div data-bind="attr: { 'class' : 'HPRM-deluxe-header-left ' + $data.highlight}, click: function() {return true}, clickBubble: false"><a data-bind="text: $data.text, attr: {title: $data.text, 'href' : 'mailto:' + $data.text}"></a></div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: $data.text -->
+                            <div data-bind="attr: { 'class' : 'HPRM-deluxe-header-left ' + $data.highlight}"></div>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="detail-component">
+                    <!-- ko if: detailComponent.details() &&  selectedUri() == item.Fields.Uri  -->
+                    <div style="position: relative; overflow: visible">
+                        <div data-bind="style: { background: (detailComponent.details() && selectedUri() == item.Fields.Uri) ? '#fff' : '#fbfbfb' }">
+                            <div class="template" data-bind="template: { name: detailComponent.detailsTemplate, data: $data, afterRender: detailComponent.postProcessingLogic }"></div>
+                        </div>
+                    </div>
+                    <!-- /ko  -->
+                </div>
+            </div>
+
+
+            <!-- MAXIMUM INDENT IS 5; ADD TRAILING 'EXPAND' IF THERE ARE 4 OR MORE PARENTS -->
+            <!-- ko if: item.ParentUris.length >= 4 && item.Fields.PossiblyHasSubordinates -->
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((70 + (item.ParentUris.length * 20)) + 'px') : '70px'}" style="min-height:0px">
+                <div class="HPRM-deluxe-list" style="padding-left:10px; background:#fff" tabindex="0"
+                     data-bind="text:item.moreItemsCaption,
+                                    click: function() {item.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    clickBubble: false, attr: {title:item.owningPanel.viewItemsCaption},
+                                    enterKey:  function() {item.owningPanel.handleMoreItemsClick(item.Fields.Uri)}">XXXXXXXX</div>
+            </div>
+            <!-- /ko -->
+            <!-- END WITH -->
+            <!-- /ko -->
+        </li>
+
+        <!-- ko if: $data.Expanded -->
+        <!-- ko template: {name : "MainObjectItemListTemplate", data: $data.subordinateList} --><!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $data.subordinateListHasMoreItems -->
+        <li class="itemlist-li active" style="min-height:0px; cursor:pointer">
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((90 + (item.ParentUris.length * 20)) + 'px') : '90px'}" style="min-height:0px">
+                <div class="HPRM-deluxe-list" style="padding-left:10px" tabindex="0"
+                     data-bind="text:$data.moreItemsCaption,
+                                    click: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    enterKey: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    clickBubble: false,
+                                    attr: {label: $data.moreItemsCaption}">XXXXXXXX</div>
+            </div>
+        </li>
+        <!-- /ko -->
+
+    </ul>
+
+</script>
+
+<script type="text/html" id="RecordItemListTemplate">
+
+    <ul class="itemlist-ul" data-bind="foreach: { data: items, as: 'item' }">
+        <div data-bind="attr:{id:owningPanel.id+ '_section_'+ $index() }"></div>
+        <li class="itemlist-li" data-bind="attr:{ id: $data.Fields.Uri + '_li', 'class': ($data.owningPanel.recordsDetailComponent.details() && $data.owningPanel.selectedUri() == $data.Fields.Uri) ? 'itemlist-li active' : 'itemlist-li' }">
+            <div class="selection-container">
+                <!-- ko if:$data.owningPanel.showSelected -->
+                <div class="customCheck" style="vertical-align: top; display:inline-block; padding-top:6px">
+
+                    <input type="checkbox" data-bind="value: $data.Fields.Uri, attr: { 'id': $data.owningPanel.id + '_' + $data.Fields.Uri }, checked: $data.owningPanel.selections" style="width: 30px;" />
+                    <label class="capitalize" data-bind="attr: { 'for': $data.owningPanel.id + '_' + $data.Fields.Uri, 'aria-label': HP.HPTRIM.Messages.rec_select, title: HP.HPTRIM.Messages.rec_select }">&nbsp;</label>
+                </div>
+                <!-- /ko -->
+
+            </div>
+
+            <div class="expander-container">
+
+                <!-- MAXIMUM INDENT IS 5; DO NOT ALLOW EXPANDING IF THERE ARE MORE 4 OR MORE PARENTS -->
+                <!-- ko if: item.Fields.PossiblyHasSubordinates && item.ParentUris.length < 4 -->
+                <!-- ko if: Expanding -->
+                <div data-bind="attr: {'aria-label': HP.HPTRIM.Messages.web_loading, title: HP.HPTRIM.Messages.web_loading},
+                                                style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}">
+                    <img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" />
+                </div>
+                <!-- /ko -->
+                <!-- ko ifnot: Expanding -->
+                <!-- ko ifnot: NoChildren -->
+                <!-- ko if: Expanded -->
+                <div class="minimise media-object" tabindex="0" style="cursor: pointer; height: 16px; width: 16px;"
+                     data-bind="click: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                     enterKey: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                     attr: {'aria-label': HP.HPTRIM.Messages.web_Collapse, title: HP.HPTRIM.Messages.web_Collapse},
+                                     style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                <!-- /ko -->
+                <!-- ko ifnot: Expanded -->
+                <div class="new_light_x16  media-object" tabindex="0" style="cursor: pointer; height: 16px; width: 16px;"
+                     data-bind="click: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                     enterKey: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                     attr: {'aria-label':HP.HPTRIM.Messages.web_Expand, title: HP.HPTRIM.Messages.web_Expand },
+                                     style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((70 + (item.ParentUris.length * 20)) + 'px') : '0px'}">
+                <div class="attachment-container">
+                    <!-- ko if: Fields.RecordRecordType -->
+                    <!-- ko if: Fields.RecordExtension  -->
+                    
+                    <div tabindex="0" style="cursor: pointer" data-bind="click: function() { $data.owningPanel.koHandleViewClick(item)},
+                                                                            enterKey: function() { $data.owningPanel.koHandleViewClick(item)},
+                                                                            attr:{title: HP.HPTRIM.Messages.vwr_tbar_view}">
+                        <span style="height: 25px; width: 25px;" data-bind="attr: { 'class': $data.getIcon($data)}"></span>
+                        <div class="HPRM-recExt" style="text-align: center; max-width:40px" data-bind="text: item.Fields.RecordExtension.toUpperCase(), attr:{'aria-label': HP.HPTRIM.Messages.web_viewTheDocument}"></div>
+                    </div>
+                    
+                    <!-- /ko -->
+                    <!-- ko ifnot: Fields.RecordExtension &&  Fields.RecordSpURL == ""-->
+                    <span style="height: 28px; width: 32px;" data-bind="attr: { 'class': (Fields.RecordRecordType.Icon.Id.toLowerCase() + '_x24 media-object'), 'title': Fields.RecordRecordType.RecordTypeName.Value }" />
+
+
+                    <!-- /ko -->
+                    <!-- /ko -->
+					<!-- ko if: Fields.RecordSpURL != ""  -->
+					<div tabindex="0" style="cursor: pointer" data-bind="click: function() { $data.owningPanel.koHandleViewClick(item)},
+                                                                            enterKey: function() { $data.owningPanel.koHandleViewClick(item)},
+                                                                            attr:{title: HP.HPTRIM.Messages.vwr_tbar_view}">
+						<div class="HPRM-recExt" style="text-align: center; max-width:40px" data-bind="text: HP.HPTRIM.Messages.vwr_tbar_view"></div>
+					</div>
+					 <!-- /ko -->
+
+                </div>
+
+
+                <div class="data" tabindex="0" data-bind="clickBubble: false,
+                              click: ($data.owningPanel.recordsDetailComponent.details() && $data.owningPanel.selectedUri() == $data.Fields.Uri) ? $data.owningPanel.closeDetails : $data.owningPanel.showItem,
+                            enterKey:  ($data.owningPanel.recordsDetailComponent.details() && $data.owningPanel.selectedUri() == $data.Fields.Uri) ? $data.owningPanel.closeDetails : function() { $data.owningPanel.showItem(this) }">
+                    <div class="data-row">
+                        <div class="HPRM-record-list-item-header">
+                            <!-- ko ifnot: Fields.RecordNumber.Value != ""  -->
+                            <!--<div data-bind="text: HP.HPTRIM.Messages.web_unknownRecordNumber" class="pull-right HPRM-deluxe-header-right listPaddingRight"></div>-->
+                            <div data-bind="text: HP.HPTRIM.Messages.web_unknownRecordNumber" class="pull-left HPRM-deluxe-header-left"></div>
+                            <!-- /ko -->
+                            <!-- ko                         ifnot: Fields.RecordRecordType -->
+                            <div data-bind="text: HP.HPTRIM.Messages.web_unknownRecordType" class="pull-left HPRM-deluxe-header-left"></div>
+                            <!-- /ko -->
+                            <!-- ko if: $data.owningPanel.recordsDetailComponent.details() &&  $data.owningPanel.selectedUri() == $data.Fields.Uri  -->
+                            <div class="pull-right alignItemsCenter upChevronContainer">
+                                <div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-down" data-bind="click: $data.owningPanel.closeDetails, clickBubble: false, attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: $data.owningPanel.recordsDetailComponent.details() &&  $data.owningPanel.selectedUri() == $data.Fields.Uri  -->
+                            <div class="pull-right downChevronContainer">
+                                <div style="width: 16px; height: 16px;" class="hp-icon hp-chevron-left" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></div>
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko if: Fields.RecordNumber.Value != ""  -->
+                            <div id="recNumber" style="padding-top: 2px;" data-bind="text: Fields.RecordNumber, attr:{title: HP.HPTRIM.Messages.web_expand}" class="pull-left HPRM-deluxe-header-left listPaddingLeft"></div>
+                            <!-- /ko -->
+
+                            <span style="height: 16px; width: 16px; top: 10px; float: right; margin-top: 4px;" data-bind="attr: { 'class': (Fields.RecordRecordType.Icon.Id.toLowerCase() + '_x16 media-object'), 'title': Fields.RecordRecordType.RecordTypeName.Value }" class="pull-right HPRM-deluxe-header-right listPaddingRight" />
+                            <!-- ko if: Fields.RecordRecordType -->
+                            <!-- ko if Fields.RecordExtension -->
+                            <!--<div data-bind="text: Fields.RecordRecordType.RecordTypeName.Value.toUpperCase() + ' - ' + Fields.RecordExtension.toUpperCase()" class="pull-left HPRM-deluxe-header-left"></div>-->
+                            <!-- /ko -->
+                            <!-- ko ifnot Fields.RecordExtension -->
+                            <div id="recType" style="margin-right: 6px;padding-top: 2px;" class="pull-right HPRM-deluxe-header-right listPaddingRight"></div>
+                            <!-- /ko -->
+                            <!-- /ko -->
+
+                        </div>
+                    </div>
+                    <div class="data-row">
+                        <div class="HPRM-record-list-item-header">
+                            <!-- ko if: Fields.RecordTitle.Value != "" -->
+                            <div id="recTitle" data-bind="text: Fields.RecordTitle, attr:{'title':Fields.RecordTitle}" class="HPRM-deluxe-title"></div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: Fields.RecordTitle.Value != "" -->
+                            <div data-bind="text: HP.HPTRIM.Messages.web_unknownRecordTitle" class="HPRM-deluxe-title"></div>
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                    <!-- ko ifnot: $data.owningPanel.recordsDetailComponent.details() &&  $data.owningPanel.selectedUri() == $data.Fields.Uri  -->
+                    <!-- ko ifnot: Fields.RecordExtension && ($data.owningPanel.selectedUri() != $data.Fields.Uri) -->
+                    <!-- ko if: Fields.RecordSpURL != ""  -->
+                    <div class="data-row">
+                        <div style="cursor: pointer;">
+                            <span data-bind="text: 'In Sharepoint'"></span>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <div class="detail-component" data-bind="clickBubble: false">
+                    <!-- ko if: $data.owningPanel.recordsDetailComponent.details() &&  $data.owningPanel.selectedUri() == $data.Fields.Uri  -->
+                    <!-- This is the icon... (and view button) -->
+                    <div style="position: relative; overflow: visible;">
+                        <div class="template" data-bind="template: { name: $data.owningPanel.recordsDetailComponent.detailsTemplate, data: $data.owningPanel.recordsDetailComponent, afterRender: $data.owningPanel.recordsDetailComponent.postProcessingLogic }"></div>
+                    </div>
+                    <!-- /ko  -->
+                </div>
+            </div>
+
+
+            <!-- MAXIMUM INDENT IS 5; ADD TRAILING 'EXPAND' IF THERE ARE 4 OR MORE PARENTS -->
+            <!-- ko if: item.ParentUris.length >= 4 && item.Fields.PossiblyHasSubordinates -->
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((70 + (item.ParentUris.length * 20)) + 'px') : '70px'}" style="min-height:0px">
+                <div class="HPRM-deluxe-list" style="padding-left:10px; background:#fff" tabindex="0"
+                     data-bind="text:$data.moreItemsCaption,
+                                    click: function() {item.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    clickBubble: false, attr: {title:$data.owningPanel.viewItemsCaption},
+                                    enterKey:  function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)}"></div>
+            </div>
+            <!-- /ko -->
+
+
+        </li>
+
+        <!-- ko if: $data.Expanded -->
+        <!-- ko template: {name : "RecordItemListTemplate", data: $data.subordinateList} -->
+        <!-- /ko -->
+        <!-- ko if: $data.subordinateListHasMoreItems -->
+        <li class="itemlist-li active" style="min-height:0px; cursor:pointer">
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((90 + (item.ParentUris.length * 20)) + 'px') : '90px'}" style="min-height:0px">
+                <div class="HPRM-deluxe-list" style="padding-left:10px"
+                     data-bind="text:$data.moreItemsCaption,
+                                    enterKey: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    click: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    attr: {label: $data.moreItemsCaption},
+                                    clickBubble: false"></div>
+            </div>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+
+
+
+    </ul>
+</script>
+
+<script type="text/html" id="BypassViewerOptions-template">
+    <div> &nbsp;</div>
+    <div>
+        <div>
+            <span data-bind="text:captionBypassViewer" style="text-transform:capitalize"></span>
+            <select class="chosen-file-types" id="bypassFileTypes" multiple style="border:thin solid #0073E7">
+                @foreach (string option in HP.HPTRIM.Services.Common.ServiceConfiguration.Instance.Setup.BypassViewerFileTypes.Split(';'))
+				{ <option value="@option">@option</option>	}
+            </select>
+
+
+            <br /><br />
+
+            <div style="height:150px">
+                <span data-bind="text:captionUseOnstreamViewer" style="text-transform:capitalize"></span>
+                <select class="chosen-file-types" id="onstreamFileTypes" multiple style="border:thin solid #0073E7">
+                    <option value="*.TIFF">*.TIFF</option>
+                    <option value="*.TIF">*.TIF</option>
+                    <option value="*.PDF">*.PDF</option>
+                </select>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+</script>
+
+<script type="text/html" id="KwikItemListTemplate">
+
+    <ul class="itemlist-ul" data-bind="foreach: { data: items, as: 'item' }">
+        <div data-bind="attr:{id:owningPanel.id+ '_section_'+ $index() }"></div>
+        <li tabindex="-1" class="itemlist-li" data-bind="click:function(){$data.owningPanel.selectItem($data,window.event);},attr:{ id: $data.Fields.Uri + '_li',class: ($data.owningPanel.selectedItem() == $data)? 'itemlist-li' : 'itemlist-li' }">
+            <div>
+                <div class="selection-container">
+                    <!-- ko if:$data.owningPanel.showSelected -->
+                    <div class="customCheck" style="vertical-align: top; display:inline-block; padding-top:6px">
+
+                        <input type="checkbox" data-bind="value: $data.Fields.Uri, attr: { 'id': $data.owningPanel.id + '_' + $data.Fields.Uri }, checked: $data.owningPanel.selections" style="width: 30px;" />
+                        <label class="capitalize" data-bind="attr: { 'for': $data.owningPanel.id + '_' + $data.Fields.Uri, 'aria-label': HP.HPTRIM.Messages.rec_select, title: HP.HPTRIM.Messages.rec_select }">&nbsp;</label>
+                    </div>
+                    <!-- /ko -->
+                    <!-- ko ifnot:$data.owningPanel.showSelected -->
+                        <div class="customCheck">
+                            <label style="height: 26px; width: 30px;"></label>
+                        </div>
+                    <!-- /ko -->
+
+                </div>                    
+                <div tabindex="-1" class="expander-container">                
+                    <!-- MAXIMUM INDENT IS 5; DO NOT ALLOW EXPANDING IF THERE ARE MORE 4 OR MORE PARENTS -->
+                    <!-- ko if: item.Fields.RecordIsContainer && item.Fields.RecordIsContainer.Value == true -->
+                        <!-- ko if: item.Fields.PossiblyHasSubordinates && item.ParentUris.length < 4 -->
+                            <!-- ko if: Expanding -->
+                            <div data-bind="attr: {'aria-label': HP.HPTRIM.Messages.web_loading, title: HP.HPTRIM.Messages.web_loading},
+                                                            style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}">
+                                <img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" />
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: Expanding -->
+                                <!-- ko ifnot: NoChildren -->
+                                    <!-- ko if: Expanded -->
+                                    <div class="minimise media-object" tabindex="-1" style="cursor: pointer; height: 16px; width: 16px;"
+                                        data-bind="click: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                                        enterKey: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                                        attr: {'aria-label': HP.HPTRIM.Messages.web_Collapse, title: HP.HPTRIM.Messages.web_Collapse},
+                                                        style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: Expanded -->
+                                    <div class="new_light_x16  media-object" tabindex="-1" style="cursor: pointer; height: 16px; width: 16px;"
+                                        data-bind="click: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                                        enterKey: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                                        attr: {'aria-label':HP.HPTRIM.Messages.web_Expand, title: HP.HPTRIM.Messages.web_Expand },
+                                                        style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- ko ifnot: item.Fields.RecordIsContainer -->
+                        <!-- ko if: item.Fields.PossiblyHasSubordinates && item.ParentUris.length < 4 -->
+                            <!-- ko if: Expanding -->
+                            <div data-bind="attr: {'aria-label': HP.HPTRIM.Messages.web_loading, title: HP.HPTRIM.Messages.web_loading},
+                                                            style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}">
+                                <img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" />
+                            </div>
+                            <!-- /ko -->
+                            <!-- ko ifnot: Expanding -->
+                                <!-- ko ifnot: NoChildren -->
+                                    <!-- ko if: Expanded -->
+                                    <div class="minimise media-object" tabindex="-1" style="cursor: pointer; height: 16px; width: 16px;"
+                                        data-bind="click: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                                        enterKey: function() {$data.owningPanel.handleMinimiseClick(item.Fields.Uri, item.ParentUris) },
+                                                        attr: {'aria-label': HP.HPTRIM.Messages.web_Collapse, title: HP.HPTRIM.Messages.web_Collapse},
+                                                        style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: Expanded -->
+                                    <div class="new_light_x16  media-object" tabindex="-1" style="cursor: pointer; height: 16px; width: 16px;"
+                                        data-bind="click: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                                        enterKey: function() {$data.owningPanel.handleExpandClick(item.Fields.Uri, item.ParentUris) },
+                                                        attr: {'aria-label':HP.HPTRIM.Messages.web_Expand, title: HP.HPTRIM.Messages.web_Expand },
+                                                        style: { marginLeft: item.ParentUris? ((item.ParentUris.length * 20) + 'px') : '0px'}" />
+                                    <!-- /ko -->
+                                <!-- /ko -->
+                            <!-- /ko -->
+                        <!-- /ko -->
+                    <!-- /ko -->                         
+                </div>                
+                <div tabindex="-1" class="listItem" data-bind="style: { marginLeft: item.ParentUris? ((70 + (item.ParentUris.length * 20)) + 'px') : '70px'}">
+                        <!-- Draw the icon -->
+                        <!-- ko if: $data.Fields.RecordRecordType -->
+                        <span data-bind="attr: { 'class': ($data.Fields.RecordRecordType.Icon.Id.toLowerCase() + '_x16 media-object item-picker-raw-icon'), 'title': $data.Fields.RecordRecordType.Name }"></span>
+                        <!-- /ko -->
+                        <!-- ko ifnot: $data.Fields.RecordRecordType -->
+                        <span data-bind="attr: { 'class': ( ($data.Fields.Icon ? $data.Fields.Icon.Id.toLowerCase() + '_x16': '') + ' media-object item-picker-raw-icon') }"></span>
+                        <!-- /ko -->
+                        <span class="listTitle "  data-bind="text: $data.Fields.NameString"></span>                        
+                        <!-- ko if: $data.Fields.RecordTitle -->
+                        <span class="listContent overflowEllipsis"  data-bind="attr:{'title': $data.Fields.RecordTitle},text: $data.Fields.RecordTitle">
+                        </span>
+                        <!-- /ko -->
+                </div>
+                <!-- MAXIMUM INDENT IS 5; ADD TRAILING 'EXPAND' IF THERE ARE 4 OR MORE PARENTS -->
+                <!-- ko if: item.ParentUris.length >= 4 && item.Fields.PossiblyHasSubordinates -->
+                    <div class="" data-bind="style: { marginLeft: item.ParentUris? ((70 +(item.ParentUris.length * 20)) + 'px') : '70px'}" style="min-height:0px">
+                        <div class="HPRM-deluxe-list" style="padding-left:10px; background:#fff" tabindex="-1"
+                            data-bind="text:$data.moreItemsCaption,
+                                            click: function() {item.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                            clickBubble: false, attr: {title:$data.owningPanel.viewItemsCaption},
+                                            enterKey:  function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)}"></div>
+                    </div>
+                <!-- /ko -->
+            </div>
+        </li>
+        <!-- ko if: $data.Expanded -->
+        <!-- ko template: {name : "KwikItemListTemplate", data: $data.subordinateList} -->
+        <!-- /ko -->
+        <!-- ko if: $data.subordinateListHasMoreItems -->
+        <li class="itemlist-li active" style="min-height:0px; cursor:pointer">
+            <div class="item-container" data-bind="style: { marginLeft: item.ParentUris? ((90 + (item.ParentUris.length * 20)) + 'px') : '90px'}" style="min-height:0px">
+                <div class="HPRM-deluxe-list" style="padding-left:10px"
+                    data-bind="text:$data.moreItemsCaption,
+                                    enterKey: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    click: function() {$data.owningPanel.handleMoreItemsClick(item.Fields.Uri)},
+                                    attr: {label: $data.moreItemsCaption},
+                                    clickBubble: false"></div>
+            </div>
+        </li>
+        <!-- /ko -->
+        <!-- /ko -->
+    </ul>
+</script>

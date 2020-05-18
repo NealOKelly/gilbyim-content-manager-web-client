@@ -1,0 +1,51 @@
+
+
+<div data-bind="if: _.has($data, 'ChosenForEdit') ">
+	<input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+	<div style="overflow: hidden; padding-right: 0px;">
+		<div style=" margin-top:5px; margin-bottom: 3px;">
+			<div class="onoffswitch" style="display:inline-block;">
+				<input type="checkbox" class="onoffswitch-checkbox" data-bind="attr: { id: Id, name: Id}, title: Caption, checked: Value, enable: enable" style="opacity: 1; position: relative">
+				<label class="onoffswitch-label" data-bind="attr: { 'for': Id }">
+					<div class="onoffswitch-inner" data-bind="title: Caption" style="color: #000">
+						<div class="onoffswitch-active">
+							<div class="onoffswitch-switch" data-bind="text: HP.HPTRIM.Messages.core_yes.toUpperCase()"></div>
+						</div>
+						<div class="onoffswitch-inactive">
+							<div class="onoffswitch-switch" data-bind="text: HP.HPTRIM.Messages.core_no.toUpperCase()"></div>
+						</div>
+					</div>
+				</label>
+			</div>
+			<div class="" style="display: inline-block; vertical-align: top; color: #000" data-bind="text: Caption"></div>
+		</div>
+	</div>
+</div>
+
+<div data-bind="ifnot: _.has($data, 'ChosenForEdit') ">
+	
+	
+    <div class="customCheck" style="margin-left:3px">
+
+        <input type="checkbox" tabindex="0" data-bind="attr: { id: Id, disabled: fieldDisabled() }, checked: Value">
+
+        <!-- ko ifnot: fieldDisabled() -->
+        <!-- ko if: Value -->
+        <label class="checkbox-selected-new-16 left" style="background: none; height:24px" data-bind="attr: { 'for': Id, 'title': tipText() }, text: Caption"></label>
+        <!-- /ko -->
+        <!-- ko ifnot: Value -->
+        <label class="checkbox-empty-dark-new-16 left" style="background: none; height:24px" data-bind="attr: { 'for': Id, 'title': tipText() }, text: Caption"></label>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: fieldDisabled() -->
+        <!-- ko if: Value -->
+        <label class="checkbox-selected-new-16 left" style="background: none; height:24px; color: #b4b4b4" data-bind="attr: { 'for': Id, 'title': tipText() }, text: Caption"></label>
+        <!-- /ko -->
+        <!-- ko ifnot: Value -->
+        <label class="checkbox-empty-dark-new-16 left left" style="background: none;height:24px; color: #b4b4b4" data-bind="attr: { 'for': Id, 'title': tipText() }, text: Caption"></label>
+        <!-- /ko -->
+        <!-- /ko -->
+
+    </div>
+   
+</div>

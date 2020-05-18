@@ -1,0 +1,15 @@
+﻿<span data-bind="text: pageSummary" class="pull-left pagination-summary" />
+
+<!-- ko if: sections().length > 0 -->
+<div class="btn-group pull-right" style="right:50px" >
+	<button role="button" name="button" style="width: auto !important; margin-top: 0;" class="btn btn-default pageSize-button dropdown-toggle" data-toggle="dropdown" data-bind="attr: { title: HP.HPTRIM.Messages.web_listPageSize, 'aria-label': HP.HPTRIM.Messages.web_listPageSize } , text:HP.HPTRIM.Messages.web_section,  event:{ click:$data.onBtnClick }">
+        
+	</button>
+
+	<ul data-bind="foreach:sections" role="menu" class="dropdown-menu" id="scrollingSection">
+		<li tabindex="0" data-bind="event: { 'keyup': function () {$parent.keyboardNav($data)}}">
+			<a data-bind="text: $data.name, event:{ click:$data.onClick }, attr: { title: $data.name, 'aria-label': $data.name }"></a>
+		</li>
+	</ul>
+</div>
+<!-- /ko -->

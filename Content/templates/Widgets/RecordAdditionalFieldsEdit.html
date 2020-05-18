@@ -1,0 +1,6 @@
+﻿<div data-bind="foreach: recordAdditionalFields" class="recordPropertySelectionContainer">
+	<div class="recordPropertySelectionBtn">
+		<button role="button" name="button" type="button" class="btn recPropBtn" data-toggle="buttons-checkbox" data-bind="text: Caption, 'css': {active : IsSelected}, click: function(context, event) {$parent.toggleSelect($parent, $data, event) }" style="text-align:left;width:100%;">Single Toggle</button>
+
+	</div>
+</div>

@@ -1,0 +1,21 @@
+
+	<td>		
+		<span style="display: table-cell;" data-bind="text:Caption"></span>
+	</td>
+
+	<td>
+		<span style="display: table-cell;" data-bind="text:value"></span>
+	</td>
+
+	<td>
+		<div class='pull-right' style="display:inline-block; margin-right: 10px;">
+			<div class="dropdown">
+				<a name="access-control-value-selector" class="dropdown-toggle drop-down-caret" role="button" data-toggle="dropdown">
+					<div style="width: 16px; height: 16px;" class="caret_green-16"></div>
+				</a>
+				<ul class="dropdown-menu access-control-dropdown-menu" data-bind="foreach:$data.aclValueDefinitions()">
+					<li style="font-size:10pt; cursor:pointer; margin:0 5px 0 5px;" data-bind="text:caption, click:onSelect"> </li>
+				</ul>
+			</div>
+		</div>
+	</td>

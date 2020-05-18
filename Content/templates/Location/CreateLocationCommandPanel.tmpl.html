@@ -1,0 +1,18 @@
+﻿<div class="commandPanel listPaddingRight" data-bind="escapeKey: cancelAction" tabindex="-1">
+    <div>
+		<div class="command-panel-header-title" data-bind="text: title"></div>
+    </div>
+    <div>
+        <div class="h3 small HPRM-action-panel-caption" data-bind="text: createDescription"></div>
+        <a tabindex="0" class="cancel" style="display:block" data-bind="text:HP.HPTRIM.Messages.web_cancel.toLowerCase(), click: cancelAction, enterKey: cancelAction"> </a>
+    </div>
+</div>
+
+
+<div class="listPadding listPaddingRight" style="margin-top: 22px;">
+    <span style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block" class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_locationTypes"></span>&nbsp;
+    
+        <!-- ko template: {name: $data.locationTypeField.template, data: $data.locationTypeField} -->
+        <!-- /ko -->
+    
+</div>

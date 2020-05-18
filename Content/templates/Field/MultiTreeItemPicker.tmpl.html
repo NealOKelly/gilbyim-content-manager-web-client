@@ -1,0 +1,164 @@
+﻿
+<!-- ko if: $data.isHidden -->
+<div class="HPRM-deluxe-list-header" style="display: inline-block; margin-bottom: 5px;" data-bind="text: HP.HPTRIM.Messages.web_fieldTypeNotSupported.toUpperCase()"></div>
+<div class="HPRM-deluxe-list-header" style="display: inline-block;" data-bind="text: label()"></div>
+<br />
+<!-- /ko -->
+<!-- ko ifnot: $data.isHidden -->
+<div class="control-container" data-bind="attr: {id: controlContainerId  + 'upper'}" style="width: inherit">
+
+	<div style="width: 100%;">
+		<div class="HPRM-deluxe-list-header" style="display: inline-block" data-bind="text: label()"></div>
+		<!-- ko if: $data.isMandatory -->
+		<div class="isMandatoryField">(Required)</div>
+		<!-- /ko -->
+		<div data-bind="if: isLoading()" class="isLoading"><i class="icon-spinner icon-spin text-white"></i></div>
+
+        <!-- ko if: !isExpanded() && (errorMessage() != "" &&  !errorHandler) -->
+        <label class="field-error-display" style="color:#FF454F !important" data-bind="text: errorMessage, attr: { title: HP.HPTRIM.Messages.vb_tio_Error }"></label>
+        <!-- /ko -->
+	</div>
+    <div style="display: flex">
+        <div data-bind="if: _.has($data, 'ChosenForEdit') ">
+            <input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 9px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[6].changeChosenState($parent)} } " />
+            <div style="overflow: hidden; padding-right: 0px;">
+                <div data-bind="click: toggleEdit, enterKey:toggleEdit" style="background:white; padding:5px;height: auto; position: relative; max-width: 473px; border:solid 1px #8e8e8e;" class="item-picker-editing">
+
+                    <div style="float: left; padding:2px 2px 0px 2px; margin-top: 2px">
+                        <!-- ko foreach:selectedItems -->
+                        <!-- ko if:$data.displayValue !== undefined -->
+                        <div class="raw-pill">
+                            <span data-bind="text:$data.displayValue, attr:{title:$data.displayValue}"></span>
+                            <span>&nbsp;</span>
+                            <span style="padding-left: 3px; display:inline-block; width:12px; height:12px; cursor: pointer;" data-bind="click: function () { $parent.deselect( $data );}, enterKey: function () { $parent.deselect( $data );}, clickBubble:false" tabindex="0" class="panelclose-grey" aria-hidden="true"></span>
+                        </div>
+
+                        <!-- /ko -->
+                        <!-- ko if:$data.displayValue === undefined -->
+                        <div class="pill">
+                            <span style="display:inline-block;width:24px;height:24px">&nbsp; &nbsp;</span>
+                            <span style="cursor:text" data-bind='text: $data, attr:{title:$data},  click:  function() { $parent.editPill($data,  arguments[1], $index())  } '></span>&nbsp
+                            <a class="pill-close" data-bind='click: function () { $parent.deselect( $data ); }'></a>
+
+                        </div>
+                        <textarea data-bind="event: { keypress: function () { return $parent.onKeyUp( $parent,window.event ) }  }" class="pill-edit" rows=1 spellcheck='false' autocomplete='false' autocorrect='off'></textarea>
+
+                        <!-- /ko-->
+                        <!-- /ko -->
+
+                        <textarea rows=1 style='background-position-y:3px; padding-left:24px; border:thin solid; width: 100px; margin-top: -2px; height: 24px; overflow: hidden; resize: none; border: 0 !important; outline: none; box-shadow: none;'
+                                  spellcheck='false' autocomplete='false' autocorrect='off'
+                                  data-bind="hasfocus: hasFocus, attr: {readonly:!isMultiItemPickerSearchEnabled() , disabled: !enabled(),id: controlContainerId }, event: { click: onTextFieldClick, keypress: function ( e ) { return onKeyUp( this,window.event||e ) }, focus: function ( e ) { if ( $data.focusCallback ) { $data.focusCallback(); } } }, value: rawValue, htmlElement: htmlElement"></textarea>
+                    </div>
+
+                    <div style='display:inline-block;position:relative;float:right'>
+                        <!-- ko if:plugins.length > 0 -->
+                        <!-- ko foreach:plugins -->
+                        <!-- ko template: {name :template, data: $data} -->
+                        <!-- /ko -->course
+                        <!-- /ko -->
+                        <!-- /ko -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div data-bind="ifnot: _.has($data, 'ChosenForEdit') "  style="display: inline-block; width: calc(100% - 45px)">
+            <div data-bind="click: toggleEdit, enterKey:toggleEdit" style="background:white; padding:5px;height:auto; position: relative; border:solid 1px #8e8e8e;" class="item-picker-editing">
+
+                <div class="jurisdiction-raw-pill" style="float: left; padding: 2px 2px 0px 2px;">
+                    <!-- ko foreach:selectedItems -->
+                    <!-- ko if:$data.displayValue !== undefined && $data.displayValue !== '' -->
+                    <div class="raw-pill" style="padding-top: 2px; padding-bottom: 2px">
+                        <span data-bind="text:$data.displayValue, attr:{title:$data.displayValue}"></span>
+                        <span>&nbsp;</span>
+                        <span style="padding-left: 3px; display:inline-block; width:12px; height:12px; cursor: pointer;" data-bind="click: function () { $parent.deselect( $data );}, enterKey: function () { $parent.deselect( $data );}, clickBubble:false" tabindex="0" class="panelclose-grey" aria-hidden="true"></span>
+                    </div>
+
+                    <!-- /ko -->
+                    <!-- ko if:$data.displayValue === undefined -->
+                    <div class="pill">
+                        <span style="display:inline-block;width:24px;height:24px">&nbsp; &nbsp;</span>
+                        <span style="cursor:text" data-bind='text: $data, attr:{title:$data},  click:  function() { $parent.editPill($data,  arguments[1], $index())  } '></span>&nbsp
+                        <a class="pill-close" data-bind='click: function () { $parent.deselect( $data ); }'></a>
+
+                    </div>
+                    <textarea data-bind="event: { keypress: function () { return $parent.onKeyUp( $parent,window.event ) }  }" class="pill-edit" rows=1 spellcheck='false' autocomplete='false' autocorrect='off'></textarea>
+
+                    <!-- /ko-->
+                    <!-- /ko -->
+
+                    <textarea class="dbpsearchmethod_light_x16" rows=1 style='background-position-y:3px;padding-left:24px; border:thin solid; width: 200px; margin-top: -2px; height: 24px; overflow: hidden; resize: none; border: 0 !important; outline: none; box-shadow: none;'
+                              spellcheck='false' autocomplete='false' autocorrect='off'
+                              data-bind="hasfocus: hasFocus, attr: {'aria-label': HP.HPTRIM.Utils.String.format(HP.HPTRIM.Messages.web_enterSearchQueryField,[label()]), 'placeholder': HP.HPTRIM.Messages.web_enterSearchQuery, readonly:!isMultiItemPickerSearchEnabled() , disabled: !enabled(),id: controlContainerId }, event: { click: onTextFieldClick, keypress: function ( e ) { return onKeyUp( this,window.event||e ) }, focus: function ( e ) { if ( $data.focusCallback ) { $data.focusCallback(); } } }, value: rawValue, htmlElement: htmlElement"></textarea>
+
+                </div>
+
+                
+
+            </div>
+        </div>
+        
+            <!-- ko if:plugins.length > 0 -->
+            <div class="clsMultiPlugin">
+            <!-- ko foreach:plugins -->
+            <!-- ko template: {name :template, data: $data} -->
+            <!-- /ko -->
+            <!-- /ko -->
+            </div>
+            <!-- /ko -->
+        
+        <!-- ko if:$data.baseObjectType.Name.toLowerCase() == HP.HPTRIM.BaseObjectTypes.Jurisdiction.name.toLowerCase() -->
+        <div class="input-group-btn"  style="display: inline-block; height: 31px; width: 44px">
+            <button title="button" name="button" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" style="height: 100%; vertical-align:text-bottom; margin-left: 2px" 
+                    data-bind="click: function () { $data.showJurisdictionsPanel() }, attr: {title: HP.HPTRIM.Messages.rec_select + ' ' + HP.HPTRIM.BaseObjectTypes.Jurisdiction.Caption, id: $data.Name + '_btn'}">
+                <i class="kwikselect" style="display: flex; height: 14px; width: 14px; margin-left: -1px">  </i>
+            </button>
+        </div>
+        <!-- /ko -->
+    </div>
+
+	<!-- ko if: isExpanded -->
+	<div class="multi-picker-result-expansion" tabindex="-1" data-bind="attr: { style: resultStyle }">
+		<div data-bind="if: supportHierarchy" tabindex="-1" style="height: auto;">
+			<ul style="background:black" class="breadcrumb" tabindex="-1">
+
+				<i class="hp-icon hp-home" style="cursor: pointer, " data-bind="click: gotoRoot"></i>
+
+				<!-- ko foreach:hierarchy.levels() -->
+				<!--<span class='divider' data-bind="if: function () { return $index() > 0 }() ">/ </span>-->
+
+				<li class="active"><a href="#" data-bind="text: name, click: function () { $parent.gotoLevel( $parent, $index ); }"></a></li>
+
+				<!-- /ko -->
+			</ul>
+		</div>
+
+		<div class="carousel slide" style="margin-bottom: 0;" data-interval="false" data-bind="attr: { id: carouselId }">
+			<div class="carousel-inner">
+				<div class="active item">
+					<!-- ko template: {name: listTemplateName(), data: $data } -->
+					<!-- /ko-->
+				</div>
+				<!-- ko if: supportHierarchy -->
+				<!-- ko foreach : hierarchy.maxDepth -->
+				<!-- ko template: {name :$parent.hierarchy.sublistTemplate, data: $parent } -->
+				<!-- /ko-->
+				<!-- /ko -->
+				<!-- /ko -->
+
+			</div>
+
+		</div>
+		<!-- end carousel id -->
+
+
+	</div>
+	<!-- /ko -->
+
+
+</div>
+
+
+<!-- /ko -->

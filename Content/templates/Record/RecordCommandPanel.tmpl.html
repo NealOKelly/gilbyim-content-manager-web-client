@@ -1,0 +1,115 @@
+﻿<div>
+    <div id="recordCommandPanel" data-bind="attr: { 'class': cssClass() + ' listPaddingRight ' }">
+        <div class="command-panel-padding-left">
+            <div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_records"></div>
+
+            <div class="create-new-object">
+                <!--<div data-bind="click: addRecord, enterKey: addRecord, attr: { 'class': 'addRecord', title: HP.HPTRIM.Messages.web_createNewRecord, id:'NAV_CREATERECORD' }, visible: $root.trimClient.canCreateRecord" style="cursor: pointer;" tabindex="0"></div>-->
+                <div data-bind="click: addRecord, enterKey: addRecord, attr: { 'class': 'addRecord', title: HP.HPTRIM.Messages.web_createNewRecord, id:'NAV_CREATERECORD' }, visible: $root.trimClient.canCreateRecord" style="cursor: pointer;" tabindex="0">
+                    <div class="spn-plus-icon">+</div><div class="spn-title" data-bind="text:HP.HPTRIM.Messages.core_new"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    <hr class="listPadding listPaddingBottom listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+    <div style="margin-top: 5px; margin-bottom:10px; cursor: pointer;">
+        <div data-bind="click: showMyRecords, enterKey:showMyRecords, attr: { 'class': myRecordsSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item auto-height',title:HP.HPTRIM.Messages.web_checkedOutRecords}" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text: HP.HPTRIM.Messages.web_checkedOut"></div>
+        </div>
+        <div data-bind="click: showRecents, enterKey:showRecents, attr: { 'class': recentssSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item auto-height',title:HP.HPTRIM.Messages.web_recentRecords}" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text: HP.HPTRIM.Messages.web_recentRecords"></div>
+        </div>
+        <div data-bind="click: showFavorites, enterKey: showFavorites, attr: { 'class': favoritesSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: HP.HPTRIM.Messages.web_favoriteRecords }" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text: HP.HPTRIM.Messages.web_favorites"></div>
+        </div>
+        <div data-bind="click: showCreated, enterKey:showCreated, attr: { 'class': createdSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item auto-height', title: HP.HPTRIM.Messages.web_createdRecords }" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text: HP.HPTRIM.Messages.web_createdRecords"></div>
+        </div>
+        <div data-bind="click: browseViaClassifications, enterKey:browseViaClassifications, attr: { 'class': 'HPRM-Record-Action-Item auto-height', title: HP.HPTRIM.Messages.web_browseViaClassification }" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text:HP.HPTRIM.Messages.web_browseViaClassification"> %Browse via Classifications%</div>
+        </div>
+        <div data-bind="visible: isbrowseViaUserLabelVisible, click: browseViaUserLabel, enterKey:browseViaUserLabel, attr: { 'class': 'HPRM-Record-Action-Item auto-height', title: HP.HPTRIM.Messages.web_browseViaUserLabel }" tabindex="0">
+            <div class="listPadding ellipsisFormat" data-bind="text:HP.HPTRIM.Messages.web_browseViaUserLabel"> </div>
+        </div>
+
+        <hr class="listPadding listPaddingRight" style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid  #dfdfdf;" />
+
+        <!-- ko if: showUrlButton() -->
+        <div class="command-panel-padding-left listPaddingRight listPaddingBottom">
+            <button role="button" name="button" id="URL_Copy_Button_Command_2" data-bind="event:{click: toggleURLView }, attr:{title:HP.HPTRIM.Messages.web_urlLink}" type="button" class="btn btn-flat btn-secondary" style="height: 32px; margin-left: 0;" title="Generate URL link">
+                <div class="url_link_viewer_select_16_black" style="height: 16px; width: 16px; display: inline-block"></div>
+                <div style="display: inline-block;vertical-align: top;font-weight:700;font-size: 14px;margin-top:3px;" data-bind="text:HP.HPTRIM.Messages.web_showURLLink ">Show URL</div>
+            </button>
+            <div id="URL" data-bind="visible: showUrl">
+                <label style="margin-bottom: 0 !important; font-weight: normal !important;" for="URL_Link_Command" data-bind="attr:{ 'aria-labelledby': URL_Link_Command }">&nbsp;</label>
+                <input style="width:100%; display:block;" id="URL_Link_Command" name="Generated URL" type="url" data-bind="value:  url">
+            </div>
+        </div>
+        <!-- /ko -->
+
+        <hr class="listPadding listPaddingRight" style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+        <!-- ko if: showActions() -->
+
+        <div class="command-panel-padding-left listPaddingRight listPaddingBottom">
+            <!-- ko if: bulkSelect -->
+            <div style="display: inline-block" class="pull-left">
+                <div class="h1" style="margin: 0 ; margin-top: 20px;" data-bind="text: HP.HPTRIM.Messages.web_bulkItemsSelected"></div>
+                <span style="margin: 0 ; margin-top: 20px;" data-bind="text: bulkQuery"></span>
+                <div class="h1" style="margin: 0 ; margin-top: 20px;"><span data-bind="text: bulkCount"></span></div>
+                <span data-bind="text: HP.HPTRIM.Messages.web_items + ' ' + HP.HPTRIM.Messages.dp_cap_Selected"></span>
+
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: bulkSelect -->
+            <div style="display: inline-block" class="pull-left">
+                <div class="h1" style="margin: 0 ; margin-top: 20px;"><span data-bind="text: $parents[3].selections().length"></span></div>
+                <span data-bind="text: HP.HPTRIM.Messages.web_items + ' ' + HP.HPTRIM.Messages.dp_cap_Selected"></span>
+            </div>
+            <!-- /ko -->
+
+        </div>
+
+        <div class="command-panel-padding-left-half listPaddingBottom listPaddingRight" style="display: inline-block; margin-top:10px; padding-bottom:10px;">
+            <div class="divbtnListIcons">
+                <button role="button" name="button" id="getContents" class="btn quaternary-button" data-bind="click: searchContainer, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_searchThisContainerforMoreRecords }" style="padding: 0; margin: 5px !important; min-width:10px; border:none">
+                    <img id="navContents" data-bind="attr: {'alt': HP.HPTRIM.Messages.web_searchThisContainerforMoreRecords, 'title': HP.HPTRIM.Messages.web_searchThisContainerforMoreRecords, src:HP.HPTRIM.Icons.navContents_x24}" />
+                </button>
+
+                <button role="button" name="button" id="documentButton_Download" class="btn quaternary-button" data-bind="click: downloadContainer, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_downloadElectronicAttachmentToYourDevice }" style="padding: 0; margin: 5px !important; min-width:10px; border:none">
+                    <img src="data:image/png;base64,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" />
+                </button>
+
+                <button role="button" name="button" id="reportButton_Command_2" data-bind="event:{ click: showReportPanel}, attr: { title: HP.HPTRIM.Messages.web_showReport }" type="button" class="btn quaternary-button" style="height: 32px; margin: 5px !important; padding: 0; min-width:10px; border:none">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADDSURBVEhLzZNBCsIwEEVrFbpw5Rm8mNdwIdjuxRO4EUS9pGP+4lcdJk1aJtLFI5NJ5j9SaCUiRTGbYHM5yvrajqZ+dGH8k/MT6kFSsHh2MkRza19Wn8EuL5gk2O1PkoJ3QTEBV1BMwBogfHkfIeBeowX6LkRYXQVkez402YIheNfCRRAjvKB2+UQxcD4fwRQwPx8B95rvQA3O/yZYhb8aK8kKSIF5CjR9YQ3mgvnighh9YQ3mwgyLvrAGc2GGhdn0Q6o3wdj7plgv8wkAAAAASUVORK5CYII=" />
+                </button>
+
+                <button role="button" name="button" id="modifyRecordAdditionalFields_Command" data-bind="event:{ click: modifyRecordAdditionalFieldsClick}, attr: { title: HP.HPTRIM.Messages.web_modify + ' ' + HP.HPTRIM.Messages.web_record + ' ' + HP.HPTRIM.Messages.web_additional_Fields }" type="button" class="btn quaternary-button" style="height: 32px; margin: 5px !important; padding: 0; min-width:10px; border:none">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAA7EAAAOxAGVKw4bAAABL0lEQVRIib2WXU6DQBSFv6sVaqLr6BJcDi88sAA1JPpIomm6AJrQB7qbLsF9GAWMHh9kEGpj2jp4XmbmEu65P2d+DEASY2ECMFtsvDM8XV9ZR9A3+MBssZGZIembYCz8H8EYfQAwGEdFXnsQxckrMG2XVVnk5x0RwMPdTQ0EB/pt0mweRnFSmVkAmCSZmUlq1qtl2M8gSLP5QTJ9vL/t6iqpAcKWpHaBgwcVlUU+3WVfr5Z+CKI42VXeN2dzBE0/5T3RtGMAbP975iYTgDSbhwc6H8DMnNxdk7tvXmSqnsd2PmzyEeUBwClvrwz+ItPf4KNElSQnVRd97Y2gfyz08WMfHNuHKE7egZMt8zNwCZ5O0yhOXgCXyUdZ5Ke+b7QLvnavaCMfYKxXhaTxLhyHT/H6jvAaux0+AAAAAElFTkSuQmCC" />
+                </button>
+            </div>
+
+            <!-- ko foreach: taskGroups -->
+            <div class="btn-group" style="min-width:-webkit-fill-available; margin-left:inherit" id="$data.id">
+                <button role="button" name="button" style="width: auto !important; margin-top: 0;color:#000;font-size:13px;margin-bottom:5px;" class="btn btn-flat btn-primary dropdown-toggle" data-toggle="dropdown" data-bind="attr: { title: $data.caption }">
+                    <span style="float:left" data-bind="text: $data.caption"></span>
+                    &nbsp;
+                    <span class="drop-down-caret" style="margin-top:-5px"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" style="margin-top:0; top:37px; left: 5px;" data-bind="foreach: subTasks">
+                    <li data-bind="click: $parents[2].executeTask ">
+                        <a href="#" data-bind="attr: { title: ($data.tagCaption? $data.tagCaption: $data.caption) }, text: ($data.tagCaption? $data.tagCaption: $data.caption) "></a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+        <div class="command-panel-padding-left" style="padding-bottom:200px;">
+            <button role="button" name="button" id="ClearSelectionButton" class="btn btn-accent btn-secondary" data-bind="click: clearSelections, text: HP.HPTRIM.Messages.web_dp_cancelText, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_dp_cancelText }"></button>
+        </div>
+        <hr class="listPadding listPaddingRight" style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+        <!-- /ko -->
+
+    </div>
+</div>

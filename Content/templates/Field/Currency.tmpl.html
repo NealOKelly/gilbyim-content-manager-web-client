@@ -1,0 +1,28 @@
+
+<div style="margin-bottom: 10px">		
+	<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+	<div data-bind="if: _.has($data, 'ChosenForEdit') ">
+		<input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+		<div style="overflow: hidden; padding-right: 0px; padding-bottom: 8px">
+            <div class="form-row">
+                <div class="input-group">
+                    <span data-bind="text:CurrencySymbol" class="input-group-addon"></span>
+                    <input type="text" data-bind="value: Value,  event: { keypress:onkeypress,  focus: focusCallback, blur: onblur}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id}" style="width: 100%;max-width: 473px;" class="form-control currency" />
+                </div>
+            </div>
+		</div>
+	</div>
+
+	<div data-bind="ifnot: _.has($data, 'ChosenForEdit') " style="width: 240px">
+        <div class="form-row">
+            <div class="input-group">
+                <span data-bind="text:CurrencySymbol" class="input-group-addon"></span>
+                <input type="text" data-bind="value: Value,  event: { keypress:onkeypress,  focus: focusCallback, blur: onblur}, disable: (isDisable() || fieldDisabled()), attr:{ id: Id}" style="width: 100%;max-width: 473px;" class="form-control currency" />
+
+            </div>
+        </div>
+	</div>
+
+</div>
+

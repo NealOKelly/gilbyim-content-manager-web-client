@@ -1,0 +1,11 @@
+﻿<!-- ko if: item.Fields.ActivityDocumentStatus === "Unlinked" && (item.Fields.ActivityDocumentOrigin === "ThisActivity" || item.Fields.ActivityDocumentOrigin === "InitiatingRecord") -->
+<div style="display: inline-flex; margin-left: 0; border: 0; padding-bottom: 0; margin-bottom: 0; width: 100%;">    
+	<!-- ko if: $parent.activityDetailComponent.assigneeName() == $parent.activityDetailComponent.currentUserName() -->
+	<!-- ko ifnot: $parent.activityDetailComponent.activityCompleted() -->
+    <div style="display: inline-block; padding-top:10px; padding-bottom: 10px; width:100%;" class="listPadding listPaddingRight" data-bind="ifnot: $parent.activityDetailComponent.activityCompleted()">
+        <button role="button" name="button" class="btn button-primary" style="margin-left:0" data-bind="click: function(){$parent.attach(item);}, attr: { title: HP.HPTRIM.Messages.web_attachElectronicDocument }, text: HP.HPTRIM.Messages.web_attachElectronicDocument " title="Attach Electronic Document"></button>
+    </div>
+    <!-- /ko -->
+	<!-- /ko -->
+</div>
+<!-- /ko -->

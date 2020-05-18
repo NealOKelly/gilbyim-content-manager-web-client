@@ -1,0 +1,155 @@
+﻿<!--START 65408 CHACKOA added Style in DIV-->
+<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler" style="overflow-x: hidden;overflow-y: visible;-webkit-overflow-scrolling: touch;">
+<!--END 65408 CHACKOA added Style in DIV-->
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: title"></div>
+
+        <!-- ko if: $data.jurisditionControl != undefined -->
+        <hr width="100%" style="margin-top: 10px; margin-bottom: 10px">
+        <label data-bind="text: labelForSeletedItems"></label>
+        <input type="text" class="hprm-text-input" data-bind="value: chosenItemNames, disable: true, attr: {title: labelForSeletedItems}" style="font-size: 14px; margin-top: 2px; width: 525px; border-radius: 2px">
+        <!-- /ko -->
+        <!-- ko if: $data.lookupItemControl != undefined-->
+        <!-- ko if: $data.lookupItemControl.returnTextOnly == true -->
+        <hr width="100%" style="margin-top: 10px; margin-bottom: 10px">
+        <textarea id="text-lu" style="width: 525px; height: 80px; margin-top: 2px; overflow-y:auto; border-radius: 2px; resize:none; border: solid 1px #8e8e8e;" rows="1" cols="50" data-bind="value: currentText, disable: false, event: {keyup: textAreaKeyUp} "></textarea>
+        <!-- /ko -->
+        <!-- ko ifnot: $data.lookupItemControl.returnTextOnly == true-->
+        <hr width="100%" style="margin-top: 10px; margin-bottom: 10px">
+        <label data-bind="text: labelForSeletedItems"></label>
+        <input type="text" class="hprm-text-input" data-bind="value: chosenItemNames, disable: true, attr: {title: labelForSeletedItems}" style="font-size: 14px; margin-top: 2px; width: 525px; border-radius: 2px">
+        <!-- /ko -->
+        <!-- /ko -->
+
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error" style="color: red; max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $data.userLabelControl != undefined -->
+    <div class="modal-body hprm-modal-body" style="height: 500px">
+
+        <!-- ko if: caption -->
+        <div class="HPRM-deluxe-list-header" data-bind="text: caption"></div>
+        <!-- /ko -->
+        <!-- ko as_panel : userLabelControl --><!-- /ko -->
+
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" data-bind='click: doTask, text: okText(), title: okText(), enable: userLabelControl.nodeSelected() !== null' class='btn btn-flat btn-primary'></button>
+            <button id="cancelBtn" role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+        </div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if: $data.jurisditionControl != undefined -->
+    <div class="modal-body hprm-modal-body" style="height: 500px">
+
+        <!-- ko if: caption -->
+        <div class="HPRM-deluxe-list-header" data-bind="text: caption"></div>
+        <!-- /ko -->
+        <!-- ko as_panel : jurisditionControl --><!-- /ko -->
+        <!-- ko if: loading() -->
+        <div style="display: inline-block; margin-top:10px;">
+            <!-- ko if: hasJurisdiction() -->
+            <span>
+                <img alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block"
+                     data-bind="attr:{src: HP.HPTRIM.Icons.progressLoading }" />
+            </span>
+            <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_loading" style="display: inline-block"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: hasJurisdiction() -->
+            <!--<div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_thereIsNoJurisdiction" style="display: inline-block"></div>-->
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" data-bind='click: doTask, text: okText(), title: okText(), enable: $data.jurisditionControl.saveRequired()' class='btn btn-flat btn-primary'></button>
+            <button id="cancelBtn" role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+        </div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if: $data.lookupItemControl != undefined -->
+    <div class="modal-body hprm-modal-body" style="height: 500px">
+        <div class="lookup-overlay" data-bind="visible: displayAttachEventsLoader()" style="display:none;padding-left:75px;padding-top:200px">
+            <img alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block"
+                 data-bind="attr:{src: HP.HPTRIM.Icons.progressLoading }" />
+            <span data-bind="text: HP.HPTRIM.Messages.web_loadingMask"></span>
+        </div>
+        <!-- ko if: $data.filterVisible -->
+        <div style="padding-bottom: 12px; margin-top: -3px; display: flex">
+            <label data-bind="text: HP.HPTRIM.Messages.web_filterColon" style="font-family: Metric-Semibold; margin-top: 10px"></label>
+            <span>&nbsp;</span>
+            <input id="lookupItemFilter" type="text" class="hprm-text-input" data-bind="value: filteringString, disable: false, event: { keyup: filterStringChanged }" style="font-size: 14px; margin-top: 2px; margin-left: 5px; width: 250px; border: 1px solid #eaeaea;  border-radius: 2px">
+            <a id="clearFilterBtn" style="position: absolute; left: 280px; margin-top: 10px; display:inline-block; width:12px; height:12px; cursor: pointer;" data-bind="visible: filteringString().trim().length > 0, event: { click: filterStringCleared }, clickBubble:false" tabindex="0" class="panelclose-grey" aria-hidden="true"></a>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: caption -->
+        <div class="HPRM-deluxe-list-header" data-bind="text: caption"></div>
+        <!-- /ko -->
+        <!-- ko as_panel : lookupItemControl --><!-- /ko -->
+        <!-- ko if: loading() -->
+        <div style="display: inline-block; margin-top:10px;">
+            <span>
+                <img alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block"
+                     data-bind="attr:{src: HP.HPTRIM.Icons.progressLoading }" />
+            </span>
+            <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_loading" style="display: inline-block"></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko if: infoMessage().length > 0 -->
+        <div style="margin-top: 10px">
+            <div style="height: 48px; width: 48px; margin-top: 5px; display: inline-block" data-bind="attr:{title: infoMessage()}" class="information_x32 col-md-2">
+            </div>
+            <div class="text-black" style="display: inline-block; vertical-align: top; font-size: 14pt; margin: 10px 0 10px 0;" data-bind="text: infoMessage()"></div>
+        </div>
+        <!-- /ko -->
+
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" data-bind='click: doTask, text: okText(), title: okText(), enable: $data.lookupItemControl.saveRequired()' class='btn btn-flat btn-primary'></button>
+            <button id="cancelBtn" role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+        </div>
+    </div>
+
+    <!-- /ko -->
+    <!-- ko if: ($data.userLabelControl == undefined && $data.jurisditionControl == undefined && $data.lookupItemControl == undefined) -->
+    <div class="modal-body hprm-modal-body">
+        <!-- ko if: caption -->
+        <div class="HPRM-deluxe-list-header  clsCaption" data-bind="text: caption"></div>
+        <!-- /ko -->
+        <!-- ko if: showMessage -->
+        <div class="hprm-modal-error alert" style="max-width: 600px">
+            <span data-bind="text: message"></span>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: showMessage -->
+        <div data-bind="foreach: rawControls" style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <div data-bind="hprm_field:$data" />
+        </div>
+        <!-- /ko -->
+
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" data-bind='click: doTask, text: okText(), title: okText()' class='btn btn-flat btn-primary'></button>
+            <button id="cancelBtn" role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+            <!--ko if: $data.actionView -->
+            	<button id="viewBtn" role="button" name="button" data-bind='click:viewHandler, text: HP.HPTRIM.Messages.vwr_tbar_view, title: HP.HPTRIM.Messages.vwr_tbar_view' class='btn btn-flat btn-secondary'></button>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <!-- /ko -->
+</div>

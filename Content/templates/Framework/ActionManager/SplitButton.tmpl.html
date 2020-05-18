@@ -1,0 +1,21 @@
+﻿<div class="btn-group" data-bind="if: $data.actions().length>0">
+	<button type="button" class="btn" data-bind="click: function () { $data.actions()[0].actionHandler($data.actions()[0]); }, enable: actions()[0].enabled, attr: { 'title': $data.actions()[0].tooltip, 'class' : cssClass }" style="margin: 0 0 3px -3px;border-left:none">
+		<i data-bind="attr: { 'class': $data.actions()[0].icon() ? $data.actions()[0].icon() : 'icon-blank' }"></i>
+		<!-- ko text: $data.actions()[0].caption --><!-- /ko -->
+	</button>    
+	<button type="button" class="btn dropdown-toggle" data-toggle="dropdown" data-bind="visible: displayDropDownCaret, attr:{ 'class' : dropDownButtonClass, 'title' : extraTitle }" >
+		<span class="caret"></span>
+	</button>	
+    <ul class="dropdown-menu" role="menu" data-bind="foreach: $data.actions, attr:{ id: id}">
+        <!-- ko if: $index()>0 -->
+            <!-- ko if: $data.visible -->
+		<li data-bind="css: {'divider': $data.caption=='-', 'disabled': !$data.enabled() }, attr: {id: id}">
+			<a href="#" data-bind="click: function () { if ($data.enabled()) { $data.actionHandler($data); } }, visible: $data.caption != '-', css: {}, attr: { 'title': $data.tooltip }">
+				<i data-bind="attr: { 'class': $data.icon() ? $data.icon() : 'icon-blank' }"></i>
+				<!-- ko text: $data.caption --><!-- /ko -->
+			</a>
+		</li>
+            <!-- /ko -->
+        <!-- /ko -->
+    </ul>
+</div>

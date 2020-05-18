@@ -1,0 +1,316 @@
+﻿@using System;
+@using System.IO;
+@using ServiceStack.Html;
+@using ServiceStack.Razor;
+
+@using ServiceStack.Host.AspNet
+@using ServiceStack
+
+@using System.Collections.Generic;
+@using System.Web;
+@using System.Globalization;
+@using System.Text;
+
+
+@using HP.HPTRIM.ServiceModel;
+@using HP.HPTRIM.Service;
+@using ServiceStack;
+@using ServiceStack.Text;
+
+
+@{
+	this.Layout = "~/Views/Shared/_Layout.cshtml";
+
+
+
+
+
+	@* TRIM :
+		- removed head, title, and HTML tags
+		- wrapped head in custom head
+		- converted body to DIV
+		- set ViewBag.HideScripts to true
+		- edited getParameterByName in JS file to recognise global_vars
+		- added global_vars to make querystring unneccessary
+		- replaced ../../ with ~/HTML5TrapezeViewer/ so that I could move page to Views folder
+		- added route to default routes
+		- in style rename close to tz-close to stop it clashing with bootstrap styles
+		- in JavascriptViewerAPI.min.js replace ../../ with ../HTML5TrapezeViewer
+		- in Constants.min.js replace ../.. with ../HTML5TrapezeViewer
+		- converted txtGoToPage into a number field and set max value from HTML5_Viewr.js
+		- set contentcolumn padding-bottom to 0
+	*@
+
+
+	<head>
+		<style>
+			#contentcolumn {
+				padding-bottom: 0px;
+			}
+		</style>
+
+		<!--Prevents caching-->
+		<meta http-equiv='cache-control' content='no-cache'>
+		<meta http-equiv='expires' content='0'>
+		<meta http-equiv='pragma' content='no-cache'>
+		<!--Enables CSS rendering when running in local network-->
+		<meta http-equiv="x-ua-compatible" content="ie=edge" />
+		<link href="~/HTML5TrapezeViewer/API/Styles/TrapezeOnline/TrapezeOnline.JavascriptViewerAPI.min.css" rel="stylesheet" type="text/css" />
+		<link href="~/HTML5TrapezeViewer/API/Styles/TrapezeOnline/TrapezeOnline.Annotations.Dialogs.min.css" rel="stylesheet" type="text/css" />
+
+
+		<script src="~/HTML5TrapezeViewer/API/Scripts/Lib/jquery-1.9.1.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/Lib/kinetic-v5.1.0.min.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/Lib/jquery.ScrollIntoView.min.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/Logging.js" type="text/javascript"></script>
+		@{
+
+			HP.HPTRIM.ServiceModel.Database database = null;
+			AspNetRequest httpReq = new AspNetRequest(System.Web.HttpContext.Current.ToHttpContextBase());
+			
+
+						
+			using (HP.HPTRIM.Service.Razor.RazorLocationService service = new HP.HPTRIM.Service.Razor.RazorLocationService(httpReq.GetSession(), httpReq))
+			{
+				var dbProperties = "DatabaseWorkgroupServerName,DatabaseWorkgroupServerPort,DatabaseId".Split(',');
+				database = service.GetCurrentDatabase(new List<string>(dbProperties));
+			}
+			
+
+			<script>
+				var global_vars = {
+					"documentID": "@("x-ottp://" + database.WorkgroupServerName + ":" + database.WorkgroupServerPort + "/TRIM/trim:" + database.Id + "/rec/" + Request.QueryString["uri"])",
+					"serviceHost": "@VirtualPathUtility.ToAbsolute("~/Onstream/TrapezeGoWebService.asmx")",
+					"appVersion": 1,
+					"debug": false,
+					"imageBaseUrl": "@VirtualPathUtility.ToAbsolute("~/HTML5TrapezeViewer/")"
+				}
+
+				TrapezeOnline.UrlBase = "@VirtualPathUtility.ToAbsolute("~/HTML5TrapezeViewer/")";
+
+
+				$(window).on("load", function (e) {
+					if ($(window).width() <= 480) {
+
+						$('#thumbnail-td').children("div").first().hide();
+						$('#thumbnail-td').children("div").first().removeAttr('id');
+						$('#btnThumbnails').hide();
+
+					} else {
+						$('#thumbnail-td').children("div").first().show();
+						$('#thumbnail-td').children("div").first().attr('id', 'thumbnails');
+						$('#btnThumbnails').show();
+					}
+
+				});
+
+				$(window).on("load resize", function (e) {
+					var height = $(window).height() - $('#topsection').height();
+					$('#previewBody').height(height);
+
+				});
+
+				window.onbeforeunload = function () {
+				    TrapezeOnline.HTML5ExampleViewer.close();
+				}
+			</script>
+
+		}
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/Constants.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Internal/Variables.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Internal/Functions.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/WS.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/WebstreamerAPICalls.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Internal/Notifications.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Internal/Tools.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/Error.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Validation/Validate.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Kinetic/Conversion.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Annotations/Transformation.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Annotations/Conversion.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Annotations/Annotation.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Annotations/Controller.js" type="text/javascript"></script>
+		<script type="text/javascript" src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Units.js"></script>
+		<script type="text/javascript" src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calculations/Conversion.js"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Tools/Select.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Tools/Line.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Tools/Rectangle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Tools/Stamp.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Marquees/Rectangle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Marquees/Line.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Marquees/Circle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Marquees/Arc.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Calculations/General.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Calculations/SelectionCalculations.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Calculations/Position.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Groups.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type001.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type002.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type007.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type008.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type012.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type013.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type018.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type019.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type022.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type025.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type026.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type029.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type028.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type031.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/Type033.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/TypeUnknown.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/XmlToAnnotation.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/XML/AnnotationToXml.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Html.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Dialogs.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Measurement.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Calibration.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Ratio.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Annotations/Selected.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Background.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Handles.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Renderer.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Magnifier.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Events/General.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Events/Rectangle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Events/Line.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Calculations/Rectangle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Calculations/Line.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Line.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/Rectangle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Renderer/KineticOverride.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Stamps/Menu.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Stamps/Text.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Stamps/StampTool.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Canvas/ScrollBars.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Canvas/Fit.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Canvas/Zoom.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Canvas/ViewCalculations.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/IO/TextFileUploader.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/General.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Canvas/ColorPicker.js" type="text/javascript"></script>
+		@*<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calculations/Line.js" type="text/javascript"></script>*@
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calculations/Polygon.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calculations/Circle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calculations/Calibration.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/General.js" type="text/javascript"></script>
+		@*<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Line.js" type="text/javascript"></script>*@
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Polygon.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Calibration.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Ratio.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Measurement/Circle.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/RectangleAnnotationProperties.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/LineAnnotationProperties.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/AnnotationTextEntry.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/General/JavascriptViewerAPI.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/API/Scripts/TrapezeOnline/Annotations/Dialogs/Dialog.js" type="text/javascript"></script>
+
+		<link href="~/HTML5TrapezeViewer/APP/Styles/HTML5_Viewer.css" rel="stylesheet" type="text/css" />
+		<script src="~/HTML5TrapezeViewer/APP/Scripts/HTML5_Viewer.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/APP/Scripts/HTML5_Viewer_Constants.js" type="text/javascript"></script>
+		<script src="~/HTML5TrapezeViewer/APP/Scripts/HTML5_Viewer_Events.js" type="text/javascript"></script>
+	</head>
+
+	<div id="previewBody" class="bodyStyle">
+		<div id="pnlDisable" class="dialogDisable wide">
+		</div>
+
+		<div id="pnlInfo" class="dialogOutter">
+			<div class="dialogHeader">
+				<span>Information </span><span>
+					<a href="javascript:void(0);" onclick="TrapezeOnline.HTML5ExampleViewer.closeInformation(); return false;"
+					   class="linkButton" title="Close">
+						<img id="imgCloseInformation" src="~/HTML5TrapezeViewer/APP/Icons/DialogClose.png" alt="Close" class="closeIcon"
+							 align="right" />
+					</a>
+				</span>
+			</div>
+			<div id="pnlInformation" class="dialogInner">
+			</div>
+		</div>
+		<div id="pnlNotifier" class="hiddenField notifier">
+		</div>
+		<div id="toolbarWrapper" style="width: 1600px;">
+			<div id="toolbar" class="buttonPanel wide">
+				<div id="pnlToolBarItems" class="toolBarItemsPanel" style="display:inline-table" ondragstart="return false;" ondrop="return false;">
+					<span class="toolBarGroup">
+						<a href="javascript:void(0);" id="btnPreviousPage" class="linkButton" title="Previous Page">
+							<img id="imgPreviousPage" src="~/HTML5TrapezeViewer/APP/Icons/PreviousPage.png" alt="Previous Page" class="toolBarIcon toolBarIconMouseOut" />
+						</a>
+						<a href="javascript:void(0);" id="btnNextPage" class="linkButton" title="Next Page">
+							<img id="imgNextPage" src="~/HTML5TrapezeViewer/APP/Icons/NextPage.png" alt="Next Page" class="toolBarIcon toolBarIconMouseOut" />
+						</a>
+						<div class="ddlPanel close">
+							<input type="number" min="1" id="txtGoToPage" value="" class="txtBox" title="Page Number" />
+							<input type="text" id="pnlPageCount" value="" unselectable="on" class="txtBox pageCount unselectable" title="Total Pages"
+								   onclick="return false;" />
+							<a href="javascript:void(0);" id="btnGoToPage" class="linkButton" title="Go To Page Number">
+								<img id="imgGoToPage" src="~/HTML5TrapezeViewer/APP/Icons/GoToPage.png" alt="Go To Page" class="toolBarIconSmall toolBarIconMouseOut" />
+							</a>
+						</div>
+					</span>
+					<span class="toolBarGroup" style="border:none">
+						<a href="javascript:void(0);" id="btnThumbnails" class="linkButton" title="Show/Hide Thumbnails">
+							<img id="imgThumbnails" src="~/HTML5TrapezeViewer/APP/Icons/Thumbnails.png" alt="Show/Hide Thumbnails"
+								 class="toolBarIcon toolBarIconMouseOut" />
+						</a>
+						<!--a href="javascript:void(0);" id="btnAnnotations" class="linkButton" title="Show/Hide Annotations">
+							<img id="imgAnnotations" src="~/HTML5TrapezeViewer/APP/Icons/Annotations.png" alt="Show/Hide Annotations"
+								 class="toolBarIcon toolBarIconMouseOut" />
+						</a-->
+						<a href="javascript:void(0);" id="btnZoomIn" class="linkButton" title="Zoom In">
+							<img id="imgZoomIn" src="~/HTML5TrapezeViewer/APP/Icons/ZoomIn.png" alt="Zoom In" class="toolBarIcon toolBarIconMouseOut" />
+						</a><a href="javascript:void(0);" id="btnZoomOut" class="linkButton" title="Zoom Out">
+							<img id="imgZoomOut" src="~/HTML5TrapezeViewer/APP/Icons/ZoomOut.png" alt="Zoom Out" class="toolBarIcon toolBarIconMouseOut" />
+						</a>
+						<a href="javascript:void(0);" id="btnRotateRight" class="linkButton" title="Rotate Current Page Right">
+							<img id="imgRotateRight" src="~/HTML5TrapezeViewer/APP/Icons/RotateRight.png" alt="Rotate Right" class="toolBarIcon toolBarIconMouseOut" />
+						</a>
+
+
+
+					</span>
+
+
+				</div>
+
+			</div>
+		</div>
+		<div id="TrapezeOnlineViewer" class="viewerPanel" style="width: 1600px; height: 760px;
+        position: relative;">
+			<div class="wrapper" id="wrapper">
+				<div class="main" id="main">
+					<table>
+						<tr>
+							<td id="thumbnail-td">
+								<div id="thumbnails" class="thumbnailsDisplay">
+									<ul></ul>
+								</div>
+							</td>
+							<td>
+								<div id="TrapezeOnline_JavascriptViewerAPI_NotificationPanel" class="TrapezeOnline_JavascriptViewerAPI_Hidden">
+									<div id="TrapezeOnline_JavascriptViewerAPI_Notification" class="TrapezeOnline_JavascriptViewerAPI_Notification">
+									</div>
+									<a href="javascript:void(0);" id="btnCloseNotificationBar" onclick="TrapezeOnline.Internal.Notifications.CloseCurrentNotification(); return false;"
+									   class="linkButton" title="Close Notification Bar">
+										<img id="imgCloseNotification" src="~/HTML5TrapezeViewer/API/Icons/CloseNotification.png" alt="Close Notification Bar"
+											 class="" />
+									</a>
+								</div>
+								<div id="page" class="pageDisplay">
+								</div>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div id="TrapezeOnline-Dialog">
+
+				</div>
+			</div>
+			<div id="TrapezeOnlineViewer-DialogContainer">
+			</div>
+		</div>
+	</div>
+
+}

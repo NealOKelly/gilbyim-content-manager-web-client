@@ -1,0 +1,16 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:confirmHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="alert_24 media" style="width:24px; height:24px; display:inline-block "></div>
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_error" style="display:inline-block; vertical-align:top; padding-top:5px; padding-left:10px"></div>
+    </div>
+
+    <div class="modal-body hprm-modal-body" id="errorFormOveray">
+        <div style="padding-left:50px" data-bind="text: errorMessage"></div>
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="okBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: confirmHandler, text: HP.HPTRIM.Messages.web_ok, attr:{title: HP.HPTRIM.web_continueButtonCaption}"></button>
+        </div>
+    </div>
+</div>

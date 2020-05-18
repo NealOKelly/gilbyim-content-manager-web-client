@@ -1,0 +1,57 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: title"></div>
+    </div>
+
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+
+    <!-- /ko -->
+
+    <div class="modal-body hprm-modal-body">
+
+        <div style="display: inline-block; min-width: 300px; width: 100%; max-width: 535px;">
+            <div style="margin-top: 10px;">
+                <div class="HPRM-deluxe-list-header"><span data-bind="text: queryLabel"></span></div>
+                <input type="text" id="query" style="padding: 5.990px" data-bind="value: queryString, attr: {title: queryLabel}" />
+            </div>
+        </div>
+        <div style="display: inline-block; min-width: 300px; width: 100%; max-width: 535px;">
+            <div style="margin-top: 10px;">
+                <div class="HPRM-deluxe-list-header"><span data-bind="text: searchNameInputLabel"></span></div>
+                <input type="text" id="searchNameInputLabel" style="padding: 5.990px" data-bind="value: searchName, attr:{title: searchNameInputLabel}" />
+            </div>
+            <div style="margin-top: 10px;">
+                <div class="HPRM-deluxe-list-header"><span data-bind="text: searchDescriptionInputLabel"></span></div>
+                <input type="text" id="searchDescriptionInputLabel" style="padding: 5.990px" data-bind="value: searchDescriptionName, attr:{title: searchDescriptionInputLabel}" />
+            </div>
+            <div style="margin-top: 10px;" data-bind="hprm_field:$data.searchOwnerField" />
+
+            <!-- ko if: showFavorite -->
+            <div style="margin-top: 10px;" data-bind="hprm_field:$data.searchFavoriteCheckbox" />
+            <!-- /ko -->
+        </div>
+
+
+        <div style="display: inline-block; min-width: 300px; width: 100%; max-width: 535px;">
+            <div style="margin-top: 10px;">
+                <div class="HPRM-deluxe-list-header"><span data-bind="text: filterLabel"></span></div>
+                <input type="text" id="query" style="padding: 5.990px" data-bind="value: filter, attr:{title: filterLabel}" />
+            </div>
+            <div style="margin-top: 10px;">
+                <div class="HPRM-deluxe-list-header"><span data-bind="text: sortLabel"></span></div>
+                <input type="text" id="sortField" style="padding: 5.990px" data-bind="value: sort, attr:{title: sortLabel}" />
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: saveHandler, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enabled: buttonsEnabled"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, enabled: buttonsEnabled"></button>
+        </div>
+    </div>
+</div>

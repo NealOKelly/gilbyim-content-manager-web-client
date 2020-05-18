@@ -1,0 +1,19 @@
+﻿<div data-bind="attr: { 'class': $data.cssClass, id: 'panel_' + $data.id }, visible: visible">
+	<div>
+		<div class="col-md-6">
+			<!-- ko if: $data.itemList.getPlugin('searching') -->
+			<!-- ko as_panel: $data.itemList.getPlugin('searching') --><!-- /ko  -->
+			<!-- /ko -->
+		</div>
+		<div class="col-md-6">
+			<!-- ko if: $data.itemList.getPlugin('selection') -->
+			<!-- ko as_panel: $data.itemList.getPlugin('selection') --><!-- /ko  -->
+			<!-- /ko -->
+		</div>
+	</div>
+	<div class="">
+		<div>
+			<!-- ko as_panel: $data.itemList --><!-- /ko  -->
+		</div>
+	</div>
+</div>

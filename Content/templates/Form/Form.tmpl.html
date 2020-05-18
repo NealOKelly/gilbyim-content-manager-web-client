@@ -1,0 +1,12 @@
+<!-- ko if:formHeader != '' -->
+<div class="formHeader h5" data-bind="text:formHeader"></div>
+<!-- /ko  -->
+<div style="width:100%;">
+	<div data-bind="with: formDefinition()">
+		<!-- ko foreach:$data.Pages -->
+		<!-- ko template: {name: 'templates/Form/Page', data : $data, afterRender: function() { $data.init() ;} } -->
+		<!-- /ko  -->
+		<!-- /ko -->
+	</div>
+</div>
+

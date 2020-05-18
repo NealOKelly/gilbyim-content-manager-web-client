@@ -1,0 +1,17 @@
+<div style="margin-bottom: 10px" data-bind="attr:{ id: Id, style: (fieldDisabled() == true)?'visibility:hidden':'visibility:visible' }">		
+	
+	<div role="group" class="accordion-group panel-body" style="border:none; height:auto;">
+		  <!-- ko if: (error() != "") -->
+		  	<label class="field-error-display" style="color:#FF454F !important" data-bind="text: error, attr: { title: HP.HPTRIM.Messages.vb_tio_Error }"></label>
+		  <!-- /ko -->	
+		<div style="height: auto; width: 300px;">	
+			<div class="control-container">
+				<div>									
+					<!-- ko template: {name: fileUploader.templateName, data : fileUploader} -->
+					<!-- /ko  -->					
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,20 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="as-spa">
+<head>
+	<title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <meta charset="utf-8" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+    
+    
+    @HP.HPTRIM.Web.HPTRIMScriptManager.Render()
+    @RenderBody()
+
+
+    @RenderSection("scripts", required: false)
+    
+    
+</html>

@@ -1,0 +1,20 @@
+﻿<div class="btn-group" data-bind="attr: {id: id, title:$data.caption}">
+	<button type="button" style="width: auto !important; margin-top: 0;color:#000;font-size:13px;" class="btn btn-flat btn-primary dropdown-toggle" data-toggle="dropdown">
+		<span data-bind="text: $data.caption"></span>
+		&nbsp;
+		<span class="drop-down-caret"></span>
+	</button>
+	<ul class="dropdown-menu" role="menu" data-bind="foreach: $data.actions">
+		<!-- ko if:visible() -->
+		<li data-bind="css: { 'divider': $data.caption == '-', 'disabled': !$data.enabled() }">
+			<a href="#" data-bind="click: function () { if ($data.enabled()) { $data.actionHandler($data); } },  css: { 'disabled-link': !enabled }, attr: { 'title': $data.tooltip }">
+				<!-- ko if: $data.icon() -->
+                <i style ='display:inline-block;width:16px;height:16px' data-bind="attr: { 'class': $data.icon() ? $data.icon() : 'icon-blank' }"></i>
+				<!-- /ko -->
+				<!-- ko text: $data.caption --><!-- /ko -->
+			</a>
+		</li>
+		<!-- /ko -->
+	</ul>
+</div>
+

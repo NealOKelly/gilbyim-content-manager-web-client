@@ -1,0 +1,314 @@
+<!-- This template needs to be part of the serverside code for the preview from URL to work properly-->
+<script type="text/html" id="DocumentViewerNewHeaderTemplate">
+ <div class="viewer-header-title-container" style="width:100%">
+    <!-- ko if: actions -->
+    <div class="pull-left " style="width:50%">
+        <div class="pull-left">
+            <div style="" class="pull-left" data-bind="as_panel: actions"></div>
+            <div class="pull-right">
+                <span class="HPRM-deluxe-list-item-data" style="">
+                    <span class="label label-info" id="documentViewerInfo"></span>
+                </span>
+            </div>
+        </div>
+        <div class="pull-right clsTitleContainer" style="" data-bind="text:title"></div>
+    </div>
+    <!-- /ko -->    
+    <div class="pull-right">
+        <!-- ko if: rightActions -->
+            <div class="pull-left" data-bind="as_panel: rightActions"></div>
+        <!-- /ko -->
+        <div style="margin-top:5px;margin-right:10px" class="pull-left" data-bind="event: { 'click': hide }">
+            <span tabindex="0" style="" class="panel-command-button panelclose-white content"></span>                    
+        </div>
+    </div>   
+ </div>
+</script>
+<!-- This template needs to be part of the serverside code for the preview from URL to work properly-->
+<script type="text/html" id="DocumentViewerHeaderTemplate">
+    <div class="viewer-header-title-container">
+        <div>
+
+
+            <!-- ko if: actions -->
+            <div data-bind="as_panel: actions"></div>
+            <!-- /ko -->
+            <div style="width:300px" class="pull-right">
+                <!-- ko if: rightActions -->
+                <div data-bind="as_panel: rightActions"></div>
+                <!-- /ko -->
+                <div style="margin-top:5px" data-bind="event: { 'click': hide }">
+                    <span tabindex="0" style="padding-left:30px;width:30px;height:35px;position:fixed" class="panel-command-button panelclose-white content"></span>                    
+                </div>
+            </div>
+            <div id="downloadElectronicUrl" style="position:absolute; margin-left:70px;" data-bind="visible:isUrlVisible" class="listPadding listPaddingRight">
+                <input style="width:450px; margin-top:2px; margin-left:30px;" id="URL_Link_View" type="url" data-bind="value:  formatLink(downloadLink()), click:function() { HP.HPTRIM.Utils.TrimHelper.copyToClipboard('#URL_Link_View') } " />
+            </div>
+        </div>
+
+        <div style="text-align:center; flex-wrap:wrap-reverse; margin-left:40%; margin-top:5px; max-width: 500px; overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap;" class="viewer-header-title" data-bind="text:title"></div>
+    </div>
+</script>
+
+<!-- This template needs to be part of the serverside code for the preview from URL to work properly-->
+<script type="text/html" id="RenditionDocumentViewerHeaderTemplate">
+    <div class="viewer-header-title-container">
+        <div>
+
+
+            <!-- ko if: actions -->
+            <div data-bind="as_panel: actions"></div>
+            <!-- /ko -->
+            <div style="width:300px" class="pull-right">
+                <!-- ko if: rightActions -->
+                <div data-bind="as_panel: rightActions"></div>
+                <!-- /ko -->
+
+                <button class="panelclose-white pull-right btn-properties" style="padding-right:30px; min-width:5px; min-height:15px;" data-bind="attr:{title:HP.HPTRIM.Messages.web_close.toLowerCase()}, style:{'margin-top':showRenditionsButton() ?  '7px':'-22px'}, event: { click: hide } "></button>
+            </div>
+            <div id="downloadElectronicUrl" style="position:absolute; margin-left:70px;" data-bind="visible:isUrlVisible" class="listPadding listPaddingRight">
+                <input style="width:450px; margin-top:2px; margin-left:30px;" id="URL_Link_View" type="url" data-bind="value:  formatLink(downloadLink()), click:function() { HP.HPTRIM.Utils.TrimHelper.copyToClipboard('#URL_Link_View') } " />
+            </div>
+        </div>
+
+        <div style="text-align:center; flex-wrap:wrap-reverse; margin-left:40%; margin-top:5px; max-width: 500px; overflow-x: hidden; text-overflow: ellipsis; white-space: nowrap;" class="viewer-header-title" data-bind="text:title"></div>
+    </div>
+</script>
+
+<style>
+    .stack-top {
+        z-index: 99999 !important;
+    }
+</style>
+<div class="modal fade bs-example-modal-lg stack-top" tabindex="-1" role="dialog" id='GISModal' aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header" style="padding-left: 12px">
+                <input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-dismiss="modal" />
+                <div style="display: block;">
+                    <h4 class="h3 small" id="GISModalLabel" style="display: inline-block; width: 200px;" data-bind="text: gpsTitle"></h4>
+                    <!-- ko if: canUpdateGPS -->
+                    <span style="display: inline-block;" class="search-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_clieckAddRightClickClearMarker"></span>
+                    <!-- /ko -->
+                </div>
+
+
+            </div>
+
+            <iframe class="modal-fill" name='gpsFrame' id='mapContainerIframe' style='border:none; margin-top:-20px' width='100%' height='100%' src='@Url.Content("~")GISConnector'></iframe>
+
+            <div class="modal-footer">
+                <button type="button" class="btn button-primary" onclick=getGpsData() data-dismiss="modal" data-bind="text: HP.HPTRIM.Messages.web_dp_okText, attr: {title: HP.HPTRIM.Messages.web_dp_okText}"></button>
+                <!-- ko if: canUpdateGPS -->
+                <button role="button" name="button" type="button" class="btn btn-default" data-dismiss="modal" data-bind="text: HP.HPTRIM.Messages.web_dp_cancelText, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText} "></button>
+                <!-- /ko -->
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+
+    var canUpdateGPS = ko.observable(true);
+    var gpsTitle = ko.observable(HP.HPTRIM.Messages.web_GPSlocationBrowser);
+
+    function loadMap() {
+        try {
+            window.frames.gpsFrame.HPRM_Mapping_resetGPSData();
+            //window.frames.gpsFrame.deleteMarkers();
+        }
+        catch (e) { }
+
+        // Try and get a current GPS value, and when read, set to undefined so it won't be used again.
+        var currentGpsValue = $(window).data('currentGpsValue');
+        $(window).data('currentGpsValue', undefined);
+
+        // Check if read only, set to false so it defaults to editable.
+        var isReadOnly = $(window).data('showMapReadOnly') == true;
+        $(window).data('showMapReadOnly', false);
+
+        // If the currentGpsValue is undefined, try to get the active GPS field ID.
+        // This is called from the GPS Field on the form or from a GPS decorator
+        if (!currentGpsValue) {
+            var activeGpsFieldId = $(window).data('activeGpsFieldId');
+            if (activeGpsFieldId) {
+                currentGpsValue = $('#' + activeGpsFieldId).val();
+            }
+        }
+
+        var gpsComponents = null;
+
+        var typeMap = {
+            'point': 0,
+            'linestring': 1,
+            'polygon': 2
+        };
+
+        var type = null;
+
+        var parameters = [];
+
+        // get rid of all space after ','
+        var newCurrentGpsValue = currentGpsValue.replace(', ', ',');
+        while (newCurrentGpsValue != currentGpsValue) {
+            currentGpsValue = newCurrentGpsValue;
+            newCurrentGpsValue = currentGpsValue.replace(', ', ',');
+        }
+
+        if (currentGpsValue) {
+            var wktParser = new HP.HPTRIM.Utils.Wkt(currentGpsValue);
+            type = typeMap[wktParser.type];
+            gpsComponents = wktParser.parameters;
+
+            parameters = [type, 0];
+
+            if (type == typeMap.polygon ||
+                type == typeMap.linestring) {
+
+                if (type == typeMap.linestring) {
+                    gpsComponents = wktParser.parameters;
+                }
+
+                //we need to reverse the long-lat to lat-long so setGPSData can understand
+                for (var i = 0; i < gpsComponents.length; i++) {
+                    var point = gpsComponents[i];
+                    parameters.push(point.y);
+                    parameters.push(point.x);
+                }
+            }
+
+            if (type == typeMap.point) {
+                var point = gpsComponents[0];
+                parameters.push(point.y);
+                parameters.push(point.x);
+            }
+        }
+
+        canUpdateGPS(true);
+        gpsTitle(HP.HPTRIM.Messages.web_GPSlocationBrowser);
+        if (isReadOnly) {
+            //Push as a string so we can search for it in the paramter list... O_o
+            parameters.push("READONLY");
+            canUpdateGPS(false);
+        }
+        var setGpsData = window.frames.gpsFrame.HPRM_Mapping_setGPSData;
+        setGpsData.apply(setGpsData, parameters);
+    }
+
+
+    function getGpsData() {
+        var activeGpsFieldId = $(window).data('activeGpsFieldId');
+        // If no active gps field id, dont worry about this...
+        if (activeGpsFieldId) {
+            var gpsPoint = window.frames.gpsFrame.HPRM_Mapping_getGPSData();
+            var locator = '#' + activeGpsFieldId;
+            $(locator).val(gpsPoint).trigger('change');
+        }
+    }
+
+    $('#GISModal').on('shown.bs.modal', function (e) {
+        loadMap();
+    })
+
+    var timeout = 120000;
+
+    showReauthenticate = function () {
+        $("#logoutMessage").text(HP.HPTRIM.Messages.web_authenticateAboutToExpire);
+        $("#reauthenticate").show();
+        $("#loggedOut").hide();
+        $("#HPRecordsManagerAuthenticationModal").modal('show');
+    }
+
+    showLoggedOut = function () {
+        $("#logoutMessage").text(HP.HPTRIM.Messages.web_authenticationExpired);
+        $("#reauthenticate").hide();
+        $("#loggedOut").show();
+        $("#HPRecordsManagerAuthenticationModal").modal('show')
+    }
+
+
+
+    reauthenticateBeforeLogout = function () {        
+    }
+
+    reauthenitcateAfterLogout = function () {        
+    }
+
+
+    hideAuthenticate = function () {
+        $("#HPRecordsManagerAuthenticationModal").modal('hide');
+    }
+
+    var RMStayALive = function () {
+        var alertShown = false;
+        var loggedOutShown = false;
+        var makeRequest = function () {
+            $.getJSON(HP.HPTRIM.TrimClient.getServiceAPIUrl() + "/WSFedInfo", function (data, status, xhr) {
+
+				if( xhr){
+					if (xhr.status == 302) {
+						location.href = xhr.getResponseHeader("Location");
+						return;
+					}
+				}
+
+				var redirectFunction = function ()
+				{
+					var basePath = HPRMWebConfig.virtualDirectory;
+                    var redirectTarget = "&wctx=rm%3d0%26id%3dpassive&ru=" + basePath;
+					top.location = decodeURIComponent(data.WSFedInfoSignInURL) + encodeURI(redirectTarget);
+				}
+				
+				reauthenticateBeforeLogout = redirectFunction;
+				reauthenitcateAfterLogout  = redirectFunction;
+
+                var validTo = new Date(Date.parse(data.WSFedInfoValidTo));
+                var alertAt = new Date(validTo.getTime() - 2 * timeout);
+
+                if (data.WSFedInfoIsAuthenticated && (new Date() > alertAt)) {                
+                    showReauthenticate();
+                }
+
+                if (new Date() > validTo) {                    
+					showLoggedOut();  
+                }
+
+            }).fail(function(){
+				showLoggedOut();
+
+			});
+        }
+        if (HPRMWebConfig.useADFS) {
+            setInterval(makeRequest, (60 * 1000));
+        }
+    }();
+
+</script>
+
+
+
+<div id="HPRecordsManagerAuthenticationModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header alignItemsMiddle" style="margin-top:20px;">
+                
+            </div>
+            <div class="modal-body alignItemsMiddle" style="margin-top:20px;">
+                <div id="logoutMessage" style="font-size:large; display:inline-block">
+                </div>
+                <div id="reauthenticate" class="modal-body">
+                    <button role="button" name="button" class="btn button-primary" onclick="reauthenticateBeforeLogout()" data-bind="text: HP.HPTRIM.Messages.web_ok"></button>
+                    <button role="button" id="cancelBtn" style="display:inline" onclick="hideAuthenticate()" role="button" name="button" class="btn btn-default" data-bind="text: HP.HPTRIM.Messages.web_cancel"></button>
+                </div>
+                <div id="loggedOut" class="modal-body">
+                    <button role="button" name="button" class="btn button-primary" onclick="reauthenitcateAfterLogout()" data-bind="text: HP.HPTRIM.Messages.web_ok">OK</button>
+                </div>
+                <br />
+            </div>
+        </div>
+    </div>
+</div>
+
+

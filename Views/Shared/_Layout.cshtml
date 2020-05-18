@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="as-spa">
+<head>
+	<!--<title>@ViewBag.Title</title>-->
+	<!-- BEGIN: Add custom LGfL <title> -->
+	<title>GilbyIM - Records Management for Schools</title>
+	<!-- END: Add custom RM4ED <title> -->
+    <!--<link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />-->
+    <!--<link rel="apple-touch-icon" href="/ServiceApi/images/apple-touch-icon.png" />-->
+	<!-- BEGIN: Add custom RM4ED favicon -->
+	<link rel="apple-touch-icon" sizes="57x57" href="~/Content/custom/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="~/Content/custom/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="~/Content/custom/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="~/Content/custom/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="~/Content/custom/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="~/Content/custom/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="~/Content/custom/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="~/Content/custom/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="~/Content/custom/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="~/Content/custom/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="~/Content/custom/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="~/Content/custom/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="~/Content/custom/favicon/favicon-16x16.png">
+	<link rel="manifest" href="~/Content/custom/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="~/Content/custom/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+	<!-- END: Add custom LGfL favicon -->
+	<!-- BEGIN: Add Noto Sans font -->
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> 
+	<!-- END: Add Noto Sans font -->
+	<meta charset="utf-8" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+    
+    @HP.HPTRIM.Web.HPTRIMScriptManager.Render()
+
+    @RenderBody()
+
+    @RenderSection("scripts", required: false)
+	<!--BEGIN Custom Scripts -->
+	<script src="~/Content/custom/js/role-specific-script.js"></script>
+	<script src="~/Content/custom/js/script.js"></script>
+	<!--END Custom Scripts -->
+
+	
+</html>

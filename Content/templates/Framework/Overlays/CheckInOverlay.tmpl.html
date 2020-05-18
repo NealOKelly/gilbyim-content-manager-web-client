@@ -1,0 +1,74 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_checkInRecord"></div>
+    </div>
+
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+
+    <!-- /ko -->
+
+    <div class="modal-body hprm-modal-body" id="checkinoverlay">
+        <div>
+            <div class="" style="display: block; color: #000">
+                <div style="display: inline-block" data-bind="text: HP.HPTRIM.Messages.web_recordNumberCaption"></div>
+                <div style="display: inline-block" data-bind="text: recordNumber"></div>
+            </div>
+            <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+                <!-- ko if: !isCheckedOutToOtherUser() -->
+                <div data-bind="hprm_field:$data.keepCheckedOutCheckbox" />
+                <!-- ko if: showMakeNewRevision -->
+                <div data-bind="hprm_field:$data.makeNewRevisionCheckbox" />
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- Discard Changes checkbox -->
+                <!-- ko if: showDiscardChanges() -->
+                <div data-bind="hprm_field:$data.discardChangesCheckbox" />
+                <!-- /ko  -->
+
+                <div class="fileuploadcomponent">
+                    <div style="margin-bottom: 10px; margin-top:5px; color: #000">
+                        <!-- ko template: {name: checkInCommentField.template, data : $data.checkInCommentField } -->
+                        <!-- /ko  -->
+                    </div>
+                    <!-- ko if: showFileUpload() -->
+                    <div style="color: #000">
+                        <!-- ko template: {name: 'templates/Widgets/TRIMFileUpload', data : $data.fileUploader, afterRender: $data.afterRenderCallback} -->
+                        <!-- /ko  -->
+                    </div>
+                    <!-- /ko  -->
+                    <!-- ko if: showWebDAVFileInfo() -->
+                    <div class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_electronicDocument"></div>
+                    <div class="unstyled well well-small marginless" style="width: 360px; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; border: none;">
+                        <div style="color: black">
+                            <div style="display:inline-block; float: left;">
+                                <i class="hp-icon hp-attachment" style="padding-right: 10px;"></i>
+                            </div>
+                            <div style="display:inline-block; width: 50%;">
+                                <div class="overflowEllipsis" data-bind="text: fileName"></div>
+                            </div>
+                        </div>
+                        <small data-bind="text: HP.HPTRIM.App.Widgets.TrimFileUploadComponent.formatFileSize(fileSize())"></small>
+                        <!-- ko if: previewURL() != "" -->
+                        <div class="alignItemsMiddle" id="imagePreview">
+                            <img style="width: 100px; height:auto;" data-bind="attr: { 'src': previewURL }" />
+                        </div>
+                        <!-- /ko  -->
+                    </div>
+                    <!-- /ko  -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="hprm-modal-footer modal-footer ">
+        <div style="max-width: 575px;">
+            <button id="checkinBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: checkIn, text: HP.HPTRIM.Messages.web_checkIn"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>

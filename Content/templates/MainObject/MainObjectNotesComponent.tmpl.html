@@ -1,0 +1,23 @@
+﻿<div style="width:100%;">
+	<textarea class="notesTextArea" id="notesField" title="notesTextArea" readonly style="width:100%; resize:none" cols="60" rows="5" data-bind="value:notes"></textarea>
+</div>
+<div style="width:100%; padding-bottom:5px; margin-top:5px;">
+	<label for="addToNotesField" data-bind="attr:{'aria-label': HP.HPTRIM.Messages.bob_selectDlgNotes}">&nbsp;</label>
+	<input type="text" id="addToNotesField" style="width:100%; max-width:100%; color: black; padding-left: 5px" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_addToNotes}" />
+</div>
+<div style="width: 100%; margin-left:-10px;">
+	<div class="visible-sm visible-md hidden-lg visible-xs">
+		<button role="button" name="button" class="btn light-grey-button" data-bind="click: showLatest, text: HP.HPTRIM.Messages.web_showLatest,attr: { 'alt': HP.HPTRIM.Messages.web_showLatest, 'title' : HP.HPTRIM.Messages.web_showLatest }"></button>
+		<button role="button" name="button" class="btn button-primary" data-bind="click: addToNotes, text: HP.HPTRIM.Messages.web_addToNotes,attr: {'alt': HP.HPTRIM.Messages.web_addToNotes, 'title': HP.HPTRIM.Messages.web_addToNotes }"></button>
+	</div>
+	<div class="hidden-sm hidden-md visible-lg hidden-xs">
+		<button role="button" name="button" class="btn light-grey-button" data-bind="click: showLatest,attr: { 'alt': HP.HPTRIM.Messages.web_showLatest, 'title' : HP.HPTRIM.Messages.web_showLatest }">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHQSURBVEhLtdQ7ixRBFIbh9cbKaiSCiyIsiAYGCqIgBv4EMwMFBSMRQU3MFCMxMRYx08Dc1D9gKl6iDTYVEbyCd9v3rakDZ6prwaD94KGrzqnpmunp7oVhGP6rbnFK3WL1GqtYSbXWMbjmearN6Raxhsg3PMSfMpvlJ57Cmn7hBUbnGhWqnDiBG93BbbzHb7QZnWtUqD4i8gT70a7Zi8dwI7/ES7Rr1t3gDMx9bEbUt+Fomm+Av8oNLtTanFEBi/CSfMWOWgsPYC/XtuMZXtVx7nU3OAhzDW3PE5m2fg7+ihOpVuRJ5Gw9HkLua70NdsMNrsJ8QunlRcbjxdlwWEbuKzbYg1zfCHMLzk3p5UXG4+nZcDiC3NcjeNd8wYFak3eUuQznpvRiQS56S5obyP1wDz+qqF2C8cl2bkovFuTiFnin+E3bSxHuwrtsCTvhk/25zu2bsjZ/yMT4ZJkNwztsRV4XdmEffMDMKUTPlHEU5oqVt6mX4Q2OIz9w/qk+cB9gfH3kz5oy7harTTiP74i8rcd4D/kFriBvLlPG3WLDS3EdOf5HN+Hd0/uMKeNucQKmjLvFCZgy7hYnYMq4W5yAKeO2OFW6L7t/cbjq9TqGhb/qc094quDLGAAAAABJRU5ErkJggg=="
+				 data-bind="attr: { 'alt': HP.HPTRIM.Messages.web_showLatest, 'title' : HP.HPTRIM.Messages.web_showLatest }" />
+		</button>
+		<button role="button" name="button" class="btn button-primary" data-bind="click: addToNotes,attr: {'alt': HP.HPTRIM.Messages.web_addToNotes, 'title': HP.HPTRIM.Messages.web_addToNotes }">
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAC1SURBVEhLtZTBDcMwEMOyUbtN91+hC7iREANnlwr6uBIgcKH1zjHG+KsYgzu0+RIjmKDtIsZOMYIJ2i5iBBO0XcQIJmi7iBFM0HYRI5ig7WL92Ll7m9TNW+FCt3sdiPpdTdBWCt8YwQRtpfCNsUHhGyOYoK0UvjGCCdpK4Rsj+DzdUaOtFL4xBl+nE920mQrfGG+c0FtV+MbYoPCNsUHhG2ODwjfGBoXvPXaBP7tffFzSGziOD0lIPG2ZZO6sAAAAAElFTkSuQmCC"
+				 data-bind="attr: {'alt': HP.HPTRIM.Messages.web_addToNotes, 'title': HP.HPTRIM.Messages.web_addToNotes }" />
+		</button>
+	</div>
+</div>

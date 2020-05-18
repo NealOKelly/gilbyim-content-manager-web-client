@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="as-spa">
+<head>
+
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <meta charset="utf-8" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+
+    <title>@ViewBag.Title</title>
+    <script>
+        function ApplyLocalisationMessages(result) {
+            HPRM = { Messages: result.Messages };
+        }
+    </script>
+    <script src='~/HPRMServiceAPI/Localisation?MatchMessages=__Phoenix&callback=ApplyLocalisationMessages'> </script>
+
+    @*@Styles.Render("~/Content/mobile-css")*@
+
+    @HP.HPTRIM.Web.HPTRIMScriptManager.Render()
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+
+</html>

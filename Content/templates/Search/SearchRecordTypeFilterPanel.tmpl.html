@@ -1,0 +1,35 @@
+﻿<div class="panel search-filter-panel" tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:$parent.dismiss">
+    <h4 data-bind="text: title"></h4>
+	<div style="display: inline-block;margin-left:50px">
+				<!-- ko hprm_field:selectionControl --> <!-- /ko -->
+     </div>
+    <div style="overflow-y: auto; max-height: 450px; padding:10px; margin-right:10px" data-bind="event: { scroll: scrolled }">
+        <ul class="dashboard-itemlist" data-bind="foreach: recordTypes()">
+            <li class="HPRM-media" style="height:30px">
+                <div class="" data-bind="attr: { 'title': name() }" style="display: block; float: left; width: 100%">
+                    <div style="display: inline-block; vertical-align: top">
+                    <!-- ko hprm_field:selectedCheckbox--> <!-- /ko -->
+                    </div>
+                    <div style="display: inline">
+                        <div style="height: 24px; width: 24px; margin-right: 5px; display: inline-block" data-bind="attr: { 'class': icon() + ' media-object'}"></div>
+                        <div class="overflowEllipsis" data-bind="text: name()" style="display: inline-block; width: 80%; max-width: 80%; color: #20262D; font-size: 14px; font-weight:400;">
+                            <!-- 
+                             <div class="overflowEllipsis" data-bind="text: name()" style="color: #20262D; font-size: 14px; font-weight:400;"></div>
+                             -->
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div style="padding: 20px 0px 0px 0px;" data-bind="hprm_field:saveFiltersAsDefaultCheckbox"></div>
+    <div class="search-result-footer" style="z-index:999999;width:100%;display:inline-block;">
+        <div style="text-align:center" data-bind="if: pendingRequest()">
+            <span data-bind="text:HP.HPTRIM.Messages.web_loading+'...'"></span>
+            <img data-bind="attr:{ src : HP.HPTRIM.Icons.progressIndicator  }" alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block" />
+
+        </div>
+    </div>
+
+</div>

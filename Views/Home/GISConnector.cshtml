@@ -1,0 +1,493 @@
+﻿<!DOCTYPE html5>
+<!-- saved from url=(0016)http://localhost -->
+<html>
+<head>
+    <meta http-equiv="x-ua-compatible" content="ie=10">
+    <title>Enter GIS Data</title>
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            height: 100%;
+        }
+
+        #floating-panel {
+            position: absolute;
+            top: 10px;
+            left: 25%;
+            z-index: 5;
+            background-color: #fff;
+            padding: 5px;
+            border: 2px solid #999;
+            text-align: center;
+            line-height: 24px;
+            font-family: 'Metric';
+        }
+
+        .btn {
+            margin: -6px 0 0 0 !important;
+        }
+        #pac-input {
+            height: 33px;
+            width: 40%;
+            margin-top: 10px;
+            padding-left: 5px;
+        }
+
+        div#floating-panel .btn {
+            padding: 5px;
+            min-width: 35px;
+        }
+
+
+        @@media screen and (max-width: 800px) {
+
+            .modal-fill-btnpad {
+                left: 15%;
+            }
+
+            #floating-panel {
+                left:8% !important;
+            }
+            #pac-input {
+                width: 37% !important;
+            }
+
+        }
+        @@media screen and (max-width: 1200px) {
+
+            #floating-panel {
+                left: 18%;
+            }
+        }
+
+    </style>
+    @Styles.Render("~/Content/styles")
+
+</head>
+<body>
+    <div id="floating-panel" class="modal-fill-btnpad" style='margin-top:-10px; height: 45px'>
+
+@{
+    string startSearchHere = "";
+    string asPolygon = "", asLine = "", trafficLayer = "", clearMarker = "";
+    string asPolygonTitle = "", asLineTitle = "", trafficLayerTitle = "", clearMarkerTitle = "";
+
+    startSearchHere = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_startYourSearchHere);
+
+    asPolygon = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_asPolygon);
+    asLine = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_asLine);
+    trafficLayer = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_traffic);
+    clearMarker = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_clearMarkers);
+
+    asPolygonTitle = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_useAllMarkersToDrawPolygon);
+    asLineTitle = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_useAllMarkersToDrawLine);
+    trafficLayerTitle = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_showTrafficLayer);
+    clearMarkerTitle = HP.HPTRIM.SDK.TrimApplication.GetMessage(HP.HPTRIM.SDK.MessageIds.web_clearAllMarkers);
+}
+
+        <input id="pac-input" class="text-left" type="text" style='margin-top:0px;' size=35  placeholder="@startSearchHere"  >
+
+        <button id="asPolygon" type="button" role="button" class="btn btn-default" onclick="asPolygon();" title="@asPolygonTitle">@asPolygon</button>
+        <button id="asLine" type="button" class="btn btn-default" onclick="asLine();"  title="@asLineTitle">@asLine</button>
+        <button id="trafficLayer" type="button" class="btn btn-default" onclick="trafficLayer();" title="@trafficLayerTitle">@trafficLayer</button>
+        &nbsp;
+        &nbsp;
+        <button id="deleteMarkers" type="button" onclick="deleteMarkers();" title="@clearMarkerTitle" class="btn btn-primary">@clearMarker</button>
+
+
+        @*<input id="asPolygon" type=button  class="hpe_map_button" onclick="asPolygon();"  value="@asPolygon"  title ="@asPolygonTitle">
+        <input id="asLine" type=button  class="hpe_map_button" onclick="asLine();" value="@asLine" title="@asLineTitle">
+        <input id="trafficLayer" type=button class="hpe_map_button" onclick="trafficLayer();" value="@trafficLayer" title="@trafficLayerTitle">
+        &nbsp
+        &nbsp
+        <input id="deleteMarkers" type=button  onclick="deleteMarkers();" value="@clearMarker" title="@clearMarkerTitle">*@
+    </div>
+    <div id="map"></div>
+    <script>
+
+// In the following example, markers appear when the user clicks on the map.
+// The markers are stored in an array.
+// The user can then click an option to hide, show or delete the markers.
+var map;
+var poly;
+var markers = [];
+var traffic;
+var service;
+var originalSearch = '';
+var line;
+var type = -1;
+var displaySearchResult = false;
+var startLoc;
+var options;
+var inputFld;
+var autoComplete;
+var defBounds;
+
+
+var allowChanges = true;
+
+function initMap() {}
+
+function initToStartPoint() {
+    map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 16,
+      center: startLoc,
+      mapTypeId: google.maps.MapTypeId.MAP,
+	  zoomControl: true,
+  	  mapTypeControl: true,
+ 	  scaleControl: true,
+  	  streetViewControl: true,
+ 	  rotateControl: true,
+  	  fullscreenControl: true  });
+
+    // This event listener will call addMarker() when the map is clicked.
+    map.addListener('click', function(event)
+    {
+        if (allowChanges) {
+            addMarker(event.latLng);
+        }
+    });
+
+    //POLYGON((148.94989014 -35.131140629,148.95263672 -35.491983665,149.34402466 -35.493101786,149.33029175 -35.132263749,148.94989014 -35.131140629))
+    defBounds = new google.maps.LatLngBounds(
+    new google.maps.LatLng(-35.131140629, 148.94989014),
+    new google.maps.LatLng(-35.493101786, 149.34402466));
+
+    options = {
+    bounds:defBounds
+    };
+
+    // Get the HTML input element for the autocomplete search box
+    inputFld = document.getElementById('pac-input');
+    // if(inputFld){
+    //   map.controls[google.maps.ControlPosition.TOP_RIGHT].push(inputFld);
+    // }
+    // else{
+    //   alert('inputFld is null');
+    //
+    // }
+    // Create the autocomplete object
+    autoComplete = new google.maps.places.Autocomplete(inputFld, options);
+
+    traffic = new google.maps.TrafficLayer();
+    service = new google.maps.places.PlacesService(map);
+    infowindow = new google.maps.InfoWindow();
+
+    autoComplete.addListener('place_changed', onPlaceChanged);
+
+    // Adds a marker at the center of the map.
+    addMarker(startLoc);
+}
+
+function onPlaceChanged() {
+  var place = autoComplete.getPlace();
+  if (place.geometry) {
+    map.panTo(place.geometry.location);
+    map.setZoom(15);
+    deleteMarkers();
+    addMarker(place.geometry.location);
+  }
+}
+
+// Adds a marker to the map and push to the array.
+function addMarker(location) {
+    var marker;
+    if (type == 2 && location.idx === 1)
+    {
+        var img = 'img/start.png';
+        marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            draggable: allowChanges,
+            icon: img
+        });
+    }
+    else {
+        marker = new google.maps.Marker({
+            position: location,
+            draggable: allowChanges,
+            map: map
+        });
+    }
+    google.maps.event.addListener(marker, 'dragend', function () {
+        if (allowChanges) {
+            draw();
+        }
+    });
+    google.maps.event.addListener(marker, 'click', function () {
+        if (allowChanges) {
+            marker.setMap(null);
+            for (var i = 0; i < markers.length; i++) {
+                if (markers[i].getPosition().lng() == marker.getPosition().lng() &&
+                    markers[i].getPosition().lat() == marker.getPosition().lat()) {
+                    markers.splice(i, 1);
+                }
+            }
+            draw();
+        }
+    });
+
+  markers.push(marker);
+  draw();
+}
+
+function trafficLayer()
+{
+	if ( traffic ) {
+		if (traffic.getMap()) {
+			traffic.setMap(null);
+		}
+		else {
+			traffic.setMap(map);
+		}
+	}
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map)
+{
+    for (var i = 0; i < markers.length; i++)
+    {
+        markers[i].setMap(map);
+    }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers()
+{
+    setMapOnAll(null);
+    clearpolys();
+}
+
+
+// Deletes all markers in the array by removing references to them.
+function deleteMarkers()
+{
+    clearMarkers();
+    markers = [];
+}
+
+function centreOnMarker(index)
+{
+    if (map) {
+        map.setCenter(markers[index].getPosition());
+    }
+}
+
+function clearpolys()
+{
+    if (poly) {
+        poly.setMap(null);
+    }
+    if (line) {
+        line.setMap(null);
+    }
+}
+
+function draw()
+{
+    clearpolys();
+    drawPolygon()
+    drawLine();
+}
+
+function drawLine()
+{
+    if (type == 1)
+    {
+        var locs = getPositions();
+
+        line = new google.maps.Polyline({
+            path: locs,
+            geodesic: true,
+            strokeColor: '#0000FF',
+            strokeOpacity: 1.0,
+            strokeWeight: 4
+        });
+        line.setMap(map);
+    }
+}
+function drawPolygon()
+{
+    if (type == 2) {
+        var locs = getPositions();
+        poly = new google.maps.Polygon({
+            paths: locs,
+            strokeColor: '#FF00FF',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#880088',
+            fillOpacity: 0.05
+        });
+        poly.setMap(map);
+    }
+}
+function getPositions() {
+    var locs = [];
+    for (var i = 0; i < markers.length; i++){
+        var posn = markers[i].getPosition();
+        locs.push(posn);
+    }
+    return locs;
+}
+
+function asLine() {
+    type = 1;
+    clearpolys();
+    drawLine();
+}
+function asPolygon() {
+    type = 2;
+    clearpolys();
+    drawPolygon();
+}
+
+// There are 3 function that must exist in this  html to make the HPRM Google Map work
+// They are HPRM_Mapping_setGPSData(), HPRM_Mapping_getGPSData() and HPRM_Mapping_Search(searchString)
+// Further details follow.
+
+//  This function sets up the initial point,line or polygon
+//  It is called by the HPRM control once the google maps api has been fully loaded into the webbrowser control.
+function HPRM_Mapping_setGPSData() {
+    // setup the start location
+    if (arguments.length >= 4) {
+        startLoc = new google.maps.LatLng(arguments[2], arguments[3]);
+        initToStartPoint();
+        deleteMarkers();
+    }
+    else
+    {
+        startLoc = new google.maps.LatLng(37.443109503, -122.15438795);
+        initToStartPoint();
+    }
+
+    // Sigh. Find and remve the READONLY parameter if it exists from the arguments.
+    allowChanges = true;
+    if (_.contains(arguments, "READONLY")) {
+        arguments = _.without(arguments, "READONLY");
+        allowChanges = false;
+    }
+
+    for (var i = 0; i < arguments.length / 2; i++) {
+        if (i == 0) {
+            type = arguments[0];
+        }
+        else {
+            var posn = new google.maps.LatLng(arguments[i * 2], arguments[i * 2 + 1]);
+            posn.idx = i;
+            addMarker(posn);
+        }
+    }
+    draw();
+    centreOnMarker(0);
+
+    if (allowChanges) {
+        $('#floating-panel').show();
+    } else {
+        $('#floating-panel').hide();
+    }
+
+}
+
+// return the GPS data as a WKT foramt string
+// currently HPRM supports 3 variations
+// point(<lng> <lat>)
+// polygon((<lng1> <lat1>, <lng2> <lat2>, <lng2> <lat2> [repeat] ))
+// linestring( )  // HPRM implementation only supports up to 3 points
+function HPRM_Mapping_getGPSData() {
+    if (markers.length > 1) {
+        var geoStr = "linestring(";
+        if (type == 2) {
+            geoStr = "polygon((";
+        }
+        for (var i = 0; i < markers.length; i++) {
+            geoStr = geoStr + markers[i].getPosition().lng() + " " + markers[i].getPosition().lat();
+            if (i + 1 < markers.length) {
+                geoStr = geoStr + ", ";
+            }
+        }
+        if (type == 2) {
+            // add the first spot again to create a ring
+            geoStr = geoStr + ", ";
+            geoStr = geoStr + markers[0].getPosition().lng() + " " + markers[0].getPosition().lat() + "))";
+        }
+        else {
+            geoStr = geoStr + ")";
+        }
+        return geoStr;
+    }
+    else if (markers.length == 1) {
+        var gs = "POINT(" + markers[0].getPosition().lng() + " " + markers[0].getPosition().lat() + ")";
+        return gs;
+    }
+    return "";
+}
+
+function HPRM_Mapping_resetGPSData() {
+    deleteMarkers();
+    for (var i = 0; i < arguments.length / 2; i++) {
+        if (i == 0) {
+            type = arguments[0];
+        }
+        else {
+            var posn = new google.maps.LatLng(arguments[i * 2], arguments[i * 2 + 1]);
+            posn.idx = i;
+            addMarker(posn);
+        }
+    }
+    draw();
+    centreOnMarker(0);
+}
+    
+var jsGoogleKey = "";
+
+    </script>
+    @using ServiceStack.Text
+    @using ServiceStack.Logging;
+    @using ServiceStack.Host.AspNet
+    @using ServiceStack
+
+    
+    @{
+        string googleKey = "";
+
+        HP.HPTRIM.ServiceModel.Database database;
+
+        AspNetRequest httpReq = new AspNetRequest(System.Web.HttpContext.Current.ToHttpContextBase());
+        AspNetResponse httpRes = new AspNetResponse(new HttpResponseWrapper(System.Web.HttpContext.Current.Response));
+
+        HP.HPTRIM.Service.BearerAuthPlugin bearerAuth = new HP.HPTRIM.Service.BearerAuthPlugin(HP.HPTRIM.Web.Configuration.ServiceDefaults.Instance.Authentication);
+        bearerAuth.Execute(httpReq);
+
+        new AuthenticateAttribute().Execute(httpReq, httpRes, null);
+        using (HP.HPTRIM.Service.Razor.RazorLocationService service = new HP.HPTRIM.Service.Razor.RazorLocationService(httpReq.GetSession(), httpReq))
+        {
+            var dbProperties = "GoogleKey".Split(',');
+            try
+            {
+                database = service.GetCurrentDatabase(new List<string>
+                    (dbProperties));
+
+                googleKey = database.GoogleKey.Value;
+
+            }
+            catch (Exception ex)
+            {
+                Exception newException = new Exception("Get GoogleKey : service.GetCurrentDatabase failed", ex);
+                throw newException;
+            }
+
+        }
+        if (!String.IsNullOrEmpty(googleKey))
+        {
+            @:<script async defer src="https://maps.googleapis.com/maps/api/js?libraries=places,weather&key=@googleKey&v=3.23&callback=initMap"></script>
+        }
+    }
+        
+</body>
+</html>

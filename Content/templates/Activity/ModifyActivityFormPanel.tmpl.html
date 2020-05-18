@@ -1,0 +1,51 @@
+﻿<div role="form" class="panel-body listPadding listPaddingRight background-white">
+	<label style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block" for="activityName" class="HPRM-deluxe-list-header" data-bind="text:HP.HPTRIM.Messages.web_name" />
+	<br /><textarea id="activityName" rows="5" cols="75" data-bind="value:activityName" />
+	<br />
+	<br />
+	<!-- ko template: {name: $data.assignedTo.template, data : $data.assignedTo} -->
+	<!-- /ko -->
+	<br />
+	<!-- ko template: {name: $data.supervisor.template, data : $data.supervisor} -->
+	<!-- /ko -->
+	<br />
+	<div>
+		<span style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block" class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_priority"></span>&nbsp;
+		<div style="margin-left:-5px;">
+			<!-- ko template: {name: $data.priority.template, data: $data.priority} -->
+			<!-- /ko -->
+		</div>
+	</div>
+	<br />
+	<span style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block" class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_activityEstimatedTime"></span>&nbsp;
+	<br />
+	<div style="max-width: 330px !important;">
+		<div class="input-group" style="width:100%">
+			<label for="days" style="width:20%;" class="input-group-addon" data-bind="text: HP.HPTRIM.Messages.core_days"></label>
+			<input id="days" style="width: 80%; margin-right: 2px;" type="number" min="0" class="form-control" data-bind="value: estimatedDays" />
+		</div>
+		<br />
+		<div class="input-group" style="width: 100%">
+			<label for="hours" style="width:20%;" class="input-group-addon" data-bind="text: HP.HPTRIM.Messages.core_hours"></label>
+			<input id="hours" style="width: 80%;" type="number" min="0" class="form-control" data-bind="value: estimatedHours" />
+		</div>
+		<br />
+		<div class="input-group" style="width: 100%">
+			<label for="minutes" style="width:20%;" class="input-group-addon" data-bind="text: HP.HPTRIM.Messages.core_minutes"></label>
+			<input id="minutes" style="width: 80%; margin-right: 2px;" type="number" min="0" class="form-control" data-bind="value: estimatedMinutes" />
+		</div>
+	</div>
+	<br />
+	<div>
+		<label for="estimatedCost" style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block" class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_activityEstimatedCost"></label>
+		<br />
+		<input id="estimatedCost" style="width: 100px; margin-right: 2px; text-indent: 10px;" type="text" min="0" data-bind="value: estimatedCost" />
+
+	</div>
+	<br />
+	<div>
+		<button role="button" name="button" type="submit" data-bind='text: HP.HPTRIM.Messages.dp_cap_SaveConfig, click:submit' class="btn button-primary" style="display: inline-block"></button>
+		<button role="button" name="button" type="button" class="btn btn-accent dark-grey-button" style="display: inline-block" data-bind='text: HP.HPTRIM.Messages.web_dp_cancelText, click: returnHandler'></button>
+	</div>
+	<br />
+</div>

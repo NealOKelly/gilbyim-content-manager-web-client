@@ -1,0 +1,10 @@
+﻿<div class="as-pager" data-bind="fadeVisible: !itemList.loading()" style="margin: 5px; margin-bottom:0" >
+    <div data-bind="text: pageSummary" class="pull-left pagination-summary" style="width:100%"></div>
+    <div data-bind="visible: pages().length > 1">
+        <ul data-bind="foreach: pages" class="pagination">
+            <li class="pagination_item" data-bind="css: { 'active': active }">
+                <a href="#" data-bind="text: text, click: function (data) { $parent.currentPage(data.pageNumber); $parent.generateEvent(data.pageNumber); }"></a>
+            </li>
+        </ul>
+    </div>
+</div>

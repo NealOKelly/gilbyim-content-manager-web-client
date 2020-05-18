@@ -1,0 +1,13 @@
+﻿<div data-bind="attr: { 'class': cssClass }, escapeKey: $parent.cancel" style="height:auto; padding-bottom:150px;" >
+	<div class="listPadding">
+		<div data-bind="if: $data.form() != null" class="background-white form-container">
+			<!-- ko as_panel: $data.form() -->
+			<!-- /ko -->
+			<div class="panel-body" data-bind="with: form()" style="padding-right:15%;margin-top:15px;">
+				<button role="button" name="saveBtn" type="submit" data-bind='visible: $parent.allowSave, click: submit, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enable: submitEnabled  && !containErrorFields()' class="btn button-primary" style="display: inline-block"></button>
+				<button role="button" name="cancelBtn" type="button" class="btn btn-accent dark-grey-button" style="display: inline-block" data-bind='click: $parent.cancel, text: HP.HPTRIM.Messages.web_dp_cancelText'></button>
+			</div>
+		</div>
+	</div>
+</div>
+

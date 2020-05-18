@@ -1,0 +1,5 @@
+<!-- ko if : showCaption -->
+<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data  } -->
+<!-- /ko -->
+<!-- /ko -->
+<select style="height:31px; margin-bottom:10px;" data-bind="options: $data.items, optionsText: 'Caption', optionsValue: 'Uri', value: selectedValue, attr:{ 'id': Id, 'name':Id} " />		

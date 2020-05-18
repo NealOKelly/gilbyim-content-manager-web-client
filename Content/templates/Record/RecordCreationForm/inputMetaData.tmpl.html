@@ -1,0 +1,26 @@
+﻿<div class ="whole-form" style="height:auto; padding-bottom: 40px;" data-bind="escapeKey:$parent.cancel" tabindex="-1">
+	
+		<div data-bind="if: $data.form() != null" class="background-white form-container" style="max-height: fit-content; background-color: white">
+			<!-- ko as_panel: $data.form() -->
+			<!-- /ko -->
+
+            <!--ko if:manualNumberingRequired()-->
+            <div class="panel-body"  style="padding-right:15%;margin-bottom:30px;">
+                <button role="button" name="saveBtn" type="button" id="saveBtn" data-bind='visible: $parent.allowSave, click: submitCheckRecordNumber, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enable: $data.form().submitEnabled() && !$data.form().containErrorFields()' class="btn button-primary" style="display: inline-block"></button>
+                <button role="button" name="cancelBtn" type="button" class="btn btn-accent dark-grey-button" style="display: inline-block" data-bind='click: $parent.cancel, text: HP.HPTRIM.Messages.web_dp_cancelText'></button>
+            </div>
+
+            <!--/ko-->
+
+            <!--ko ifnot:manualNumberingRequired()-->
+            <div class="panel-body" data-bind="with: form()" style="padding-right:15%;margin-bottom:30px;">
+                <button role="button" name="saveBtn" type="button" id="saveBtn" data-bind='visible: $parent.allowSave, click: submit, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enable: submitEnabled && !containErrorFields()' class="btn button-primary" style="display: inline-block"></button>
+                <button role="button" name="cancelBtn" type="button" class="btn btn-accent dark-grey-button" style="display: inline-block" data-bind='click: $parent.cancel, text: HP.HPTRIM.Messages.web_dp_cancelText'></button>
+            </div>
+
+            <!--/ko-->
+			
+		</div>
+
+</div>
+

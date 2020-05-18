@@ -1,0 +1,78 @@
+﻿<div data-bind="attr: { class: cssClass } ">
+	<div class="listPadding hpebox listPaddingRight">
+		<div class="hpebox-title dashboard-container-header">
+			<div class="hpebox-draghandle drag-handle ui-sortable-handle"></div>
+			<div class="listPadding listPaddingRight">
+				<span class="h4 capitalize"  data-bind="text: headerCaption, click: viewAll" />
+			</div>				
+		</div>
+		<div>
+			<!-- ko if:trimItemListPanel.itemList.items().length == 0 -->
+
+			<!-- ko if:trimItemListPanel.trimItemListLoader.loading() == true -->
+				<span style="padding:20px;" data-bind="text:HP.HPTRIM.Messages.web_loading + '...'"></span>
+			<!-- /ko -->
+
+				<!-- ko ifnot:trimItemListPanel.trimItemListLoader.loading() == true -->
+				<div class="listPadding listPaddingRight col-md-12">
+					<div style="margin-top: 10px">
+						<div data-bind="attr:{title: HP.HPTRIM.Messages.web_noRecordsFound}" class="information_x24 col-md-2 dashboard-search-no-result" title="No records found"></div>
+						<div class="text-black" style="display: inline-block; vertical-align: top; font-size: 14pt; margin: 10px 0 10px 0;" data-bind="text: HP.HPTRIM.Messages.web_noRecordsFound"></div>
+					</div>
+					<div style="margin-left: 0; font-size: small" class="HPRM-deluxe-list-item col-md-12" data-bind="text: HP.HPTRIM.Messages.web_filterOrSecurityMayPreventedTheDisplayOfMatchRecords"></div>
+				</div>
+				<!-- /ko -->
+			<!-- /ko -->
+			<!-- ko if:trimItemListPanel.itemList.items().length > 0 -->
+			<ul class="dashboard-itemlist col-xs-12" data-bind="foreach: trimItemListPanel.itemList.items() , as : 'item' ">
+				<li class="HPRM-media" data-bind="click: function(){$parent.showItem($data)}">
+                    <div class="attachment-container" style="position:absolute">
+                        <!-- ko if: Fields.RecordRecordType -->                                                                                
+                        <span style="height: 32px; width: 32px; margin-right: 5px; display: inline-block; float: left" data-bind="attr: { 'class': $data.getIcon($data) }"></span>
+                            <div class="HPRM-recExtHome" style="top:24px; left:-47px; float:left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 40px;"  data-bind="text: $data.Fields.RecordExtension.toUpperCase()"></div>
+                        <!-- /ko -->
+
+                        <!-- ko if: Fields.SavedSearchObjectType -->
+                        <span style="height: 32px; width: 32px; margin-right: 5px; display: inline-block; float: left" data-bind="attr: {'class': HP.HPTRIM.Utils.TrimHelper.getSavedSearchIconName($data.Fields.SavedSearchObjectType, '_24') }" ></span>
+                        <!-- /ko -->
+
+                    </div>
+                    <div class="icon-container" style="margin-left:50px">
+                        <!-- ko if: $data.Fields.RecordTitle -->
+                        <!-- Record -->
+
+                        <div class="input-group-btn" data-bind="attr: { 'title': $data.Fields.RecordTitle }" style="display: block; width: 100%">
+
+                            <div class="padding-left: 2.5641%;" style="display: inline-block; width: 80%; max-width: 80%;">
+                                <div class="overflowEllipsis" data-bind="text: $data.Fields.RecordTitle" style="color: #20262D; font-size: 14px; font-weight:400;"></div>
+                                <div class="overflowEllipsis" data-bind="text: $data.Fields.RecordNumber" style="color: #8b8b8b; font-size: 14px; font-weight:400;"></div>
+                            </div>
+                        </div>
+                        <!-- /ko  -->
+                        <!-- ko ifnot: $data.Fields.RecordTitle -->
+                        <div class="dataRow form-group">
+                            <div class="input-group-btn">
+                                <div class="listPadding overflowEllipsis" style="display: inline-block; width: 80%; max-width: 80%; line-height: 32px; font-size: 14px;" data-bind="attr: { 'title': $data.Fields.NameString }, text: $data.Fields.NameString"></div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </li>
+			</ul>
+
+
+            
+            <div>
+                <div class="dashboard-container-footer capitalize">
+                    <span  data-bind="text: footerCaption, click: viewAll" />
+                </div>
+                
+                
+            </div>
+            
+
+			<!-- /ko -->
+		</div>
+	</div>
+
+</div>

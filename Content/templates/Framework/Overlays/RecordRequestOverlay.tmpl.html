@@ -1,0 +1,86 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_request"></div>
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body">
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+
+            <!-- ko ifnot: isBasicRequest -->
+            <div class="h3 small" style="margin: 0;" data-bind="text:requestTypeName"></div>
+            <!-- /ko-->
+
+            <div style="margin: 10px 0 10px 0;">
+                <!-- ko if: hasInfoObject -->
+                <div class="HPRM-deluxe-title" data-bind="text:recordNumber"></div>
+                <div class="HPRM-deluxe-title" data-bind="text:recordTitle"></div>
+                <!-- /ko -->
+            </div>
+
+            <!-- ko if: isBasicRequest -->
+            <div data-bind="hprm_field:$data.requestorField" />
+            <!-- /ko-->
+            <!-- ko if: isRetrieveTemporary -->
+            <!-- ko if: hasInfoObject -->
+            <div data-bind="hprm_field:$data.currentHomeLocationField" />
+            <!-- /ko -->
+
+
+            <div data-bind="hprm_field:$data.requestorField" />
+            <!-- /ko-->
+            <!-- ko if: isRetrievePermanent -->
+            <!-- ko if: hasInfoObject -->
+            <div data-bind="hprm_field:$data.currentHomeLocationField" />
+            <!-- /ko -->
+            <div data-bind="hprm_field:$data.newHomeField" />
+            <!-- /ko-->
+            <!-- ko if: isRetrieveRecurring -->
+            <!-- ko if: hasInfoObject -->
+            <div data-bind="hprm_field:$data.currentHomeLocationField" />
+            <!-- /ko -->
+            <div data-bind="hprm_field:$data.requestorField" />
+
+            <!-- /ko-->
+            <!-- ko if: isPickupNew-->
+            <!-- ko if: hasInfoObject -->
+            <div data-bind="hprm_field:$data.currentHomeLocationField" />
+            <!-- /ko -->
+            <div data-bind="hprm_field:$data.serviceLocationField" />
+            <!-- /ko-->
+            <!-- ko if: isPickupReturn-->
+            <!-- ko if: hasInfoObject -->
+            <div data-bind="hprm_field:$data.currentAssigneeLocationField" />
+            <div data-bind="hprm_field:$data.currentHomeLocationField" />
+            <!-- /ko -->
+            <!-- /ko-->
+            <!-- ko ifnot: isBasicRequest -->
+            <!-- always show these guys at the moment... -->
+            <div data-bind="hprm_field:$data.requestPriorityField" />
+            <!-- ko if: showDateRequired -->
+            <div data-bind="hprm_field:$data.dateRequiredFromField" />
+            <!-- /ko -->
+            <!-- /ko -->
+            <!-- ko if: isRetrieveRecurring -->
+            <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_recurringRequest"></div>
+            <div data-bind="hprm_field:$data.recurranceCountField" />
+            <div data-bind="hprm_field:$data.recurranceTypeField" />
+            <div data-bind="hprm_field:$data.recurUntilField" />
+            <!-- /ko-->
+            <!-- ko ifnot: isBasicRequest -->
+            <div data-bind="hprm_field:$data.notesField" />
+            <!-- /ko -->
+        </div>
+    </div>
+
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="saveBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: save, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, enabled: buttonsEnabled"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, enabled: buttonsEnabled"></button>
+        </div>
+    </div>
+</div>

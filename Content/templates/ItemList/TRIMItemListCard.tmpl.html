@@ -1,0 +1,46 @@
+﻿<!-- ko if: (!$data.getPlugin('fieldchooser') || !$data.getPlugin('fieldrenderer')) -->
+<div class="alert alert-danger">
+	<strong>Error</strong> This template can only be used with an ItemList that has the FieldChooser and FieldRenderer plugins.
+</div>
+<!-- /ko -->
+
+<!-- ko if: ($data.getPlugin('fieldchooser') && $data.getPlugin('fieldrenderer')) -->
+
+	<!-- ko if: $data.getPlugin('summary') -->
+	<select data-bind="options: getPlugin('summary').summaryTypes, optionsText: 'caption', value: getPlugin('summary').summaryType"></select>
+	<!-- /ko -->
+
+	<ul class="media-list" data-bind="foreach: items">
+		<li class="media" >
+			<a class="pull-left" href="#">
+				<div >
+					<div class="col-md-6">
+						<!-- ko if: $parent.getPlugin('selection') && $data.Fields[$parent.getPlugin('selection').keyField] -->
+						<input type="checkbox" data-bind = "checked: $data.isSelected" />
+						<!-- /ko -->
+					</div>
+					<div class="col-md-6">
+						<!-- ko template: {name: 'templates/Framework/ItemList/FieldValue', data: {field: $parent.getPlugin('fieldchooser').getField('Extension'), itemList: $parent, item: $data }}--><!-- /ko  -->
+					</div>
+				</div>
+			</a>
+			<div class="media-body">
+				<h4 class="media-heading">
+					<!-- ko template: {name: 'templates/Framework/ItemList/FieldValue', data: {field: $parent.getPlugin('fieldchooser').getField('Name'), itemList: $parent, item: $data }}--><!-- /ko  -->
+				</h4>
+				<p data-bind="if: $data.Summary, text: $data.Summary"></p>                            
+				<div class="well well-small" data-bind="foreach: $parent.getPlugin('fieldchooser').selectedFields">
+					<!-- ko if: (['DRETITLE', 'FILETYPE'].indexOf($data.InternalName))==-1 -->
+					<div >
+						<div class="col-md-2" data-bind="text: $data.DisplayName" ></div>
+						<div class="col-md-10">
+							<!-- ko template: {name: 'templates/Framework/ItemList/FieldValue', data: {field: $data, itemList: $parents[1], item: $parent }}--><!-- /ko  -->
+						</div>
+					</div>
+					<!-- /ko -->
+				</div>
+			</div>
+		</li>
+	</ul>
+
+<!-- /ko -->

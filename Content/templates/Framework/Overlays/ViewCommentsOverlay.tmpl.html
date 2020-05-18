@@ -1,0 +1,71 @@
+﻿<div id="viewCommeentOverlay">
+    <div data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler" tabindex="-1">
+        <div class="hprm-modal-header modal-header">
+            <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_viewCommentsHeader"></div>
+        </div>
+        <div class='modal-body hprm-modal-body'>
+            <!-- ko if: $data.errorVisible() -->
+                <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+                    <span data-bind="text: $data.alertDetails"></span>
+                </div>
+            <!-- /ko -->
+            
+            <div style="display: table-row;margin:0 10px 0 10px;" class="pull-left">
+                <div>
+                    <div class="clsItemListPanel">
+                        <div class="itemlist-container" >
+                            <!-- ko if: $data.loading() -->
+                                <span style="padding:20px;" data-bind="text:HP.HPTRIM.Messages.web_loading + '...'"></span>
+                            <!-- /ko-->
+                            <!-- ko ifnot: $data.loading() -->
+                            <ul class="">
+                                <li tabindex="-1" class="" style="list-style:none" data-bind="attr:{class: '' }">
+                                    <div tabindex="-1" class="listItem" data-bind="">
+                                        <span class="clsTableRow" style="font-weight:bolder" data-bind="text:HP.HPTRIM.Messages.web_roles"></span>
+                                        <span class="clsTableCln" style="font-weight:bolder" data-bind="text:HP.HPTRIM.Messages.web_recordLocations"></span>
+                                    </div>   
+                                </li>
+                            </ul>
+                            <ul class="itemlist-ul clsViewCommentsReviewerCln" data-bind="foreach: { data: roleLocations, as: 'item' }">
+                                <li tabindex="-1" class="itemlist-li" data-bind="click:function(){$parent.loadComments(item);},attr:{id:uri,class:($parent.selectedLocationUri() == uri) ? 'itemlist-li activeItem' : 'itemlist-li' }">
+                                    <div tabindex="-1" class="listItem" data-bind="">
+                                            <span style="border:none" data-bind="attr: { 'class': (icon+'_x16 media-object item-picker-raw-icon'), 'title': 'Icon' }"></span>
+                                            <span  class="clsTableRow" data-bind="text: role"></span>
+                                            <span style="white-space:nowrap" class="clsTableCln" data-bind="text: location"></span>
+                                    </div>   
+                                </li>
+                            </ul>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                </div>
+            </div>            
+            <div  class="pull-left" style="margin:0 20px 0 20px;">
+                <!-- ko foreach:$data.fieldDecorators -->
+                <!-- ko template: {name: '/templates/Form/PageItem', data : $data} -->
+                <!-- /ko  -->
+                <!-- /ko -->
+                <!-- ko ifnot: $data.currentCommentsField.fieldDisabled() -->
+                    <div>
+                        <button id="useTimestampBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doUseTimeStamp, text: HP.HPTRIM.Messages.web_useStamp, enabled: buttonsEnabled"></button>
+                        <button id="useNote" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doUseNote, text: HP.HPTRIM.Messages.web_addNotes, enabled: buttonsEnabled"></button>
+                    </div>
+                <!-- /ko -->                
+            </div>                
+        </div>
+        <div class="hprm-modal-header modal-footer">
+            <div class="pull-right">
+                    <!-- ko if: $data.reviewersCanEdit() -->
+                    <button id="saveBtn" role="button" name="button"  data-bind="click: doTask, text: HP.HPTRIM.Messages.dp_cap_SaveConfig ,attr: { class: 'btn btn-flat btn-primary ' + $data.saveBtnClass() }, enabled: saveEnabled"></button>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $data.reviewersCanEdit() -->
+                        <button id="okBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_ok, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText}" ></button>
+                    <!-- /ko -->
+                    <button id="cancelBtn" role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, attr: {title: HP.HPTRIM.Messages.web_dp_cancelText} "></button>
+                    <button id="ViewBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: doView, text: HP.HPTRIM.Messages.vwr_tbar_view"></button>                
+            </div>
+        </div>
+
+    </div>
+
+    </div>

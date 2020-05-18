@@ -1,0 +1,26 @@
+﻿<style>
+
+	.menu__filter-textbox{
+		margin-left:5px 0px 5px 5px;
+		
+
+	}
+	.menu__icon{
+		vertical-align:middle;
+		height: 16px; 
+		width: 16px;
+		display:inline-block;
+		border:thin solid;
+		margin-left:5px;
+
+	}
+
+	.menu__menu-dropdown .menu-group {
+		margin-left:32px;
+	}
+</style>
+
+<div class="menu">	
+	<span style="display:inline-block" data-bind="as_panel: quickObjectMenu"></span>
+	<span class="menu__menu-dropdown" style="display:inline-block" data-bind="as_panel: menuPopup"></span>
+</div>

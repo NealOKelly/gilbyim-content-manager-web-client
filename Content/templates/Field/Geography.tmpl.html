@@ -1,0 +1,30 @@
+﻿<div style="margin-bottom: 10px;">
+    <!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+    <div data-bind="if: _.has($data, 'ChosenForEdit') ">
+        <input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.ocx_menuClear }, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+        <div style="overflow: hidden; padding-right: 0px; padding-bottom: 8px">
+            <div id="gpsCoordinates" class="input-group-btn" style="display: table; width: 100%; height: 33px">
+                <input type="text" style="max-width: calc(100% - 45px)" class="hprm-text-input" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur }, enable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: HP.HPTRIM.Messages.web_GPSLocation }, enterKey: onEnter ">
+                <button type="button" class="btn button-grey gps_button" style="margin-left: 2px" data-bind="disable: (isDisable() || fieldDisabled()), click:showMap, attr:{ title: HP.HPTRIM.Messages.web_modify }">
+                    <span class="hp-icon gps_x24 gps_icon"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="ifnot: _.has($data, 'ChosenForEdit') ">
+ 
+         <div id="gpsCoordinates" class="input-group-btn" style="display: table; max-width: 550px; width: 100%; height: 33px">
+            <input type="text" style="width: calc(100% - 45px)"  class="hprm-text-input" data-bind="value: Value, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur }, disable: (isDisable() || fieldDisabled()), attr:{ id: Id, title: HP.HPTRIM.Messages.web_GPSLocation }, enterKey: onEnter ">
+            <button type="button" class="btn button-grey gps_button" style="margin-left: 2px" data-bind="disable: ((isDisable() || fieldDisabled()) && fieldIsEmpty()), click:showMap, attr:{ title: HP.HPTRIM.Messages.web_modify }">
+                <span class="hp-icon gps_x24 gps_icon"></span>
+            </button>
+        </div>
+    
+    </div>
+    
+</div>
+
+
+    

@@ -1,0 +1,21 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:close">
+        <div class="hprm-modal-header modal-header">
+            <div class="h3 small" data-bind="text: headerText"></div>
+        </div>
+        <div class="">
+            <div class="modal-body hprm-modal-body" >
+                <div class="listPadding listPaddingRight">
+                    <!-- ko template:{ name: $data.data.templateName(), data: $data.data} -->
+                    <!-- /ko -->
+					
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer hprm-modal-footer alignItemsMiddle">
+            <div style="max-width: 575px;">
+                <button id="okBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: ok, text: HP.HPTRIM.Messages.web_dp_okText"></button>
+                <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: close, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,173 @@
+﻿
+<div data-bind="attr: { 'class': cssClass() + ' listPaddingRight ', 'id': 'mainObjectCommandPanel_' + typeName() }" style="padding-left: 10px;" >
+    <!-- Header -->
+    <div>
+        <div class="command-panel-header-title" data-bind="text: caption"></div>
+    </div>
+
+
+
+    <!-- Description text (if it exists)-->
+    <!-- ko if: descriptionText -->
+    <div>
+        <div class="h2 HPRM-action-panel-caption" data-bind="text: descriptionText"></div>
+    </div>
+    <!-- /ko -->
+
+    <div class="create-new-object">
+        <!-- ko if: showAddButton() -->
+        <!--<div data-bind="click: addButtonClick, enterKey: addButtonClick, attr: { 'class': 'addRecord', title: createTitle, id:'NAV_CREATERECORD' }" style="cursor: pointer;" tabindex="0" />-->
+        <div data-bind="click: addButtonClick, enterKey: addButtonClick, attr: { 'class': 'addRecord', title: createTitle, id:'NAV_CREATERECORD' }" style="cursor: pointer;" tabindex="0">
+            <div class="spn-plus-icon">+</div><div class="spn-title" data-bind="text:createHeader"></div>
+            </div>
+        <!-- /ko -->
+    </div>
+
+</div>
+
+<!--<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #e6e6e6;">-->
+<!-- ko if: trayPages().length == 1 -->
+<!-- Single 'page' of trays - dont show accordian -->
+<div style="margin: 10px 0 10px 0; cursor: pointer;">
+
+    <!-- ko foreach: trayPages()[0].pageItems -->
+    <div data-bind="click: $parent.doTraySearch, attr: { 'class': (caption ==  $parent.selectedTrayCaption()) ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: caption } " tabindex="0">
+        <div class="listPadding" data-bind="text: caption"></div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->
+<!-- ko if: trayPages().length > 1 -->
+<!-- More than 1 page of trays - *do* show accordian -->
+<!-- Nested foreach loop - use parents[1] to get to the owning scope -->
+<div class="mainObjectAccordion" data-bind="attr: {id:$data.id}">
+    <div class="panel-group" data-bind="attr:{id:'accordion_'+$data.id}">
+
+        <!-- ko foreach: trayPages -->
+        <!------------------------------------
+           TOP LEVEL
+        -------------------------------------->
+        <div class="panel panel-default" style="margin-top:0;" data-bind="attr: {id : $data.pageId +'_' + $parent.id + '_header'}">
+            <div class="panel-heading" style="padding-left: 0; padding-bottom: 0; margin-bottom: 10px;">
+                <a data-toggle="collapse" data-bind="attr: { href: '#' + $data.pageId +'_' + $parent.id, 'data-parent': '#accordion_' + $parent.id }" style="text-decoration: none !important; width: 0; height:0;">
+                    <div class="panel-title" data-bind="click:  function(){ $parent.doAccordionToggleWithId('#' + $data.pageId,$parent.id) }">
+                        <div class="h3 small overflowEllipsis" style="display: inline-block; color: #333; padding-left: 10px;" data-bind="text:$data.pageCaption"></div>
+                    </div>
+                </a>
+            </div>
+
+            <div data-bind="attr:{ id: $data.pageId +'_' + $parent.id , class: 'panel-collapse '  + ($data.pageId == $parent.openPageId() ? 'in' : 'collapse') }">
+                <div class="panel-body" style="border:none; padding: 0;">
+                    <!-- ko foreach: $data.pageItems -->
+                    <div data-bind="click: $parents[1].doTraySearch, attr: { 'class': (caption ==  $parents[1].selectedTrayCaption()) ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: caption } ">
+                        <div class="listPadding overflowEllipsis" data-bind="text: caption"></div>
+                    </div>
+                    <!-- /ko -->
+
+                </div>
+            </div>
+            <!--<hr style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid #868686;" />-->
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+</div>
+<!-- /ko -->
+<!-- ko if: hasActionsToShow() -->
+<!-- ko if: showActions() -->
+
+<hr class="listPadding listPaddingRight" style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid #dfdfdf;">
+
+<div class="command-panel-padding-left listPaddingRight">
+    <!-- ko if: bulkSelect -->
+    <div style="display: inline-block">
+        <div class="h1" style="margin: 0 ; margin-top: 20px;" data-bind="text: HP.HPTRIM.Messages.web_bulkItemsSelected"></div>
+        <span style="margin: 0 ; margin-top: 20px;" data-bind="text: bulkQuery"></span>
+        <div class="h1" style="margin: 0 ; margin-top: 20px;"><span data-bind="text: bulkCount"></span></div>
+        <span data-bind="text: HP.HPTRIM.Messages.web_items + ' ' + HP.HPTRIM.Messages.dp_cap_Selected"></span>
+
+    </div>
+    <!-- /ko -->
+    <!-- ko ifnot: bulkSelect -->
+    <div style="display: inline-block">
+        <div class="h1" style="margin: 0 ; margin-top: 20px;"><span data-bind="text: $parents[3].selections().length"></span></div>
+        <span data-bind="text: HP.HPTRIM.Messages.web_items + ' ' + HP.HPTRIM.Messages.dp_cap_Selected"></span>
+    </div>
+    <!-- /ko -->
+
+</div>
+
+<div class="command-panel-padding-left-half  listPaddingRight listPaddingBottom" style="display: inline-block; margin-top:10px;">
+   
+    <!-- ko if: hasFavorite -->
+    <button role="button" name="button" id="FavoriteRecordBtn" class="btn quaternary-button" data-bind="click: addToFavorites, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_addToFavorites }" style="padding: 0; margin: 5px !important;">
+        <img data-bind="attr: { 'src': HP.HPTRIM.Icons.favorite_x24, 'alt': HP.HPTRIM.Messages.web_addToFavorites }" />
+    </button>
+    <!-- /ko -->
+    <!-- ko if: showReportsButton -->
+    <button role="button" data-bind="event: { click: handleReportButtonClick },attr: { title: HP.HPTRIM.Messages.web_showReport }" class="btn btn-default quaternary-button" style="height: 32px; padding:0;border-color:#FFF; margin: 5px !important;">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADDSURBVEhLzZNBCsIwEEVrFbpw5Rm8mNdwIdjuxRO4EUS9pGP+4lcdJk1aJtLFI5NJ5j9SaCUiRTGbYHM5yvrajqZ+dGH8k/MT6kFSsHh2MkRza19Wn8EuL5gk2O1PkoJ3QTEBV1BMwBogfHkfIeBeowX6LkRYXQVkez402YIheNfCRRAjvKB2+UQxcD4fwRQwPx8B95rvQA3O/yZYhb8aK8kKSIF5CjR9YQ3mgvnighh9YQ3mwgyLvrAGc2GGhdn0Q6o3wdj7plgv8wkAAAAASUVORK5CYII=" />
+    </button>
+    <!-- /ko -->
+    <!-- Navigation tasks -->
+    <!-- Use parent to get out of foreach context -->
+    <!-- Update tasks -->
+    <!-- Use parent to get out of foreach context -->
+    <!-- ko foreach: updateTasks -->
+    <!-- ko ifnot: isGroup -->
+    <button role="button" name="button" id="id" class="btn quaternary-button " data-bind="click: $parent.doUpdateTask, clickBubble: false, attr: { title: caption, id: id }" style="padding: 0 0 0 7px; margin: 5px !important;">
+        <span style="height: 24px; width: 24px; " data-bind="attr: { class: $data.icon + ' media-object'}" />
+    </button>
+    <!-- /ko -->
+    <!-- ko if: isGroup -->
+    <div class="btn-group" data-bind="attr: {id: id } ">
+        <button role="button" name="button" style="width: auto !important; margin-top: 0;color:#000;font-size:13px;margin-bottom:8px;" class="btn btn-flat btn-primary dropdown-toggle" data-toggle="dropdown" data-bind="attr: { title: toolTip}">
+                <span style="float:left;" data-bind="text: caption"></span>
+                &nbsp;
+                <span class="drop-down-caret" style="margin-top:-5px"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu" style="margin-top:0; top:37px; left: 5px;">
+                <!-- ko foreach: subTasks  -->
+                <li data-bind="click: $parents[1].doUpdateTask, clickBubble: false">
+                    <a href="#" data-bind="attr: { title: caption }, text: caption"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+</div>
+    <!-- /ko -->
+    <!-- /ko -->
+    <br />
+     <!-- ko foreach: navigationTasks -->
+	<!-- ko ifnot: isGroup -->
+	<button role="button" name="button" id="id" class="btn quaternary-button " data-bind="click: $parent.doNavTask, clickBubble: false, attr: { title: caption, id: id }" style="padding: 0 0 0 7px; margin: 5px !important;">
+		<span style="height: 24px; width: 24px; " data-bind="attr: { class: $data.icon + ' media-object'}" />
+	</button>
+	<!-- /ko -->
+	<!-- ko if: isGroup -->
+	<div class="btn-group" data-bind="attr: {id: id } ">
+		<button role="button" name="button" style="width: auto !important; margin-top: 0;color:#000;font-size:13px;margin-bottom:8px;margin-left:4px;" class="btn btn-flat btn-primary dropdown-toggle" data-toggle="dropdown" data-bind="attr: { title: toolTip}">
+			<span style="float:left;" data-bind="text: caption"></span>
+			&nbsp;
+			<span class="drop-down-caret" style="margin-top:-5px"></span>
+		</button>
+		<ul class="dropdown-menu" role="menu" style="margin-top:0; top:37px; left: 5px;" >
+			<!-- ko foreach: subTasks  -->
+			<li data-bind="click: $parents[1].doNavTask, clickBubble: false">
+				<a href="#" data-bind="attr: { title: caption }, text: caption"></a>
+			</li>
+			<!-- /ko -->
+		</ul>
+	</div>
+	<!-- /ko -->
+	<!-- /ko -->
+</div>
+
+<div class="command-panel-padding-left " style="display: inline-block">
+    <button role="button" name="button" id="ClearSelectionButton" class="btn button-primary" data-bind="click: clearSelections, text: HP.HPTRIM.Messages.web_dp_cancelText, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_dp_cancelText }"></button>
+</div>
+
+<hr class="listPadding listPaddingRight" style="margin-top: 8px; margin-bottom: 8px; border-top: 1px solid #dfdfdf;">
+
+<!-- /ko -->
+<!-- /ko -->

@@ -1,0 +1,23 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="warning_24 media" style="width:24px; height:24px; display:inline-block "></div>
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_warning" style="display:inline-block; vertical-align:top; padding-top:5px; padding-left:10px"></div>
+    </div>
+
+    <div class="modal-body hprm-modal-body" id="warningsOverlay">
+        <div data-bind="html:warningDetails"/>
+    </div>
+
+    <div class="modal-footer">
+        <div style="max-width: 575px;">
+            <div class="pull-right">
+                <button id="okbtn" role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_ok"></button>
+                <!-- ko if: $data.hideCancelBtn() == false -->
+                <button id="cancelBtn" role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+                <!-- /ko-->
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,22 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_requestOnBehalfOf"></div>
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body">
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <!-- ko template: {name: $data.requestor.template, data : $data.requestor} -->
+            <!-- /ko  -->
+        </div>
+    </div>
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button role="button" name="button" data-bind='click: doRequest, text: HP.HPTRIM.Messages.web_sendRequestOnBehalfOfButtonCaption, title: HP.HPTRIM.Messages.web_sendRequestOnBehalfOfButtonCaption' class='btn btn-flat btn-primary'></button>
+            <button role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: settingsCaption"></div>
+    </div>
+
+
+    <!-- ko hprm_field: $data.m_alert() --> <!-- /ko -->
+    <div style="color:#565656" id="settingsPanel" class="hprm-modal-body savedSearchOvrLy">
+
+        <div role="tabpanel" class="tabbable tabs-below">
+            <!-- Tab UI -->
+            <ul class="nav nav-tabs" role="tablist">
+
+                <!-- ko ifnot: $root.name == "TrimMobileApp" -->
+                <li role="presentation" class="active">
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'dashboardConfigTab'}, text: dashboardConfigurationCaption"></a>
+                </li>
+
+                <li role="presentation">
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'localeTab'}, text: localeCaption"></a>
+                </li>
+
+                <li role="presentation">
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'viewerTab'}, text: documentViewerCaption"></a>
+                </li>
+
+                <!-- ko if: hasSystemOptionPrm() -->
+                <li role="presentation">
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'globalSetting'}, text: globalSettingsCaption"></a>
+                </li>
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: $root.name == "TrimMobileApp" -->
+                <li role="presentation" class="active">
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + 'localeTab'}, text: localeCaption"></a>
+                </li>
+                <!-- /ko -->
+
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+
+                <!-- ko ifnot: $root.name == "TrimMobileApp" -->
+                <div role="tabpanel" style="margin:20px" class="tab-pane fade in active" data-bind="attr: { id: 'dashboardConfigTab'}">
+                    <!-- ko as_panel: $data.dashboardConfigurationTabPanel --><!-- /ko  -->
+                </div>
+
+                <div role="tabpanel" style="margin-left:20px" class="tab-pane fade" data-bind="attr: { id: 'localeTab'}">
+                    <!-- ko as_panel: $data.localeTabPanel --><!-- /ko  -->
+                </div>
+
+                <div role="tabpanel" style="margin-left:20px" class="tab-pane fade" data-bind="attr: { id: 'viewerTab'}">
+                    <!-- ko as_panel: $data.viewerOptionsTabPanel--><!-- /ko  -->
+                </div>
+
+                <div role="tabpanel" style="margin-left:20px" class="tab-pane fade" data-bind="attr: { id: 'globalSetting'}">
+                    <div style="padding:10px">
+                        <!-- ko hprm_field: saveAsGlobalSetting --> <!-- /ko -->
+                    </div>
+
+                    <div style="border:thin solid ; border-color:lightgrey; border-radius:10px;padding:10px">
+                        <span style="display:inline-block">
+                            <i class="fa fa-info-circle " aria-hidden="true"></i>
+                        </span>
+                        <div style="display:block;width:90%;margin-left:20px;margin-top:-20px" data-bind="text:HP.HPTRIM.Messages.web_setGlobalSettingInfo"> </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <!-- /ko -->
+                <!-- ko if: $root.name == "TrimMobileApp" -->
+                <div role="tabpanel" style="margin-left:20px" class="tab-pane fade in active" data-bind="attr: { id: 'localeTab'}">
+                    <!-- ko as_panel: $data.localeTabPanel --><!-- /ko  -->
+                </div>
+                <!-- /ko -->
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="modal-footer">
+        <div style="max-width: 575px;">
+            <div class="pull-right">
+                <button id="getGlobalSetting" role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: getGlobalSettings, text: HP.HPTRIM.Messages.web_getGlobalSettings"></button>
+                <button id="okbtn" role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: onOk, text: HP.HPTRIM.Messages.web_ok"></button>
+                <button id="cancelBtn" role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+            </div>
+        </div>
+    </div>
+</div>

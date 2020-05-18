@@ -1,0 +1,132 @@
+﻿
+<link href="@Url.Content("~")Content/SiteMobile.css" rel="stylesheet" type="text/css">
+@{
+    ViewBag.Title = "Content Manager Mobile";
+    Layout = "~/Views/Shared/_Layout.Mobile.cshtml";
+}
+
+<script>
+    var HPRMWebConfig = {        
+        webClientClassicUrl: "@HP.HPTRIM.Services.Common.ServiceConfiguration.Instance.Setup.WebClientClassicUrl",
+        searchAhead: "@HP.HPTRIM.Services.Common.ServiceConfiguration.Instance.Setup.SearchAhead",
+        useADFS: ("@HP.HPTRIM.Services.Common.ServiceConfiguration.Instance.Setup.UseADFS".toLowerCase() == "true"),
+        virtualDirectory: '@Url.Content("~")'
+    }
+</script>
+@{
+    var objectsToLoad = new List<HP.HPTRIM.ServiceModel.BaseObjectTypes>() {
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.Record,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.Location,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.Workflow,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.SavedSearch,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.Activity,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.Request,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.EmailLink,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItem,
+                HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItemItemReference
+           
+		};
+
+    Html.RenderPartial("~/Views/Shared/_Initialisation.cshtml", objectsToLoad);
+}
+
+@Scripts.Render("~/bundles/HPRM")
+
+    </head>
+
+    <body class="as-spa">
+        <div id="HPRecordsManagerError" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header alignItemsMiddle" style="margin-top:20px;">
+						<img src="data:image/png;base64,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" />
+                    </div>
+
+                    <div class="modal-body alignItemsMiddle" style="margin-top:20px;">
+                        <span>
+                            <div id='errorBox' style="font-size:large; display:inline-block"></div>
+                            @{
+                            if (Request.Browser.Browser == "IE")
+                            {
+                                if (Request.Browser.MajorVersion < 9)
+                                {
+                                    Write("The minimum supported version for Content Manager is Internet Explorer 9, please upgrade to the latest version.");
+                                }
+                            }
+                        }
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="bodyContent" style="height:100%;">
+            <!-- ko template: {name: templateName(), data: $data, afterrender: afterLoad()} --><!-- /ko  -->
+            <!-- ko template: {name: $data.notificationWindow.templateName(), data: $data.notificationWindow} --><!-- /ko  -->
+        </div>
+        <script>
+
+            try {
+
+                HP.HPTRIM.TrimClient.handleAjaxError = function (err) {
+                    $("#errorBox").html(err.Message);
+                    $('#HPRecordsManagerError').modal('show');
+                }
+    } catch (e) {
+        //HP.HPTRIM.TrimClient.handleAjaxError probably hasn't been loaded by now.
+        $('#HPRecordsManagerError').modal('show')
+    }
+
+
+    $(document).bind("mobileinit", function () {
+        $.mobile.touchOverflowEnabled = true;
+    });
+
+    document.addEventListener('focusout', function (e) { window.scrollTo(0, 0) });
+
+    $(document).ready(function () {
+        infuser.defaults.templateSuffix = ".tmpl.html";
+        infuser.defaults.templateUrl = HPRMWebConfig.virtualDirectory + "Content";
+
+        var root = {};
+        var trimClient = new HP.HPTRIM.TrimClient();
+
+        // at this point check if we are on some kind of phone or not...
+        // TODO - add query to force us not to
+        var root = {};
+
+        var trimClient = new HP.HPTRIM.TrimClient();
+        trimClient.setDatabase(HPRM_currentDatabase);
+        trimClient.setCurrentUser(HPRM_currentUser);
+        trimClient.setCurrentUserMemberships(HPRM_currentUserMemberships);
+        trimClient.setStartupOptions(HPRM_startupOptions);
+        trimClient.setLocaleData(HPRM_localeOptions);
+        trimClient.setPropertyDefCache(HPRM_propertyDefs);
+        trimClient.setEnumCache(HPRM_enumDefs);
+        trimClient.setCheckoutCaptionData(HPRM_checkoutCaption);
+        trimClient.setObjectDefs(HPRM_objectDefs);
+        trimClient.setFormDefintions(HPRM_objectFormDefinitionDefs);
+        trimClient.addSearchClauseHelpToCache("Record", HPRM_recordSearchClauseDefs)
+
+        trimClient.setWebClientOptions(HPRM_webClientOptions);
+
+        root = new HP.HPTRIM.App.TRIMMobileApp(trimClient);
+        window.root = root;
+        ko.applyBindings(root);
+        HP.HPTRIM.Utils.UrlHelper.processUrlQuery(trimClient);
+        //Do Menu binding
+        setTimeout(function () {
+            $('#side-menu').metisMenu();
+        }, 1500);
+
+    });
+
+    // Android 4.1 browser fix for Bootstrap 3.0
+    //http://getbootstrap.com/getting-started/#support-android-stock-browser
+    var nua = navigator.userAgent
+    var isAndroid = (nua.indexOf('Mozilla/5.0') > -1 && nua.indexOf('Android ') > -1 && nua.indexOf('AppleWebKit') > -1 && nua.indexOf('Chrome') === -1)
+    if (isAndroid) {
+        $('select.form-control').removeClass('form-control').css('width', '100%')
+    }
+
+    </script>
+</body>

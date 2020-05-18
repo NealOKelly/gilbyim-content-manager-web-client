@@ -1,0 +1,21 @@
+# DW Dreamweaver added files
+_notes
+_compareTemp
+configs/
+dwsync.xml
+dw_php_codehinting.config
+*.mno
+/ADFS/
+/APIErrorPages/
+/bin/
+/Scripts/
+/HTML5TrapezeViewer/
+/images/
+/config/
+/onstream/
+/ServiceStack_Logging_Log4Net_For_Copy/
+/Content/data/
+/Content/FontAwesome/
+/Content/fonts/
+/Content/help/
+/Content/img/

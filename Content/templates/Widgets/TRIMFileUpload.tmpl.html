@@ -1,0 +1,70 @@
+﻿<div data-bind="attr: { id: $data.id }">
+	<form role="form" style="cursor:pointer" class="marginless" data-bind="attr: { action: $data.options.url, method: 'POST', enctype: 'multipart/form-data', target: 'iframe-transport-' + $data.id }">		
+		<!-- ko ifnot: isDragAndDropSupported -->
+		<div class="fileinput-button">
+			<button role="button" name="button" class="btn button-primary" data-bind="click: function () {  }" title="Select a file from your device">
+				<i class="icon-plus alignItemsMiddle">
+				</i>
+				<span style="color: #606060 !important" data-bind="text: HP.HPTRIM.Messages.web_attachElectronicDocument.toUpperCase()"></span>
+			</button>
+			<label data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_attachElectronic, 'for':$data.id+'_fileUploader'}">&nbsp;</label>
+			<input type="file" name="files[]" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_attachElectronic, id:$data.id+'_fileUploader'}">
+		</div>
+		<!-- /ko -->
+		<!-- ko if: isDragAndDropSupported -->
+
+		<!-- ko if: showDropZone() == true --> 
+
+		<div class="HPRM-deluxe-list-header" data-bind="text: HP.HPTRIM.Messages.web_attachElectronicDocument"></div>
+		<div class="dropzone" id="dropZone" data-bind="visible: $data.files().length == 0">
+			<div style="text-align:center; font-size: 14px !important; color: #606060; margin: 20px, 0, 5px, 0;">
+				<i class="hp-icon hp-cloud hp-2x" style="color:#606060"> </i>
+				<br />
+				<span style="color: #606060" data-bind="text: HP.HPTRIM.Messages.web_dragAndDropToUpload"></span>
+			</div>
+			<div style="padding-left: 5px;" id="FileInputComponent" class="hidden">
+				<label  data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_attachElectronic, 'for':$data.id+'_fileUploader'}">&nbsp;</label>
+				<input  type="file" name="files[]" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_attachElectronic, id:$data.id+'_fileUploader'}">
+			</div>
+		</div>
+		<!-- /ko -->
+		<div class="unstyled well well-small marginless" style="width: 360px; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0; border: none;" data-bind="foreach: $data.files, visible: $data.files().length > 0">
+			<div style="color: black">
+				<div style="display:inline-block; float: left;">
+					<i class="hp-icon hp-attachment" style="padding-right: 10px;"></i>
+				</div>
+				<div style="display:inline-block; width: 50%;">
+					<div class="overflowEllipsis" data-bind="text: $data.name"></div>
+				</div>
+				<div style="display:inline-block; float: right">
+					<button class="btn btn-stroke button-primary" title="Remove attached file" style="cursor: pointer;" data-bind="text: HP.HPTRIM.Messages.web_remove,click: function (data, event) { $parent.files([]); $parent.uploadedFiles([]); $parent.clearForm(); $( '#saveBtn' ).removeClass( 'disabled' ); }"></button>
+				</div>
+			</div>
+			<small data-bind="text: HP.HPTRIM.App.Widgets.TrimFileUploadComponent.formatFileSize($data.size)"></small>
+			<div class="progress" id="progressBar" style="margin-top: 10px;">
+				<div id="uploadprogress" class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 1%;">
+				</div>
+			</div>
+			
+			<div class="alert-info" data-bind="text:$parent.statusMessage"> </div>
+
+			<div class="alignItemsMiddle" style="margin-top: 25px;" id="cancelContainer">
+				<button class="btn btn-stroke button-primary btn-sm" id="cancelUpload" data-bind="text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+			</div>
+			<div class="alignItemsMiddle" id="imagePreview"></div>
+		</div>
+		<div id="errors" style="margin-top: 10px;">
+			<div class="hidden" id="notSupported">
+				<div class="alert alert-warning" role="alert">Your browser does not support Drag and Drop for File Input. Please manually select the file again to attach it.</div>
+			</div>
+			<div class="hidden" id="fileUploadError">
+				<div style="margin-top: 10px;" class="alert alert-warning" role="alert" id="FileUploadErrorMessage" data-bind="visible: $data.error, text: $data.error"></div>
+				<div style="margin-top: 10px;" class="alert alert-warning" role="alert" id="networkError"></div>
+				<div style="margin-top: 10px;" class="alert alert-warning" role="alert" id="uploadCancelled"></div>
+			</div>
+		</div>
+		<!-- /ko -->
+
+		<input type="submit" name="submit" title="submit" value="none" style="display:none" />
+	</form>
+</div>

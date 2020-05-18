@@ -1,0 +1,65 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancel">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_parameterisedSavedSearch"></div>
+    </div>
+    <div class='hprm-modal-body savedSearchOvrLy'>
+        <div class="tabbable tabs-below">
+            <!-- Tab UI -->
+            <ul class="nav nav-tabs" id="parameterisedSearch" data-bind="foreach: $data.searchStack" style="margin-bottom: 0;">
+                <!-- ko if: _.has( $data, "ParameterCaption" ) || $data.isSummary === true -->
+                <li>
+                    <a style="margin:0;" data-toggle="tab" data-bind="attr: { href: '#' + tabIndex }, text: ShortParameterCaption, click: function () { $parent.setPageIndex(tabIndex) }"></a>
+                </li>
+                <!-- /ko -->
+            </ul>
+
+            <!-- Tab Content -->
+            <div class="tab-content" data-bind="foreach: $data.searchStack">
+                <!-- ko if: _.has( $data, "ParameterCaption" ) || $data.isSummary === true   -->
+                <!-- ko ifnot: $data.field -->
+                <div class="tab-pane" data-bind="attr: { id: tabIndex }">
+                    <!-- ko template:{name: template(), data:$data, afterRender:$parent.afterRender} -->
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- ko if: $data.field -->
+                <div class="tab-pane" data-bind="attr: { id: tabIndex }">
+                    <!-- ko if: $data.field.isHidden -->
+                    <span data-bind="text: $data.ClauseDefinition.ToolTip"></span><br /><br />
+                    <span data-bind="text: HP.HPTRIM.Messages.web_unsupportedSearchType"></span>
+                    <!-- /ko -->
+                    <!-- ko ifnot: $data.field.isHidden -->
+                    <!-- ko template:{name: template(), data:$data, afterRender:$parent.afterRender} -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer hprm-modal-footer hidden-sm hidden-xs">
+        <div style="max-width: 575px;">
+            <div class="pull-left">
+                <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: startOver, visible: wizardNavigator.startOverButtonVisible, text: HP.HPTRIM.Messages.web_parameterisedStartOver"></button>
+            </div>
+
+            <div class="pull-right">
+                <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: back, visible: wizardNavigator.backButtonVisible, text: HP.HPTRIM.Messages.vb_nts_Back"></button>
+                <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: next, visible: wizardNavigator.nextButtonVisible, text: HP.HPTRIM.Messages.vb_nts_Next"></button>
+                <button role="button" name="button" type="button" class="btn btn-flat btn-primary" data-bind="click: search, visible: wizardNavigator.searchButtonVisible, text: HP.HPTRIM.Messages.web_search"></button>
+                <button role="button" name="button" type="button" class="btn btn-flat btn-secondary" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer hprm-modal-footer visible-phone hidden-md hidden-lg">
+        <div>
+            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" style="margin-left:0;" data-bind="click: startOver, visible: wizardNavigator.startOverButtonVisible, text: HP.HPTRIM.Messages.web_parameterisedStartOver"></button>
+            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" style="margin-left:0;" data-bind="click: back, visible: wizardNavigator.backButtonVisible, text: HP.HPTRIM.Messages.vb_nts_Back"></button>
+            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" style="margin-left:0;" data-bind="click: next, visible: wizardNavigator.nextButtonVisible, text: HP.HPTRIM.Messages.vb_nts_Next"></button>
+            <button role="button" name="button" type="button" class="btn btn-flat btn-primary" style="margin-left:0;" data-bind="click: search, visible: wizardNavigator.searchButtonVisible, text: HP.HPTRIM.Messages.web_search"></button>
+            <button role="button" name="button" type="button" class="btn btn-flat btn-secondary" style="margin-left:0;" data-bind="click: cancel, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+        </div>
+    </div>
+</div>

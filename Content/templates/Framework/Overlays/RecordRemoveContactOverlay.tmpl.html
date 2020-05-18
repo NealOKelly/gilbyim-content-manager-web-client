@@ -1,0 +1,75 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: pageCaption"></div>
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body" style="margin-bottom:2px">
+
+        <!-- ko if: $data.itemList._options.loader._baseObjectType.Id == "UserLabel" -->
+        <!-- ko if: $data.itemList.items().length > 0  -->
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <div class="customCheck boldFont" style="vertical-align: top; display:inline-block;">
+                <div style="display: inline-block; width:45px; vertical-align: inherit;" data-bind="text: ''"></div>
+                <div class="h6" style="display: inline-block; width:250px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_name"></div>
+                <div style="display: inline-block; width:10px; vertical-align: inherit;" data-bind="text: ''"></div>
+                <div class="h6" style="display: inline-block; width:100px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.dsg_certOwner"></div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $data.itemList._options.loader._childObjectListName == "ChildLocations" -->
+        <!-- ko if: $data.itemList.items().length > 0  -->
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <div style="vertical-align: top; display:inline-block;margin-left: -33px;">
+                <div style="display: inline-block; width:45px; vertical-align: inherit;" data-bind="text: ''"></div>
+                <div class="h4" style="display: inline-block; width:160px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_contactType"></div>
+                <div class="h4" style="display: inline-block; width:200px; vertical-align: inherit;margin-left: 19px" data-bind="text: HP.HPTRIM.Messages.web_contactName"></div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <!-- ko if: $data.itemList._options.loader._childObjectListName == "ChildRelationships" -->
+        <!-- ko if: $data.itemList.items().length > 0  -->
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <!-- ko if: $data.showControls() -->
+            <div class="customCheck boldFont" style="vertical-align: top; display: inline-block;margin-left: -33px;">
+                <div style="display: inline-block; width:45px; vertical-align: inherit;" data-bind="text: ''"></div>
+                <div class="h4" style="display: inline-block; width:120px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_relationship"></div>
+                <div class="h4" style="display: inline-block; width:120px; vertical-align: inherit;margin-left: 19px" data-bind="text: HP.HPTRIM.Messages.web_recordNumberCaption"></div>
+                <div class="h4" style="display: inline-block; vertical-align: inherit;margin-left: 10px" data-bind="text: HP.HPTRIM.Messages.web_record + ' ' + HP.HPTRIM.Messages.dsg_certTitle"></div>
+            </div>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.showControls() -->
+            <div class="h6" style="display: inline-block; width:120px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_relationship"></div>
+            <div class="h6" style="display: inline-block; width:120px; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_recordNumberCaption"></div>
+            <div class="h6" style="display: inline-block; vertical-align: inherit;" data-bind="text: HP.HPTRIM.Messages.web_record + ' ' + HP.HPTRIM.Messages.dsg_certTitle"></div>
+            <!-- /ko -->
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+            <div>
+                <!-- ko as_panel: $data.itemList --><!-- /ko  -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <!-- ko if: $data.showControls() -->
+                <!-- ko if: $data.itemList.items().length > 0 -->
+                    <button id="removeBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: save, text: HP.HPTRIM.Messages.web_remove"></button>
+                <!-- /ko -->
+                <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, enabled: buttonsEnabled"></button>
+            <!-- /ko -->
+            <!-- ko ifnot: $data.showControls() -->
+                <button id="okBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_ok, enabled: buttonsEnabled"></button>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>

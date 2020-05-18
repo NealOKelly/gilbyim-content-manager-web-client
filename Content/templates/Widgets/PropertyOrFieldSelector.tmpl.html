@@ -1,0 +1,67 @@
+﻿
+
+<input type="text"  class="inputItemIcon propertyOrFieldDefFilter" data-bind="value: filterValue, valueUpdate:'afterkeydown', attr:{placeholder: placeHolderText } " />
+
+
+<div style="position:static;">
+    <label tabindex="0" data-bind="text: HP.HPTRIM.Messages.web_availableProps" class="available-property-header"></label>  &nbsp;&nbsp;
+	<a tabindex="0" href="#" data-bind="event:{ click: sortAsc} , css:{ 'link-clicked': sortState() == 0} ">A-Z</a>
+	<a tabindex="0" style="margin-left:5px" href="#" data-bind="event:{ click: sortDesc} ,css:{ 'link-clicked': sortState() == 1}">Z-A</a><br />
+</div>
+
+
+	
+	<div id="availableProperties" class="properties-list" style="background-color:#efefef">
+
+		<div data-bind="visible: loading() "> 
+			<span></span>Loading... 		
+		</div>
+
+		<table data-bind="visible:!loading()" style="width:99%;">
+			<tbody data-bind="foreach: properties">
+				<!-- ko if: IsVisible -->
+				<tr data-bind="ifnot:IsAdded , css: { active : IsSelected() == true}, event:{ click: function() { $parent.toggleSelected($data, $parent)}} ">
+					
+					<td tabindex="0">
+						<label data-bind="text: Caption"></label>
+					</td>
+				</tr>
+				<!-- /ko -->
+			</tbody>
+		</table>
+	</div>
+
+<span id="propertySelectorButtons">
+	<button class="btn btn-secondary" style="display:block; min-width:10px; font-size:11px" data-bind="event:{click: addSelectedPofds  }, text: HP.HPTRIM.Messages.web_Add ">  </button>
+	<button class="btn btn-secondary" style="display:block; top:40px; min-width:10px; font-size:11px; margin-left: 0px" data-bind="attr: { disabled: (isDisabled() == true) },event:{click: removeSelectedPofds }, text: HP.HPTRIM.Messages.web_remove"> </button>
+    <button class="btn btn-flat spn-up-down" data-bind="attr: { disabled: (isUpDisabled() == true) },event:{ click: function() { moveSelectedProperty('up')}}"><p class="up_x16" style="height: 16px;width: 16px;margin:2px 0px 8px -2px;"></p></button>
+    <button class="btn btn-flat spn-up-down" data-bind="attr: { disabled: (isDownDisabled() == true) },event:{ click: function() { moveSelectedProperty('down')}}"><p class="down_x16" style="height: 16px;width: 16px;margin:2px 0px 8px -2px;"></p></button>     
+</span>
+
+
+
+    <div tabindex="0" data-bind="text: HP.HPTRIM.Messages.web_selectedProps" class="added-property-header">  </div>
+	<div id="added-properties" class="properties-list" style="background-color:#efefef">
+			
+		<div data-bind="visible: loading() ">
+			<span></span>Loading...			
+		</div>
+			
+		<table id="tableSelectedPropertice" data-bind="visible:!loading()" style="width:99%;">
+			<tbody data-bind="foreach: addedProperties">
+				
+				<tr tabindex="0" data-bind="css: { active : IsSelected() ==  true}, event:{ click: function() { $parent.toggleSelected($data, $parent)}}, attr: { 'data-pid': Id } ">
+					<td>
+						<span class="drag icon_x16" />
+					</td>
+
+					<td>
+						<label data-bind="text: Caption"></label>						
+					</td>
+					
+				</tr>
+
+			</tbody>
+		</table>
+
+	</div>

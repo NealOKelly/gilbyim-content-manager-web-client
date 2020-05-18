@@ -1,0 +1,19 @@
+﻿<div>
+	<!-- ko if: items().length == 0 -->
+	<span class="listPadding" data-bind="text: HP.HPTRIM.Messages.web_noReportTemplatesAvailable"></span>
+	<!-- /ko  -->
+	<!-- ko ifnot: items().length == 0 -->
+	<ul data-bind="foreach: items" class="report-container">
+		<!-- ko if: $parents[1].getSelectedReportName() == $data.Fields.ReportName -->
+		<li class="selected" data-bind="event: { click: $parents[1].selectReport }">
+			<span class="report-selected" data-bind="text: $data.Fields.ReportName" style="font-weight: 600;"></span>
+		</li>
+		<!-- /ko -->
+		<!-- ko ifnot: $parents[1].getSelectedReportName() == $data.Fields.ReportName -->
+		<li data-bind="event: { click: $parents[1].selectReport }">
+			<span data-bind="text: $data.Fields.ReportName"></span>
+		</li>
+		<!-- /ko -->
+	</ul>
+	<!-- /ko  -->
+</div>

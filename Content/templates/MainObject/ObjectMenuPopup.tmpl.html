@@ -1,0 +1,71 @@
+﻿
+<style>
+
+	.menu__filter-textbox{
+		margin-left:5px 0px 5px 5px;
+		
+
+	}
+	.menu__icon{
+		vertical-align:middle;
+		height: 16px; 
+		width: 16px;
+		display:inline-block;
+		border:thin solid;
+		margin-left:5px;
+
+	}
+</style>
+
+<div class="menu">
+
+	<div class="btn-group" title="New">
+		<button type="button" style="width: auto !important; margin-top: 0;" class="btn btn-default quaternary-button dropdown-toggle" data-bind="event:{ click: initMenu }" data-toggle="dropdown">
+			<span>More Command</span>
+			&nbsp;
+			<span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu dropdown" role="menu">
+
+			<li class="">
+				<form onsubmit="javascript:onclick=';'">
+					<div data-bind="hprm_field: txtMenuSearch"></div>
+
+					<span class="settings_b_24"  style="cursor:pointer;top: 1px; right: 3px; position: absolute;vertical-align:middle; height: 24px; width: 24px;margin-left:5px; display: inline-block;" data-bind="attr:{ title: HP.HPTRIM.Messages.web_setting, 'aria-label': HP.HPTRIM.Messages.web_setting},event:{click:customizeActions}" ></span>
+
+					
+				</form>
+
+			</li>
+			
+			<!-- ko if: menuView() == 0 -->
+				<ul id="menu-popup" data-bind="foreach: menu.items">
+					<!-- ko template: {name : $data.templateName, data: $data }--> <!-- /ko -->
+				</ul>
+				<!-- /ko -->
+
+				<!-- ko if: menuView() == 1 --> 
+			
+			
+
+				<ul id="menu-popup-flat"  data-bind="foreach: _.values(FlattenMenu.Record)">
+					
+					<!-- ko if:visible -->
+
+					<!-- ko template: {name : $data.templateName, data: $data }--> <!-- /ko -->
+					
+					<form>
+						<span style="margin-left:35px;cursor:none;float:right;font-style: italic;" data-bind="text:$data.StatusBarMessage"></span>
+					</form>
+					
+					<!-- /ko -->
+				</ul>
+				
+
+
+			<!-- /ko -->
+
+</ul>
+	</div>
+
+</div>

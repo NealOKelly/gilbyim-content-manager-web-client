@@ -1,0 +1,67 @@
+﻿<div style="width:100%; height:32px; background-color: #262626">
+	<div style="width:auto; height: auto; background-color: transparent; margin-right: 10px;" class="pull-right">
+
+		<div class="visible-lg visible-md hidden-sm hidden-xs">
+			<div class="btn-group">
+				<div class="btn-group">
+					<button role="button" name="button" class="btn btn-stroke nav-sub-button" style="border-radius: 0;" data-bind="click: function () { showSettingsFunction() }">
+						<img class="navIcon" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_setting}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABuSURBVDhPY0AGLNOv/WcGYoZpQEw2AGkGYrBBZAOoIawziDEEm3OhBmCVQwecM69jKiTFAJBf4QGHDRMD8BlAdGCCAwyLASBMVoygu4osQzhgAUyJIcPMJeiGgDIfVIp4gG4IVJg0ALYZrJmBAQAWJ70hoHHmjQAAAABJRU5ErkJggg==">
+						&nbsp;
+						<span data-bind="text: HP.HPTRIM.Messages.web_setting.toUpperCase(), attr:{ title: HP.HPTRIM.Messages.web_setting}"></span>
+					</button>
+					<button type="button" class="btn btn-stroke dropdown-toggle nav-sub-button" style="border-radius: 0;" data-toggle="dropdown">
+						<img class="navIcon" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_setting}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEYSURBVDhPY2BAAlxNOxh4pl6GYSYgWw2KGZHEGRiFpJC1QdjMqibImq2BGu4A8X8ovgmkTWCGsHll4jVAGKjwHZJmmCGvgWL8IEMIGZCMRTPMkChiDMjEY0ASbgP0HGFhoAhU9AuLId+BYtJgA4LLUMMAFKrc3UeRAzECqPArkiGfgOwQ5JgABToccObPQ9bsBlQYBMTiQBwMxSA2yFAHmCEgCxk4eTGiTweo4AvUZlCobwfiHUD8Fir2AUiroEQnR9pEmO0sQImLeAIQFhOngGpAiYwBlPCQ/Z5OhGaYIbEwVyD7/QIJBhxDN4ALKPCPBAN+A9WyggyBuYCbBM0gb/wBYnZkA0AGrSXBkGVwL6BlYeQwIYoNAIQ0qSyUXLCTAAAAAElFTkSuQmCC">
+						&nbsp;
+						<span style="display: inline-block" data-bind="text:HP.HPTRIM.Messages.web_profile.toUpperCase(), attr:{title:HP.HPTRIM.Messages.web_profile}"></span>
+						<span style="display: inline-block" class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" style="width:300px;height:100px; margin: 0; right: 0px !important; left: initial; border-radius:0; border:none;">
+						<li>
+							<div class="listPadding" style="width: 32px; height: 32px; display:inline-block;">
+								<img class="navIcon" style="margin-top:20px;vertical-align: super" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_setting}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHPSURBVFhHxZahTsNQFIYnEBMTCMTEBAkCgURO8ACIPQACgUAgEQjEBA+AQC7IBTXFlm7Zq/AWKAJb+Q9pSe/Z164dDRVf1vPvnP+/u2lv14rjuFFQ3MZoNGqLvrhMsOs96t0GinkopD0ej58Xi0VM6Pv7qgtBkZBxl0IJ9XbIg0CRoKAi/HweKHr0iwYUUoRmzsjLg6KHAkqwIi8Pih4wL4X3IVD0kHkZvA+Bomc+n68poAjdA6/k5UHRI7M7CilCM9fk5UHRI7P9KrtgvZppk5cHRUKG/TKLSMJPyYNAMQ8zLlpEEn5Cs3mg6JFpV/yc8fYpBuJJLBPs+jzTby+rg7QuAsUsMupFUbSazWYfur4Ruee8hYpb6xefuu5SXxYUUyxMRl9+q6VHYijS1/GDWPq+6XT6Lr3w7YhiioZfvGlV5PFI3ikoGhq8IMNdkNfv/eFBUQP23KPZLtg9IU88FzYEw7aNjP6CPIeUtSGosfQ/nyrYjtIuBIWhpsrnflnkfeXzgsKw55eG62Aymbz5vKCwLaLBOsnmGUGhBRzSUJ0oIziim1hAL5vpF9ChoTrJ5hlBYdBQjax9XlAY2oVjGKwFeR/5vKBoAhT/j7j1DUFgAwev4nkiAAAAAElFTkSuQmCC">
+							</div>
+							<div class="listPadding" style="position:absolute; top:10px; display:inline-block">
+								<div class="profile-user-details" style="color:black; height: 100%; text-transform:capitalize" data-bind="text:profileUsername"></div>
+								<div class="profile-user-details" style="color:black; height: 100%;"><b>User Type: </b><span data-bind="text:profileUserType"></span></div>
+								<div class="profile-user-details" style="color:black; height: 100%;"><b>Dataset Id: </b><span data-bind="text:profileDatasetId"></span></div>
+							</div>
+							<!-- ko ifnot: ($root.trimClient.database.workgroupServerName()) -->
+							<div style="width: auto; height: 100%; display:inline-block;" class="HPRM-username" data-bind="text: HP.HPTRIM.Messages.web_loadingMask"><i class="icon-spin icon-spinner color-blue"></i></div>
+							<!-- /ko -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="hidden-lg hidden-md visible-sm visible-xs">
+			<div class="btn-group">
+				<div class="btn-group">
+					<button role="button" name="button" class="btn btn-stroke nav-sub-button" style="border-radius: 0;" data-bind="click: function () { showSettingsFunction() }">
+						<img class="navIcon" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_setting, title: HP.HPTRIM.Messages.web_setting}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABuSURBVDhPY0AGLNOv/WcGYoZpQEw2AGkGYrBBZAOoIawziDEEm3OhBmCVQwecM69jKiTFAJBf4QGHDRMD8BlAdGCCAwyLASBMVoygu4osQzhgAUyJIcPMJeiGgDIfVIp4gG4IVJg0ALYZrJmBAQAWJ70hoHHmjQAAAABJRU5ErkJggg==">
+					</button>
+					<button type="button" class="btn btn-stroke dropdown-toggle nav-sub-button" style="border-radius: 0;" data-toggle="dropdown">
+						<img class="navIcon" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_profile, title: HP.HPTRIM.Messages.web_profile}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEYSURBVDhPY2BAAlxNOxh4pl6GYSYgWw2KGZHEGRiFpJC1QdjMqibImq2BGu4A8X8ovgmkTWCGsHll4jVAGKjwHZJmmCGvgWL8IEMIGZCMRTPMkChiDMjEY0ASbgP0HGFhoAhU9AuLId+BYtJgA4LLUMMAFKrc3UeRAzECqPArkiGfgOwQ5JgABToccObPQ9bsBlQYBMTiQBwMxSA2yFAHmCEgCxk4eTGiTweo4AvUZlCobwfiHUD8Fir2AUiroEQnR9pEmO0sQImLeAIQFhOngGpAiYwBlPCQ/Z5OhGaYIbEwVyD7/QIJBhxDN4ALKPCPBAN+A9WyggyBuYCbBM0gb/wBYnZkA0AGrSXBkGVwL6BlYeQwIYoNAIQ0qSyUXLCTAAAAAElFTkSuQmCC">
+						<span style="display: inline-block" class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" role="menu" style="width:300px; height:100px; margin: 0; right: 0px !important; left: initial; border-radius:0; border:none;">
+						<li style="height:100%">
+							<div class="listPadding" style="width: 32px; height: 32px; display:inline-block;">
+								<img class="navIcon" style="margin-top:20px;vertical-align: super" data-bind="attr:{'alt': HP.HPTRIM.Messages.web_setting}" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHPSURBVFhHxZahTsNQFIYnEBMTCMTEBAkCgURO8ACIPQACgUAgEQjEBA+AQC7IBTXFlm7Zq/AWKAJb+Q9pSe/Z164dDRVf1vPvnP+/u2lv14rjuFFQ3MZoNGqLvrhMsOs96t0GinkopD0ej58Xi0VM6Pv7qgtBkZBxl0IJ9XbIg0CRoKAi/HweKHr0iwYUUoRmzsjLg6KHAkqwIi8Pih4wL4X3IVD0kHkZvA+Bomc+n68poAjdA6/k5UHRI7M7CilCM9fk5UHRI7P9KrtgvZppk5cHRUKG/TKLSMJPyYNAMQ8zLlpEEn5Cs3mg6JFpV/yc8fYpBuJJLBPs+jzTby+rg7QuAsUsMupFUbSazWYfur4Ruee8hYpb6xefuu5SXxYUUyxMRl9+q6VHYijS1/GDWPq+6XT6Lr3w7YhiioZfvGlV5PFI3ikoGhq8IMNdkNfv/eFBUQP23KPZLtg9IU88FzYEw7aNjP6CPIeUtSGosfQ/nyrYjtIuBIWhpsrnflnkfeXzgsKw55eG62Aymbz5vKCwLaLBOsnmGUGhBRzSUJ0oIziim1hAL5vpF9ChoTrJ5hlBYdBQjax9XlAY2oVjGKwFeR/5vKBoAhT/j7j1DUFgAwev4nkiAAAAAElFTkSuQmCC">
+							</div>
+							<div class="listPadding" style="position:absolute; top:10px; display:inline-block">
+								<div class="profile-user-details" style="color:black; height: 100%; text-transform:capitalize" data-bind="text:profileUsername"></div>
+								<div class="profile-user-details" style="color:black; height: 100%;"><b>User Type: </b><span data-bind="text:profileUserType"></span></div>								
+								<div class="profile-user-details" style="color:black; height: 100%;"><b>Dataset Id: </b><span data-bind="text:profileDatasetId"></span></div>
+							</div>
+							<!-- ko ifnot: ($root.trimClient.database.workgroupServerName()) -->
+							<div style="width: auto; height: 100%; display:inline-block;" class="HPRM-username" data-bind="text: HP.HPTRIM.Messages.web_loadingMask"><i class="icon-spin icon-spinner color-blue"></i></div>
+							<!-- /ko -->
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,48 @@
+<div class="panel-group" data-bind="attr: {'id': 'PageAccordion' + $data.id }">
+	<div role="group" class="panel panel-default">   
+		<!-- ko ifnot: $data.HideChevron -->     
+		<a data-toggle="collapse" style="text-decoration: none;" data-bind="attr: { href: '#' + $data.id, 'data-parent': 'PageAccordion' + $data.id}">
+            <!-- ko if: $data.Caption -->
+            <div class="panel-heading" style="height:50px;" data-bind="click: onClick">
+				<div class="panel-title">
+		
+					<div style="display: inline; vertical-align: middle">
+						<div style="width: 16px; height: 16px; display: inline-block; cursor: pointer;" class="hp-icon hp-chevron-left pull-right" data-bind="attr: {'id' : $data.id + '_caret'}"></div>
+					</div>
+					
+					<div style="display: inline">
+						<div class="h3 small HPRM-page-heading" data-bind="text: $data.Caption"></div>
+					</div>
+				</div>
+			</div>
+            <!-- /ko -->
+		</a>
+		<!-- /ko -->
+
+		<!-- ko if: $data.HideChevron -->
+        <!-- ko if: $data.Caption -->
+		<!-- ko if: $data.Caption.length > 0 -->
+		<div class="h3 small HPRM-page-heading" style="padding: 10px 15px 0px 15px; pointer-events: none;" data-bind="text: $data.Caption"></div>
+		<!-- /ko -->
+        <!-- /ko -->
+        <!-- /ko -->
+
+		<div data-bind="attr: { id: $data.id }" class="panel-collapse collapse">
+			<div class="panel-body" style="padding: 5px 15px 5px 15px;">
+				<!-- ko foreach:$data.PageItems -->
+				<!-- ko template: {name: '/templates/Form/PageItem', data : $data} -->
+				<!-- /ko  -->
+				<!-- /ko -->
+
+
+				<div data-bind="if: $data.templateName">
+
+					<!-- ko template: {name: $data.templateName, data : $data} -->
+					<!-- /ko  -->
+				</div>
+
+			</div>
+		</div>		
+	</div>
+</div>
+<!-- End Accordion -->

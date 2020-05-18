@@ -1,0 +1,10 @@
+﻿<!-- ko as_panel: $data.activePanel -->
+<!-- /ko-->
+
+<!-- ko if: ($data.panels() && $data.panels().length > 0)-->
+    <!-- ko foreach: $data.panels() -->
+        <!-- ko if: $data.visible() -->
+        <!-- ko as_panel: $data --><!-- /ko -->
+        <!-- /ko -->
+    <!-- /ko -->
+<!-- /ko -->

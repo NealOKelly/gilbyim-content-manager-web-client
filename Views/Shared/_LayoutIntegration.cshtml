@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html lang="en" class="as-spa">
+<head>
+	<meta http-equiv="x-ua-compatible" content="IE=10">    
+    <link rel="shortcut icon" href="@Url.Content("~/favicon.ico")" />
+    <meta charset="utf-8" />
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1, maximum-scale=1" />
+
+    <title>@ViewBag.Title</title>
+    <script>
+
+        var console = console || { "log": function () { } };
+        HPRM = {};
+        function ApplyLocalisationMessages(result) {
+            HPRM.Messages = result.Messages;
+        }
+    </script>
+
+
+    <!--script src='~/HPRMServiceAPI/Localisation?MatchMessages=__Phoenix&callback=ApplyLocalisationMessages'> </script-->
+    @foreach (var hh in this.Request.Headers.AllKeys)
+    {
+        if (hh == "Authorization" && this.Request.Headers[hh].Contains("Bearer"))
+        {
+            <script>
+                HPRM = HPRM || {};
+                HPRM.BearerAuth = "@this.Request.Headers[hh]";
+            </script>
+        }
+    }
+    @Styles.Render("~/Content/styles")
+    @Styles.Render("~/Content/images-style")
+
+
+    @HP.HPTRIM.Web.HPTRIMScriptManager.Render()
+
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+    @if (this.Request.Headers.AllKeys.Contains("Authorization") && this.Request.Headers["Authorization"].Contains("Bearer"))
+    {
+        <script>
+
+            $.ajaxSetup({
+                beforeSend: function (xhr) {
+                    if (HPRM.BearerAuth) {
+                        xhr.setRequestHeader('Authorization', HPRM.BearerAuth);
+                    }
+                }
+            });
+            $.getScript('HPRMServiceAPI/Localisation?MatchMessages=__Phoenix&callback=ApplyLocalisationMessages');
+        </script>
+    }
+    else
+    {
+        <script src='~/HPRMServiceAPI/Localisation?MatchMessages=__Phoenix&callback=ApplyLocalisationMessages'> </script>
+    }
+</html>

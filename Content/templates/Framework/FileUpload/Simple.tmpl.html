@@ -1,0 +1,25 @@
+﻿<div data-bind="attr: { id: $data.id }" >
+    <form class="marginless" data-bind="attr: { action: $data.options.url, method: 'POST', enctype: 'multipart/form-data', target: 'iframe-transport-' + $data.id }">
+       
+        <span class="btn btn-success fileinput-button">
+            <i class="icon-plus"></i>
+            <span>Select File</span>
+            <input type="file" name="files[]">
+        </span>    
+        <button class="btn button-primary" data-bind="click: function () { $data.start(); }, css: { disabled: !$data.pending() }, visible: !$data.options.autoUpload">Upload</button>                
+        <span></span>
+
+        <ul class="unstyled well well-small marginless" data-bind="foreach: $data.files, visible: $data.files().length>0">
+            <li>
+                <i class="icon-file-alt"></i>
+                <span data-bind="text: $data.name"></span>
+                <small data-bind="text: HP.HPTRIM.App.Widgets.TrimFileUploadComponent.formatFileSize($data.size)"></small>
+                <i data-bind="css: { 'icon-spinner': $data.state() == 'inprogress', 'icon-warning-sign': $data.state() == 'error', 'icon-check-empty': $data.state() == 'pending', 'icon-check': $data.state() == 'complete' }"></i>
+                <span class="text-error" data-bind="visible: $data.error, text: $data.error"></span>
+            </li>    
+        </ul>
+
+    </form>
+    
+</div>
+

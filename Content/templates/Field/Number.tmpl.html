@@ -1,0 +1,15 @@
+<div style="margin-bottom: 10px">		
+	<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+	<div data-bind="if: _.has($data, 'ChosenForEdit') ">
+		<input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+		<div style="overflow: hidden; padding-right: 0px; padding-bottom: 8px">
+			<input type="number" style="max-width: 473px; width: 100%" class="hprm-text-input" data-bind="value: Value, event: { keydown: onkeydown, focus: focusCallback, blur: onblur }, disable: (isDisable() || fieldDisabled()), attr:{ id: Id} ">
+		</div>
+	</div>
+
+	<div data-bind="ifnot: _.has($data, 'ChosenForEdit') " style="width: 240px">
+		<input type="number" class="hprm-text-input" style="width: 100%" data-bind="value: Value, event: { keydown: onkeydown, focus: focusCallback, blur: onblur }, disable: (isDisable() || fieldDisabled()), attr:{ id: Id} ">
+	</div>
+
+</div>

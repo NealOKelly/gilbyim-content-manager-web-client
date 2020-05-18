@@ -1,0 +1,45 @@
+﻿<div data-bind="attr: { 'class': cssClass }, visible: visible" side-navigation role="navigation" id="side-menu">
+    <!-- Menu Button -->
+   <!--<a style="z-index:5000; position:absolute;" class="navbar-minimize navbar-minimalize btn" id="menu-collapse" onclick="$('#bodyContent').toggleClass('mini-navbar');" data-bind="attr:{title: HP.HPTRIM.Messages.web_menuText,'aria-label': HP.HPTRIM.Messages.web_menuText}">
+        <i class="hp-icon hp-menu-skinny"></i>
+        <span style="height: 56px; width: 56px;" class="cm_logo media-object"></span> 
+    </a>-->
+
+    <!--<a class="navbar-logofix" href="#">
+        <span style="height: 56px; width: 56px;" class="cm_logo media-object"></span>        
+    </a>
+
+
+    <a style="z-index:5000; position:absolute; margin-top:-40px; left:60px;" class="navbar-minimize navbar-minimalize" id="menu-collapse" onclick="$('#bodyContent').toggleClass('mini-navbar');" data-bind="attr:{title: HP.HPTRIM.Messages.web_menuText,'aria-label': HP.HPTRIM.Messages.web_menuText}">
+        <i class="hp-icon hp-menu-skinny"></i>
+    </a>-->
+
+	<nav id="hprm-nav-menu" class="navbar-default navbar-static-side sidebar-nav" role="navigation">
+		<div class="sidebar-collapse">
+				<!-- Dynamically generated navigation items. -->
+				<ul class="nav" data-bind="foreach: actions, css: navClasses" style="padding-top:0px;display: block;">
+					<li class="section" data-toggle="collapse" data-bind="attr:{id:'NAV_' + $data.id, 'title' : caption }, css: { 'active': active() }, visible: visible, click: function () { actionHandler($data); }">
+						<a data-bind="attr:{href: ('?' + $data.targetUrl()) }">
+							<img data-bind="attr: {'alt': caption + ' icon', 'src': icon }, visible: icon()" class="navIcon" />
+							<span class="navCap" data-bind="text: caption"></span>
+							<!-- ko if: childActions().length > 0 -->
+							<span class="hp-icon hp-collapse arrow" style="color: #b3b3b3; display: inline-block; margin-top: 5px;" data-bind="attr:{'aria-label':HP.HPTRIM.Messages.web_more, title:HP.HPTRIM.Messages.web_more}"></span>
+							<!-- /ko -->
+						</a>
+						<!-- If the menu item happens to have sub items, render this list too! -->
+						<!-- ko if: childActions().length > 0 -->
+						<ul class="nav nav-second-level collapse" style="z-index: 3000;">
+							<!-- ko foreach: childActions -->
+							<li data-bind="attr:{id:'NAV_' + $data.id, 'title' : caption }, css: { 'active': active() }, visible: visible, click: function () { actionHandler($data); }">
+								<a data-bind="attr:{href: '?' + $data.targetUrl()}">
+									<span class="navCap" data-bind="text: caption"></span>
+								</a>
+							</li>
+							<!-- /ko -->
+						</ul>
+						<!-- /ko -->
+					</li>
+			    </ul>
+		</div>
+	</nav>
+</div>

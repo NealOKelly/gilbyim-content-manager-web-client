@@ -1,0 +1,38 @@
+﻿<!-- ko ifnot: $root == "CreateRecordAPP" -->
+
+	<!-- ko ifnot: $root.name == "TrimMobileApp" -->
+	<div class="input-group-btn" data-bind="visible:!(owner.Readonly == true)">
+    <button type="button" role="button" title="button" name="button" style="vertical-align:text-bottom; margin-left: 0px" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" data-bind="attr: {title: HP.HPTRIM.Messages.web_create + ' ' + HP.HPTRIM.Messages.web_location}">
+        <i class="hp-icon hp-add">  </i>
+    </button>
+    <ul class="dropdown-menu dropdown-menu-right hprm-dropdown-new-location">
+        <!-- ko foreach:locationTypes -->
+
+        <li>
+            <a href="#" data-bind="	click: function () { $parent.onClick( $parent, $data ) }"><div data-bind="	text: caption, attr: { class: icon }" style="padding-left:20px; margin-left:-10px" /></a>
+        </li>
+        <!-- /ko -->
+    </ul>
+</div>
+	<!-- /ko -->
+
+	<!-- ko if: $root.name == "TrimMobileApp" -->
+		<!-- Functionality not available on mobile devices -->	
+	<!-- /ko -->
+<!-- /ko -->
+
+<!-- ko if: $root == "CreateRecordAPP" -->
+<div class="input-group-btn" data-bind="visible:!(owner.Readonly == true)">
+	<button type="button" role="button" name="button" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown">
+		<i class="hp-icon hp-add">  </i>
+	</button>
+	<ul class="dropdown-menu dropdown-menu-right hprm-dropdown-new-location">
+		<!-- ko foreach:locationTypes -->
+
+		<li>
+			<a href="#" data-bind="	click: function () { $parent.onClick( $parent, $data ) }"><div data-bind="	text: caption, attr: { class: icon }" style="padding-left:20px; margin-left:-10px" /></a>
+		</li>
+		<!-- /ko -->
+	</ul>
+</div>
+<!-- /ko -->

@@ -1,0 +1,151 @@
+﻿<!-- ko if: $data.isHidden -->
+<!-- ko ifnot: $data.showTextField -->
+<!-- ko ifnot: $data.Name =="UserLabelParentLabel" -->
+<div class="HPRM-deluxe-list-header" style="display:inline-block; margin-bottom:5px;" data-bind="text: HP.HPTRIM.Messages.web_fieldTypeNotSupported + ': ' + label()"></div>
+<br />
+<!-- /ko -->
+
+<!-- /ko -->
+<!-- ko if:$data.showTextField -->
+<div class="control-container" data-bind="attr: {id: controlContainerId + 'upper'}" style="width:inherit">
+    <div class="HPRM-deluxe-list-header">
+        <div style="margin-bottom: 0 !important; font-weight: normal !important; display: inline-block !important" data-bind="text: label(), attr:{ for: controlContainerId  }"></div>
+    </div>
+    <div style="overflow: hidden; padding-right: 0px;">
+        <div class="input-group" style="width:100%; height: 33px">
+            <input type="text" style="margin-bottom: 1px; overflow: hidden; display:inline-block; float: left;" data-bind="enable: enabled(), attr: {id: controlContainerId, 'aria-required': $data.isMandatory, 'aria-disabled': !enabled()}, value: value" />
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko ifnot: $data.isHidden -->
+<div class="control-container" data-bind="attr: {id: controlContainerId + 'upper'}" style="width:inherit">
+
+    <div style="width: 100%;" data-bind="visible: !isEditing()">
+        <div class="HPRM-deluxe-list-header">
+            <div style="margin-bottom: 0 !important; font-weight: normal !important; display: inline-block !important" data-bind="text: label(), attr:{ for: controlContainerId  }"></div>
+            <!-- ko if: $data.IsRecursive-->
+            <div data-bind="hprm_field:$data.recursiveCheckbox,checked:isRecursive,click:onCheckBoxFieldClick,valueUpdate: 'afterkeydown', event: { keyup: getCheckedOnSpacebar(event) }" style="width:20%;float:right;display: inline-flex;" />
+            <!-- /ko -->
+            <!-- ko if: $data.isMandatory -->
+            <div style="margin-bottom: 0 !important; font-weight: normal !important;" class="isMandatoryField" data-bind="text: '(' + HP.HPTRIM.Messages.web_requiredCaption + ')', attr:{ for: controlContainerId }"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <div style="width: 100%;" data-bind="visible: isEditing()" class="HPRM-deluxe-list-header">
+        <label style="margin-bottom: 0 !important; font-weight: normal !important;" data-bind="text: label(), attr:{ for: controlContainerId, 'aria-label': label(),title: label() }"></label>
+        <!-- ko if: $data.IsRecursive-->
+        <div data-bind="hprm_field:$data.recursiveCheckbox,checked:isRecursive,click:onCheckBoxFieldClick,valueUpdate: 'afterkeydown', event: { keyup: getCheckedOnSpacebar(event) }" style="width:20%;float:right;display: inline-flex;" />
+        <!-- /ko -->
+        <!-- ko if: $data.isMandatory -->
+        <div style="margin-bottom: 0 !important; font-weight: normal !important;" class="isMandatoryField" data-bind="text: '(' + HP.HPTRIM.Messages.web_requiredCaption + ')', attr:{ for: controlContainerId }"></div>
+        <!-- /ko -->
+        <div data-bind="if: isLoading()" class="isLoading"><i class="icon-spinner icon-spin text-white"></i></div>
+
+
+        <!-- ko if: (error() != "") -->
+        <label class="field-error-display" style="color:#FF454F !important" data-bind="text: error, attr: { title: HP.HPTRIM.Messages.vb_tio_Error }"></label>
+        <!-- /ko -->
+
+    </div>
+
+    <div data-bind="visible: !isEditing(), click: toggleEdit, enterKey:toggleEdit, attr:{'cursor' : isEditing()? 'pointer' : 'auto' }" style="position: relative;" class="item-picker-editing">
+        <div style="vertical-align: middle; font-size: medium; border: solid 1px #8e8e8e;" class="itempickerBorder">
+            <div class='item-picker-display' tabindex="0" data-bind="css : itemDisplayCss, event:{ focus: onDisplayDivFocus    }">
+                <!-- ko if:$data.value() && ($data.value().hasIcon == true) -->
+                <div data-bind="attr: { 'aria-label': label(), 'class': ($data.value().iconId.toLowerCase() + '_x24 media-object item-picker-raw-icon'), 'title': getRawValue() }" />
+                <!-- /ko -->
+                <div class="overflowEllipsis item-picker-raw" data-bind="text: getRawValue(), attr:{title: toolTip} "></div>
+            </div>
+        </div>
+    </div>
+
+    <div data-bind="visible: isEditing()" class="item-picker-editing">
+        <div data-bind="if: _.has($data, 'ChosenForEdit') ">
+            <input type="button" class="panelclose-dk-grey" style="float: right; background-color: transparent; border:none; margin-top: 7px; margin-right:2px" data-bind="attr: { title: HP.HPTRIM.Messages.web_clickToNotSetfieldValue}, event: { click: function(){ $parents[5].changeChosenState($data)} } " />
+            <div style="overflow: hidden; padding-right: 0px;">
+                <div class="input-group" style="width:100%; max-width: 473px; height: 33px">
+                    <input type="text" style="margin-bottom: 1px; overflow: hidden; display:inline-block; float: left;" class="picker-input-expansion inputItemIcon" data-bind="hasfocus: hasFocus, enable: enabled(), attr: {id: controlContainerId, 'aria-required': $data.isMandatory, 'aria-disabled': !enabled()}, click: onTextFieldClick, enterKey: onTextFieldClick, event: { keyup: function (data, e) { $data.onKeyUp($data,e); }, focus: function (e) { if ($data.focusCallback) { $data.focusCallback(); } }, blur: function() { /*setTimeout(onblur($data), 3000) */} }, value: rawValue, htmlElement: htmlElement" />
+                    <!-- ko if:plugins.length > 0 -->
+                    <!-- ko foreach:plugins -->
+                    <!-- ko template: {name :template, data: $data} -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+
+        <div data-bind="ifnot: _.has($data, 'ChosenForEdit') ">
+            <div class="input-group" style="width:100%; height: 33px">
+
+                <input type="text" style="margin-bottom: 1px; overflow: hidden; display:inline-block; float: left;" class="picker-input-expansion inputItemIcon dbpsearchmethod_light_x16" data-bind="hasfocus: hasFocus, enable: enabled(),  attr:{'aria-label': HP.HPTRIM.Utils.String.format(HP.HPTRIM.Messages.web_enterSearchQueryField,[label()]), 'placeholder': HP.HPTRIM.Messages.web_enterSearchQuery,   id: controlContainerId, 'aria-required': $data.isMandatory, 'aria-disabled': !enabled()},click: onTextFieldClick, enterKey: onTextFieldClick,  event: {keyup: function (data, e) { $data.onKeyUp($data,e); }, focus: function (e) { if ($data.focusCallback) { $data.focusCallback(); } }, blur: function() { onblur($data) }}, value: rawValue, htmlElement: htmlElement" />
+
+                <!--
+                <button role="button" name="button" class="btn quaternary-button"  data-bind="click: editQuery" style="position:absolute; margin-top:0px; margin-left:0px">
+                    <span style="height: 24px; width: 24px;"  class="searchhistory_x24 media-object" > </span>
+                </button>
+                  -->
+                <!-- ko if:plugins.length > 0 -->
+                <!-- ko foreach:plugins -->
+                <!-- ko template: {name :template, data: $data} -->
+                <!-- /ko -->
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+
+        <!-- ko if: isExpanded -->
+        <div class="picker-result-expansion" data-bind="attr: { style: resultStyle }" style="margin-bottom: 50px; min-width:330px; width:auto">
+            <div data-bind="if: supportHierarchy" style="height: auto;">
+                <ul class="breadcrumb" style="margin-left:-8px">
+                    <i class="hp-icon hp-home" style="cursor: pointer;background-color:firebrick;font-size:21px" data-bind="click: gotoRoot"></i>
+                    <!-- ko foreach:hierarchy.levels() -->
+                    <!--<span class='divider' data-bind="if: function () { return $index() > 0 }() ">/ </span>-->
+
+                    <li class="active"><a data-bind="text: name, attr: {title: name, href: name, id: name}, click: function () { $parent.gotoLevel($parent, $index); }"></a></li>
+
+                    <!-- /ko -->
+                </ul>
+            </div>
+
+            <div class="carousel slide" style="margin-bottom: 0;" data-interval="false" data-bind="attr: { id: carouselId }">
+                <div class="carousel-inner">
+                    <div class="active item">
+                        <!-- ko template: {name: listTemplateName(), data: $data } -->
+                        <!-- /ko-->
+                    </div>
+                    <!-- ko if: supportHierarchy -->
+                    <!-- ko foreach : hierarchy.maxDepth -->
+                    <!-- ko template: {name :$parent.hierarchy.sublistTemplate, data: $parent } -->
+                    <!-- /ko-->
+                    <!-- /ko -->
+                    <!-- /ko -->
+
+                </div>
+
+            </div>
+            <!-- end carousel id -->
+
+
+        </div>
+
+        <!-- /ko -->
+
+    </div>
+
+    <!--<span>
+        <!-- ko if:plugins.length > 0 -- >
+        <!-- ko foreach:plugins -- >
+        <!-- ko template: {name :template, data: $data} -- >
+        <!-- /ko - ->
+        <!-- /ko -- >
+        <!-- /ko -- >
+    </span>-->
+
+</div>
+
+
+<!-- /ko -->

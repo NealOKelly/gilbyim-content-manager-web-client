@@ -1,0 +1,447 @@
+﻿@{
+    Layout = "";
+}
+
+@using ServiceStack.Text
+@using ServiceStack.Logging;
+@using ServiceStack.Host.AspNet
+@using ServiceStack
+@{
+	var objectsToLoad = this.Model as List<HP.HPTRIM.ServiceModel.BaseObjectTypes>;
+	if (objectsToLoad == null)
+	{
+		// Check if there is an option in the request...
+		var objectList = Request.QueryString["objectlist"];
+
+		switch (objectList)
+		{
+			case "record":
+				objectsToLoad = new List<HP.HPTRIM.ServiceModel.BaseObjectTypes>() {
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Record,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.SavedSearch };
+				break;
+			case "recordtype":
+				objectsToLoad = new List<HP.HPTRIM.ServiceModel.BaseObjectTypes>() {
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.RecordType,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.SavedSearch,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Location };
+				break;
+			default:
+				objectsToLoad = new List<HP.HPTRIM.ServiceModel.BaseObjectTypes> {
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Record,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Location,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Workflow,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.SavedSearch,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Activity,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.Request,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.CheckinStyle,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItem,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItemItemReference,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.ActionDef,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.ActionDefStep,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.RecordAction,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.UserLabel,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.History,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.ConsignmentApprover,
+					HP.HPTRIM.ServiceModel.BaseObjectTypes.ConsignmentRejection,
+
+				};
+				break;
+		}
+
+
+
+
+
+
+
+
+	}
+	string newCookieToken, formToken = "";
+
+	long Uri = 0L;
+	// Set up an empty init value - and have *all* the things reference it.
+	var initValue = new HtmlString("null");
+
+	HtmlString dbJson = initValue;
+
+	HtmlString webClientOptionsJson = initValue;
+	HtmlString localeJson = initValue;
+	HtmlString fileDropOptionJson = initValue;
+
+	HtmlString startupJson = initValue;
+	HtmlString userSearchOptionsJson = initValue;
+	HtmlString applicationSettings = initValue;
+
+	HtmlString currentUserJson = initValue;
+	HtmlString currentUserMembershipsJson = initValue;
+
+	HtmlString propertySearchOptionDefsJson = initValue;
+
+	HtmlString userOptionPropertyDefsJson = initValue;
+	HtmlString checkoutCaptionJson = initValue;
+
+	///////////////////////
+	//// EXPENSIVE STUFF...
+	HtmlString objectFormDefsJson = initValue;
+	HtmlString objectsJson = initValue;
+	HtmlString propertyDefsJson = initValue;
+	HtmlString enumDefsJson = initValue;
+
+	HtmlString localisedMessages = initValue;
+
+
+	HtmlString mainObjectPropertyHTMLString = initValue;
+
+	string exceptionDetails = "";
+
+	bool errorInitialising = false;
+
+	try
+	{
+		// Use the service API To get the URI here...
+		AspNetRequest httpReq = new AspNetRequest(System.Web.HttpContext.Current.ToHttpContextBase());
+		AspNetResponse httpRes = new AspNetResponse(new HttpResponseWrapper(System.Web.HttpContext.Current.Response));
+
+		HP.HPTRIM.Service.BearerAuthPlugin bearerAuth = new HP.HPTRIM.Service.BearerAuthPlugin(HP.HPTRIM.Web.Configuration.ServiceDefaults.Instance.Authentication);
+		bearerAuth.Execute(httpReq);
+
+		new AuthenticateAttribute().Execute(httpReq, httpRes, null);
+		using (HP.HPTRIM.Service.Razor.RazorLocationService service = new HP.HPTRIM.Service.Razor.RazorLocationService(httpReq.GetSession(), httpReq))
+		{
+
+
+			//////////////////////////////////////////////////////////
+			//// LOCALISATION CALL
+			///
+			var messages = service.GetMessages("__Phoenix");
+			var keys = new List<string>(messages.Keys);
+			foreach (var key in keys) {
+				var messageEntry = messages[key];
+				if (messageEntry.Contains('"'))
+				{
+					messages[key] = messageEntry.Replace("\"", "");
+				}
+
+				if (messageEntry.Contains("\r\n"))
+				{
+					messages[key] = messageEntry.Replace("\r\n", " ");
+				}
+			}
+
+
+			localisedMessages = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(messages.ToJson()));
+
+			/* Get the antiforgeryToken */
+			try
+			{
+				if (HP.HPTRIM.Services.Common.ServiceConfiguration.Instance.RequireAntiForgeryToken)
+				{
+					ServiceStack.Html.AntiXsrf.AntiForgery.GetTokens(null, out newCookieToken, out formToken);
+					httpRes.SetSessionCookie(ServiceStack.Html.AntiXsrf.AntiForgeryConfig.CookieName, newCookieToken);
+				}
+
+			}
+			catch (Exception e)
+			{
+				var Log = LogManager.GetLogger(typeof(HP.HPTRIM.Web.RecordManagerApplication));
+				Log.Error("Error setting Antiforgery token: " + e.Message);
+				Log.Error("Inner Exception Details " + e.InnerException.Message);
+			}
+
+
+			/* Get the current database information */
+			var dbProperties = "id,name,WorkgroupServerName,currentUser,ActivatedProductFeatures,LicensedProductFeatures,GoogleKey,DefaultOwner,CurrencySymbol,CurrencyDecimalDigits".Split(',');
+			try
+			{
+				HP.HPTRIM.ServiceModel.Database database = service.GetCurrentDatabase(new List<string>(dbProperties));
+
+				string jsonString = HP.HPTRIM.Web.Utils.EscapeJson(database.ToJson());
+
+				dbJson = new HtmlString(jsonString);
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetCurrentDatabase failed", ex);
+				throw newException;
+			}
+
+
+			/* Get the user options */
+			try
+			{
+				var webClientOptions = service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.WebClient);
+				string jsonString = HP.HPTRIM.Web.Utils.EscapeJson(webClientOptions.ToJson());
+				webClientOptionsJson = new HtmlString(jsonString);
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.WebClient) failed", ex);
+				throw newException;
+			}
+
+
+			/* Get the user options locale information */
+			try
+			{
+				var locale = service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Locale);
+				localeJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson (locale.ToJson() ) );
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Locale) failed", ex);
+				throw newException;
+			}
+
+
+			/* Get the user options file drop information */
+			try
+			{
+				var fileDrop = service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.DroppedFiles);
+				fileDropOptionJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(fileDrop.ToJson()) );
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception(" service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.DroppedFiles) failed", ex);
+				throw newException;
+			}
+
+
+			try
+			{
+				var startupOptions = service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Startup);
+				startupJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(startupOptions.ToJson() ));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Startup) failed", ex);
+				throw newException;
+			}
+
+			try
+			{
+				//Get User search Options
+				var userSearchOptions = service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Search);
+				userSearchOptionsJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(userSearchOptions.ToJson()));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetUserOptions(HP.HPTRIM.ServiceModel.UserOptionSetIds.Search) failed", ex);
+				throw newException;
+			}
+
+			try
+			{
+				//GetTimezone Settings
+				var appSettings = service.GetApplicationSettings();
+				applicationSettings = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(appSettings.ToJson() ));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception(" service.GetApplicationSettings() failed", ex);
+				throw newException;
+			}
+
+
+
+			//////////////////////////////////////////////////////////////
+			// MODERATELY EXPENSIVE CALLS
+			//////////////////////////////////////////////////////////////
+
+			/* Get the current user information */
+			var locProperties = "userType,permissions,SearchDefaults".Split(',');
+			HP.HPTRIM.ServiceModel.Location currentUser = null;
+			try
+			{
+				currentUser = service.GetCurrentUser(new List<string>(locProperties));
+				Uri = currentUser.Uri;
+				currentUserJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(currentUser.ToJson()));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetCurrentUser failed", ex);
+				throw newException;
+			}
+
+			try
+			{
+				var currentUserMemberships = service.GetCurrentUserMemberships();
+				currentUserMembershipsJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(currentUserMemberships.ToJson()) );
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception(" service.GetCurrentUserMemberships failed", ex);
+				throw newException;
+			}
+
+
+			/* Get the 'search option' defintions (eg when searching for a record be assignee, use member locations of provided assignee as well) */
+			try
+			{
+				var propertySearchOptionDefs = service.GetPropertyDefs(objectsToLoad, HP.HPTRIM.ServiceModel.PropertyOrFieldDefType.SearchOptions);
+				var escapedPropertySearchOptionDefs = HP.HPTRIM.Web.Utils.EscapeJson(propertySearchOptionDefs.ToJson());
+				propertySearchOptionDefsJson = new HtmlString(escapedPropertySearchOptionDefs);
+			}
+			catch (Exception ex)
+			{
+
+				Exception newException = new Exception("service.GetPropertyOrFieldDefs(objectsToLoad);, All); failed", ex);
+				throw newException;
+			}
+
+			/* Get the property definitions for the user options */
+			try
+			{
+				var userOptionPropertyDefs = service.GetPropertyOrFieldDefsForUserOptions();
+				userOptionPropertyDefsJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(userOptionPropertyDefs.ToJson()));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception(" service.GetPropertyOrFieldDefsForUserOptions() failed", ex);
+				throw newException;
+			}
+
+			var checkoutCaption = service.GetPropertyOrFieldDef("RecordIsCheckedOut");
+			checkoutCaptionJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(checkoutCaption.ToJson()));
+
+			try
+			{
+				// Get the object definitions - including the search forms. Don't get the data entry forms though
+				var objectDefs = service.GetOjectDefs(false, false, true);
+				objectsJson = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(objectDefs.ToJson()));
+			}
+			catch (Exception ex)
+			{
+				Exception newException = new Exception("service.GetOjectDefs(false);, true); failed", ex);
+				throw newException;
+			}
+
+			/////////////////////////////////////////////////////////////////////////////////////////////////
+			/////
+			///// Propery defs for main objects
+			/////
+			/////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+			var objectPropertyList = new Dictionary<HP.HPTRIM.ServiceModel.BaseObjectTypes, List<String>>(){
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.Location, new List<String>(){"Icon", "LocationGpsLocation", "LocationFormattedName", "LocationTypeOfLocation", "LocationPhoneNumber", "LocationInternetMailAddress", "LocationJobDescription", "LocationFormattedAddress", "LocationWebPage", "LocationNotes", "LocationActiveFrom", "LocationActiveTo", "LocationUserType" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.SavedSearch, new List<String>(){"SavedSearchObjectType", "SavedSearchName", "SavedSearchOwner", "SavedSearchDescription", "SavedSearchFilterString", "SavedSearchIsOldFormat", "SavedSearchSortString", "SavedSearchQueryString" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.SearchForm, new List<String>(){"Icon", "SearchFormName", "SearchFormObjectType", "SearchFormName", "SearchFormDescription", "SearchFormName"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.Request, new List<String>(){"RequestRequestType", "RequestRecord", "RequestStatus", "RequestRequestor", "RequestDueDate", "RequestDateCompleted","RequestNotes","RequestDescription","RequestIsComplete"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.CheckinStyle, new List<String>(){"CheckinStyleRecordType", "CheckinStyleStyleOwner", "CheckinStyleName"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItem, new List<String>(){"Icon", "TodoItemTodo", "TodoItemDateDue", "TodoItemIsComplete", "TodoItemAssignee", "TodoItemDateDone","TodoItemNotes"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.TodoItemItemReference, new List<String>(){"TodoItemItemReferenceRecord", "TodoItemItemReferenceReferenceType", "TodoItemItemReferenceDetails"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.RecordAction, new List<String>(){"Icon", "RecordActionRecord", "RecordActionActionName", "RecordActionResponsibility", "RecordActionStatus", "RecordActionNotes", "RecordActionDueDate" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.UserLabel, new List<String>(){"Icon", "UserLabelName", "UserLabelFullName", "UserLabelOwner", "DateLastUpdated","UserLabelParentLabel"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.History, new List<String>(){"HistoryRecord", "HistoryLocation", "HistoryActivity", "HistoryWorkflow", "HistoryForObjectType", "HistoryLoginLocation", "HistoryEventDescription"}},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.RecordType, new List<String>(){"RecordTypeHomeLocation","RecordTypeOwnerLocation", "RecordTypeName" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.Record, new List<String>(){ "RecordTitle", "RecordContainer", "RecordHomeLocation", "RecordOwnerLocation", "RecordNumber","RecordIsEnclosed","RecordGpsLocation" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.ConsignmentApprover, new List<String>(){ "ConsignmentApproverApprover", "ConsignmentApproverConsignment", "ConsignmentApproverStatus", "ConsignmentApproverApprovedOn", "Icon" }},
+				{HP.HPTRIM.ServiceModel.BaseObjectTypes.ConsignmentRejection, new List<String>(){ "ConsignmentRejectionApprover", "ConsignmentRejectionConsignment", "ConsignmentRejectionRecord", "ConsignmentRejectionRejectReason", "ConsignmentRejectionRejectedOn", "ConsignmentRejectionIsConfirmed", "Icon" }},
+			};
+
+
+			var fullObjectPropertyStringPrefix = "[";
+			var fullObjectPropertyStringSuffix = "]";
+			var workingObjectPropertyString = "";
+
+			var addComma = false;
+			foreach (KeyValuePair<HP.HPTRIM.ServiceModel.BaseObjectTypes, List<String>> kvp in objectPropertyList)
+			{
+				try
+				{
+					var propDefs = service.GetPropertyDefs(kvp.Key, kvp.Value.ToArray());
+					var propDefString = propDefs.ToJson();
+					var objectToPropertyDefJSON = "{\"objectName\":\"" + kvp.Key + "\",\"properties\":" + propDefString + "}";
+					workingObjectPropertyString = workingObjectPropertyString + (addComma ? ",": "") + objectToPropertyDefJSON;
+					addComma = true;
+				}
+				catch (Exception ex)
+				{
+					Exception newException = new Exception("service.GetPropertyDefs for main objects failed", ex);
+					throw newException;
+				}
+			}
+
+
+			var mainObjectPropertyString = fullObjectPropertyStringPrefix + workingObjectPropertyString + fullObjectPropertyStringSuffix;
+
+
+			//Fix any \"s or \'s
+			//mainObjectPropertyString = mainObjectPropertyString.Replace("\'", "\\\'");
+			mainObjectPropertyHTMLString = new HtmlString(HP.HPTRIM.Web.Utils.EscapeJson(mainObjectPropertyString));
+
+
+
+
+
+		}
+	}
+	catch (Exception e)
+	{
+		var Log = LogManager.GetLogger(typeof(HP.HPTRIM.Web.RecordManagerApplication));
+		Log.Error("Error starting Content Manager: " + e.Message);
+		if (e.InnerException != null)
+		{
+			Log.Error("Inner Exception Details " + e.InnerException.Message);
+		}
+		exceptionDetails = e.Message;
+
+		errorInitialising = true;
+	}
+	////////////////////////////
+	/// END C SHARP INIT CODE
+	////////////////////////////
+		}
+
+		var HPRM_unableToConnectMessage = 'Content Manager web client is unable to establish a connection to the Web Service. <br/> <div class="error-details"> <label>Details : </label> ' + '@exceptionDetails' + '</div>';
+		var HPRM_errorInitialising = false;
+		var HPRM_antiForgeryToken = "@formToken";
+
+
+		var HPRM = {Messages:{}};
+        var localisedMessages = '@localisedMessages'
+        
+        localisedMessages = localisedMessages.replace(/\n/g, "\\\\n").replace(/\r/g, "\\\\r").replace(/\t/g, "\\\\t");
+
+		HPRM.Messages = jQuery.parseJSON(localisedMessages);
+
+        try {
+
+            var currentUserUri = "@Uri";
+
+		var HPRM_currentDatabase = jQuery.parseJSON('@dbJson');
+
+		var HPRM_webClientOptions = jQuery.parseJSON('@webClientOptionsJson');
+		var HPRM_localeOptions = jQuery.parseJSON('@localeJson');
+		var HPRM_fileDropOption = jQuery.parseJSON('@fileDropOptionJson');
+
+		var HPRM_startupOptions = jQuery.parseJSON('@startupJson');
+		var HPRM_userSearchOptions = jQuery.parseJSON('@userSearchOptionsJson');
+		var HPRM_applicationSettings = jQuery.parseJSON('@applicationSettings');
+
+		var HPRM_currentUser = jQuery.parseJSON('@currentUserJson');
+		var HPRM_currentUserMemberships = jQuery.parseJSON('@currentUserMembershipsJson');
+
+		var HPRM_searchOptionDefs = jQuery.parseJSON('@propertySearchOptionDefsJson');
+
+		var HPRM_userOptionDefs = jQuery.parseJSON('@userOptionPropertyDefsJson');
+		var HPRM_checkoutCaption = jQuery.parseJSON('@checkoutCaptionJson');
+
+
+		var HPRM_objectFormDefinitionDefs = jQuery.parseJSON('@objectFormDefsJson');
+		var HPRM_objectDefs = jQuery.parseJSON('@objectsJson');
+
+
+		var HPRM_propertyDefs = jQuery.parseJSON('@propertyDefsJson');
+		var HPRM_enumDefs = jQuery.parseJSON('@enumDefsJson');
+
+		var HPRM_RequiredMainObjectPropertyDefs = jQuery.parseJSON('@mainObjectPropertyHTMLString');
+
+
+		HPRM_errorInitialising = @(errorInitialising ? "true" : "false");
+            
+        } catch (e) {
+
+	        HPRM_errorInitialising = true;
+        }

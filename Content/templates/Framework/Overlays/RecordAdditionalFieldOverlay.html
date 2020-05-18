@@ -1,0 +1,20 @@
+﻿<!-- Select a list of properties -->
+<div>
+	<div class="hprm-modal-header modal-header">
+		<div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_selectPropertiesCaption"></div>
+	</div>
+	<div class="">
+		<div class="modal-body hprm-modal-body" style="max-width: 600px; max-height:310px;">
+			<div class="listPadding listPaddingRight">
+				<!-- ko template:{name: $data.propertyOrFieldDefSelector.templateName(), data: $data.propertyOrFieldDefSelector} -->
+				<!-- /ko -->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer hprm-modal-footer alignItemsMiddle">
+		<div style="max-width: 575px;">
+			<button role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: ok, text: HP.HPTRIM.Messages.web_dp_okText"></button>
+			<button role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: close, text: HP.HPTRIM.Messages.web_dp_cancelText"></button>
+		</div>
+	</div>
+</div>

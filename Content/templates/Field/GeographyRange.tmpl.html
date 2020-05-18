@@ -1,0 +1,45 @@
+﻿<div style="margin-bottom: 10px;">
+    <!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+
+
+    <div class="input-group" style="display: table; width: 100%; padding-top:15px">
+        <div data-bind="text: HP.HPTRIM.Messages.web_GPSWithin" style="padding-right:8px"></div>
+        <div class="row">
+            <div class="col-lg-6" style="padding:0px; width:45%; display:inline-block">
+                <input type="number" style="height:31px; max-width:100px" class="hprm-text-input" data-bind="value: rangeValue, event: { keydown: onRangeKeyDown, focus: focusCallback, blur: onRangeBlur }, attr:{ id: Id} ">
+            </div>
+            <div class="col-lg-6" style="padding:0px; width:55%; display:inline-block">
+                <select style="height:31px; margin: 0 0 10px 0" data-bind="value: selectedRangeUnitValue, selectedOption: selectedRangeUnitValue, options: $data.rangeUnitItems(), optionsValue: optionsValue, optionsText: optionsText, attr: { id:Id, title: Id  },  event: { focus: focusCallback, blur: onblur }" />
+            </div>
+        </div>
+    </div>
+
+    <div class="input-group" style="display: table; width: 100%">
+        <div data-bind="text: HP.HPTRIM.Messages.web_GPSof" style="padding-right:8px"></div>
+        <select style="height:31px; margin: 0 0 10px 0" data-bind="value: selectedMethod, selectedOption: selectedMethod, options: $data.methodItems(), optionsValue: optionsValue, optionsText: optionsText, attr: { id:Id, title: Id  },  event: { focus: focusCallback, blur: onblur }" />
+    </div>
+
+    <!-- ko if: ($data.selectedMethod() == HP.HPTRIM.Form .GeographyRangeDecorator.GIS_METHOD ) -->
+    <div class="input-group" style="display: table; width: 100%;">
+        <div data-bind="text: HP.HPTRIM.Messages.web_GPSLocation, " style="padding-right:8px"></div>
+
+        <input  id="gpsCoordinates" type="text" style="max-width: calc(100% - 55px)" class="hprm-text-input" data-bind="value: GPSValue, valueUpdate:'afterkeydown', event: { focus: focusCallback, blur: onblur }, attr:{ id: rangeGPSId, title: HP.HPTRIM.Messages.web_GPSLocation }, enterKey: onEnter ">
+        <button type="button" class="btn button-grey gps_button" style="min-width:10px;" data-bind="click:showMap, attr:{ title: HP.HPTRIM.Messages.web_modify }">
+            <span class="hp-icon gps_x24 gps_icon"></span>
+        </button>
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $data.selectedMethod() ==  HP.HPTRIM.Form .GeographyRangeDecorator.LOCATION_METHOD -->
+    <div>
+        <!-- ko hprm_field: $data.locationPicker --><!-- /ko -->
+    </div>
+    <!-- /ko -->
+    <!-- ko if: $data.selectedMethod() == HP.HPTRIM.Form .GeographyRangeDecorator.RECORD_METHOD  -->
+    <div>
+        <!-- ko hprm_field: $data.recordPicker --><!-- /ko -->
+    </div>
+    <!-- /ko -->
+</div>
+
+
+

@@ -1,0 +1,18 @@
+<div style="margin-bottom:10px">
+	<!-- ko template:{name:'templates/Field/FieldCaption' , data: $data} --> <!-- /ko -->
+	<div class="text-container">        
+        <textarea  style="resize:none; overflow-y:auto;height:47px !important; border: solid 1px #8e8e8e;" rows="3" cols="80" data-bind="value: Value, disable: (isDisable() || fieldDisabled()), event: { focus: focusCallback, blur: onblur }, attr:{ id: Id,  title: ($data.ToolTip ? $data.ToolTip: (Caption? Caption : Id)) } "></textarea>
+        
+        <div class="input-group-btn" style="display: inline-block; width: 44px">
+            <button title="button" name="button" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" style="vertical-align:text-bottom; width: 100%; height: 31px" data-bind="attr: {title: selectKeywordTooltip}, event: {click: showThesaurusModal } ,  disable: (isDisable() || fieldDisabled())">
+                <i class="kwikselect" style="display: flex; height: 14px; width: 14px; margin-left: -1px">  </i>
+            </button>
+        </div>
+        <!--<button tabindex="0"  type="button" role="button" name="button" style="margin-left:-3px; height:47px !important;display:inline-block; vertical-align:text-bottom" class="btn btn-default dropdown-toggle button-grey" data-toggle="dropdown" data-bind="attr: {title: selectKeywordTooltip}, event: {click: showThesaurusModal } ,  disable: (isDisable() || fieldDisabled())">
+            <i class="kwikselect" style="display: flex; height: 14px; width: 14px; margin-left: -1px">  </i>
+        </button>-->
+	</div>
+    
+    
+	
+</div>

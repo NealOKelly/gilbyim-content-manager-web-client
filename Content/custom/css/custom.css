@@ -1,0 +1,652 @@
+/* SPLASH SCREEN AND LOADER */
+#splash-screen {
+   width: 100%;
+   height: 100%;
+   top: 0;
+   left: 0;
+   position: fixed;
+   display: block;
+   /*opacity: 0.7;*/
+   background-color: white;
+   z-index: 99999;
+    display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.loader {
+  margin: auto;
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #75b540;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* END - SPLASH SCREEN AND LOADER */
+
+/* CUSTOMISATIONS FOR UNIVERAL SEARCH */
+
+/* Hide standard header panel */
+
+
+#rm4ed-global-search-input {
+  width: 95%;
+  border: none;
+  border-radius: 0 0 0 0;
+  max-width: inherit;
+  padding: 0 25px 0 20px;
+  height: 32px;
+}
+
+
+
+/* END - CUSTOMISATION FOR UNIVERSAL SEARCH */
+
+#globalSearchPanel{
+	background-color: #000033 !important;
+}
+
+#main-menu{
+	background-color: #75b540 !important;
+}
+
+
+.object_selector{
+	background-color: #000033 !important;
+}
+
+button.btn.global-search-finder-btn.dropdown-toggle.object_selector.pull-left:hover,
+button.btn.global-search-finder-btn.dropdown-toggle.object_selector.pull-left:focus {
+  border: 1px solid #75b540 !important;
+}
+
+
+.option_selector{
+	background-color: #000033 !important;
+}
+
+button.btn.global-search-finder-btn.dropdown-toggle.option_selector.pull-left:hover,
+button.btn.global-search-finder-btn.dropdown-toggle.option_selector.pull-left:focus {
+  border: 1px solid #75b540 !important;
+}
+
+.global-search-btn{
+	background-color: #000033 !important;
+}
+
+#show-saved-searches{
+	background-color: #75b540 !important;
+}
+
+#profile-user-details{
+	background-color: #75b540 !important;
+}
+
+.dashboard-container-header .h4{
+	border-bottom: none;
+}
+
+.dashboard-container-header .h4:hover{
+	color: #75b540;
+	border-bottom: #75b540;
+}
+
+h3.small{
+	color: #75b540;
+}
+.spn-plus-icon{
+	color: #75b540;
+}
+.spn-title{
+	color: #75b540;
+}
+
+
+/* HIDE UNWANTED COMPONENTS */
+/* Hide main menu */
+#dropdownMenu1{
+	display: none;
+}
+
+/*This button replaces the main menu*/
+#custom-new-record-button>a{
+	color: white;
+	margin-left: 30px;
+}
+
+#custom-new-record-button>a:hover,
+#custom-new-record-button>a:focus,
+#custom-new-record-button>a:active{
+	color: white;
+	text-decoration: none;
+}
+.btn .global-search-finder-btn .dropdown-toggle .object_selector .pull-left{
+	display: none !important;
+}
+
+/* Hide options button anf help button in global serach bar 
+.global-search-options-wide{
+	display: none;
+}
+
+/* Hide User detail button. 
+#profile-user-details{
+	display: none;
+}
+*/
+/*
+div.div-profile-header > ul.dropdown-menu > li:nth-child(1){
+	border-bottom: 0 !important;
+}
+div.div-profile-header > ul.dropdown-menu > li:nth-child(2){
+	display: none !important;
+}
+div.div-profile-header > ul.dropdown-menu > li:nth-child(3){
+	display: none !important;
+}
+div.div-profile-header > ul.dropdown-menu > li:nth-child(4){
+	display: none !important;
+}
+*/
+
+/* Hide tabbing mechanism */
+div.as-spa-body>div>div.tabbable {
+	display: none;
+}
+
+/* Hide query - this is not a SQL editor, it's a user interface. */
+.HPRM-search-list-header{
+	/*display: none;*/
+}`
+
+.itemlist-header{
+	height: 50px !important;
+}
+
+.itemlist-header-result-size{
+	display: none;
+}
+
+.itemlist-header-paging-control{
+	padding-top: 10px;
+}
+
+/*  Hide unwanted items from the left-hand panel int he record context.*/
+.create-new-object{
+	display: none;
+}
+
+[title='Checked Out Records']{
+    display: none;
+}
+
+[title='Created Records']{
+    display: none;
+}
+[title='Browse via User Label']{
+    display: none;
+}
+hr.listPadding.listPaddingRight{
+	display: none;
+}
+.command-panel-padding-left.listPaddingRight.listPaddingBottom{
+	display: none;
+}
+
+/* Hide unwanted options at the record level*/
+#locationMenu{
+	display: none;
+}
+
+#requestMenu{
+	display: none;
+}
+
+#workflowMenu{
+	display: none;
+}
+
+/* RM4ED-specific styling */
+
+
+.form-control:focus{
+	border-color: #75b540;
+}
+
+textarea{
+	border-color: #75b540 !important;
+}
+
+.btn.btn-flat.btn-primary,
+.btn.btn-icon.btn-primary {
+  color: #75b540;
+  background-color: transparent;
+}
+.btn.btn-flat.btn-primary:not(.btn-icon-only),
+.btn.btn-icon.btn-primary:not(.btn-icon-only) {
+  min-width: unset;
+}
+.btn.btn-flat.btn-primary:focus,
+.btn.btn-icon.btn-primary:focus {
+  color: #75b540;
+  background-color: rgba(54, 204, 204, 0.2);
+  box-shadow: unset;
+  animation: none;
+}
+.btn.btn-flat.btn-primary:hover,
+.btn.btn-icon.btn-primary:hover {
+  color: #75b540;
+  background-color: rgba(54, 204, 204, 0.05);
+}
+.btn.btn-flat.btn-primary:active,
+.btn.btn-flat.btn-primary:focus:active,
+.btn.btn-icon.btn-primary:active,
+.btn.btn-icon.btn-primary:focus:active {
+  color: #75b540;
+  background-color: rgba(54, 204, 204, 0.1);
+}
+.btn.btn-flat.btn-primary:hover,
+.btn.btn-flat.btn-primary:focus:hover,
+.btn.btn-icon.btn-primary:hover,
+.btn.btn-icon.btn-primary:focus:hover {
+  box-shadow: none;
+}
+.btn.btn-flat.btn-primary:focus:hover:active,
+.btn.btn-icon.btn-primary:focus:hover:active {
+  box-shadow: none;
+}
+.btn.btn-flat.btn-primary:disabled,
+.btn.btn-flat.btn-primary:disabled:hover,
+.btn.btn-flat.btn-primary:disabled:active,
+.btn.btn-icon.btn-primary:disabled,
+.btn.btn-icon.btn-primary:disabled:hover,
+.btn.btn-icon.btn-primary:disabled:active {
+  background-color: transparent;
+  color: #cececf;
+}
+
+.btn-primary{
+	background-color: #75b540;
+}
+
+.button-primary:hover,
+.btn-primary:hover{
+	background-color: #75b540;
+}
+
+.btn.btn-primary, 
+.open > .dropdown-toggle.btn-primary{
+	background-color: #75b540;
+	border-color: #75b540;
+}
+
+.btn.btn-primary:hover, 
+.open > .dropdown-toggle.btn-primary:hover{
+	background-color: #75b540;
+}
+
+.btn.btn-primary:focus, 
+.open > .dropdown-toggle.btn-primary:focus{
+	background-color: #75b540;
+	border-color: #75b540;
+}
+
+.btn.btn-primary:active, 
+.open > .dropdown-toggle.btn-primary:active{
+	background-color: #75b540;
+}
+
+.btn.btn-primary:active, 
+.btn.btn-primary:focus:active,
+.open > .dropdown-toggle.btn-primary:active,
+.open > .dropdown-toggle.btn-primary:focus:active{
+	background-color: #75b540;
+}
+
+.btn.button-primary{
+	background-color: #75b540;
+}
+
+.btn.button-primary:hover{
+	border-color: #75b540;
+}
+
+.button-accent:focus, .button-primary:focus{
+	color: #fff;
+}
+
+
+/* RECORDS PANEL context */
+.HPRM-Record-Action-Item:hover{
+	background-color: rgba(54, 204, 204, 0.2)	
+}
+.HPRM-Record-Action-Item-Selected{
+	border-left: 4px solid #75b540;
+	background-color: rgba(54, 204, 204, 0.2)
+}
+.panel-header{
+	background-color: #75b540;
+}
+.gtreetable .node-selected .node-container{
+	border-left: 4px solid #75b540;
+	background-color: rgba(54, 204, 204, 0.05);
+}
+
+.node .node-collapsed .node-saved .nodehovered{
+	rgba(54, 204, 204, 0.05);
+}
+
+.command-panel .btn:focus{
+	border: 1px solid #419ffd !important;
+}
+
+/* NEW RECORD context */
+a.cancel {
+	color: #75b540;
+	font-weight: bold;
+}
+.itempickerBorder{
+	border: solid 1px #75b540 !important;
+}
+
+.picker-result-expansion{
+	border-color: #75b540;
+}
+
+.input-group-addon{
+	border: 1px solid #75b540;
+}
+
+input[type='text']{
+	border-color: #75b540;
+}
+
+.hp-icon{
+	color: #75b540;
+}
+
+.field-error-display{
+	color: #75b540 !important;
+}
+
+/* FORM SEARCH context */
+.savedSearchOvrLy div > .nav-tabs > li.active, 
+.searchEditorOverlay div > .nav-tabs > li.active{
+	border-bottom: #75b540 4px solid !important;
+}
+
+
+
+
+/*
+.btn.btn-flat.btn-primary, .btn.btn-icon.btn-primary{
+	color: rgb(210,35,42);
+}
+*/
+#show-saved-searches {
+	background-color: rgb(210,35,42);
+}
+
+
+
+#main-menu li ul li{
+	border-left: 1px solid #fff;
+}
+
+.lgfl-footer{
+	background-color: #444 !important;	
+}
+
+
+#custom-footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;            /* Footer height */
+}
+
+
+/* DOCUMENT VIEWER */
+.modal-full-header{
+	background-color: #000033;
+}
+
+#DocumentViewerPanel_3{
+	background-color: #000033 !important;
+}
+
+.btn-revision{
+	background-color: #000033 !important;
+}
+
+.btn .btn-stroke .button-primary{
+	border-color: #fff;
+}
+.button-primary.btn-stroke {
+	color: #fff;
+}
+
+
+
+div.as-spa-dash-main{
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../images/background.jpg') no-repeat bottom;
+  height: 95%;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+
+}
+
+
+
+
+div.as-spa-dash-main-secondary{
+	background-color: none !important;
+	background-color:rgba(255,0,0,0);
+	
+	
+	position: relative;
+	z-index: 999;
+}
+
+#gilbyim-bottom-panel{
+	height: 200px; 
+	width: 100%;
+	position: absolute; 
+	bottom: 0; 
+	z-index: 0;
+}
+
+#gilbyim-bottom-panel-left{
+	float: left; 
+	height: 100%; 
+	width: 30%;
+}
+
+#gilbyim-bottom-panel-left img{
+	height: 50px; 
+	position: absolute; 
+	bottom: 30px;
+	left: 30px;	
+}
+
+#gilbyim-bottom-panel-center{
+	margin: auto;
+	position: relative;
+	height: 100%; 
+	width: 30%;
+	}
+
+#gilbyim-bottom-panel-center p{
+	position: absolute;
+	width: 100%;
+	text-align: center;
+	color: #fff;
+	bottom: 10px;
+}
+#gilbyim-bottom-panel-right{
+	float: right; 
+	height: 100%; 
+	width: 30%;
+}
+#gilbyim-bottom-panel-right img{
+	height: 50px; 
+	position: absolute; 
+	bottom: 30px;
+	right: 30px;	
+}
+.btn.button-primary.btn-stroke{
+	border-color: #FFF;
+}
+
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: 'Noto Sans', sans-serif;
+}
+html,
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+.record-heading {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-page-heading:hover {
+  font-family: 'Noto Sans', sans-serif;
+}
+.ViewAllBtn {
+  font-family: 'Noto Sans', sans-serif;
+}
+.as-spa-body .nav-tabs > li.active > div > a,
+.as-spa-body .nav-tabs > li.active > div > a:focus {
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+}
+.as-spa-body .nav-tabs > li.active > div > a:hover {
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+}
+.dropdown-menu li a {
+  font-family: 'Noto Sans', sans-serif;
+}
+#hpe-rm-text {
+  font-family: 'Noto Sans', sans-serif;
+}
+#profile-user-details.block.m-t-xs {
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+}
+.HPRM-Record-Action-Item div {
+  font-family: 'Noto Sans', sans-serif;
+  font-size: 16px;
+}
+.HPRM-Record-Action-Item-Selected div {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-recExt {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-recExtHome {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-deluxe-title {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-deluxe-header-left {
+  font-family: 'Noto Sans', sans-serif;
+  }
+.HPRM-deluxe-header-right {
+  font-family: 'Noto Sans', sans-serif;
+}
+.HPRM-deluxe-bold {
+  font-family: 'Noto Sans', sans-serif;
+ }
+#globalSearchPanel #globalSearch .search-input-container .search-control .global-search-finder-btn .overflowEllipsis {
+  font-family: 'Noto Sans', sans-serif;
+}
+.navCap {
+  font-family: 'Noto Sans', sans-serif;
+  /*color:#656668;*/
+}
+.nav-header .text-muted {
+  font-family: 'Noto Sans', sans-serif;
+}
+.mainObjectAccordion .panel .panel-heading a > .panel-title div {
+  font-family: 'Noto Sans', sans-serif;
+}
+.modal-header .h3 {
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+}
+.btn-properties {
+  font-family: 'Noto Sans', sans-serif;
+}
+.dashboard-container-footer {
+  font-family: 'Noto Sans', sans-serif;
+}
+.command-panel-accordion-header {
+  font-family: 'Noto Sans', sans-serif;
+}
+.command-panel-accordion-header .command-panel-accordion-sub-header {
+  font-family: 'Noto Sans', sans-serif;
+}
+.panel-label .h5 {
+  font-family: 'Noto Sans', sans-serif';
+}
+.search-modal-header .h3 {
+  font-family: 'Noto Sans', sans-serif;
+  text-transform: uppercase;
+}
+.search-builder-h4 {
+  font-family: 'Noto Sans', sans-serif;
+}
+.search-builder-h5 {
+  font-family: 'Noto Sans', sans-serif;
+}
+.search-panel-header-title {
+  font-family: 'Noto Sans', sans-serif;
+}
+.viewer-header-title {
+  font-family: 'Noto Sans', sans-serif;
+}
+.properties-heading {
+  font-size: 14px;
+  font-family: 'Noto Sans', sans-serif;
+  font-weight: 700;
+}
+.properties-list td {
+  padding: 5px;
+  font-size: 14px;
+  font-family: 'Noto Sans', sans-serif;
+}
+.added-property-header {
+  text-transform: uppercase;
+  font-family: 'Noto Sans', sans-serif;
+}
+.available-property-header {
+  text-transform: uppercase;
+  font-family: 'Noto Sans', sans-serif;
+}
+.clsCaption {
+  font-family: 'Noto Sans', sans-serif;
+}

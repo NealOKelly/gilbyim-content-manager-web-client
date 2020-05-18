@@ -1,0 +1,171 @@
+﻿<div class="progress-notification-window" data-bind="attr: { id: $data.id }, visible: visible" role="alert">
+
+	<div class="hprm-modal-header" style="border-bottom: 1px solid #404040; min-height: 60px;">
+		<div class="" style="padding-top: 10px">
+			<!-- Heading -->
+			<div style="display: inline-block; white-space: nowrap; margin-right: 20px;">
+				<div class="h4" data-bind="text: heading"></div>
+			</div>
+
+			<div class="pull-right" style="display: inline-block">
+				<!-- ko if: finished -->
+				<!-- close button -->
+				<button role="button" tabindex="0"  name="button" id="CloseButton" class="btn button-primary" data-bind="click: hideNotification, text: HP.HPTRIM.Messages.web_close, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_close}"></button>
+				<!-- /ko -->
+				
+                <!-- ko if: showErrorControls -->
+				<!-- cancel button -->
+				<button role="button" tabindex="0"  name="button" id="CancelProcessingButton" class="btn button-primary" data-bind="click: cancelProcessing, text: HP.HPTRIM.Messages.web_cancel, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_cancel }"></button>
+				<!-- /ko -->
+
+                <!-- ko if: showWarningControls -->
+                <!-- cancel button -->
+                <button role="button" tabindex="0"  name="button" id="CancelProcessingButton" class="btn button-primary" data-bind="click: cancelProcessing, text: HP.HPTRIM.Messages.web_cancel, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_cancel }"></button>
+                <!-- /ko -->
+
+
+				<!-- ko ifnot: finished -->
+				<!-- ko ifnot: showErrorControls -->
+                <!-- ko ifnot: showWarningControls-->
+				<!-- cancel button -->
+				<button role="button" tabindex="0"  name="button" id="CancelProcessingButton" class="btn button-primary" data-bind="click: cancelCallback, text: HP.HPTRIM.Messages.web_cancel, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_cancel }"></button>
+				<!-- /ko -->
+				<!-- /ko -->
+                <!-- /ko -->
+			</div>
+
+		</div>
+	</div>
+	<div style="margin: 10px;">
+		<!-- ko ifnot: finished -->
+		    <!-- ko if: showErrorControls -->
+		    <div class="" data-bind="text: HP.HPTRIM.Messages.web_progressErrorHeading "></div>
+		    <!-- /ko -->
+		    <!-- Progress bar -->
+		    <div class="">
+			    <div class="progress">
+				    <div class="progress-bar fast-progress-bar" role="progressbar"
+					     aria-valuemin="0" aria-valuemax="100" data-bind="text: function() {return progressValue() + '%' }(), style: { width: function(){ return progressValue() + '%'; }() }, attr: { 'aria-valuenow': progressValue() }">
+				    </div>
+			    </div>
+
+		    </div>
+            <!-- ko if: currentItemMessage -->
+            <div class="list-padding">
+                <!-- Object Message (if it exists) -->
+                <!-- ko if: currentItemError -->
+                <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="warning_x16"></div>
+                <!-- /ko -->
+                <!-- ko if: currentItemWarning -->
+                <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="caution_16"></div>
+                <!-- /ko -->
+                <div style="display: inline-block" data-bind="text: currentItemMessage"></div>
+            </div>
+            <!-- /ko -->
+
+		    <div class="list-padding">
+			    <!-- Object Title -->
+			    <div class="HPRM-deluxe-title" data-bind="text: currentItemName"></div>
+		    </div>
+		<!-- /ko -->
+
+        <!-- ko if: finished -->
+            <!-- success count -->
+            <div>
+                <div style="height: 16px; width: 16px; display: inline-block;vertical-align:text-top; margin-right: 10px" class="ok_16"></div>
+                <div data-bind="text: successCountMessage" style="display: inline-block"></div>
+            </div>
+            <!-- ko if: warningCountMessage -->
+            <!-- warning count -->
+            <div>
+                <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="caution_16"></div>
+                <div data-bind="text: warningCountMessage" style="display: inline-block"></div>
+            </div>
+            <!-- /ko -->
+            <!-- ko if: failedCountMessage -->
+            <div>
+                <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="warning_x16"></div>
+                <div data-bind="text: failedCountMessage" style="display: inline-block"></div>
+            </div>
+            <!-- /ko -->
+		    <!-- ko if: errorList().length > 0 -->
+		    <div class="list-padding" style="margin: 5px;">
+			    <div class="list-padding well well-lg" id="progressWarningErrorLog" data-bind="visible: prettyView" style="overflow-y:scroll; background-color:white; height:100px">
+                    <!-- ko if: errors -->
+
+                    <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="warning_x16"></div>
+                    <div style="display: inline-block" data-bind="text: HP.HPTRIM.Messages.web_errors" ></div>
+				    <ul data-bind="foreach: errorList">
+                        <!-- ko if: !warning -->
+					    <li>
+						    <div data-bind="text: name"></div>
+						    <div data-bind="text: message"></div>
+					    </li>
+                        <!-- /ko -->
+				    </ul>
+                    <!-- /ko -->
+                    <!-- ko if: warnings -->
+                    <div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="caution_16"></div>
+                    <div style="display: inline-block" data-bind="text:  HP.HPTRIM.Messages.web_warnings"></div>
+                    <ul data-bind="foreach: errorList">
+                        <!-- ko if: warning -->
+                        <li>
+                            <div data-bind="text: name"></div>
+                            <div data-bind="text: message"></div>
+                        </li>
+                        <!-- /ko -->
+                    </ul>
+                    <!-- /ko -->
+			    </div>
+                <div  data-bind="visible: !prettyView()" >
+                    <textarea id="processLogComputedText" data-bind="value: processLogComputedText" style="overflow-y:scroll; background-color:white; height:100px; width: 100%"></textarea>
+                </div>
+		    </div>
+            <button role="button" name="button" tabindex="0" id="blah" class="btn button-accent" data-bind="click:copyToClipboard, text: HP.HPTRIM.Messages.web_copy, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_copy}"></button>
+
+		    <!-- /ko -->
+        <!-- /ko -->
+	</div>
+
+
+	<div style="margin: 10px;">
+		<!-- ko if: processLogText -->
+		<div>
+			<div style="height: 16px; width: 16px;display: inline-block; vertical-align:text-top; margin-right: 10px" class="caution_16"></div>
+			<div data-bind="text: processLogText" style="display: inline-block"></div>
+		</div>
+		<!-- /ko -->
+	</div>
+
+	<div class="hprm-modal-footer" style="margin-bottom: 30px;">
+
+        <!-- ko if: showWarningControls -->
+        <div data-bind="text: HP.HPTRIM.Messages.web_shouldIgnoreWarning"></div>
+        <div>
+        <!-- ignore this warning button -->
+        <button role="button" name="button" tabindex="0"  id="continue" class="btn btn-sm button-accent" data-bind="click: ignoreWarning, text: HP.HPTRIM.Messages.core_yes, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.core_yes}"></button>
+        <!-- ignore this and all future warnings button -->
+        <button role="button" name="button" tabindex="0"  id="ignoreErrors" class="btn btn-sm button-accent" data-bind="click: IgnoreAllWarnings, text: HP.HPTRIM.Messages.web_yesToAllWarnings, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_yesToAll}"></button>
+        <!-- skip current object button -->
+        <button role="button" name="button" tabindex="0"  id="continue" class="btn btn-sm button-accent" data-bind="click: skipWarning, text: HP.HPTRIM.Messages.core_no, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.core_no}"></button>
+        <!-- skip all objects with this warning -->
+        <button role="button" name="button" tabindex="0"  id="continue" class="btn btn-sm button-accent" data-bind="click: skipAllWarnings, text: HP.HPTRIM.Messages.web_noToAllWarnings, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_noToAll}"></button>
+        </div>
+        <!-- /ko -->
+
+		<!-- ko if: showErrorControls -->
+		<!-- continue button -->
+        <div data-bind="text: HP.HPTRIM.Messages.web_shouldContinue"></div>
+		<button role="button" name="button" tabindex="0" id="continue" class="btn btn-sm button-accent" data-bind="click: continueAfterError, text: HP.HPTRIM.Messages.web_continueButtonCaption, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_continueButtonCaption}"></button>
+		<!-- ignore errors button -->
+		<button role="button" name="button" tabindex="0"  id="ignoreErrors" class="btn btn-sm button-accent" data-bind="click: ignoreErrors, text: HP.HPTRIM.Messages.web_continueAfterAllErrors, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_continueAfterAllErrors}"></button>
+        <!-- cancel button -->
+        <button role="button" name="button" tabindex="0"  id="CancelProcessingButton" class="btn button-primary" data-bind="click: cancelProcessing, text: HP.HPTRIM.Messages.web_cancel, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_cancel }"></button>        
+        <!-- /ko -->
+
+        <!-- ko if: finished() && errorList().length > 0-->
+        <button role="button" name="button" tabindex="0" id="errors" class="btn button-accent" data-bind="click: searchErrors, text: HP.HPTRIM.Messages.web_viewErrors, clickBubble: false, attr: { 'title': HP.HPTRIM.Messages.web_viewErrors }"></button>
+        <!-- /ko -->
+
+	</div>
+</div>

@@ -1,0 +1,75 @@
+<div id="custom-header">
+<div>
+<!-- HTML content contained within this file MUST be included inside the a <div> with the ID of "custom-top".-->
+	 <div class="header-background">
+
+        <!-- Desktop masthead with LGfL logo, search bar and support helpline -->
+        <div class="container">
+            <div class="row">
+                <!-- LGfL desktop logo -->
+                <div class="col-sm-3 col-md-5 col-lg-5 lgfl-logo-desktop hidden-xs">
+                    <span><a href="https://lgfl.net" target="_blank"><img id="imgLogo" src="Content/custom/html/img/lgfl-logo-new.png" alt="LGfL logo and home button" /></a></span>
+                    <span class="hidden-sm"><a href="https://report.iwf.org.uk/en" target="_blank"><img class="img-responsive" id="iwf-logo" src="Content/custom/html/img/iwf-member-badge.png" alt="IWF logo" /></a></span>
+                </div>
+                <!-- end .lgfl-logo-desktop -->
+                <div class="col-sm-8 col-md-7 col-lg-6 pull-right">
+                    <div class="row">
+
+                        <div id="brandLgflHeader">
+							<!-- support-helpline -->
+							<div class="col-sm-12 hidden-xs">
+								<ul class="list-inline header-links">
+
+									<li><a href="http://londonmail.lgfl.net" target="_blank"><span class="londonmail glyphicon glyphicon-envelope"></span> LondonMail </a></li>
+									<li><a href="http://staffmail.lgfl.net" target="_blank"><span class="staffmail glyphicon glyphicon-envelope"></span> StaffMail</a></li>
+									<li>Helpline 020 82 555 555</li>
+								</ul>
+							</div>
+
+                        
+						</div>
+                        <!-- end .support-helpline -->
+
+                        <!-- search form -->
+                        <div class="col-sm-12">
+                            <div id="collapse-search" class="searchbar collapse">
+                                <div class="input-group">
+                                    <input name="ctl00$searchQuery" type="text" id="searchQuery" class="form-control" placeholder="Find learning resources and services ..." onchange="performSearch();" />
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default lgfl-red" type="submit" onclick="performSearch();"><span class="glyphicon glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                                <!-- /input-group -->
+                            </div>
+                            <!-- close .searchbar -->
+                        </div>
+
+                    </div>
+                    <!-- end row -->
+                </div>
+                <!-- end col -->
+
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </div>
+	<div id="rm4-search-container">
+		<div class="search-control">
+			<input title="< Enter Search Query >" class="clearable x" id="global-search-input" aria-label="< Enter Search Query >" type="search" autocomplete="off" data-bind="value: searchField, enterKey: onSearchEnter, valueUpdate:'afterkeydown',&#10;">
+
+			<div class="pull-right" style="padding-right: 8px"><span tabindex="0" title="Remove" class="panelclose-grey" aria-hidden="true" style="padding-left: 3px; width:12px; height:12px; cursor: pointer;" data-bind="click: function() { $data.removeHandler() }, enterKey:function() { $data.removeHandler() }, clickBubble:false, attr: {title: HP.HPTRIM.Messages.web_remove}"></span></div>
+			
+				<div class="overflowEllipsis">
+					<a title='content:""Elasticsearch" Or anyWord:Pippa" ' href="#" data-bind="click: function() { $data.actionHandler() }, text: $data.friendlyString, attr: {'title': $data.friendlyString}">content:""Elasticsearch" Or anyWord:Pippa" </a>
+				</div>
+				<!-- Pull right will bring it across on the same line as the search field. -->
+
+			<button title="Search" class="btn button-primary global-search-btn " style="box-shadow:none;min-width:10px;" aria-label="Search" type="submit" data-bind="click: executeSearch, clickBubble: false, attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }">
+					<div title="Search" class="search_24" style="height: 24px; width: 24px;" aria-label="Search" data-bind="attr: {title: HP.HPTRIM.Messages.web_search , 'aria-label': HP.HPTRIM.Messages.web_search }"></div>
+				</button>
+					
+		</div>
+		</div>	
+	</div><!-- end rm4ed-search-container -->
+<!-- end #custom-header -->

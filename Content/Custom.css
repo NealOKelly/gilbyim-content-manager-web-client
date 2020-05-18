@@ -1,0 +1,72 @@
+/*
+	User Customisation for Cascading Style Sheets.
+	
+
+	To leverage custom styles, please use the following CSS file to do so.
+	All styles in this file will be applied last.
+*/
+
+
+/* Global Search Component Styles */
+div.as-spa-header {
+	/*
+	background-color: #008aca;
+	border-bottom: 4px solid #0080bc;
+	*/
+}
+
+/* Content Panel Styles */
+div.as-spa-content-primary {
+	/*
+	background-color: #747474;
+	color: #f5f5f5;
+	border-right: 1px solid #c4c4c4;
+	font-size: small;
+	*/
+}
+
+div.as-spa-content-primary {
+    border-left: 4px solid #efefef;
+    background: #f6f7f7;
+}
+
+div.as-spa-content-main {
+    background: #ffffff;
+    padding-bottom: 60px;
+}
+
+/* Content Manager - Navigation Styles */
+.sidebar-nav {
+	/*
+	border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+	background-image: -webkit-linear-gradient(left, color-stop(#333333 10px), color-stop(#222222 10px));
+	background-image: linear-gradient(to right, #333333 10px, #222222 10px);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff333333', endColorstr='#ff222222', GradientType=1);
+	*/
+}
+
+div.as-spa-nav {
+	/*
+	background-color: #262626;
+	color: white;
+	*/
+}
+
+/* Content Manager - Custom Active Naivgation item left margin colour */
+.nav > li.active {
+	/*
+	border-left: 9px solid #008fcc;
+	*/
+}
+
+/* Content Manager - List Panel Styles */
+.trimItemListPanel {
+	margin-bottom:60px;
+	/*
+	background-color: #f5f5f5;
+	color: #747474;
+	*/
+     /*padding: 14px;*/
+}
+

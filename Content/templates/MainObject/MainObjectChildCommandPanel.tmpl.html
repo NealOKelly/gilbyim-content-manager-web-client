@@ -1,0 +1,25 @@
+﻿
+<div id="todoItemChildReferenceCommandPanel" data-bind="attr: { 'class': cssClass() + ' command-panel-padding-left listPaddingRight ' }">
+	<!-- Header -->
+	<div>
+		<div class="command-panel-header-title" data-bind="text: title"></div>
+	</div>
+</div>
+
+<div class="HPRMSummaryTextLink" style="margin-top: 15px; margin-bottom: 10px; cursor: pointer">
+	<div data-bind="click: back, attr: { 'class': 'HPRM-Record-Action-Item', title: returnToParentTypeName}">
+			<!--<img style="height:24px; width: 24px;" class="listPadding" data-bind="attr: {alt: returnToParentTypeName, src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADaSURBVEhLtZRBDoJADEUxegqv4u3Uy8gpvIkbNy5dGCNqxjbhk077VRadn7wYXuHPAIaulNIUKjOhMhMqM6HSgrDZHKi0IGw2Byoty373ZN6DBO+FRcpfwpvNPEjwXoCV7FzL5ffB5h4keC8UKR1096t+Pxwvpw07x4ME74XZ+fTsz7fr+h9jf+irDhaHbfmFLHr/xthf9SnVASu1sGIw9ld9ShBycrtHBKR8eslszkCC9wKYO8n/mwK9C12EzTxI8F54ZIF2nwrALpwLlZlQmQmVmVCZSeN03QeDNOzPlagdIwAAAABJRU5ErkJggg=='}" />&nbsp-->
+			<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;"></div>
+			<div style="display:inline-block" data-bind="text: returnToParentTypeName"></div>
+	</div>
+</div>
+
+<hr class="listPadding listPaddingRight" style="margin-top: 20px; border-top: 1px solid #fff;">
+
+<div class="command-panel-padding-left create-new-object" >
+	<!-- ko if: showAddButton() -->
+	<div data-bind="click: addChildObjectButtonClick, attr: { 'class': 'addRecord', title: createCaption, id:'NAV_CREATERECORD' }" style="cursor: pointer;" >
+		<div class="spn-plus-icon">+</div><div class="spn-title" data-bind="text:HP.HPTRIM.Messages.core_new"></div>
+	</div>
+	<!-- /ko -->
+</div>

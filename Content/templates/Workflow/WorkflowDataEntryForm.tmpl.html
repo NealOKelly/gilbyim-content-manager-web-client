@@ -1,0 +1,22 @@
+﻿
+
+
+<div data-bind="if:showForm" class="panel-body">
+
+
+	<div class="HPRM-deluxe-list-header">
+		<label style="margin-bottom: 0 !important; font-weight: normal !important;" for="workflowName" data-bind="text:HP.HPTRIM.Messages.web_name"></label>
+	</div>
+	<textarea id="workflowName" rows="2" cols="50"  data-bind="value:workflowName" />
+
+	<br />
+    
+    <!-- ko if: recordSupplied() || workflowHasInitialRecord()  -->
+    <div data-bind="hprm_field: recInitiatingRecordAs"></div>
+    <div data-bind="hprm_field: initiatingRecordBehavior"></div>
+    <!-- /ko -->
+    <br />
+	<button role="button" name="button" type="submit" id="saveBtn" data-bind='text: HP.HPTRIM.Messages.dp_cap_SaveConfig, click:submit' class="btn button-primary" style="display: inline-block"></button>
+	<button role="button" name="button" type="button" id="cancelBtn" class="btn btn-accent dark-grey-button" style="display: inline-block" data-bind='text: HP.HPTRIM.Messages.web_dp_cancelText, click:close'></button>
+</div>
+

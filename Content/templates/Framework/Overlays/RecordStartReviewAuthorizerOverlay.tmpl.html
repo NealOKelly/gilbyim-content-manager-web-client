@@ -1,0 +1,30 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: taskTitle()"></div>
+    </div>
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body">
+        <!-- ko if: taskCaption -->
+        <div class="HPRM-deluxe-list-header  clsCaption" data-bind="text: taskCaption()"></div>
+        <!-- /ko -->
+        <div style="display: inline-block; min-width: 360px; width: 100%; height: auto;">
+                <label style="margin-bottom: 0 !important; font-weight: normal !important;" data-bind="text:dueDateFieldCaption()"></label>
+            <div data-bind="hprm_field:dueDateField" />
+        </div>
+    </div>
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+                <button id="saveBtn" role="button" name="button" data-bind='click: doTask, text: HP.HPTRIM.Messages.dp_cap_SaveConfig, title: HP.HPTRIM.Messages.dp_cap_SaveConfig,attr: { class: "btn btn-flat btn-primary " + $data.saveBtnClass() }' class='btn btn-flat btn-primary'></button>
+                <button id="cancelBtn" role="button" name="button" data-bind='click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, title: HP.HPTRIM.Messages.web_dp_cancelText' class='btn btn-flat btn-secondary'></button>
+                <!--ko if: $data.actionView -->
+                    <button id="viewBtn" role="button" name="button" data-bind='click:viewHandler, text: HP.HPTRIM.Messages.vwr_tbar_view, title: HP.HPTRIM.Messages.vwr_tbar_view' class='btn btn-flat btn-secondary'></button>
+                <!-- /ko -->
+            </div>
+    </div>
+</div>

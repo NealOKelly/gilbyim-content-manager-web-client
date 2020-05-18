@@ -1,0 +1,27 @@
+﻿<div class="command-panel-search-builder" data-bind="attr: {  id: $data.id }, visible: visible" style="width:290px;padding: 5px 20px 5px 20px">
+    <div class="search-panel-header-title" data-bind="text: title"></div>
+    	<div style="padding-bottom:15px">
+		<!-- ko hprm_field:txtSearchSearchClause --> <!-- /ko -->
+		<div style="display:block;height:15px;margin:10px 0 0 3px;">
+            <span data-bind="visible: isFilteringSearchClauses, text: HP.HPTRIM.Messages.web_searching + HP.HPTRIM.Messages.web_blah">
+            </span>
+		</div>
+            
+            <hr style="margin-top:0px; margin-bottom:0px" />
+            <div style="padding: 5px 0px 5px 0px;" data-bind="text:selectionCaption"></div>
+
+            <div class="btn-group">
+                <button role="button" type="button" id="alphabeticalView" data-bind="click:showAlphabetical, text: HP.HPTRIM.Messages.web_searchAlphabetical, attr: {class: alphabeticalButtonClass()}" tabindex="0"></button>
+                <button role="button" type="button" id="categoryView" data-bind="click:showCategories, text: HP.HPTRIM.Messages.web_searchByCategory, attr: {class: categoryButtonClass()}" tabindex="0"></button>        
+            </div>
+    	</div>
+	
+	<div class="content" style="height:380px; overflow-y:scroll" >
+
+        <!-- ko if: loading -->
+        <div data-bind="text: HP.HPTRIM.Messages.web_loading "></div>
+        <!-- /ko -->
+		<div class="gtreetable table " data-bind="attr:{'id': searchClausesContainerId }"></div>
+	</div>
+	
+</div>

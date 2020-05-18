@@ -1,0 +1,6 @@
+﻿
+
+<div style="display: inline-block; margin-bottom: 5px; font-weight: bold; color: #000;" data-bind="text: strOnlySupportThreeDashboarrdItems"></div>
+<div data-bind="foreach: startupCheckboxes ">
+	<div data-bind="hprm_field:$data, event: { 'keyup': function () {$parent.keyboardNavEnterKeyPress($data)}}" tabindex="0"></div>
+</div>

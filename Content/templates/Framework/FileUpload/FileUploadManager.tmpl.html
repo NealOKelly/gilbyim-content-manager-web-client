@@ -1,0 +1,24 @@
+﻿
+<div class="as-spa-content-primary" style="width: 15%;">
+	<div data-bind="hprm_field: rtyField" />
+	<div data-bind="hprm_field: chkDisplayDataEntry" />
+</div>
+
+<div tabindex="-1" class="as-spa-dash-main">
+	<div style="width:100%">
+						
+		<!-- ko template: {name: fileUploader.templateName, data : fileUploader} -->
+		<!-- /ko  -->
+					
+		<span style="padding:20px;">
+			<spa data-bind="text:statusMessage"></spa>
+		</span>
+		<br />
+		<span style="padding:20px;">
+				<span data-bind="as_panel: btnCheckInDocuments"></span>
+				<span data-bind="as_panel: btnCancel"></span>
+		</span>
+	</div>
+</div>
+
+

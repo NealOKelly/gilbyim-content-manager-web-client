@@ -1,0 +1,6 @@
+﻿<div class="btn-group" data-bind="foreach: $data.actions">
+    <button type="button" class="btn" data-bind="enable: $data.enabled, click: function () { if ($data.enabled()) { $data.actionHandler($data); } }, attr: { 'title': $data.tooltip }">
+        <i data-bind="attr: { 'class': $data.icon }, visible: $data.icon()"></i>
+        <!-- ko text: $data.caption --><!-- /ko -->
+    </button>
+</div>

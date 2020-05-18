@@ -1,0 +1,34 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:cancelHandler">
+    <div class="hprm-modal-header modal-header">
+        <div class="warning_24 media" style="width:24px; height:24px; display:inline-block "></div>
+        <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_warning" style="display:inline-block; vertical-align:top; padding-top:5px; padding-left:10px"></div>
+    </div>
+
+    <div class="modal-body hprm-modal-body" id="confirmFormOveray">
+        <div style="display: block">
+
+            <!-- ko if: warningBody -->
+            <div class="h6" style="padding-top:5px; padding-left:5px; padding-bottom:8px; " data-bind="text: warningBody"></div>
+            <!-- /ko-->
+
+            <!-- ko ifnot: warningBody -->
+            <div class="h6" style="padding-top:5px; padding-left:5px; padding-bottom:8px; " data-bind="text: HP.HPTRIM.Messages.web_oneOrMoreWarnings"></div>
+            <!-- /ko-->
+
+
+            <!-- ko if: warningMessageList().length == 0-->
+            <div data-bind="defaultWarning" style="padding-left:40px"></div>
+            <!-- /ko -->
+            <!-- ko foreach: warningMessageList -->
+            <div data-bind="text: $data" style="padding-left:40px"></div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+    <div class="modal-footer hprm-modal-footer">
+        <div style="max-width: 575px;">
+            <button id="okBtn" role="button" name="button" class="btn btn-flat btn-primary" data-bind="click: confirmHandler, text: HP.HPTRIM.Messages.web_ok, enable: buttonsActive, attr:{title: HP.HPTRIM.web_continueButtonCaption}"></button>
+            <button id="cancelBtn" role="button" name="button" class="btn btn-flat btn-secondary" data-bind="click: cancelHandler, text: HP.HPTRIM.Messages.web_dp_cancelText, enable: buttonsActive, attr:{title: HP.HPTRIM.web_dp_cancelText}"></button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+﻿<div id="activityDocumentCommandPanel">
+	<div class="command-panel-header-title" data-bind="text:currentActivityName"></div>
+</div>
+
+<div data-bind="visible: nonSelectionMade(), click: returnToActivityDocuments, attr: { 'class': 'HPRM-Record-Action-Item', title:HP.HPTRIM.Messages.vb_nts_Back }">
+		<!--<img style="height: 24px; width: 24px; display:inline-block" data-bind="attr: {alt: HP.HPTRIM.Messages.web_returnToActivityDocuments, src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADaSURBVEhLtZRBDoJADEUxegqv4u3Uy8gpvIkbNy5dGCNqxjbhk077VRadn7wYXuHPAIaulNIUKjOhMhMqM6HSgrDZHKi0IGw2Byoty373ZN6DBO+FRcpfwpvNPEjwXoCV7FzL5ffB5h4keC8UKR1096t+Pxwvpw07x4ME74XZ+fTsz7fr+h9jf+irDhaHbfmFLHr/xthf9SnVASu1sGIw9ld9ShBycrtHBKR8eslszkCC9wKYO8n/mwK9C12EzTxI8F54ZIF2nwrALpwLlZlQmQmVmVCZSeN03QeDNOzPlagdIwAAAABJRU5ErkJggg=='}" />&nbsp -->
+		<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;"></div>
+		<div style="display:inline-block" data-bind="text: HP.HPTRIM.Messages.vb_nts_Back"></div>
+</div>
+
+<div data-bind="visible: !nonSelectionMade(), click: returnToAttachTypeSelection, attr: { 'class': 'HPRM-Record-Action-Item', title:HP.HPTRIM.Messages.vb_nts_Back}">
+	<!--<img style="height: 24px; width: 24px;" class="listPadding" data-bind="attr: { alt: HP.HPTRIM.Messages.vb_nts_Back, src: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADaSURBVEhLtZRBDoJADEUxegqv4u3Uy8gpvIkbNy5dGCNqxjbhk077VRadn7wYXuHPAIaulNIUKjOhMhMqM6HSgrDZHKi0IGw2Byoty373ZN6DBO+FRcpfwpvNPEjwXoCV7FzL5ffB5h4keC8UKR1096t+Pxwvpw07x4ME74XZ+fTsz7fr+h9jf+irDhaHbfmFLHr/xthf9SnVASu1sGIw9ld9ShBycrtHBKR8eslszkCC9wKYO8n/mwK9C12EzTxI8F54ZIF2nwrALpwLlZlQmQmVmVCZSeN03QeDNOzPlagdIwAAAABJRU5ErkJggg=='}" />&nbsp-->
+	<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;"></div>
+	<span data-bind="text: HP.HPTRIM.Messages.vb_nts_Back"></span>
+</div>
+
+<div style="margin-top: 10px">
+
+	<div class="attach-record-type-list listPaddingRight" style="margin-top: 5px; margin-bottom:10px; cursor: pointer;">
+		<div class="leftPad h3 small" style="padding-bottom: 10px;" data-bind="text: HP.HPTRIM.Messages.rdr_documentType"></div>
+
+		<div data-bind="visible: (nonSelectionMade() || selectedOptions.isSuperCopySelected()), event : {click:attachSuperCopy}, attr: { 'class': selectedOptions.isSuperCopySelected()? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item',title: HP.HPTRIM.Messages.web_recordSupercopy}">
+			<div class="" data-bind="text: HP.HPTRIM.Messages.web_recordSupercopy"></div>
+		</div>
+		<div data-bind="visible: (nonSelectionMade() || selectedOptions.isElectronicSelected()), event : {click:attachElectronic}, attr: { 'class': selectedOptions.isElectronicSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: HP.HPTRIM.Messages.web_localElectronicFile }">
+			<div class="" data-bind="text: HP.HPTRIM.Messages.web_localElectronicFile"></div>
+		</div>
+		<div data-bind="visible: (nonSelectionMade() || selectedOptions.isSelectFromRecordManagerSelected()), event : {click:attachExistingRecord}, attr: { 'class':  selectedOptions.isSelectFromRecordManagerSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: HP.HPTRIM.Messages.web_record }">
+			<div class="" data-bind="text: HP.HPTRIM.Messages.web_record"></div>
+		</div>
+	</div>
+
+	<div class="leftPad listPaddingRight" data-bind="if:selectedOptions.isElectronicSelected() || selectedOptions.isSuperCopySelected()">
+		<!-- ko template: {name: $data.rtyField.template, data : $data.rtyField} -->
+		<!-- /ko -->
+	</div>
+	<!-- SEARCH QUERY CONTROLS -->
+	<div class="leftPad listPaddingRight" style="height: 150px;" data-bind="if:!selectedOptions.isElectronicSelected()">
+		<div style="width: 100%">
+			<label style="margin-top:15px; font-weight:500; margin-bottom:0;" for="searchInput" data-bind="text: HP.HPTRIM.Messages.web_attachExisting"></label>
+			<textarea class="listPaddingRight" id="searchInput" style="margin-top:0 !important;" data-bind="value: queryString, valueUpdate: 'afterkeydown', enterKey: finaliseQuery, attr: { placeholder: HP.HPTRIM.Messages.web_enterText +'...' }"></textarea>
+			<button role="button" name="button" style="display: inline-block; margin-top: 5px; margin-right:0;" class="btn button-primary pull-right" data-bind="event: { click: finaliseQuery }, attr: { title: HP.HPTRIM.Messages.web_initiateYourSearch }, text: HP.HPTRIM.Messages.web_search"></button>
+		</div>
+	</div>
+
+</div>

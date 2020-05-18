@@ -1,0 +1,27 @@
+<div class="field access-control" style="margin-bottom: 10px; width: 100%">
+	<div class="HPRM-deluxe-list-header">
+		<div data-bind="text: Caption, attr:{for: Id}" style="margin-bottom: 0 !important; font-weight: normal !important; display: inline-block;"></div>
+	</div>	
+
+	<!-- ko ifnot:Readonly-->
+		<div class="access-control-setting white-back" data-bind="event: { focus: focusCallback } ">
+			<table class="table table-striped">
+				<thead class="header" >
+					<th data-bind="text:HP.HPTRIM.Messages.web_access"></th>
+					<th data-bind="text:HP.HPTRIM.Messages.web_details"></th>
+					<th></th>
+				</thead>
+				<tbody data-bind="foreach:accessControlTypes()">
+					<tr data-bind="template: {name:template , data: $data } "></tr>
+				</tbody>
+			</table>
+		</div>
+	<!-- /ko -->
+
+
+	<!-- ko if:Readonly -->    
+    <div class="field-readonly cm-well " data-bind="foreach: $data.getAclAsArray(Value)">
+        <div data-bind="text:$data"></div>
+    </div>
+	<!-- /ko -->
+</div>

@@ -1,0 +1,57 @@
+﻿<div data-bind="attr: { 'class': cssClass }" style="height:100%;">
+	<div class="listPadding listPaddingRight">
+		<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_createReport"></div>
+	</div>
+
+	<div class="HPRMSummaryTextLinkNew">
+		<div class="HPRM-Record-Action-Item-New" data-bind="event: { click: cancel }">
+			<!--<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAADaSURBVEhLtZRBDoJADEUxegqv4u3Uy8gpvIkbNy5dGCNqxjbhk077VRadn7wYXuHPAIaulNIUKjOhMhMqM6HSgrDZHKi0IGw2Byoty373ZN6DBO+FRcpfwpvNPEjwXoCV7FzL5ffB5h4keC8UKR1096t+Pxwvpw07x4ME74XZ+fTsz7fr+h9jf+irDhaHbfmFLHr/xthf9SnVASu1sGIw9ld9ShBycrtHBKR8eslszkCC9wKYO8n/mwK9C12EzTxI8F54ZIF2nwrALpwLlZlQmQmVmVCZSeN03QeDNOzPlagdIwAAAABJRU5ErkJggg=="
+				 data-bind="text: HP.HPTRIM.Messages.vb_nts_Back, attr: { alt: HP.HPTRIM.Messages.vb_nts_Back }" />-->
+            <div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;"></div>
+			<span data-bind="text: HP.HPTRIM.Messages.vb_nts_Back, title: HP.HPTRIM.Messages.vb_nts_Back"></span>
+		</div>
+	</div>
+
+	<div class="listPadding listPaddingRight">
+		<ul style="padding: 10px 0 0 20px;">
+			<li><span data-bind="text: HP.HPTRIM.Messages.web_selectRecordsForReport"></span></li>
+			<li><span data-bind="text: HP.HPTRIM.Messages.web_selectTemplate"></span></li>
+			<li style="margin-bottom: 10px;"><span data-bind="text: HP.HPTRIM.Messages.web_clickReport"></span></li>
+		</ul>
+	</div>
+	<br />
+	<div class="row-fluid" style="display: none;">
+		<div class="listPadding listPaddingRight" style="width: 100%">
+			<!-- ko if: $data.itemList.getPlugin('searching') -->
+			<!-- ko as_panel: $data.itemList.getPlugin('searching') -->
+			<!-- /ko  -->
+			<!-- /ko -->
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div>
+			<!-- ko as_panel: $data.itemList -->
+			<!-- /ko  -->
+		</div>
+	</div>
+	<div class="listPadding listPaddingRight">
+		<div style="margin-top: 5px; margin-bottom: 5px;">
+			<div class="h1" style="margin: 0 ; margin-top: 20px;"><span data-bind="text: selectedCount"></span></div>
+			<span data-bind="text: HP.HPTRIM.Messages.web_items + ' ' + HP.HPTRIM.Messages.dp_cap_Selected"></span>
+		</div>
+
+		<br />
+		<div>
+			<!-- ko if: $data.getSelectedReportName() === "" || selectedCount() === 0 -->
+			<button role="button" name="button" class="btn btn-primary disabled" data-bind="text: HP.HPTRIM.Messages.web_reportButtonCaption, title: HP.HPTRIM.Messages.web_reportButtonCaption"></button>
+			<!-- /ko  -->
+			<!-- ko ifnot: $data.getSelectedReportName() === "" || selectedCount() === 0 -->
+			<a data-bind="attr: { href: reportUrl }, click: doReport" target="_blank">
+				<button role="button" name="button" class="btn btn-primary" data-bind="text: HP.HPTRIM.Messages.web_reportButtonCaption, title: HP.HPTRIM.Messages.web_report"></button>
+			</a>
+			<!-- /ko  -->
+
+		</div>
+		<iframe style="display: none" name="_report_target" title="_report_target" />
+	</div>
+</div>

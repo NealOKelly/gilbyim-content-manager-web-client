@@ -1,0 +1,11 @@
+﻿<div data-bind="attr: { 'class': $data.cssClass, id: $data.id }, visible: $data.visible">
+    <div class="h2" data-bind="text: $data.caption, visible: $data.caption"></div>
+    <ul class="nav" data-bind="foreach: $data.actions, css: $data.navClasses">
+        <li data-bind="css: { 'active': active() }, visible: visible">
+            <a href="#" data-bind="click: function () { actionHandler($data); }, attr: {'title' : $data.tooltip }">
+                <i data-bind="attr: { 'class': $data.icon }, visible: $data.icon()"></i>
+                <span data-bind="text: $data.caption"></span>
+            </a>
+        </li>
+    </ul>                       
+</div>

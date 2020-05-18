@@ -1,0 +1,15 @@
+﻿
+<div class="HPRM-deluxe-list-header" data-bind="if: _.has($data, 'Caption') && $data.Caption">
+	<!-- ko if: $data.Mandatory -->
+	<label style="margin-bottom: 0 !important; font-weight: normal !important; display:inline-block;" data-bind="text:Caption, attr:{ for: Id }"></label>
+	<div class="isMandatoryField" style="margin-bottom: 0 !important; font-weight: normal !important; display: inline-block;" data-bind="text: ' (' +  HP.HPTRIM.Messages.web_requiredCaption + ')'"></div>
+	<!-- /ko -->
+	<!-- ko ifnot: $data.Mandatory -->
+	<label style="margin-bottom: 0 !important; font-weight: normal !important;" data-bind="text:Caption, attr:{ for: Id}"></label>
+	<!-- /ko -->
+
+    <!-- ko if: (error() != "") -->
+    <label class="field-error-display" style="color:#FF454F !important" data-bind="text: error, attr: { title: HP.HPTRIM.Messages.vb_tio_Error }"></label>
+    <!-- /ko -->
+
+</div>

@@ -1,0 +1,26 @@
+﻿<div class="panel search-sort-panel">
+    <h4 data-bind="text: title"></h4>
+
+    <hr />
+    <div>
+        <div>1.</div>
+        <select id="firstSortField" style="height:31px; margin: 0 0 10px 0" data-bind="value: firstSortValue, options: firstSortSelector, optionsValue: 'Name', optionsText: 'Caption', selectedOption: firstSort, css:cssClass" />
+        <!-- ko hprm_field:firstSortDescendingCheckbox--><!-- /ko -->
+    </div>
+    <hr />
+    <div>
+        <div>2.</div>
+        <select id="secondSortField" style="height:31px; margin: 0 0 10px 0" data-bind="value: secondSortValue, options: secondSortSelector, optionsValue: 'Name', optionsText: 'Caption', selectedOption: secondSort, css:cssClass, enable:secondSortEnabled" />
+        <!-- ko hprm_field:secondSortDescendingCheckbox--><!-- /ko -->
+
+    </div>
+    <hr />
+    <div>
+        <div>3.</div>
+        <select id="thirdSortField" style="height:31px; margin: 0 0 10px 0" data-bind="value: thirdSortValue, options: thirdSortSelector, optionsValue: 'Name', optionsText: 'Caption', selectedOption: thirdSort, css:cssClass, enable:thirdSortEnabled" />
+        <!-- ko hprm_field:thirdSortDescendingCheckbox--><!-- /ko -->
+    </div>
+
+    <hr />
+    <div data-bind="hprm_field:saveSortsAsDefaultCheckbox"></div>
+</div>

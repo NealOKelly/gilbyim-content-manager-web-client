@@ -1,0 +1,105 @@
+﻿<!-- ko ifnot: (showingRecords() || showingActivitiesForWorkflow() ) -->
+
+<div data-bind="attr: { 'class': cssClass() + ' listPaddingRight ' }" style="padding-left: 10px;">
+	<div>
+		<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural"></div>
+	</div>
+	<div class="create-new-object" data-bind="if:hasWorkflowCreatePrm">
+        <!--<div data-bind="click: initiateWorkflowClick, attr: { 'class': 'addRecord', 'title': HP.HPTRIM.Messages.web_initiateWorkFlow, id:'NAV_INITIATEWORKFLOW' }, " style="cursor: pointer;" />-->
+		<div data-bind="click: initiateWorkflowClick, attr: { 'class': 'addRecord', 'title': HP.HPTRIM.Messages.web_initiateWorkFlow, id:'NAV_INITIATEWORKFLOW' }, " style="cursor: pointer;">
+            <div class="spn-plus-icon">+</div><div class="spn-title" data-bind="text: createObject"></div>
+       </div>
+	</div>
+</div>
+
+<!-- Workflow -->
+<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+<!--div class="h3 small listPadding" data-bind="text: HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural" style="padding-top: 15px; color:#3a3a3a"></div-->
+<div style="margin-top: 5px; margin-bottom:10px; cursor: pointer;">
+	<div data-bind="click: showWorkflows, attr: { 'class': workflowsSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item',title:HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural, 'aria-label':HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural}">
+		<div class="listPadding" data-bind="text: HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural"></div>
+	</div>
+</div>
+
+<!--Activities-->
+<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+<div class="h3 small listPadding" data-bind="text: HP.HPTRIM.Messages.web_activities" style="color: #3a3a3a"></div>
+<div style="margin-top: 5px; margin-bottom:10px; cursor: pointer;">
+	<div data-bind="click: showActivitiesDue, attr: { 'class': activitesDueSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: HP.HPTRIM.Messages.web_activitiesReadyToStart, 'aria-label': HP.HPTRIM.Messages.web_activitiesReadyToStart } ">
+		<div class="listPadding" data-bind="text:  HP.HPTRIM.Messages.web_activitiesReadyToStart"></div>
+	</div>
+
+	<div data-bind="click: showActivitiesIncomplete, attr: { 'class': activitesIncompleteSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title: HP.HPTRIM.Messages.web_activitiesIncomplete, 'aria-label': HP.HPTRIM.Messages.web_activitiesIncomplete } ">
+		<div class="listPadding" data-bind="text: HP.HPTRIM.Messages.web_activitiesIncomplete"></div>
+	</div>
+</div>
+
+<!-- /ko -->
+<!-- ko if: showingRecords() -->
+<!-- ko if: showingRecordsFromActivity() -->
+<div  data-bind="attr: { 'class': cssClass() + ' listPaddingRight ' }">
+	<div>
+		<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural"></div>
+	</div>
+</div>
+
+<div style="margin-top: 5px; margin-bottom:10px; cursor: pointer;">
+	<div data-bind="click: returnToActivities, attr: { 'class': workflowsSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title:HP.HPTRIM.Messages.web_activity, 'aria-label':HP.HPTRIM.Messages.web_activity}">
+			<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;"></div>
+			<div style="display:inline-block" data-bind="text: HP.HPTRIM.Messages.vb_nts_Back"></div>
+	</div>
+</div>
+
+<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+
+<div class="command-panel-padding-left listPaddingRight">
+	<div class="h3 small HPRM-action-panel-caption"   data-bind="text: HP.HPTRIM.Messages.web_records + ' - ' + HP.HPTRIM.Messages.web_activities + ':'"> </div>
+	<span data-bind="text: activityTitle()"></span>
+</div>
+
+<!-- /ko -->
+<!-- ko if: showingRecordsFromWorkflow() -->
+<div  data-bind="attr: { 'class': cssClass() + ' listPaddingRight ' }">
+	<div>
+		<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.Messages.web_workflow"></div>
+	</div>
+</div>
+
+<div class="HPRMSummaryTextLink" style="margin-top: 5px; margin-bottom: 10px; cursor: pointer">
+	<div data-bind="click: returnToWorkflow, attr: { 'class': workflowsSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title:HP.HPTRIM.Messages.web_activity,'aria-label':HP.HPTRIM.Messages.web_activity}">
+			<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;padding: 0px;"></div>
+			<div style="display:inline-block;padding: 0px;" data-bind="text: HP.HPTRIM.Messages.web_returnToWorkflows"></div>
+	</div>
+</div>
+
+<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+
+<div class="command-panel-padding-left listPaddingRight">
+	<div class="h3 small HPRM-action-panel-caption"  data-bind="text: HP.HPTRIM.Messages.web_records + ' - ' + HP.HPTRIM.Messages.web_workflow + ':'"></div>
+	<span data-bind="text: workflowTitle()"></span>
+</div>
+
+<!-- /ko -->
+<!-- /ko -->
+<!-- ko if: showingActivitiesForWorkflow() -->
+<div id="recordCommandPanel" data-bind="attr: { 'class': cssClass() + ' listPaddingRight ' }">
+	<div>
+		<div class="command-panel-header-title" data-bind="text: HP.HPTRIM.BaseObjectTypes.Workflow.CaptionPlural"></div>
+	</div>
+</div>
+
+<div class="HPRMSummaryTextLink" style="margin-top: 5px; margin-bottom: 10px; cursor: pointer">
+	<div data-bind="click: returnToWorkflow, attr: { 'class': workflowsSelected() ? 'HPRM-Record-Action-Item-Selected' : 'HPRM-Record-Action-Item', title:HP.HPTRIM.Messages.web_activity,'aria-label':HP.HPTRIM.Messages.web_activity}">
+			<div class="goback_x24" style="width:24px; height:24px; margin: 4px 5px 0px 0px;padding: 0px;"></div>
+			<div style="display:inline-block;padding: 0px;" data-bind="text: HP.HPTRIM.Messages.web_returnToWorkflows"></div>
+	</div>
+</div>
+
+<hr class="listPadding listPaddingRight" style="margin-top: 0; margin-bottom: 8px; border-top: 1px solid #dfdfdf;" />
+
+<div class="command-panel-padding-left listPaddingRight">
+	<div class="h3 small HPRM-action-panel-caption"   data-bind="text: HP.HPTRIM.Messages.web_activities + ' - ' + HP.HPTRIM.Messages.web_workflow + ':'"> </div>
+	<span data-bind="text: workflowTitle()"></span>
+</div>
+
+<!-- /ko -->

@@ -1,0 +1,25 @@
+﻿<!-- ko if: items().length == 0 -->
+<span class="listPadding" data-bind="text: HP.HPTRIM.Messages.web_noRecordsFound"></span>
+<!-- /ko  -->
+
+<!-- ko ifnot: items().length == 0 -->
+<div class="ready-search-container">
+	<ul class="ready-search-media-list" data-bind="foreach: items">
+		<li class="ready-search-media" style="height: auto !important">
+			<!-- ko if:$parents[1].isLoading -->
+			<span data-bind="text: HP.HPTRIM.Messages.web_loading"></span>
+			<!-- /ko -->
+
+			<div class="ready-search-media-body" style="height: auto; line-height:unset;">
+				<div class="customCheck" style="vertical-align: top; display:inline-block; width: 100%; margin-top:2px; margin-bottom:2px">
+					<input style="height: 22px; width: 30px;" type="checkbox" data-bind="value: $data.Fields.Uri, checked: $parents[1].selections, attr:{id: $data.Fields.Uri}" />
+					<label data-bind="attr: { 'for': $data.Fields.Uri }" style="height: 16px"></label>
+					<div style="display: inline-block; width:120px; padding-top: 5px; vertical-align: inherit;" data-bind="text: $data.Fields.RecordRelationshipDescription"></div>
+					<div style="display: inline-block; width:120px; padding-top: 5px; vertical-align: inherit;" data-bind="attr: {'title': $data.Fields.RecordRelationshipRelatedRecord.NameString }, text: $data.Fields.RecordRelationshipRelatedRecord.NameString"></div>
+                    <div style="display: inline-block; width:200px; padding-top: 5px; vertical-align: inherit;margin-left:10px" data-bind="attr: {'title': $data.Fields.RecordRelationshipRelatedTitle }, text: $data.Fields.RecordRelationshipRelatedTitle"></div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>
+<!-- /ko  -->

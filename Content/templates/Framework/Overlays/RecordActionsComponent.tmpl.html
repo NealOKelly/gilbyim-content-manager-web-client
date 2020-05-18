@@ -1,0 +1,102 @@
+﻿<div tabindex="-1" data-bind="attr:{id:'overlay_'+id}, escapeKey:dismiss">
+
+    <div class="hprm-modal-header modal-header">
+        <div class="h3 small" data-bind="text: title"></div>
+    </div>
+
+    <!-- ko if: errorVisible() -->
+    <div class="hprm-modal-error alert" style="max-width: 600px; padding: 20px 20px 20px 20px">
+        <span data-bind="text: alertDetails"></span>
+    </div>
+    <!-- /ko -->
+    <div class="modal-body hprm-modal-body" style="margin-right: 33px; max-height:none">
+
+        <!-- ko if: loading -->
+        <div style="display: inline-block; margin-top:10px;">
+            <span>
+                <img alt="progress_indicator" style="height: 24px; width: 24px; display: inline-block"
+                     data-bind="attr:{src: HP.HPTRIM.Icons.progressLoading }" />
+            </span>
+            <div class="h3 small" data-bind="text: HP.HPTRIM.Messages.web_loading" style="display: inline-block"></div>
+        </div>
+        <!-- /ko -->
+        <!-- ko ifnot: loading -->
+        <!-- ko if: recordActions().length == 0 -->
+            <!-- ko if: (showNewActionAndProcedure()) -->
+                <div style="font: 14px metric" data-bind="text: HP.HPTRIM.Messages.web_noAttachedRecordActions"></div>
+            <!-- /ko -->
+            <!-- ko ifnot: (showNewActionAndProcedure()) -->
+                <div style="font: 14px metric" data-bind="text: HP.HPTRIM.Messages.web_noAttachedActionRecordActions"></div>
+            <!-- /ko -->
+        <!-- /ko -->
+
+        <div class="attached_action" style="display: block; overflow: hidden; padding-top:20px ;padding-bottom:10px; padding-right:20px; padding-left:10px">
+            <!-- All buttons... -->
+            <div class="pull-left" style="padding-right:20px">
+                <!-- ko if: (showNewActionAndProcedure()) -->
+                <button tabindex="0" role="button" name="button" id="id" style="color:black" data-bind="click: newAction, clickBubble: false, attr: { class: 'btn btn-secondary' }, text: HP.HPTRIM.Messages.core_new"></button>
+                <!-- /ko -->
+                <!-- ko ifnot: (recordActions().length == 0) -->
+                <!-- ko if: actionAdmin() -->
+                <button tabindex="0" role="button" name="button" id="id" style="color:black" data-bind="click: completeAll, clickBubble: false, attr: { class: 'btn btn-secondary' }, text: HP.HPTRIM.Messages.web_completeAll"></button>
+                <button tabindex="0" role="button" name="button" id="id" style="color:black" data-bind="click: deleteAll, clickBubble: false, attr: { class: 'btn btn-secondary' }, text: HP.HPTRIM.Messages.web_deleteAll"></button>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+
+            <!-- Action buttons -->
+            <div class="pull-left">
+                <!-- ko if: selectedItem() -->
+                <div style="width: 100%; height:30px; margin-right:20px;">
+                    <button tabindex="0" role="button" name="button" id="id" class="btn" data-bind="click: goToRecordAction, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_viewActions}" style="padding:1px 1px 2px 1px;color: #595959; background-color: #fff; width: 28px; overflow: hidden; height:30px !important;">
+                        <span style="height: 24px; width: 24px;" class="viewactions_x24 media-object" />
+                    </button>
+                    <button tabindex="0" role="button" name="button" id="id" class="btn" data-bind="click: $parent.goToResponsibleLocation, clickBubble: false, attr: { title: HP.HPTRIM.Messages.web_responsibleLoc}" style="padding: 1px 1px 2px 1px;color: #595959; background-color: #fff; width: 28px; overflow: hidden; height:30px !important;">
+                        <span style="height: 24px; width: 24px;" class="locperson_x24 media-object" />
+                    </button>
+
+                    <!-- ko foreach: selectedItem().visibleUpdateTasks -->
+                    <!-- ko if: $data.icon -->
+                    <button tabindex="0" role="button" name="button" id="id" data-bind="click: $parent.executeTask, clickBubble: false, attr: { title: caption,  class: 'btn'}" style="padding: 1px 1px 2px 1px;color: #595959; background-color: #fff; width: 28px; overflow: hidden; height:30px !important;">
+                        <span style="height: 24px; width: 24px; " data-bind="attr: { class: $data.icon + ' media-object'}" />
+                    </button>
+
+                    <!-- /ko -->
+                    <!-- ko ifnot: $data.icon -->
+                    <button tabindex="0" role="button" name="button" id="id" data-bind="click: $parent.executeTask, clickBubble: false, attr: { title: toolTip, class: 'btn button-primary' }, text: caption"></button>
+                    <!-- /ko -->
+                    <!-- /ko-->
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+
+        <!-- ko if: recordActions().length != 0 -->
+        <div style="max-height:550px; width: 800px; min-height:200px;  display:block; overflow-x:auto; padding-left:10px">
+            <table style="width:100%" border="1" class="actionTrackingTable">
+                <!-- Heading row... -->
+                <tr style="background-color:#848484; color:white; font: 14px metric; height:30px">
+                    <th style="padding-left:5px" data-bind="text:HP.HPTRIM.Messages.web_viewActions"></th>
+                    <th style="padding-left:5px" data-bind="text:HP.HPTRIM.Messages.web_todoItemOwner"></th>
+                    <th style="padding-left:5px" data-bind="text:HP.HPTRIM.Messages.web_dateDue"></th>
+                </tr>
+                <tbody>
+
+                    <!-- ko foreach: recordActions -->
+                    <!-- ko template: {name : "RecordActionComponentRecordAction", data: $data} -->
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- /ko -->
+        <!-- /ko -->
+
+        <div class="pull-right" style="padding-top:65px">
+            <button tabindex="0" role="button" name="button" id="closeBtn" data-bind="text:HP.HPTRIM.Messages.web_close, click: dismiss, enterKey: dismiss, clickBubble: false, attr: { class: 'btn btn-flat btn-secondary' }"></button>
+        </div>
+
+
+    </div>
+</div>
