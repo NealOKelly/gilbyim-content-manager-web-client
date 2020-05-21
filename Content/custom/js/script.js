@@ -183,7 +183,7 @@ $(document).ready(function(){
 	
 
 	// add splsh screen
-	//$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
+	$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
 	});
 
 	// add custom stylesheets AFTER the in-built custom.css
