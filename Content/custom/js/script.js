@@ -1,3 +1,17 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Options for the observers (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true };
 
@@ -12,7 +26,7 @@ function addObserverIfDesiredNodeAvailable(desiredNode, observerName) {
 };
 
 function logAnyErrorToConsole() {
-	console.log("$('#HPRecordsManagerError').length = " + $('#HPRecordsManagerError').length)
+	//console.log("$('#HPRecordsManagerError').length = " + $('#HPRecordsManagerError').length)
 	if(!$('#HPRecordsManagerError').length) {
 		//The node we need does not exist yet.
 		//Wait 500ms and try again
@@ -46,17 +60,18 @@ function updateGlobalSearchInput(){
 		for(var i=0; i<mutationsList.length; i++) {
 			var mutation = mutationsList[i];
 			if (mutation.type === 'childList') {
-				console.log('A child node has been added or removed.');
+				//console.log('A child node has been added or removed.');
 				
 				if($("div[id*='MainPanel']").length){
 					if(!$("#gilbyim-bottom-panel").length){
 						$("div[id*='MainPanel']").append("<div id='gilbyim-bottom-panel'><div id='gilbyim-bottom-panel-left'><img src='Content/custom/images/micro-focus-gold-partner.png'></div><div id='gilbyim-bottom-panel-center'><p>&copy; Records Transformation Ltd (2020)</p></div><div id='gilbyim-bottom-panel-right'><img src='Content/custom/images/cyber-essentials-badge.png'></div></div>");		
 					}
 				}
-				
+				//console.log("It should fade out now.");
 				// Fade out splash screen when the Dashboard has loaded
-				if($("div[id*='DashboardPanel']").length){
-					
+				//if($("div[id*='DashboardPanel']").length){
+				if($('.as-spa-dash-main').length){
+					console.log("It should fade out now.");
 					$("#custom-loader").fadeOut(1500);
 					$("#splash-screen").fadeOut(3000);
 				}
@@ -130,7 +145,7 @@ function updateGlobalSearchInput(){
 				
 			}
 			else if (mutation.type === 'attributes') {
-				console.log('The ' + mutation.attributeName + ' attribute was modified.');
+			//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
 			}
 		}
 
@@ -152,7 +167,7 @@ function updateGlobalSearchInput(){
 		for(var i=0; i<mutationsList.length; i++) {
 			var mutation = mutationsList[i];
 			if (mutation.type === 'childList') {
-				console.log('A child node has been added or removed.');
+				//console.log('A child node has been added or removed.');
 				
 				// hide "Filter" tab from search form.
 				if($("a[href='#formSearchFilter']").length){
@@ -165,7 +180,7 @@ function updateGlobalSearchInput(){
 				}
 			}
 			else if (mutation.type === 'attributes') {
-				console.log('The ' + mutation.attributeName + ' attribute was modified.');
+				//console.log('The ' + mutation.attributeName + ' attribute was modified.');
 			}
 		}
 	};
