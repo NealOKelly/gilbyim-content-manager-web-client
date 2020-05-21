@@ -37,38 +37,23 @@ function updateGlobalSearchInput(){
 	$("#global-search-input").trigger(e);
 }
 
-$(document).ready(function(){
-	
-	logAnyErrorToConsole;
-	
+
+
 
 	// Callback function to execute when mutations to #bodyContent are observed
 	const bodyContentObserverCallback = function(mutationsList, bodyContentObserver) {
-		// Use traditional 'for loops' for IE 11
-		for(let mutation of mutationsList) {
+		
+		for(var i=0; i<mutationsList.length; i++) {
+			var mutation = mutationsList[i];
 			if (mutation.type === 'childList') {
-				
-				
-				console.dir( $('.global-search-btn').data('events') );
-				
-				function myFunction(){
-					//alert("myFunction has been called.");
-				}
-				
-				// testing
-				
-				//$(".global-search-btn").off("click");
-				
-				// testing
+				console.log('A child node has been added or removed.');
 				
 				if($("div[id*='MainPanel']").length){
 					if(!$("#gilbyim-bottom-panel").length){
 						$("div[id*='MainPanel']").append("<div id='gilbyim-bottom-panel'><div id='gilbyim-bottom-panel-left'><img src='Content/custom/images/micro-focus-gold-partner.png'></div><div id='gilbyim-bottom-panel-center'><p>&copy; Records Transformation Ltd (2020)</p></div><div id='gilbyim-bottom-panel-right'><img src='Content/custom/images/cyber-essentials-badge.png'></div></div>");		
 					}
-					
 				}
 				
-
 				// Fade out splash screen when the Dashboard has loaded
 				if($("div[id*='DashboardPanel']").length){
 					
@@ -145,9 +130,10 @@ $(document).ready(function(){
 				
 			}
 			else if (mutation.type === 'attributes') {
-				//console.log('The ' + mutation.attributeName + ' attribute was modified.');
+				console.log('The ' + mutation.attributeName + ' attribute was modified.');
 			}
 		}
+
 	};
 	
 	// Create an observer instance linked to the callback function
@@ -156,12 +142,17 @@ $(document).ready(function(){
 	addObserverIfDesiredNodeAvailable(document.getElementById('bodyContent'), bodyContentObserver);
 
 	//bodyContentObserver.disconnect();
-	
+
+
+
+
+
 	// Callback function to execute when mutations are observed
 	const hprmDynamicModalObserverCallback = function(mutationsList, hprmDynamicModalObserver) {
-		// Use traditional 'for loops' for IE 11
-		for(let mutation of mutationsList) {
+		for(var i=0; i<mutationsList.length; i++) {
+			var mutation = mutationsList[i];
 			if (mutation.type === 'childList') {
+				console.log('A child node has been added or removed.');
 				
 				// hide "Filter" tab from search form.
 				if($("a[href='#formSearchFilter']").length){
@@ -172,11 +163,9 @@ $(document).ready(function(){
 				if($("div[id*='overlay_SavedSearchForm']").length){
 					//$("div[id*='overlay_SavedSearchForm']").find("input[type='checkbox']").css("background-color", "lime");
 				}
-					
-				
 			}
 			else if (mutation.type === 'attributes') {
-			//console.log('The ' + mutation.attributeName + ' attribute was modified.');
+				console.log('The ' + mutation.attributeName + ' attribute was modified.');
 			}
 		}
 	};
@@ -185,19 +174,16 @@ $(document).ready(function(){
 	const hprmDynamicModalObserver = new MutationObserver(hprmDynamicModalObserverCallback);
 	// Start observing the target node for configured mutations
 	addObserverIfDesiredNodeAvailable(document.getElementById('hprm-dynamic-modal'), hprmDynamicModalObserver);
-	//hprmDynamicModalObserver.disconnect();
+
+$(document).ready(function(){
 	
+	logAnyErrorToConsole;
 	
 
 	
 
-	
-	
-	
-	
-	
 	// add splsh screen
-	$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
+	//$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
 	});
 
 	// add custom stylesheets AFTER the in-built custom.css
