@@ -167,27 +167,14 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 					}
 					else{
 						console.log($("#global-search-input").val())
-					//	if($("#global-search-input").val() != 'content:"" Or anyWord:'){
-						
-							$("#show-saved-searches").css("display", "inline");
-							
-					//	   }
-						
-						
+						$("#show-saved-searches").css("display", "inline");
 					}
-					
 
-					console.log($(".HPRM-Record-Action-Item-Selected").length)
-			//		if(!$(".HPRM-Record-Action-Item-Selected").length){
-				//		$("#show-saved-searches").css("display", "inline");
-				//	}
 				}
 			}
 			else{
 				$("#show-saved-searches").css("display", "none");
 			}
-			
-
 		}
 		else if (mutation.type === 'attributes') {
 		//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
@@ -262,12 +249,12 @@ $(document).ready(function(){
 	//			$("head").append("<style>#BodyPanel_10 {top:"+topHeight+"px;} .as-spa-header {top:"+headHeight+"px;}div.as-spa-dash-main-secondary{height:auto;}"); 
 			})
 	
-		// Add footer
-		$("#bodyContent").css("height", "95%");
-		jQuery.get(window.location.pathname+"Content/custom/html/custom-footer.html").then(function(text, status, xhr){
-			$("#bodyContent").after(text);
-		})
-	});
+	// Add footer
+	$("#bodyContent").css("height", "95%");
+	jQuery.get(window.location.pathname+"Content/custom/html/custom-footer.html").then(function(text, status, xhr){
+		$("#bodyContent").after(text);
+	})
+});
 /// END EVENT HANDLERS FOR INITIAL LOAD ///
 
 
