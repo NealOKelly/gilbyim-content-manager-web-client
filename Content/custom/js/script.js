@@ -191,7 +191,7 @@ addObserverIfDesiredNodeAvailable(document.getElementById('hprm-dynamic-modal'),
 // END Mutation Observer for #hprmDynamicModal //
 /// MUTATION OBSERVERS ///
 
-
+/// EVENT HANDLERS FOR INITIAL LOAD ///
 $(document).ready(function(){
 	
 	logAnyErrorToConsole;
@@ -199,34 +199,32 @@ $(document).ready(function(){
 	// add splsh screen
 	$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
 	
-	});
+	// add custom stylesheets AFTER the in-built custom.css
+	$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/custom.css' type='text/css' media='screen'>");
+	$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/role-specific-styles.css' type='text/css' media='screen'>");
+	
+	// Add custom-header.html
+	jQuery.get(window.location.pathname+"Content/custom/html/custom-header.html").then(function(text, status, xhr){
+		$("#splash-screen").after(text);
 
-// add custom stylesheets AFTER the in-built custom.css
-$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/custom.css' type='text/css' media='screen'>");
-$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/role-specific-styles.css' type='text/css' media='screen'>");
-
-
-// Add custom-header.html
-jQuery.get(window.location.pathname+"Content/custom/html/custom-header.html").then(function(text, status, xhr){
-	$("#splash-screen").after(text);
-		
-	}).then(function(){
-			// we really only need to do this once - consider rewriting
-//			var headHeight = $("#custom-header").outerHeight(true); //this is the height of the header
-//			var menuHeight = 56; //this is set by other CSS - it doesn't change
-//			var topHeight = headHeight + menuHeight + 1; //they currently move it by 57, so 56+1, so we add 1 here
-//			$("head").append("<style>#BodyPanel_10 {top:"+topHeight+"px;} .as-spa-header {top:"+headHeight+"px;}div.as-spa-dash-main-secondary{height:auto;}"); 
-		
-			
+		}).then(function(){
+				// we really only need to do this once - consider rewriting
+	//			var headHeight = $("#custom-header").outerHeight(true); //this is the height of the header
+	//			var menuHeight = 56; //this is set by other CSS - it doesn't change
+	//			var topHeight = headHeight + menuHeight + 1; //they currently move it by 57, so 56+1, so we add 1 here
+	//			$("head").append("<style>#BodyPanel_10 {top:"+topHeight+"px;} .as-spa-header {top:"+headHeight+"px;}div.as-spa-dash-main-secondary{height:auto;}"); 
+			})
+	
+		// Add footer
+		$("#bodyContent").css("height", "95%");
+		jQuery.get(window.location.pathname+"Content/custom/html/custom-footer.html").then(function(text, status, xhr){
+			$("#bodyContent").after(text);
 		})
+	});
+/// END EVENT HANDLERS FOR INITIAL LOAD ///
 
 
-// Add footer
-$("#bodyContent").css("height", "95%");
-jQuery.get(window.location.pathname+"Content/custom/html/custom-footer.html").then(function(text, status, xhr){
-	$("#bodyContent").after(text);
-})
-
+/// EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
 $(document).ready(function(){
 
 	// "click" event for logo (got to home)
@@ -306,3 +304,4 @@ $(document).ready(function(){
 		});
 	});
 });
+/// END EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
