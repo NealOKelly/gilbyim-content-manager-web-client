@@ -41,6 +41,10 @@ function logAnyErrorToConsole() {
 // This function takes the content of the RM4ED Universal Search box and populated the hidden global-search-input box
 function updateGlobalSearchInput(){
 	var str = $("#rm4ed-global-search-input").val();
+	if(str == ""){
+		$("#global-search-input").val(strSearchQuery);	
+	}
+	
 	var strSearchQuery = 'content:"'+str+'" Or anyWord:'+str;
 	$("#global-search-input").val(strSearchQuery);
 
@@ -140,6 +144,49 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 			if($(".btn-properties").length){
 				$(".btn-properties").css("color", "#33cccc");
 			}
+			
+			// Control when the "Save Search" button is visible
+			if($(".command-panel-header-title").length){
+				
+				console.log("The command panel is displayed")
+				// Hide the "Save Search" button when in the "Saved Searches" context.
+				
+				if($(".command-panel-header-title")[0].innerHTML == "Saved Searches"){
+					$("#show-saved-searches").css("display", "none");
+				}
+
+
+				
+				if($(".command-panel-header-title")[0].innerHTML == "Records"){
+
+					// If a menu item is selected
+					if($(".HPRM-Record-Action-Item-Selected").length>0){
+
+						$("#show-saved-searches").css("display", "none");
+
+					}
+					else{
+						console.log($("#global-search-input").val())
+					//	if($("#global-search-input").val() != 'content:"" Or anyWord:'){
+						
+							$("#show-saved-searches").css("display", "inline");
+							
+					//	   }
+						
+						
+					}
+					
+
+					console.log($(".HPRM-Record-Action-Item-Selected").length)
+			//		if(!$(".HPRM-Record-Action-Item-Selected").length){
+				//		$("#show-saved-searches").css("display", "inline");
+				//	}
+				}
+			}
+			else{
+				$("#show-saved-searches").css("display", "none");
+			}
+			
 
 		}
 		else if (mutation.type === 'attributes') {
@@ -229,8 +276,11 @@ $(document).ready(function(){
 
 	// "click" event for logo (got to home)
 	$(document).on('click', ".navbar-logofix", function (){
-		updateGlobalSearchInput();
+		//updateGlobalSearchInput();
+		console.log("Clickety-click")
+		$("#show-saved-searches").css("display", "none");
 		$("div.tabbable").find("a[title='Home']").trigger("click");
+
 	})
 
 
@@ -257,7 +307,7 @@ $(document).ready(function(){
 
 	});
 
-	//submit a search when user presses the enter key inside the search box
+	// Submit a search when user presses the enter key inside the search box
 	$(document).on("keyup", "#rm4ed-global-search-input", function(e){
 		$("#rm4ed-global-search-input").trigger("change");	
 		updateGlobalSearchInput();
@@ -288,7 +338,7 @@ $(document).ready(function(){
 	$(document).on('click', "#rm4ed-intercept-global-search-button-click-narrow", function (e){
 		$("#rm4ed-global-search-input").trigger("change");
 
-
+		console.log("THe search button has been clicked.")
 		//alert($("#global-search-input").val());
 		//if($("#global-search-input").val()=='content:"" Or anyWord:'){
 		//alert('Query is crud, do not search.');
