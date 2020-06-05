@@ -199,14 +199,19 @@ hr.listPadding.listPaddingRight{
 	display: none;
 }
 
-/* Brwoser via Classification */
+/* Brwoser via Classification 
 
 div[id^='BrowseViaClassificationsPanel_']{
 	width: 400px;
 }
+*/
 
+.command-panel{
+	width: 400px;
+}
 
-div[id^='BrowseViaClassificationsPanel_'].command-panel-maximized{
+/*div[id^='BrowseViaClassificationsPanel_'].command-panel-maximized{*/
+.command-panel-maximized{
 	width: 700px;
 }
 .category_node_container{
