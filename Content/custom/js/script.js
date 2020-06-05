@@ -9,12 +9,14 @@
 
 
 
-/// CONSTANTS ///
+/// CONSTANTS & GLOBAL VARIABLES ///
 
 // Options for the observers (which mutations to observe)
 const config = { attributes: true, childList: true, subtree: true };
 
-// END CONSTANTS //
+var browseViaClassificationIsDefaultedToFavorites = false;
+
+// END CONSTANTS & GLOBAL VARIABLES //
 
 /// FUNCTIONS ///
 function addObserverIfDesiredNodeAvailable(desiredNode, observerName) {
@@ -175,6 +177,21 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 			else{
 				$("#show-saved-searches").css("display", "none");
 			}
+		
+		// Automatically select Favorites when viewing Browse via Classification
+		if($(".command-panel").length){ // IE11 version	
+				if(browseViaClassificationIsDefaultedToFavorites==false){
+					if($("button[data-bind='click:selectFavorite, text: HP.HPTRIM.Messages.web_favorites, attr:{class: favoriteButtonClass}']").length){
+						
+						// This setTimout is ineligant.  It is required because the otherwise the click event fires before Web Client has finished buiding the DOM for "ALL".
+						setTimeout(function(){
+							$("button[data-bind='click:selectFavorite, text: HP.HPTRIM.Messages.web_favorites, attr:{class: favoriteButtonClass}']").trigger("click"); 
+							}, 300);
+						
+						browseViaClassificationIsDefaultedToFavorites=true;
+					}
+				}
+			}
 		}
 		else if (mutation.type === 'attributes') {
 		//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
@@ -270,6 +287,10 @@ $(document).ready(function(){
 
 	})
 
+	// "click" event for New Record button
+	$(document).on('click', "#custom-new-record-button", function (){
+		$("a[title='New Record']").trigger("click");
+	})
 
 	// "click" event for Advanced Search button - Open Search
 	$(document).on('click', "#rm4ed-advanced-search", function (){
@@ -278,21 +299,7 @@ $(document).ready(function(){
 		$('#DefaultSearchForm > a')[0].click();
 	})
 
-	// "click" event for New Record button
-	$(document).on('click', "#custom-new-record-button", function (){
-		$("a[title='New Record']").trigger("click");
-	})
 
-	// Populate the #global-search-input from the custom rm4ed search box
-	$(document).on('change', "#rm4ed-global-search-input", function (){
-		if(!$("#rm4ed-global-search-input").val().length){
-			//	alert("The input box is empty.");
-				$("#global-search-input").val("");
-			//	alert($("#rm4ed-global-search-input").val());
-			}
-		updateGlobalSearchInput()
-
-	});
 
 	// Submit a search when user presses the enter key inside the search box
 	$(document).on("keyup", "#rm4ed-global-search-input", function(e){
@@ -322,10 +329,46 @@ $(document).ready(function(){
 	  //});
 
 		//#rm4ed-intercept-global-search-button-click-narrow
-	$(document).on('click', "#rm4ed-intercept-global-search-button-click-narrow", function (e){
-		$("#rm4ed-global-search-input").trigger("change");
+	//$(document).on('click', "#rm4ed-intercept-global-search-button-click-narrow", function (e){
+		
+		
+	//	$(document).on('click', "#rm4ed-global-search-input", function (e){
+	//		return false;
+//		}
+		
+		jQuery(function( $ ){
 
-		console.log("THe search button has been clicked.")
+			// Bind click events to links. This will bind a click
+			// handler to all current links as well as all new
+			// links added to the page.
+			$( ".global-search-btn" ).on(
+				"click",
+				function( event ){
+					console.log("Link clicked!");
+				//	alert( "Link clicked!" );
+				}
+			);
+
+			// Cancel all click events off of paragraphs.
+			$( "#rm4ed-intercept-global-search-button-click-narrow" ).click(
+				function(){
+			//		return( false );
+				}
+			);
+
+		});
+		
+		
+		
+		
+	
+	//	$(document).on('click', ".global-search-btn", function (e){
+	//	$("#rm4ed-global-search-input").trigger("change");
+
+	//	console.log("THe search button has been clicked.")
+		
+	//		e.preventDefault();
+	//		e.stopPropagation();
 		//alert($("#global-search-input").val());
 		//if($("#global-search-input").val()=='content:"" Or anyWord:'){
 		//alert('Query is crud, do not search.');
@@ -339,6 +382,6 @@ $(document).ready(function(){
 		$("#global-search-input").val("");
 
 		});
-	});
+	//});
 });
 /// END EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
