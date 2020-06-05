@@ -199,6 +199,30 @@ hr.listPadding.listPaddingRight{
 	display: none;
 }
 
+/* Brwoser via Classification */
+
+div[id^='BrowseViaClassificationsPanel_']{
+	width: 400px;
+}
+
+
+div[id^='BrowseViaClassificationsPanel_'].command-panel-maximized{
+	width: 700px;
+}
+.category_node_container{
+	width: 375px;
+}
+
+.node-number{
+	display: none;
+}
+
+@media (min-width: 1271px)
+.command-panel-maximized .category_node_container {
+    width: 690px!important;
+}
+
+
 /* Hide unwanted options at the record level*/
 #locationMenu{
 	display: none;
