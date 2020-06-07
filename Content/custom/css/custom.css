@@ -135,12 +135,18 @@ h3.small{
 	display: none;
 }
 
-/* Hide User detail button. 
+*/
+#show-help-btn{
+	display: none;
+}
+
+
+/* Hide User detail button. */
 #profile-user-details{
 	display: none;
 }
-*/
-/*
+
+
 div.div-profile-header > ul.dropdown-menu > li:nth-child(1){
 	border-bottom: 0 !important;
 }
@@ -153,7 +159,7 @@ div.div-profile-header > ul.dropdown-menu > li:nth-child(3){
 div.div-profile-header > ul.dropdown-menu > li:nth-child(4){
 	display: none !important;
 }
-*/
+
 
 /* Hide tabbing mechanism */
 div.as-spa-body>div>div.tabbable {
@@ -207,7 +213,7 @@ div[id^='BrowseViaClassificationsPanel_']{
 */
 
 .command-panel{
-	width: 400px;
+	width: 300px;
 }
 
 /*div[id^='BrowseViaClassificationsPanel_'].command-panel-maximized{*/
@@ -215,7 +221,7 @@ div[id^='BrowseViaClassificationsPanel_']{
 	width: 700px;
 }
 .category_node_container{
-	width: 375px;
+	width: 275px;
 }
 
 .node-number{
