@@ -56,6 +56,13 @@ function updateGlobalSearchInput(){
 	e.keyCode = 50
 	$("#global-search-input").trigger(e);
 }
+
+// Returns the User Type
+function getUserType(){
+	return $("#globalSearch [data-bind='text:profileUserType']").text()
+}
+
+
 /// END FUNCTIONS ///
 
 
@@ -192,22 +199,25 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 				}
 			}
 
-			// In New Record context, hide Record Type that include "folder" within the title.
-			if($("div[id^='item-picker-container-spa-item-picker']").length){
+			if(getUserType() != "Administrator"){
 				
-				$("div[id^='spa-item-picker']>div>div>ul>li:not('.loadMore')").each( function( i, el ) {
-				var elem = $( el );
-				var str = elem.find('.itempicker-text').html().toLowerCase();
-				
-				if(str.includes("folder")){
-					
-					elem.css("display", "none");
+				// In New Record context, hide Record Type that include "folder" within the title.
+				if($("div[id^='item-picker-container-spa-item-picker']").length){
+
+					$("div[id^='spa-item-picker']>div>div>ul>li:not('.loadMore')").each( function( i, el ) {
+					var elem = $( el );
+					var str = elem.find('.itempicker-text').html().toLowerCase();
+
+					if(str.includes("folder")){
+
+						elem.css("display", "none");
+					}
+				});
+
 				}
-			});
 				
 			}
 
-			
 		}
 		else if (mutation.type === 'attributes') {
 		//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
@@ -243,6 +253,33 @@ const hprmDynamicModalObserverCallback = function(mutationsList, hprmDynamicModa
 			if($("div[id*='overlay_SavedSearchForm']").length){
 				//$("div[id*='overlay_SavedSearchForm']").find("input[type='checkbox']").css("background-color", "lime");
 			}
+			
+			// Remove dashboard and locale options if the user is not an Administrator
+			if(getUserType() != "Administrator"){
+
+				var managedByAdministratorsHTML = "<div>These setting are managed by the GilbyIM Administrators.</div>"
+
+
+				if($("#dashboardConfigTab").length){
+					if($("#dashboardConfigTab").html() != managedByAdministratorsHTML){
+
+					$("#dashboardConfigTab").empty()
+					$("#dashboardConfigTab").append(managedByAdministratorsHTML)					
+
+					}
+				}
+
+				if($("#localeTab").length){
+					if($("#localeTab").html() != "<div> &nbsp;</div>" + managedByAdministratorsHTML){
+
+					$("#localeTab").empty()
+					$("#localeTab").append("<div> &nbsp;</div>" + managedByAdministratorsHTML)					
+
+					}
+				}
+
+			}
+			
 		}
 		else if (mutation.type === 'attributes') {
 			//console.log('The ' + mutation.attributeName + ' attribute was modified.');
@@ -256,10 +293,14 @@ const hprmDynamicModalObserver = new MutationObserver(hprmDynamicModalObserverCa
 addObserverIfDesiredNodeAvailable(document.getElementById('hprm-dynamic-modal'), hprmDynamicModalObserver);
 
 // END Mutation Observer for #hprmDynamicModal //
+
 /// MUTATION OBSERVERS ///
 
 /// EVENT HANDLERS FOR INITIAL LOAD ///
 $(document).ready(function(){
+	
+//	$("#globalSearch [data-bind='text:profileUserType']").css("background", "lime")
+	//$("span[data-bind='text:profileUserType']").css("background", "lime")
 	
 	logAnyErrorToConsole;
 
@@ -282,6 +323,7 @@ $(document).ready(function(){
 	//			$("head").append("<style>#BodyPanel_10 {top:"+topHeight+"px;} .as-spa-header {top:"+headHeight+"px;}div.as-spa-dash-main-secondary{height:auto;}"); 
 			})
 	
+
 	// Add footer
 	$("#bodyContent").css("height", "95%");
 	jQuery.get(window.location.pathname+"Content/custom/html/custom-footer.html").then(function(text, status, xhr){
@@ -300,7 +342,6 @@ $(document).ready(function(){
 		console.log("Clickety-click")
 		$("#show-saved-searches").css("display", "none");
 		$("div.tabbable").find("a[title='Home']").trigger("click");
-
 	})
 
 	// "click" event for New Record button
