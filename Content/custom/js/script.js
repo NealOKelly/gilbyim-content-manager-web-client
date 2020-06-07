@@ -15,6 +15,10 @@
 const config = { attributes: true, childList: true, subtree: true };
 
 var browseViaClassificationIsDefaultedToFavorites = false;
+var newRecordButtonClicked = false;
+var favoriteSavedSearchesLinkClicked = false;
+var favoriteRecordsLinkClicked = false;
+var searchButtonClicked = false;
 
 // END CONSTANTS & GLOBAL VARIABLES //
 
@@ -82,11 +86,13 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 				}
 			}
 
+			
 			// Fade out Splash Screen and Loader.
 			if($('.as-spa-dash-main').length){
 				$("#custom-loader").fadeOut(1500);
 				$("#splash-screen").fadeOut(3000);
 			}
+
 
 			// Rename Save Search button.
 			if($("button[title='Save']").length){
@@ -153,6 +159,29 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 			if($(".btn-properties").length){
 				$(".btn-properties").css("color", "#33cccc");
 			}
+
+			
+			// Replace third panel with New iFrame.
+			var gilbyIMNewsPanelHeaderHTML = '<div class="hpebox-title dashboard-container-header"><div class="hpebox-draghandle drag-handle ui-sortable-handle"></div><div class="listPadding listPaddingRight"><span class="h4 capitalize" data-bind="text: headerCaption, click: viewAll">GILBYIM NEWS</span></div></div>'
+			
+			var gilbyIMNewsPanelStyles ="<style>iframe{margin: 0; padding: 0; border: none; width: 100%; height: 100%'}'</style>"
+			
+			var gilbyIMNewsPanelHTML = gilbyIMNewsPanelHeaderHTML + gilbyIMNewsPanelStyles + "<iframe src='Content/custom/html/news.html'>"
+			//console.log("Dashpanel.length =" + $("div[id^='DashMainPanel_']").length)
+			
+			if(newRecordButtonClicked==false && favoriteRecordsLinkClicked == false && favoriteSavedSearchesLinkClicked == false || searchButtonClicked == false){
+				// the above line is to prevent this code being fired when except for on initial load.
+				if($("div[id^='DashMainPanel_']").length){
+					if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
+						bodyContentObserver.disconnect(); // The iframe causes the mutation observer to go into an infinite loop.  This temporaily disconnect the observer while the frame is loaded.
+						$("div[id^='DashMainPanel_']").children().eq(2).children().empty()
+						$("div[id^='DashMainPanel_']").children().eq(2).children().append(gilbyIMNewsPanelHTML)
+						bodyContentObserver.observe(document.getElementById('bodyContent'), config);
+
+					}
+				}				
+			}
+
 			
 			// Control when the "Save Search" button is visible
 			if($(".command-panel-header-title").length){
@@ -174,7 +203,6 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 
 					}
 					else{
-						console.log($("#global-search-input").val())
 						$("#show-saved-searches").css("display", "inline");
 					}
 
@@ -257,7 +285,7 @@ const hprmDynamicModalObserverCallback = function(mutationsList, hprmDynamicModa
 			// Remove dashboard and locale options if the user is not an Administrator
 			if(getUserType() != "Administrator"){
 
-				var managedByAdministratorsHTML = "<div>These setting are managed by the GilbyIM Administrators.</div>"
+				var managedByAdministratorsHTML = "<div>These settings are managed by the GilbyIM Administrators.</div>"
 
 
 				if($("#dashboardConfigTab").length){
@@ -305,11 +333,12 @@ $(document).ready(function(){
 	logAnyErrorToConsole;
 
 	// add splsh screen
-	$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
+	//$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
 	
 	// add custom stylesheets AFTER the in-built custom.css
 	$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/custom.css' type='text/css' media='screen'>");
 	$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/role-specific-styles.css' type='text/css' media='screen'>");
+
 	
 	// Add custom-header.html
 	jQuery.get(window.location.pathname+"Content/custom/html/custom-header.html").then(function(text, status, xhr){
@@ -339,13 +368,31 @@ $(document).ready(function(){
 	// "click" event for logo (got to home)
 	$(document).on('click', ".navbar-logofix", function (){
 		//updateGlobalSearchInput();
-		console.log("Clickety-click")
+		//console.log("Clickety-click")
 		$("#show-saved-searches").css("display", "none");
 		$("div.tabbable").find("a[title='Home']").trigger("click");
 	})
 
+	
+	// click event for Favorite Records link
+	$(document).on('click', ".as-spa-dash-main-secondary>div>div>div>span:contains(Favorite records)", function (){
+		favoriteRecordsLinkClicked = true;
+	})
+	
+	// click event for Favorite Save Searches link
+	$(document).on('click', ".as-spa-dash-main-secondary>div>div>div>span:contains(Favorite saved searches)", function (){
+		favoriteSavedSearchesLinkClicked = true;
+		})
+	
+	
+	$(document).on('click', ".global-search-btn", function (){
+		searchButtonClicked = true;
+	   })
+	
+	
 	// "click" event for New Record button
 	$(document).on('click', "#custom-new-record-button", function (){
+		newRecordButtonClicked = true;
 		$("a[title='New Record']").trigger("click");
 	})
 
@@ -360,7 +407,8 @@ $(document).ready(function(){
 
 	// Submit a search when user presses the enter key inside the search box
 	$(document).on("keyup", "#rm4ed-global-search-input", function(e){
-		$("#rm4ed-global-search-input").trigger("change");	
+		$("#rm4ed-global-search-input").trigger("change");
+		favoriteSavedSearchesLinkClicked = true; // this is used to handle permance issues with the iFrame.
 		updateGlobalSearchInput();
 		if(e.which == 13){
 			var x = $("#rm4ed-global-search-input").val().length;
@@ -401,8 +449,6 @@ $(document).ready(function(){
 			$( ".global-search-btn" ).on(
 				"click",
 				function( event ){
-					console.log("Link clicked!");
-				//	alert( "Link clicked!" );
 				}
 			);
 
