@@ -149,8 +149,7 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 			
 			// Control when the "Save Search" button is visible
 			if($(".command-panel-header-title").length){
-				
-				console.log("The command panel is displayed")
+
 				// Hide the "Save Search" button when in the "Saved Searches" context.
 				
 				if($(".command-panel-header-title")[0].innerHTML == "Saved Searches"){
@@ -186,12 +185,29 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 						// This setTimout is ineligant.  It is required because the otherwise the click event fires before Web Client has finished buiding the DOM for "ALL".
 						setTimeout(function(){
 							$("button[data-bind='click:selectFavorite, text: HP.HPTRIM.Messages.web_favorites, attr:{class: favoriteButtonClass}']").trigger("click"); 
-							}, 300);
+							}, 400);
 						
 						browseViaClassificationIsDefaultedToFavorites=true;
 					}
 				}
 			}
+
+			// In New Record context, hide Record Type that include "folder" within the title.
+			if($("div[id^='item-picker-container-spa-item-picker']").length){
+				
+				$("div[id^='spa-item-picker']>div>div>ul>li:not('.loadMore')").each( function( i, el ) {
+				var elem = $( el );
+				var str = elem.find('.itempicker-text').html().toLowerCase();
+				
+				if(str.includes("folder")){
+					
+					elem.css("display", "none");
+				}
+			});
+				
+			}
+
+			
 		}
 		else if (mutation.type === 'attributes') {
 		//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
