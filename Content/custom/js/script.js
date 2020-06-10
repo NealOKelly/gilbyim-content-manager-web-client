@@ -15,10 +15,23 @@
 const config = { attributes: true, childList: true, subtree: true };
 
 var browseViaClassificationIsDefaultedToFavorites = false;
+
+
+// These variables are used to determine the conditions under which the News Panel is loaded/re-loaded.
 var newRecordButtonClicked = false;
 var favoriteSavedSearchesLinkClicked = false;
 var favoriteRecordsLinkClicked = false;
 var searchButtonClicked = false;
+var homeButtonClicked = false;
+
+
+// News Panel variables.  These are global because they are called by multiple event handlers.
+var gilbyIMNewsPanelHeaderHTML = '<div class="hpebox-title dashboard-container-header"><div class="hpebox-draghandle drag-handle ui-sortable-handle"></div><div class="listPadding listPaddingRight"><span class="h4 capitalize" data-bind="text: headerCaption, click: viewAll">GILBYIM NEWS</span><span><img src="Content/custom/html/img/gilbyim-logo.png"  style="height:25px; float: right;"><span></div></div>'
+var gilbyIMNewsPanelStyles ="<style>iframe{margin: 0; padding: 0; border: none; width: 100%; height: auto;}</style>"
+var gilbyIMNewsPanelScript = ""
+var gilbyIMNewsPanelHTML = gilbyIMNewsPanelHeaderHTML + gilbyIMNewsPanelStyles + "<div id='iframe-container'><iframe id='gilbyim-news-iframe' src='Content/custom/html/news.html'></div>"
+
+
 
 // END CONSTANTS & GLOBAL VARIABLES //
 
@@ -66,6 +79,10 @@ function getUserType(){
 	return $("#globalSearch [data-bind='text:profileUserType']").text()
 }
 
+function loadGilbyIMNewsPanel(){
+	
+	console.log("GilbyIM News Panel loaded...")
+}
 
 /// END FUNCTIONS ///
 
@@ -162,14 +179,24 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 
 			
 			// Replace third panel with New iFrame.
-			var gilbyIMNewsPanelHeaderHTML = '<div class="hpebox-title dashboard-container-header"><div class="hpebox-draghandle drag-handle ui-sortable-handle"></div><div class="listPadding listPaddingRight"><span class="h4 capitalize" data-bind="text: headerCaption, click: viewAll">GILBYIM NEWS</span></div></div>'
-			
-			var gilbyIMNewsPanelStyles ="<style>iframe{margin: 0; padding: 0; border: none; width: 100%; height: 100%'}'</style>"
-			
-			var gilbyIMNewsPanelHTML = gilbyIMNewsPanelHeaderHTML + gilbyIMNewsPanelStyles + "<iframe src='Content/custom/html/news.html'>"
+
 			//console.log("Dashpanel.length =" + $("div[id^='DashMainPanel_']").length)
-			
-			if(newRecordButtonClicked==false && favoriteRecordsLinkClicked == false && favoriteSavedSearchesLinkClicked == false || searchButtonClicked == false){
+			console.log("homeButtonClicked=" + homeButtonClicked)
+			if(homeButtonClicked==true){
+				if($("div[id^='DashMainPanel_']").length){
+					if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
+						bodyContentObserver.disconnect(); // The iframe causes the mutation observer to go into an infinite loop.  This temporaily disconnect the observer while the frame is loaded.
+						$("div[id^='DashMainPanel_']").children().eq(2).children().empty()
+						$("div[id^='DashMainPanel_']").children().eq(2).children().append(gilbyIMNewsPanelHTML)
+						bodyContentObserver.observe(document.getElementById('bodyContent'), config);
+
+					}
+				}	
+				homeButtonClicked = false;
+			}			
+
+			if(newRecordButtonClicked==false && favoriteRecordsLinkClicked == false && favoriteSavedSearchesLinkClicked == false && searchButtonClicked == false){
+				
 				// the above line is to prevent this code being fired when except for on initial load.
 				if($("div[id^='DashMainPanel_']").length){
 					if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
@@ -369,7 +396,20 @@ $(document).ready(function(){
 	$(document).on('click', ".navbar-logofix", function (){
 		//updateGlobalSearchInput();
 		//console.log("Clickety-click")
+			if($("div[id^='DashMainPanel_']").length){
+				if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
+					bodyContentObserver.disconnect(); // The iframe causes the mutation observer to go into an infinite loop.  This temporaily disconnect the observer while the frame is loaded.
+					$("div[id^='DashMainPanel_']").children().eq(2).children().empty()
+					$("div[id^='DashMainPanel_']").children().eq(2).children().append(gilbyIMNewsPanelHTML)
+					bodyContentObserver.observe(document.getElementById('bodyContent'), config);
+
+				}
+			}
+		
+		
+		
 		$("#show-saved-searches").css("display", "none");
+		homeButtonClicked = true;
 		$("div.tabbable").find("a[title='Home']").trigger("click");
 	})
 
@@ -488,3 +528,17 @@ $(document).ready(function(){
 	//});
 });
 /// END EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
+
+
+window.addEventListener('message', function(e) {
+	var scroll_height = e.data;
+		//scroll_height = data[0];
+	
+		console.log("scroll_height="+scroll_height)
+		
+	// Check message from which iframe
+		document.getElementById('iframe-container').style.height = scroll_height + 'px'; 
+		document.getElementById('gilbyim-news-iframe').style.height = scroll_height + 'px'; 
+} , false);
+
+

@@ -2,12 +2,65 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
-</head>
+<title>GilbyIM News</title>
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet"> 
+	<link href="css/news.css" rel="stylesheet"> 
 
-<body>
+<script>
+	// This function sends a post message to the parent window containing the height of the iframe.
+	function reportHeightToParent(){
+		window.top.postMessage(document.body.scrollHeight, "*");	
+	}
+
+</script>	
+
+</head>
 	
-	<div>The quick brown fox jumps over the lazy dog.</div>
-	<div>Rich likes goats.</div>
+<body onLoad="reportHeightToParent();">
+	<div id="news-main-panel">
+		<div id="news-main-content">
+			<!-- 
+			Each new article should take the following form:
+
+			<div class="news-article">
+				<div class="news-article-date">
+					xth Month yyyy
+				</div>
+				<div class="news-article-title">
+					The title
+				</div>
+				<div class="news-article-content">
+					The content
+				</div>
+			</div>
+
+			-->
+			
+			<!-- BEGIN editable section -->
+			<div class="news-article">
+				<div class="news-article-date">
+					9th July 2020
+				</div>
+				<div class="news-article-title">
+					GilbyIM welcomes Camden Centre for Learning
+				</div>
+				<div class="news-article-content">
+					GilbyIM would like to welcome Pippa and the rest of the team at Camden Centre for Learning.  We look forward to working with you!
+				</div>
+			</div>
+			<div class="news-article">
+				<div class="news-article-date">
+					8th July 2020
+				</div>
+				<div class="news-article-title">
+					GilbyIM News Panel
+				</div>
+				<div class="news-article-content">
+					We've introduce the new "GilbyIM News" panel so that we can commuicate useful information to our users - such as where to find training materials and guidance, and when the service is going to be offline for scheduled maintenance.
+				</div>
+			</div>
+			<!-- END editable section -->
+		</div>
+	</div>
 </body>
 </html>

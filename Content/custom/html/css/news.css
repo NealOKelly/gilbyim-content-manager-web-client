@@ -1,0 +1,36 @@
+/* CSS Document */
+body {
+  font-family: 'Noto Sans', sans-serif;
+	overflow: hidden;
+}
+
+#news-main-panel{
+	font-family: 'Noto Sans', sans-serif;
+	padding-left: 25px;	
+	padding-right: 25px;
+	padding-top: 5px;
+}
+
+.news-article{
+	padding-top: 5px;
+	padding-bottom: 10px;
+}
+
+.news-article-date{
+	font-family: 'Noto Sans', sans-serif;
+	font-size: small;
+	font-style: italic;
+	color: grey;
+}
+
+.news-article-title{
+	font-family: 'Noto Sans', sans-serif;
+	font-size: medium;
+	font-weight: bold;
+	color: #75b540;
+}
+
+.news-article-content4{
+	font-family: 'Noto Sans', sans-serif;
+	font-size: small;
+}
