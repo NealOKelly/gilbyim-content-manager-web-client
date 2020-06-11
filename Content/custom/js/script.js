@@ -343,7 +343,6 @@ const hprmDynamicModalObserverCallback = function(mutationsList, hprmDynamicModa
 				}
 
 			}
-			
 		}
 		else if (mutation.type === 'attributes') {
 			//console.log('The ' + mutation.attributeName + ' attribute was modified.');
@@ -363,13 +362,10 @@ addObserverIfDesiredNodeAvailable(document.getElementById('hprm-dynamic-modal'),
 /// EVENT HANDLERS FOR INITIAL LOAD ///
 $(document).ready(function(){
 	
-//	$("#globalSearch [data-bind='text:profileUserType']").css("background", "lime")
-	//$("span[data-bind='text:profileUserType']").css("background", "lime")
-	
 	logAnyErrorToConsole;
 
 	// add splsh screen
-	//$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
+	$("body").prepend("<div id='splash-screen'><div id='custom-loader' class='loader'></div></div>");
 	
 	// add custom stylesheets AFTER the in-built custom.css
 	$("head link[rel='stylesheet']").last().after("<link rel='stylesheet' href='Content/custom/css/custom.css' type='text/css' media='screen'>");
@@ -460,7 +456,6 @@ $(document).ready(function(){
 	});
 	
 	$(document).on("click", ".global-search-btn", function(){
-		//console.log("Search button clicked")
 		updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")		   
 	})
 	
@@ -470,6 +465,11 @@ $(document).ready(function(){
 		updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")		   
 	})
 
+	// Clear search input box when executing and advanced search
+	$(document).on("click", "button[title='Initiate your search']", function(){
+		console.log("The button is clicked.")		
+		$("#rm4ed-global-search-input").val("")
+	})
 	
 });
 /// END EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
