@@ -459,6 +459,12 @@ $(document).ready(function(){
 		}
 	});
 	
+	$(document).on("click", ".global-search-btn", function(){
+		//console.log("Search button clicked")
+		updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")		   
+	})
+	
+	
 	// We use the mousedown event to update the #global-search-input BEFORE the click event is fired.
 	$(document).on("mousedown", "#rm4ed-intercept-global-search-button-click-narrow", function(){
 		updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")		   
