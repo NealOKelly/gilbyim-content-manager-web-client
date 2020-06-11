@@ -304,14 +304,28 @@ const hprmDynamicModalObserverCallback = function(mutationsList, hprmDynamicModa
 				$("a[href='#formSearchFilter']").parent().css("display", "none");
 			}
 
-			// placeholder for customising the saved search form
-			if($("div[id*='overlay_SavedSearchForm']").length){
-				//$("div[id*='overlay_SavedSearchForm']").find("input[type='checkbox']").css("background-color", "lime");
+			// Customising the New Saved Search form
+			if($("div[id^='overlay_SavedSearchForm']").length){
+				
+				// Hide Query field
+				$("div[id^='overlay_SavedSearchForm']").children().eq(1).children().eq(0).css("display", "none")
+				
+				// Remove the suggested description
+				$("#searchDescriptionInputLabel").val("")
+				$("#searchDescriptionInputLabel").change(); //This update the kockout.js view model
+								
+				// Hide Filter and Sort fields
+				$("div[id^='overlay_SavedSearchForm']").children().eq(1).children().eq(2).css("display", "none")
+				
+				// Default the Add to Favorites checkbox to checked.
+				if($("div[id*='overlay_SavedSearchForm']").find("input[type='checkbox']").prop("checked")==false){
+					$("div[id*='overlay_SavedSearchForm']").find("input[type='checkbox']").trigger("click");	
+				}
 			}
 			
-			// Remove dashboard and locale options if the user is not an Administrator
+			
 			if(getUserType() != "Administrator"){
-
+				// Remove dashboard and locale options if the user is not an Administrator
 				var managedByAdministratorsHTML = "<div>These settings are managed by the GilbyIM Administrators.</div>"
 
 
