@@ -26,7 +26,7 @@ var homeButtonClicked = false;
 
 
 // News Panel variables.  These are global because they are called by multiple event handlers.
-var gilbyIMNewsPanelHeaderHTML = '<div class="hpebox-title dashboard-container-header"><div class="hpebox-draghandle drag-handle ui-sortable-handle"></div><div class="listPadding listPaddingRight"><span class="h4 capitalize" data-bind="text: headerCaption, click: viewAll">GILBYIM NEWS</span><span><img src="Content/custom/html/img/gilbyim-logo.png"  style="height:25px; float: right;"><span></div></div>'
+var gilbyIMNewsPanelHeaderHTML = '<div class="hpebox-title dashboard-container-header"><div class="hpebox-draghandle drag-handle ui-sortable-handle"></div><div class="listPadding listPaddingRight"><span class="h4 capitalize" style="color: #75b540;cursor: text;" data-bind="text: headerCaption, click: viewAll">GILBYIM NEWS</span><span><img src="Content/custom/html/img/gilbyim-logo.png"  style="height:25px; float: right;"><span></div></div>'
 var gilbyIMNewsPanelStyles ="<style>iframe{margin: 0; padding: 0; border: none; width: 100%; height: auto;}</style>"
 var gilbyIMNewsPanelScript = ""
 var gilbyIMNewsPanelHTML = gilbyIMNewsPanelHeaderHTML + gilbyIMNewsPanelStyles + "<div id='iframe-container'><iframe id='gilbyim-news-iframe' src='Content/custom/html/news.html'></div>"
