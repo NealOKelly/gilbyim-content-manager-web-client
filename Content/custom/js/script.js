@@ -58,20 +58,26 @@ function logAnyErrorToConsole() {
 }
 
 // This function takes the content of the RM4ED Universal Search box and populated the hidden global-search-input box
-function updateGlobalSearchInput(){
-	var str = $("#rm4ed-global-search-input").val();
-	if(str == ""){
-		$("#global-search-input").val(strSearchQuery);	
-	}
+function updateGlobalSearchInput(value, source){
 	
-	var strSearchQuery = 'content:"'+str+'" Or anyWord:'+str;
-	$("#global-search-input").val(strSearchQuery);
+	//var str = $("#rm4ed-global-search-input").val();
+	var str = value;
+	var strSearchQuery = ""
+	
+	if(source=="input"){
 
-	// Simulate a keydown event in the global-search-input box.  This tricks knockoutjs into updating the view model.
-	var e = jQuery.Event("keydown");
-	e.which = 50; // # Some key code value
-	e.keyCode = 50
-	$("#global-search-input").trigger(e);
+		if(str == ""){
+			$("#global-search-input").val(strSearchQuery);	
+		}
+		else{
+			strSearchQuery = 'content:"'+str+'" Or anyWord:'+str;	
+		}
+	}
+	else{
+		strSearchQuery = value;
+	}
+	$("#global-search-input").val(strSearchQuery);
+	$("#global-search-input").change(); // This tricks knockout.js into updating the view model.
 }
 
 // Returns the User Type
@@ -153,19 +159,11 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 			}
 
 
-			// Update the global standard search box with the contents of the rm4ed univeral search
-			// This is required because otherwise users may click on the search button and resurn results that do not reflect what was in the search box
-			// THIS CODE IS NOT PARTICULARLY PERFORMANT.  POTENTIALLY I COULD SET UP A LOWER LEVEL MUTATION OBSERVER.
+			// When search results are displayed, write the query string back to the #global-search-input box.  This allow users to save searches conducted using the Advanced Search form.
 			if($(".HPRM-search-list-header").length){
-					updateGlobalSearchInput();	
-					var str = $(".HPRM-search-list-header>span").html()
-					if((str == "Query: 'favorite'") || (str == "Saved Searches - public") || (str == "Query: 'owner:[default:Me]'") || (str == "Query: 'myDocuments'"))
-						{
-				//		$(".HPRM-search-list-header>span").addClass("globalSearchInputUpdated");
-				//		if($(".HPRM-search-list-header>span.globalSearchInputUpdated").length){
-				//			updateGlobalSearchInput();										
-				//		}
-					}
+				var str = $(".HPRM-search-list-header>span").html().slice(8, $(".HPRM-search-list-header>span").html().length-1)
+				updateGlobalSearchInput(str, "other")
+				console.log("global-search-input="+ $("#global-search-input").val() )
 				}
 
 			// Style error messages.
@@ -179,9 +177,6 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 
 			
 			// Replace third panel with New iFrame.
-
-			//console.log("Dashpanel.length =" + $("div[id^='DashMainPanel_']").length)
-			console.log("homeButtonClicked=" + homeButtonClicked)
 			if(homeButtonClicked==true){
 				if($("div[id^='DashMainPanel_']").length){
 					if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
@@ -408,23 +403,21 @@ $(document).ready(function(){
 
 	// "click" event for logo (got to home)
 	$(document).on('click', ".navbar-logofix", function (){
-		//updateGlobalSearchInput();
-		//console.log("Clickety-click")
-			if($("div[id^='DashMainPanel_']").length){
-				if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
-					bodyContentObserver.disconnect(); // The iframe causes the mutation observer to go into an infinite loop.  This temporaily disconnect the observer while the frame is loaded.
-					$("div[id^='DashMainPanel_']").children().eq(2).children().empty()
-					$("div[id^='DashMainPanel_']").children().eq(2).children().append(gilbyIMNewsPanelHTML)
-					bodyContentObserver.observe(document.getElementById('bodyContent'), config);
 
-				}
+		if($("div[id^='DashMainPanel_']").length){
+			if($("div[id^='DashMainPanel_']").children().eq(2).children().html() != gilbyIMNewsPanelHTML){
+				bodyContentObserver.disconnect(); // The iframe causes the mutation observer to go into an infinite loop.  This temporaily disconnect the observer while the frame is loaded.
+				$("div[id^='DashMainPanel_']").children().eq(2).children().empty()
+				$("div[id^='DashMainPanel_']").children().eq(2).children().append(gilbyIMNewsPanelHTML)
+				bodyContentObserver.observe(document.getElementById('bodyContent'), config);
+
 			}
-		
-		
-		
+		}
+		// Hide Save Search button
 		$("#show-saved-searches").css("display", "none");
 		homeButtonClicked = true;
 		$("div.tabbable").find("a[title='Home']").trigger("click");
+		
 	})
 
 	
@@ -461,98 +454,25 @@ $(document).ready(function(){
 
 	// Submit a search when user presses the enter key inside the search box
 	$(document).on("keyup", "#rm4ed-global-search-input", function(e){
-		$("#rm4ed-global-search-input").trigger("change");
-		favoriteSavedSearchesLinkClicked = true; // this is used to handle permance issues with the iFrame.
-		updateGlobalSearchInput();
 		if(e.which == 13){
-			var x = $("#rm4ed-global-search-input").val().length;
-			if(x>0){
-				$( ".global-search-btn" ).trigger( "click" );
-			}
+			$( ".global-search-btn" ).trigger( "click" )
 		}
-
-	// THIS STILL DOESN'T WORK AS INTENDED
-	// The issue is that there is a second event hndler (in knoutjs that will proceed with the click.  The answer would be to enclose the button in a new div by amending GlobalSearchPanel.tmpl.html
-	// We could then use this kind of idea to trap the venet at the div level.  https://www.bennadel.com/blog/1751-jquery-live-method-and-event-bubbling.htm
-	// this handles the scenarion where the user has added search information and subsequently deleted it from the search box.
-
-	  //$(".global-search-btn").click(function(e){
-		//alert('clicked!');
-		//if($("#global-search-input").val()=='content:"" Or anyWord:'){
-			//alert('Query is crud, do not search.');
-		//	$("#global-search-input").val(null);
-		//	alert($("#global-search-input").val());
-		//	e.preventDefault();
-		//	e.stopPropagation();
-		//	}
-	  //});
-
-		//#rm4ed-intercept-global-search-button-click-narrow
-	//$(document).on('click', "#rm4ed-intercept-global-search-button-click-narrow", function (e){
-		
-		
-	//	$(document).on('click', "#rm4ed-global-search-input", function (e){
-	//		return false;
-//		}
-		
-		jQuery(function( $ ){
-
-			// Bind click events to links. This will bind a click
-			// handler to all current links as well as all new
-			// links added to the page.
-			$( ".global-search-btn" ).on(
-				"click",
-				function( event ){
-				}
-			);
-
-			// Cancel all click events off of paragraphs.
-			$( "#rm4ed-intercept-global-search-button-click-narrow" ).click(
-				function(){
-			//		return( false );
-				}
-			);
-
-		});
-		
-		
-		
-		
+	});
 	
-	//	$(document).on('click', ".global-search-btn", function (e){
-	//	$("#rm4ed-global-search-input").trigger("change");
+	// We use the mousedown event to update the #global-search-input BEFORE the click event is fired.
+	$(document).on("mousedown", "#rm4ed-intercept-global-search-button-click-narrow", function(){
+		updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")		   
+	})
 
-	//	console.log("THe search button has been clicked.")
-		
-	//		e.preventDefault();
-	//		e.stopPropagation();
-		//alert($("#global-search-input").val());
-		//if($("#global-search-input").val()=='content:"" Or anyWord:'){
-		//alert('Query is crud, do not search.');
-		//$("#global-search-input").val(null);
-		//alert("Clickety-click-click");
-		//}
-		});
-		
-	$(document).on('mousedown', ".global-search-btn", function (e){
-
-		$("#global-search-input").val("");
-
-		});
-	//});
+	
 });
 /// END EVENT HANDLERS FOR USER-DRIVEN EVENTS ///
 
 
 window.addEventListener('message', function(e) {
 	var scroll_height = e.data;
-		//scroll_height = data[0];
-	
-		console.log("scroll_height="+scroll_height)
-		
-	// Check message from which iframe
-		document.getElementById('iframe-container').style.height = scroll_height + 'px'; 
-		document.getElementById('gilbyim-news-iframe').style.height = scroll_height + 'px'; 
+	document.getElementById('iframe-container').style.height = scroll_height + 'px'; 
+	document.getElementById('gilbyim-news-iframe').style.height = scroll_height + 'px'; 
 } , false);
 
 
