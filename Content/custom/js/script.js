@@ -12,7 +12,7 @@
 /// CONSTANTS & GLOBAL VARIABLES ///
 
 // Options for the observers (which mutations to observe)
-const config = { attributes: true, childList: true, subtree: true };
+const config = { attributes: true, childList: true, subtree: true, characterData: true, characterDataOldValue: true };
 
 var browseViaClassificationIsDefaultedToFavorites = false;
 
@@ -80,6 +80,39 @@ function updateGlobalSearchInput(value, source){
 	$("#global-search-input").change(); // This tricks knockout.js into updating the view model.
 }
 
+
+function parseSearchQueryResultString(){
+	
+	var str = $(".HPRM-search-list-header>span").html()
+
+	/// Quick search, nil results, returns Records - xxxxx - End
+	// Advance search. nil results, retunrs Records - xxxxx - Filtered
+	//Advanced search returned Query: xxxx
+
+	//console.log("The full text:"+$(".HPRM-search-list-header>span").html())
+
+	if($(".HPRM-search-list-header>span").html().slice(0, 10).search("Query:")!=-1){
+	//	console.log("Some result have been returned")
+		str = $(".HPRM-search-list-header>span").html().slice(8, $(".HPRM-search-list-header>span").html().length-1)
+		//console.log("#global-search-input will be updated to: " + str)
+	}
+	else if ($(".HPRM-search-list-header>span").html().slice($(".HPRM-search-list-header>span").html().length-8, $(".HPRM-search-list-header>span").html().length).search("Filtered")!=-1) {
+		//console.log("Result is filtered.")
+		str = $(".HPRM-search-list-header>span").html().slice(10, $(".HPRM-search-list-header>span").html().length-11)
+		console.log("#global-search-input will be updated to: " + str)
+	}
+	else{
+		str = $(".HPRM-search-list-header>span").html().slice(10, $(".HPRM-search-list-header>span").html().length)
+	}
+	//str = "This is the contents of str";
+	return str
+	
+	
+}
+
+
+
+
 // Returns the User Type
 function getUserType(){
 	return $("#globalSearch [data-bind='text:profileUserType']").text()
@@ -108,7 +141,6 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 					$("div[id*='MainPanel']").append("<div id='gilbyim-bottom-panel'><div id='gilbyim-bottom-panel-left'><img src='Content/custom/images/micro-focus-gold-partner.png'></div><div id='gilbyim-bottom-panel-center'><p>&copy; Records Transformation Ltd (2020)</p></div><div id='gilbyim-bottom-panel-right'><img src='Content/custom/images/cyber-essentials-badge.png'></div></div>");		
 				}
 			}
-
 			
 			// Fade out Splash Screen and Loader.
 			if($('.as-spa-dash-main').length){
@@ -161,9 +193,15 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 
 			// When search results are displayed, write the query string back to the #global-search-input box.  This allow users to save searches conducted using the Advanced Search form.
 			if($(".HPRM-search-list-header").length){
-				var str = $(".HPRM-search-list-header>span").html().slice(8, $(".HPRM-search-list-header>span").html().length-1)
+				var str = $(".HPRM-search-list-header>span").html()
+				
+
+				str = parseSearchQueryResultString()
+				console.log(str)
+				
+				//str = $(".HPRM-search-list-header>span").html().slice(8, $(".HPRM-search-list-header>span").html().length-1)
 				updateGlobalSearchInput(str, "other")
-				console.log("global-search-input="+ $("#global-search-input").val() )
+				//console.log("global-search-input="+ $("#global-search-input").val() )
 				}
 
 			// Style error messages.
@@ -272,6 +310,19 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 		else if (mutation.type === 'attributes') {
 		//	console.log('The ' + mutation.attributeName + ' attribute was modified.');
 		}
+		else if (mutation.type === 'characterData') {
+			
+			// This handles updating the #global-search-input for searches other the first search; i.e. when .HPRM-search-list-header>span is changed rather than created.
+			// Not thar this code will be executed for ALL changes.  Need to look for a way round thius.
+			
+			console.log("mutatiion.oldValue="+mutation.oldValue)
+			if(mutation.oldValue!=$("#global-search-input").val()){
+					
+				str = parseSearchQueryResultString()
+				updateGlobalSearchInput(str, "other")
+				
+			}
+		}
 	}
 
 };
@@ -284,7 +335,6 @@ addObserverIfDesiredNodeAvailable(document.getElementById('bodyContent'), bodyCo
 //bodyContentObserver.disconnect();
 
 // END Mutation Observer for #bodyContent //
-
 
 // Mutation Observer for #hprmDynamicModal //
 // Callback function to execute when mutations are observed
