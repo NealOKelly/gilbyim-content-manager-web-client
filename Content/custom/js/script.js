@@ -54,7 +54,7 @@ function logAnyErrorToConsole() {
 		window.setTimeout(logAnyErrorToConsole,500);
 		return;
 	}
-	console.log("There is an error.  Its name is Fred.");
+	//console.log("There is an error.  Its name is Fred.");
 }
 
 // This function takes the content of the RM4ED Universal Search box and populated the hidden global-search-input box
@@ -78,7 +78,19 @@ function updateGlobalSearchInput(value, source){
 	}
 	$("#global-search-input").val(strSearchQuery);
 	$("#global-search-input").change(); // This tricks knockout.js into updating the view model.
+//1	ko.cleanNode(document.getElementById("global-search-input"))
+//	ko.applyBindings(viewModel, document.getElementById("global-search-input"))
 }
+
+function clearSearchBox(){
+	//console.log("clear search box called")
+	$("#rm4ed-global-search-input").val("")
+	//console.log("rm4edb box="+$("#rm4ed-global-search-input").val())
+	updateGlobalSearchInput($("#rm4ed-global-search-input").val(), "input")
+	console.log('$("#global-search-input").val()='+$("#global-search-input").val())
+}
+
+
 
 
 function parseSearchQueryResultString(){
@@ -99,7 +111,7 @@ function parseSearchQueryResultString(){
 	else if ($(".HPRM-search-list-header>span").html().slice($(".HPRM-search-list-header>span").html().length-8, $(".HPRM-search-list-header>span").html().length).search("Filtered")!=-1) {
 		//console.log("Result is filtered.")
 		str = $(".HPRM-search-list-header>span").html().slice(10, $(".HPRM-search-list-header>span").html().length-11)
-		console.log("#global-search-input will be updated to: " + str)
+		//console.log("#global-search-input will be updated to: " + str)
 	}
 	else{
 		str = $(".HPRM-search-list-header>span").html().slice(10, $(".HPRM-search-list-header>span").html().length)
@@ -120,7 +132,7 @@ function getUserType(){
 
 function loadGilbyIMNewsPanel(){
 	
-	console.log("GilbyIM News Panel loaded...")
+	//console.log("GilbyIM News Panel loaded...")
 }
 
 /// END FUNCTIONS ///
@@ -197,7 +209,7 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 				
 
 				str = parseSearchQueryResultString()
-				console.log(str)
+			//	console.log(str)
 				
 				//str = $(".HPRM-search-list-header>span").html().slice(8, $(".HPRM-search-list-header>span").html().length-1)
 				updateGlobalSearchInput(str, "other")
@@ -322,6 +334,18 @@ const bodyContentObserverCallback = function(mutationsList, bodyContentObserver)
 				updateGlobalSearchInput(str, "other")
 				
 			}
+			
+			console.log('$(".command-panel-header-title")[0].html()"='+$(".command-panel-header-title").html())
+			
+			if($(".command-panel-header-title").html()=="Records")
+				{
+				$("#show-saved-searches").css("display", "none")	
+				}
+		//	if(mutation.oldValue=="Saved Searches"){
+		//		console.log("This code has been called.")
+		//		$("#show-saved-searches").css("display", "inline")	
+		//	}
+		
 		}
 	}
 
@@ -474,6 +498,7 @@ $(document).ready(function(){
 	
 	// click event for Favorite Save Searches link
 	$(document).on('click', ".as-spa-dash-main-secondary>div>div>div>span:contains(Favorite saved searches)", function (){
+		clearSearchBox()
 		favoriteSavedSearchesLinkClicked = true;
 		})
 	
@@ -517,7 +542,7 @@ $(document).ready(function(){
 
 	// Clear search input box when executing and advanced search
 	$(document).on("click", "button[title='Initiate your search']", function(){
-		console.log("The button is clicked.")		
+	//	console.log("The button is clicked.")		
 		$("#rm4ed-global-search-input").val("")
 	})
 	
