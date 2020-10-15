@@ -1,0 +1,43 @@
+﻿/*<meta />*/
+
+/*
+FILE:         _FT_Responsive_SearchBar.css
+DESCRIPTION:  Cascading Style Sheet for supporting responsive design
+MODIFIED:     September 18, 2017
+LEVEL         CSS Level 3 (plus support for Madcap Flare HTML5 help)
+VERSION:      RD 1.0 for FTFS 1.0 and later 
+			  Supported only by HTML5 skins.
+*/
+
+@namespace MadCap "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
+
+/* Auto-adjust header area on smaller browsers. Works only for HTML5 skins because they define link to this .css file */
+@media only screen and (max-width:47.938em)  { 
+	
+	/* TopNav mobile and HTML5 only: Move the search bar to the left edge and down to prevent header overlap */
+	.mobile_search_bar.search-bar,	/* TopNav mobile */
+	#header .search-bar				/* HTML5 */
+	{
+		left : 37px !important; 
+		right: auto !important;
+		top: 125% !important; 
+	}
+
+	/* Move the body content down to make room for the search bar that is now lower. */
+	#body {
+		top: 95px !important;   /* orig + search box height */
+	}
+
+	/* Make title a little smaller. */
+	#header-content {
+		font-size: 1.25em !important;
+		margin-top: 1em !important;
+		line-height: 0.95em !important; 
+	}
+	
+	/* Make logo smaller. */
+	#header-logo > img{
+		max-width: 90px !important;
+	}
+	
+}

@@ -78,6 +78,12 @@ function updateGlobalSearchInput(value, source){
 	}
 	$("#global-search-input").val(strSearchQuery);
 	$("#global-search-input").change(); // This tricks knockout.js into updating the view model.
+	//$(function() {
+    //$("#global-search-input").keypress();
+	//	console.log("Keydown event fired")
+//});
+	
+	
 //1	ko.cleanNode(document.getElementById("global-search-input"))
 //	ko.applyBindings(viewModel, document.getElementById("global-search-input"))
 }
@@ -487,7 +493,7 @@ $(document).ready(function(){
 		$("#show-saved-searches").css("display", "none");
 		homeButtonClicked = true;
 		$("div.tabbable").find("a[title='Home']").trigger("click");
-		
+	
 	})
 
 	

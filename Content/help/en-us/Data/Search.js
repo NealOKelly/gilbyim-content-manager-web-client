@@ -1,0 +1,1 @@
+define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/Action_Tracking/Record_Actions.htm'],s:['+','on'],p:[['+',1],['appropriate',6],['click',24],['displayed',29],['form',46],['keyboard',1],['notes',8],['procedures',48],['screen',1],['the',7],['to',19],['will',47]]});

@@ -1,0 +1,96 @@
+﻿/*<meta />*/
+
+/* This header may be removed before distributing to customers. 
+
+FILE:         _FT_Fonts.css
+DESCRIPTION:  Font-based cascading Style Sheet for Flare Template File Set projects.
+MODIFIED:     September 18, 2017
+VERSION:      FTFS 1.0
+ 	
+*/
+
+@namespace MadCap "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
+
+/* The _FT_Icons fonts are used in online Help outputs for notification images in Admonitions */
+
+@font-face {
+	font-family: 'font_icon';
+	src:url('_FT_Icons/_FT_icons.eot');
+	src:url('_FT_Icons/_FT_icons.eot') format('embedded-opentype'),
+		url('_FT_Icons/_FT_icons.ttf') format('truetype'),
+		url('_FT_Icons/_FT_icons.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'font_icon';
+	src:url('_FT_Icons/_FT_icons.eot');
+	src:url('_FT_Icons/_FT_icons.eot') format('embedded-opentype'),
+		url('_FT_Icons/_FT_icons.ttf') format('truetype'),
+		url('_FT_Icons/_FT_icons.woff') format('woff');
+	font-weight: bold;
+}
+
+@font-face
+{
+    font-family: 'FT-MetricLocal_semi';
+    font-weight: normal;
+    font-style: normal;
+    src:  url('./_FT_fonts/Bold/MetricNEW-Web-SemiboldWeb.woff') format('woff');
+} 
+
+@font-face
+{
+    font-family: 'FT-MetricLocal_semi';
+    font-weight: normal;
+    font-style: italic;
+    src:  url('./_FT_fonts/Bold/MetricNEW-Web-SemiboldItalicWeb.woff') format('woff');
+}
+
+@font-face
+{
+	font-family: 'FT-MetricLocal';
+	font-weight: normal;
+	font-style: normal;
+	src: url('./_FT_fonts/Regular/MetricNEW-Web-RegularWeb.woff') format('woff');
+} 
+
+@font-face
+{
+	font-family: 'FT-MetricLocal';
+	font-weight: bold;
+	font-style: normal;
+	src: url('./_FT_fonts/Bold/MetricNEW-Web-BoldWeb.woff') format('woff');
+} 
+
+@font-face
+{
+	font-family: 'FT-MetricLocal';
+	font-weight: normal;
+	font-style: italic;
+	src:	url('./_FT_fonts/Regular/MetricNEW-Web-RegularItalicWeb.woff') format('woff');
+} 
+
+@font-face
+{
+	font-family: 'FT-MetricLocal';
+	font-weight: bold;
+	font-style: italic;
+	src: url('./_FT_fonts/Bold/MetricNEW-Web-BoldItalicWeb.woff') format('woff');
+} 
+
+@font-face
+{
+	font-family: 'FT-MetricLocal_Light';
+	font-weight: normal;
+	font-style: normal;
+	src: url('./_FT_fonts/Light/MetricNEW-Web-LightWeb.woff') format('woff');
+} 
+
+@font-face
+{
+	font-family: 'FT-MetricLocal_Light';
+	font-weight: normal;
+	font-style: italic;
+	src: url('./_FT_fonts/Light/MetricNEW-Web-LightItalicWeb.woff') format('woff');
+
+} 

@@ -1,0 +1,521 @@
+/*<meta />*/
+
+/* This header may be removed before distributing to customers. 
+
+FILE:         _FT_IE_Experience.css
+DESCRIPTION:  Cascading Style Sheet for Flare Template File Set
+MODIFIED:     September 8, 2017
+VERSION:      FTFS 1.0 
+
+*/
+
+@import url('_FT_IE.css');
+
+/* imports styles used by HTML5 skins for responsive mobile headers */
+@import url('_FT_Responsive_SearchBar.css');
+
+/* imports the prism.css stylesheet for use with Prism.js code syntax highlighting styles in online help */
+@import url('_FT_prism.css');
+
+@namespace MadCap "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
+
+/* Paragraphs */
+
+body
+{
+	color: #333333;
+	font-family: FT-MetricLocal, Arial, Tahoma, 'Lucida Sans Unicode', sans-serif; 
+	font-size: 1.0em;
+	line-height: 1.2em;
+}
+
+b
+{
+	color: #333333;
+}
+
+a > b
+{
+	color: inherit;
+}
+
+/*needed for Flare 9 */
+
+span.dropDownHotspot > b
+{
+	color: #3baeda;
+}
+
+/*span.MCDropDownHotspot  > b {color: #0073e7;}
+span.MCDropDownHotSpot_ > b {color: #0073e7;}*/
+
+/* Links */
+
+a,
+a.MCXref.xref,
+a.MCDropDownHotspot,
+a.MCDropDownHotSpot_
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+a:link,
+a.MCXref.xref:link,
+a.MCDropDownHotspot:link,
+a.MCDropDownHotSpot_:link
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+a:visited,
+a.MCXref.xref:visited,
+a.MCDropDownHotspot:visited,
+a.MCDropDownHotSpot_:visited
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+a:hover,
+a.MCXref.xref:hover,
+a.MCDropDownHotspot:hover,
+a.MCDropDownHotSpot_:hover
+{
+	color: #3BAEDA;
+	/* text-decoration: underline; */
+}
+
+
+/* popup and dropdown icon  */
+
+a.pop
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+a.pop:visited
+{
+	color: #0073e7;
+}
+
+a.MCTopicPopup
+{
+	background-image: url('./_FT_Experience_popup.png');
+	background-position: right;
+	padding-right: 14px;
+}
+
+a.MCTopicPopupHotSpot
+{
+	background-image: url('./_FT_Experience_popup.png');
+	background-position: right;
+	padding-right: 14px;
+}
+
+a.Popup
+{
+	background-image: url('./_FT_Experience_popup.png');
+}
+
+/* Rules */
+
+hr
+{
+	color: #E5E8E8;
+}
+
+/* examples */
+
+div.example
+{
+	border-color: #f3f3f3;
+}
+
+/* tables */
+
+table
+{
+	color: #333333;
+}
+
+td
+{
+	color: #333333;
+}
+
+td p:last-child
+{
+	margin-bottom:0px; 
+}
+
+th
+{
+	color: #333333;
+	background-color: #f3f3f3;
+	border: 1px solid #B9B8BB;
+	vertical-align: top;
+}
+
+table.no_lines,
+table.no_lines td
+{
+	color: #333333;
+}
+
+table.no_lines th
+{
+	color: #333333;
+}
+
+caption
+{
+	color: #333333;
+}
+
+/* MadCap Flare Styles */
+
+MadCap|breadcrumbsProxy
+{
+	color: #0073e7;
+	border-bottom: 1px solid #E5E8E8;
+}
+
+MadCap|breadcrumbsProxy:visited
+{
+	color: #0073e7;
+}
+
+span.MCBreadcrumbsDivider,
+span.MCBreadcrumbs
+{
+	color: #222222;
+}
+
+MadCap|conceptLink
+{
+	color: #0073e7;
+	mc-image: url('./_FT_Experience_RelatedTopics.png');
+}
+
+MadCap|conceptLink:link
+{
+	color: #0073e7;
+}
+
+MadCap|conceptLink:visited
+{
+	color: #0073e7;
+}
+
+MadCap|conceptLink.ListFormatHeader
+{
+	color: #333333;
+	text-decoration: none;
+}
+
+MadCap|dropDown
+{
+	mc-closed-image: url('./_FT_Exp_expand.png');
+	mc-open-image: url('./_FT_Exp_collapse.png');
+	mc-image-position: left;
+}
+
+MadCap|dropDownHead
+{
+	vertical-align: text-top;
+}
+
+MadCap|dropDownHotspot
+{
+	color: #0073e7;
+}
+
+/* Padding based on image sizes in _FT_Exp_collapse.png & _FT_Exp_expand.png */
+/* Override Flare12 with !important */
+div.MCDropDown_Open a.MCDropDownHotSpot_ 
+{
+	padding-left: 16px !important;
+	padding-top: 3px;
+}
+
+div.MCDropDown_Closed a.MCDropDownHotSpot_
+{
+    padding-left: 16px;
+	padding-top: 7px;
+}
+
+img.MCDropDown_Image_Icon
+{
+	display: none;
+}
+
+MadCap|expanding
+{
+	mc-closed-image: url('./_FT_Exp_expand.png');
+	mc-open-image: url('./_FT_Exp_collapse.png');
+	mc-image-position: left;
+}
+
+MadCap|glossaryTerm
+{
+	border: none;
+	color: #0073e7;
+	font-weight: normal;
+	mc-image: url('./_FT_Experience_Glossary.png');
+}
+
+MadCap|glossaryTerm.Expanding
+{
+	color: #0073e7;
+}
+
+MadCap|glossaryTerm.Hyperlink
+{
+	color: #0073e7;
+}
+
+MadCap|glossaryTerm.Popup
+{
+	color: #0073e7;
+}
+
+MadCap|helpControlMenu
+{
+	background-color: #ffffff;
+	border: solid 1pt #E5E8E8;
+}
+
+MadCap|helpControlMenuItem	
+{
+	background-color: #ffffff;
+	background-position: right;
+	color: #0073e7;
+	margin-bottom: 0em;
+	list-style-type: none;
+	margin-left: 0.50em;
+}
+
+MadCap|helpControlMenuItem.Highlighted
+{
+	background-color: #E5E8E8;
+	color: #0073e7;
+}
+
+MadCap|keywordLink
+{
+	color: #0073e7;
+	mc-image: url('./_FT_Experience_RelatedTopics.png');
+}
+
+MadCap|keywordLink:link
+{
+	color: #0073e7;
+}
+
+MadCap|keywordLink:visited
+{
+	color: #0073e7;
+}
+
+MadCap|keywordLink.ListFormatHeader
+{
+	color: #333333;
+	mc-help-control-display: list;
+	mc-image: none;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+MadCap|miniTocProxy
+{
+	border-top: solid 0px #ffffff;
+}
+
+MadCap|popup
+{
+	background-color: #ffffff;
+	border: 1pt;
+	color: #0073e7;
+}
+
+MadCap|popup:link
+{
+	color: #0073e7;
+}
+
+MadCap|popup:visited
+{
+	color: #0073e7;
+}
+
+MadCap|popupBody
+{
+	background-color: #ffffff;
+	margin: 2pt;
+	border: solid 1pt #E5E8E8;
+	border-color: #E5E8E8;
+}
+
+MadCap|popupHead
+{
+	background-color: #ffffff;
+	background-image: url('./_FT_Experience_popup.png');
+	color: #0073e7;
+}
+
+MadCap|relatedTopics
+{
+	color: #0073e7;
+	margin: 0em;
+	mc-image: url('./_FT_Experience_RelatedTopics.png');
+}
+
+MadCap|relatedTopics.ListFormatHeader
+{
+	color: #333333;
+	text-decoration: none;
+}
+
+/* controls list bullet colors */
+
+MadCap|relatedTopicsControlList
+{
+	color: #333333;
+}
+
+MadCap|toggler
+{
+	mc-image-position: left;
+	mc-open-image: url('_FT_checked.png');
+	mc-closed-image: url('_FT_unchecked.png');
+}
+
+MadCap|toggler:link
+{
+	color: #0073e7;
+}
+
+MadCap|toggler:visited
+{
+	color: #0073e7;
+}
+
+MadCap|toggler:hover
+{
+	text-decoration: underline;
+}
+
+MadCap|xref
+{
+	color: #0073e7;
+}
+
+MadCap|xref:link
+{
+	border: none;
+	color: #0073e7;
+}
+
+MadCap|xref:visited
+{
+	border: none;
+	color: #0073e7;
+}
+
+MadCap|xref.noNum
+{
+	border: none;
+	color: #0073e7;
+}
+
+MadCap|xref.noNum:visited
+{
+	border: none;
+	color: #0073e7;
+}
+
+span.MCExpandingHead
+{
+	color: #0073e7;
+}
+
+span.MCPopup > a:link
+{
+	color: #0073e7;
+	background-image: url('./_FT_Experience_popup.png');
+	padding-right: 14px;
+}
+
+span.MCPopupBody
+{
+	background-color: #ffffff;
+}
+
+span.MCTogglerHotSpot
+{
+	color: #0073e7;
+}
+
+div.MCKLinkBody
+{
+	border: solid 1px #000000;
+}
+
+/* Microsoft HTML Help only: launches another program */
+MadCap|shortcut  
+{
+	color: #0073e7;
+}
+
+/* Logo placement on Legal notices help pages */
+img.logoLegalNotices 
+{
+	margin-top: 28px;
+	margin-right: 28px; 
+	margin-bottom: 28px;
+	float:right;
+}
+
+.clearLegalLogo
+{
+	clear:right;
+}
+	
+@media only screen and (max-device-width: 767px) {
+	
+	img.logoLegalNotices
+	{
+		margin-bottom: 28px;
+		float:left;
+	}
+	
+	.clearLegalLogo
+	{
+		clear:left;
+	}
+}
+	
+@media non-print
+{
+	h1
+	{
+		color: #333333;
+		font-family: 'FT-MetricLocal_semi', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	}
+
+	h2
+	{
+		color: #333333;
+		font-family: 'FT-MetricLocal_semi', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		padding-top: 1em;
+	}
+
+	b
+	{
+		color: #333333;
+	}
+
+}

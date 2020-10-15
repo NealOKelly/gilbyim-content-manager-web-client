@@ -1,1 +1,0 @@
-# gilbyim-content-manager-web-client

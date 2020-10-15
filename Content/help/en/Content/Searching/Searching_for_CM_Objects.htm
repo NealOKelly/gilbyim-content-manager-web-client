@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="WebClient.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Content Manager Web Client Help|Searching">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Searching for Content Manager Objects</title>
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" />
+        <style>p.footerlink
+{
+	font-size: 85%;
+	text-align: right;
+}
+
+</style>
+        <link href="../Resources/Stylesheets/_FT_IE_Experience.css" rel="stylesheet" />
+        <script src="../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <div class="nocontent">
+            <div class="MCBreadcrumbsBox_0 breadcrumbs" data-mc-breadcrumbs-divider=" &gt; " data-mc-breadcrumbs-count="5" data-mc-toc="True"><span class="MCBreadcrumbsPrefix">  <![CDATA[ ]]></span>
+            </div>
+        </div>
+        <h1>Searching for Content Manager Objects</h1>
+        <p>To perform a search with Content Manager Web Client:</p>
+        <ol>
+            <li value="1">From the global Search panel, select the Content Manager object to search for:<ul style="list-style-type: circle;"><li value="1">Record </li><li value="2">Location </li><li value="3">Activity </li><li value="4">Check In Style</li><li value="5">Consignment Approver</li><li value="6">Consignment Record Rejection</li><li value="7">Historical Event</li><li value="8">Record Action</li><li value="9">Request </li><li value="10">Saved Search</li><li value="11">To Do Item</li><li value="12">User Label</li><li value="13">Workflow </li></ul></li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="2">In the <b>Search query</b> field, type the search method and parameter, for example CreatedOn:Today or title:Reef</li>
+            <li value="3">Click <b>Search</b> to run the search, or press Enter on the keyboard.</li>
+        </ol>
+        <p>The search results are displayed in the Search Results panel.</p>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>When a search returns more than 500 results, a <b>Count</b> option will become available next to the "<b>Showing Results..</b>." caption and above the search results list. To count the total number of results returned in a search, click <b>Count</b> and the results will be displayed as <b>[Total Results:xxx]</b>. This <b>Count</b> option is available for all Content Manager object pages with the exception the Workflow page.</div>
+        <h2>Sample Search Methods for Records</h2>
+        <p>Title word - search record(s) for any word in a record title, e.g. title:admin*</p>
+        <p>Any word -search for record(s) combining title words and notes words, e.g. anyword:nest</p>
+        <p>Assignee - search record(s) based on the Assignee value, e.g. assignee:abbott*</p>
+        <p>Record Number - search for record(s) using it's record number e.g. number:FBOX15/1</p>
+        <p>Date Registered - search for record(s) using the date registered value, e.g. registeredOn:this week</p>
+        <p>Date Created - search for records using the date created value, e.g. createdOn:06/01/2015 to 06/09/2015</p>
+        <h2>Sample Search Methods for Locations</h2>
+        <p>Surname - search for Location(s) based on the Last name, e.g. surname:abb*</p>
+        <p>Email Address - search for Location(s) based on their email address, e.g. email:petera@localhost.com</p>
+        <p>First Name - search for Location(s) based on their first name, e.g. givenNames:rhoda</p>
+        <h2>Sample Search Methods for Activities</h2>
+        <p>Assigned To - search for Activities based on the Location the Activity is assigned to, e.g. assignee:me</p>
+        <p>Due Date - search for Activities based on their due date, e.g. dueOn:today</p>
+        <h2>Sample Search Methods for Check In Styles</h2>
+        <p>Check In Style Owner - search for Check In Style(s) based on the owner, e.g. owner:Abbey, Rhoda (Ms)</p>
+        <p>Linked Record - search for Check In Style(s) based on the Container record, e.g. container:15/8901</p>
+        <h2>Sample Search Methods for Historical Events</h2>
+        <p>For record - search for Historical Events on a particular record, e.g. record:G16/1</p>
+        <p>Updated by - search for Historical Events made by a particular user, e.g. user:"abbott, peter"</p>
+        <h2>Sample Search Methods for Record Actions</h2>
+        <p>Action Name - search for a Record Action based on the Record Action name, e.g. name:Accident Report</p>
+        <p>Done - search for all completed Record Actions, e.g. done</p>
+        <p>Ready to Start - search for all Record Actions that are ready to start, e.g. canstart</p>
+        <p>Completed on - search for Record Actions completed on a particular date or within a date period, e.g. doneOn:this week</p>
+        <h2>Sample Search Methods for Requests</h2>
+        <p>Record Assignee - search for Request(s) based on the Record's Assignee, e.g. assignee:me</p>
+        <p>Date Required - search for Request(s) based on the date the Request is required, e.g. dueOn:this week</p>
+        <p>Status - search for Request(s) based on the Request status, e.g. status:"New Request - Awaiting Approval", "New Request - Not Yet Actioned"</p>
+        <p>Priority - search for Request(s) based on the Request priority, e.g. priority:high</p>
+        <h2>Sample Search Methods for Saved Searches</h2>
+        <p>Name - search for Saved Searches by name. Use a wildcard stand in for one or more unspecified characters.</p>
+        <p>Favourite - search for your favourite saved searches, e.g. favourite</p>
+        <p>Object type - search for saved searches that are for a specific Content Manager object type, e.g. type:location</p>
+        <h2>Sample Search Methods for To Do Items</h2>
+        <p>Date Due - search for To Do Item(s) based on the date the item is due, e.g. dueOn:tomorrow</p>
+        <p>To Do Item name - search for To Do Item(s) based on the To Be Done field, e.g. name:help*</p>
+        <p>Assignee - search for To Do Item(s) based on the assignee e.g. assignee:me</p>
+        <h2>Sample Search Methods for User Labels</h2>
+        <p>Owner - search for all User Labels that are owned by a particular user, e.g. owner:"abbott, peter"</p>
+        <p>User Label Name - search for User Labels by their name, e.g. name:project*</p>
+        <h2>Sample Search Methods for Workflows</h2>
+        <p>Due Date - search for Workflow(s) based on their due date, e.g. dueOn:this week</p>
+        <p>Overdue - search for Workflow(s) that are Overdue, e.g. overdue</p>
+        <p>Initiating record - search for Workflow(s) based on an initiating record, e.g. initiator:15/365</p>
+        <p>Date Completed - search for Workflow(s) based on the date the Workflow was completed, e.g. doneOn:last month</p>
+        <p>&#160;</p>
+        <!-- hr = horizontal rule -->
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="border: none; border-collapse: collapse;">
+                        <p id="Copyright" style="font-size: 85%; text-align: left;direction: ltr;"><a href="../Resources/MasterPages/_FT_Legal_Notices.htm#1">© Copyright <span class="_FTc_Basic_Variables_FT_Copyright_Date_Range">2008-2019</span>&#160;<span class="_FTb_Branding_Variables_FT_Company_Legal_Name">Micro Focus or one of its affiliates</span></a>
+                        </p>
+                    </td>
+                    <td style="border: none;">
+                        <div id="Feedback">
+                            <p class="footerlink"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback</a>
+                            </p>
+                            <!-- Localizable -->
+                            <div id="ft-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                                <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="ft-feedbackClose">Close</a>
+                                </div>
+                                <!-- Localizable -->
+                                <p style="font-weight: bold; margin-top: 1.5em;">Send documentation feedback</p>
+                                <!-- Localizable -->
+                                <p>To open the configured email client on this computer, <a name="ft-feedbackOpen" id="ft-feedbackOpen">open an email window</a>.</p>
+                                <!-- Localizable -->
+                                <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_FTc_Basic_Variables_FT_Product_IE_Team_PDL">hprmdocumentation@microfocus.com</span>.</p>
+                                <p style="margin-top: 1.5em;">We appreciate your feedback!</p>
+                                <!-- Localizable -->
+                                <hr />
+                                <div id="ft-feedbackBody">
+                                    <br />Product: <span id="ft-feedbackProduct"></span><span id="ft-feedbackAcronym"></span>&#160;<span id="ft-feedbackVersion"></span><br /><br />Topic Title: <span id="ft-feedbackTopic"></span><br /><br />Help Topic: <span id="ft-feedbackURL"></span><br /><br />Feedback:<br /><br /><br /></div>
+                                <!-- Localizable -->
+                            </div>
+                            <div style="display:none;" id="ft-feedback-variables" companyName="Micro Focus" productName="Content Manager" productVersion="9.4" commentsEmailAddress="hprmdocumentation@microfocus.com" productAcronym="CM" topicTitle="Searching for Content Manager Objects" skinLine1="Micro Focus Content Manager" skinLine2="Web Client">&#160;
+        <p style="display:none;"><script src="../Resources/MasterPages/_FT_Feedback.js"></script></p></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table><a href="../Resources/MasterPages/_FT_HTML5_bannerTitle.htm" style="visibility: hidden;">_FT_HTML5_bannerTitle.htm</a>
+        <div style="display:none;" id="FTb-Branding-Variables" Footer="Yes" Feedback="Yes">&#160;
+        </div>
+        <script>/* <![CDATA[ */
+			var BrandingVariables = document.getElementById("FTb-Branding-Variables");
+			if(BrandingVariables.getAttribute('Footer')=="No"){document.getElementById('Copyright').style.display = 'none';}
+			if(BrandingVariables.getAttribute('Feedback')=="No"){document.getElementById('Feedback').style.display = 'none';}
+		/* ]]> */</script>
+        <script src="../Resources/MasterPages/_FT_prism.js">
+        </script>
+    </body>
+</html>

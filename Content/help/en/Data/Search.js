@@ -1,0 +1,1 @@
+define({r:0.5,st:'Stem',n:1,t:[0],u:['../Content/Action_Tracking/Record_Actions.htm'],s:['+','ok'],p:[['+',1],['apply',48],['click',22],['displayed',19],['form',19],['jurisdiction',19],['not',21],['preview',24],['saved',15],['the',1],['to',6],['will',11]]});

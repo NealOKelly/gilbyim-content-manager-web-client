@@ -1,21 +1,17 @@
-# DW Dreamweaver added files
-_notes
-_compareTemp
-configs/
-dwsync.xml
-dw_php_codehinting.config
-*.mno
+# https://git-scm.com/docs/gitignore
+# https://help.github.com/articles/ignoring-files
+# Example.gitignore files : https://github.com/github/gitignore
+# a change
+_notes/
+/bower_components/
+/node_modules/
 /ADFS/
 /APIErrorPages/
 /bin/
-/Scripts/
+/config/
 /HTML5TrapezeViewer/
 /images/
-/config/
 /onstream/
+/Scripts/
 /ServiceStack_Logging_Log4Net_For_Copy/
-/Content/data/
-/Content/FontAwesome/
-/Content/fonts/
-/Content/help/
 /Web.config

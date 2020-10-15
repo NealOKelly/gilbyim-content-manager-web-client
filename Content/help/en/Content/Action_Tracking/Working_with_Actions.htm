@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="WebClient.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Content Manager Web Client Help|Record Actions">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Working with Actions</title>
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" />
+        <style>p.footerlink
+{
+	font-size: 85%;
+	text-align: right;
+}
+
+</style>
+        <link href="../Resources/Stylesheets/_FT_IE_Experience.css" rel="stylesheet" />
+        <script src="../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <div class="nocontent">
+            <div class="MCBreadcrumbsBox_0 breadcrumbs" data-mc-breadcrumbs-divider=" &gt; " data-mc-breadcrumbs-count="5" data-mc-toc="True"><span class="MCBreadcrumbsPrefix">  <![CDATA[ ]]></span>
+            </div>
+        </div>
+        <h1>Working with Actions</h1>
+        <p>There are a number of menu options available relating to Record Actions on the Workflow option on a selected record.</p>
+        <h2>Attaching a new Record Action</h2>
+        <p>To attach a new Action to a selected record:</p>
+        <ol>
+            <li value="1">From the displayed list of records, click the record that the Record Action to be added to.</li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="2">Click <b>Workflow</b> and then click <b>Attach Action</b>.</li>
+        </ol>
+        <p>The <b>Attach Action</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">In the <b>Action (</b><i style="font-weight: bold;">Required</i><b>)</b> field, type in the name of the Record Action to be attached to the record and select the Action from the displayed list. If the name is unknown, type <i>all</i> in the field and then select the required action from the displayed list.</li>
+            <li value="4">Complete the <b>Attach Action</b> dialogue, see <a href="#Record_Action_Properties">Record Action properties</a> for details.</li>
+            <li value="5">Click <b>Save</b>.</li>
+        </ol>
+        <p>Alternatively, an Action can also be attached to a selected record from the  <b>Attached Actions/Procedures</b> dialogue:</p>
+        <ol>
+            <li value="1">On the record the Action is to be attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">Click <b>New</b>.</li>
+        </ol>
+        <p>The <b>Attach Action</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">In the <b>Action (</b><i style="font-weight: bold;">Required</i><b>)</b> field, type in the name of the Record Action to be attached to the record and select the Action from the displayed list. If the name is unknown, type <i>all</i> in the field and then select the required action from the displayed list.</li>
+            <li value="4">Complete the <b>Attach Action</b> dialogue, see <a href="#Record_Action_Properties">Record Action properties</a> for details.</li>
+            <li value="5">Click <b>Save</b>.</li>
+        </ol>
+        <div class="MCDropDown MCDropDown_Open dropDown"><span class="MCDropDownHead dropDownHead"><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_ MCHotSpotImage"><img class="MCDropDown_Image_Icon" src="../../Skins/Default/Stylesheets/Images/transparent.gif" height="8" width="16" alt="Closed" data-mc-alt2="Open" /></a><a name="Record_Action_Properties"></a><a href="javascript:void(0);" class="MCDropDownHotSpot dropDownHotspot MCDropDownHotSpot_">Record Action Properties</a></span>
+            <div class="MCDropDownBody dropDownBody">
+                <p><b>Action</b> - type in the name of the Record Action to be attached to the record and select the Record Action from the displayed list. If the name is unknown, type <i>all</i> in the field and then select the required action from the displayed list.</p>
+                <p><b>Responsible Location</b> - by default, the Responsible Location that was assigned to the Record Action when it was created is displayed. If the Record Action is to be assigned to a different person, type the name of the Location who will be responsible for completing this Record Action and select the required Location from the displayed list. </p>
+                <p>Select the rules to apply when the Action is assigned:</p>
+                <p><b>Assign only if Action has no default responsible Location</b> - Content Manager will use the Location as the Responsible Location for the Record Action only if the Action has no default Location set.</p>
+                <p><b>Assign to this Action and Any Subordinate Record Action</b> - Content Manager will use the Location as the Responsible Location for this and any subordinate Actions within a Procedure.</p>
+                <p>Scheduling of the New Action. New Action starts:</p>
+                <p><b>On a Specific Date</b> - select this option to enter a start date and time for the Action. Type in, or use the Calendar to select, the date the Action should start.</p>
+                <p><b>Before any existing record actions for this record</b> - adds the Action to the beginning of the Action list. This will reschedule the due dates of any subsequent Actions already attached to the record.</p>
+                <p><b>After any existing record actions for this record</b> - adds the Action to the end of the Action list. The dates for the Action will be modified according to the due dates of any preceding Actions already attached to the record.</p>
+                <p><b>Before the Nominated Action Below*</b> - this option is only available if you attach an Action via the <b>Attached Actions/Procedures</b> dialogue and you have selected an already attached Action. Select this option to insert the Action before the selected attached Record Action. This will reschedule the due dates of the nominated Actions attached to the record. </p>
+                <p><b>After the Nominated Action Below*</b> - this option is only available if you attach an Action via the <b>Attached Actions/Procedures</b> dialogue and you have selected an already attached Action. Select this option to insert the Action after the selected attached Record Action. Content Manager will modify the dates for the Action according to the due dates of the nominated Actions attached to the record.</p>
+                <p>* The name of the selected Action is displayed below these two options on the <b>Attached Actions/Procedures</b> dialogue.</p>
+            </div>
+        </div>
+        <h2><a name="Completing_a_Record_Action"></a>Completing a Record Action</h2>
+        <p>If a selected record has an Action that is assigned to you as the Responsible Location, you can complete the Action from the record it is attached to or from the <a href="Record_Actions.htm#Completed">Record Actions</a> panel. To complete the action from the associated record:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Complete&#160;Current Action</b>.</li>
+        </ol>
+        <p>The <b>Complete Current Action</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">By default, the current date and time is appended to <b>Completion Date/Time</b>. If required, a different date/time can be typed in or selected using the Calendar.</li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="3">Click <b>Save</b>.</li>
+        </ol>
+        <p>Alternatively, an Action can also be completed from the <b>Attached Actions/Procedures</b> dialogue:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action to be completed and then click <b>Complete</b> <img src="../Resources/Images/Action_complete.png" /></li>
+        </ol>
+        <p>The <b>Complete:&lt;selected Action Name&gt;</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">By default, the current date and time is appended to <b>Completion Date/Time</b>. If required, a different date/time can be typed in or selected using the Calendar.</li>
+            <li value="4">To automatically complete any previous Actions in the Procedure that are not yet completed, select <b>Complete all previous incomplete record actions</b>.</li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="5">Click <b>Save</b>.</li>
+        </ol>
+        <h2>Completing All Record Actions</h2>
+        <p>Users that have the required user permissions have the option to complete all attached Actions for a record from the <b>Attached Actions/Procedures</b> dialogue. To complete all attached Actions:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action to be completed and then click <b>Complete All</b> <![CDATA[ ]]></li>
+        </ol>
+        <p>The <b>Complete All</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">By default, the current date and time is appended to <b>Completion Date/Time</b>. If required, a different date/time can be typed in or selected using the Calendar.</li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="4">Click <b>Save</b>.</li>
+        </ol>
+        <h2><a name="Uncompleting_a_Record_Action"></a>Uncompleting a Record Action</h2>
+        <p>If a Record Action has been completed but you need to reopen it, it can be made uncomplete. To uncomplete an Action:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action to be uncompleted and then click <b>Uncomplete</b> <img src="../Resources/Images/Action_uncomplete.png" /></li>
+        </ol>
+        <p>The Action will be updated and will now be available to complete when required.</p>
+        <h2><a name="Reassigning_a_Record_Action"></a>Reassigning a Record Action</h2>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action to be reassigned and then click <b>Reassign</b> <img src="../Resources/Images/Action_reassign.png" /></li>
+        </ol>
+        <p>The <b>Reassign</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">In the <b>New Assignee</b> field, type in the name of the user who the Action is to be assigned to, select the required name from the displayed list.</li>
+            <li value="4">Click <b>Save</b>.</li>
+        </ol>
+        <h2><a name="Updating_the_Cost_of_a_Record_Action"></a>Updating the Cost of a Record Action</h2>
+        <p>Each Record Action can be assigned a cost. To update this cost:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action whose Cost is to be updated and then click <b>Update Cost</b> <img src="../Resources/Images/Action_cost.png" /></li>
+        </ol>
+        <p>The <b>Update Cost</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="3">In the <b>New cost</b> field, type in, or use the spinner control to select the number, the cost of the Action.</li>
+            <li value="4">Click&#160;<b>Save</b>.</li>
+        </ol>
+        <h2>Viewing the Responsible Location</h2>
+        <p>From a record, you can view the Location that is responsible for completing this Action. </p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">Click <b>Responsible Location</b> <img src="../Resources/Images/Action_RespLoc.png" /> and the Location that the Action is assigned to appears on the <b>Locations</b> panel.</li>
+        </ol>
+        <p>To navigate back to the record, click the browser's <b>Back</b> button.</p>
+        <h2>Navigating to a Record Action</h2>
+        <p>To open an attached Record Action on the Record Actions panel:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol data-mc-continue="true">
+            <li value="2">From the displayed list of Actions/Procedures, select the Action to opened on the <b>Record Actions</b> panel and click <b>View Actions</b><![CDATA[  ]]><img src="../Resources/Images/Action_ViewActions.png" /></li>
+        </ol>
+        <p>The <b>Record Actions</b> panel appears with the selected Action displayed. See <a href="Record_Actions.htm">Record Actions</a> for details on the options available on this panel.</p>
+        <p>To navigate back to the record, click the browser's <b>Back</b> button.</p>
+        <h2>Deleting a Record Action</h2>
+        <p>Users that have the required user permissions have the option to delete an attached Action for a record from the <b>Attached Actions/Procedures</b> dialogue. To delete an attached Action:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol>
+            <li value="1">From the displayed list of Actions/Procedures, select the Action to be deleted and then click <b>Delete</b> <img src="../Resources/Images/Action_delete.png" /></li>
+        </ol>
+        <p style="font-weight: normal;">The <b>Remove Record Action</b> dialogue appears. </p>
+        <ol data-mc-continue="true">
+            <li style="font-weight: normal;" value="2">Click <b>OK</b>.</li>
+        </ol>
+        <h2>Deleting all Record Actions</h2>
+        <p>Users that have the required user permissions have the option to delete all attached Actions for a record from the <b>Attached Actions/Procedures</b> dialogue. To delete all Actions:</p>
+        <ol>
+            <li value="1">On the record the Action is attached to, click <b>Workflow</b> and then click <b>Attached Actions/Procedures</b>.</li>
+        </ol>
+        <p>The <b>Attached Actions/Procedures</b> dialogue appears.</p>
+        <ol>
+            <li value="1">From the displayed list of Actions/Procedures, select the Action to be deleted and then click <b>Delete All</b>.</li>
+        </ol>
+        <p style="font-weight: normal;">The <b>Remove All Actions</b> dialogue appears. </p>
+        <ol data-mc-continue="true">
+            <li style="font-weight: normal;" value="2">Click <b>OK</b>.</li>
+        </ol>
+        <h2>Viewing the Record Action Properties</h2>
+        <p>From the Attached Actions/Procedures dialogue, the properties of the attached Actions or Procedures can be viewed.</p>
+        <ol>
+            <li value="1">Select a listed Action or Procedure, click <b>Hide/Show the Properties Panel</b> .</li>
+        </ol>
+        <p>The Properties panel will be displayed within the Attached Actions/Procedures dialogue.</p>
+        <ol data-mc-continue="true">
+            <li value="2">Click <b>Hide/Show the Properties Panel</b> to close the Properties Panel.</li>
+        </ol>
+        <p>&#160;</p>
+        <!-- hr = horizontal rule -->
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="border: none; border-collapse: collapse;">
+                        <p id="Copyright" style="font-size: 85%; text-align: left;direction: ltr;"><a href="../Resources/MasterPages/_FT_Legal_Notices.htm#1">© Copyright <span class="_FTc_Basic_Variables_FT_Copyright_Date_Range">2008-2019</span>&#160;<span class="_FTb_Branding_Variables_FT_Company_Legal_Name">Micro Focus or one of its affiliates</span></a>
+                        </p>
+                    </td>
+                    <td style="border: none;">
+                        <div id="Feedback">
+                            <p class="footerlink"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback</a>
+                            </p>
+                            <!-- Localizable -->
+                            <div id="ft-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                                <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="ft-feedbackClose">Close</a>
+                                </div>
+                                <!-- Localizable -->
+                                <p style="font-weight: bold; margin-top: 1.5em;">Send documentation feedback</p>
+                                <!-- Localizable -->
+                                <p>To open the configured email client on this computer, <a name="ft-feedbackOpen" id="ft-feedbackOpen">open an email window</a>.</p>
+                                <!-- Localizable -->
+                                <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_FTc_Basic_Variables_FT_Product_IE_Team_PDL">hprmdocumentation@microfocus.com</span>.</p>
+                                <p style="margin-top: 1.5em;">We appreciate your feedback!</p>
+                                <!-- Localizable -->
+                                <hr />
+                                <div id="ft-feedbackBody">
+                                    <br />Product: <span id="ft-feedbackProduct"></span><span id="ft-feedbackAcronym"></span>&#160;<span id="ft-feedbackVersion"></span><br /><br />Topic Title: <span id="ft-feedbackTopic"></span><br /><br />Help Topic: <span id="ft-feedbackURL"></span><br /><br />Feedback:<br /><br /><br /></div>
+                                <!-- Localizable -->
+                            </div>
+                            <div style="display:none;" id="ft-feedback-variables" companyName="Micro Focus" productName="Content Manager" productVersion="9.4" commentsEmailAddress="hprmdocumentation@microfocus.com" productAcronym="CM" topicTitle="Working with Actions" skinLine1="Micro Focus Content Manager" skinLine2="Web Client">&#160;
+        <p style="display:none;"><script src="../Resources/MasterPages/_FT_Feedback.js"></script></p></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table><a href="../Resources/MasterPages/_FT_HTML5_bannerTitle.htm" style="visibility: hidden;">_FT_HTML5_bannerTitle.htm</a>
+        <div style="display:none;" id="FTb-Branding-Variables" Footer="Yes" Feedback="Yes">&#160;
+        </div>
+        <script>/* <![CDATA[ */
+			var BrandingVariables = document.getElementById("FTb-Branding-Variables");
+			if(BrandingVariables.getAttribute('Footer')=="No"){document.getElementById('Copyright').style.display = 'none';}
+			if(BrandingVariables.getAttribute('Feedback')=="No"){document.getElementById('Feedback').style.display = 'none';}
+		/* ]]> */</script>
+        <script src="../Resources/MasterPages/_FT_prism.js">
+        </script>
+    </body>
+</html>

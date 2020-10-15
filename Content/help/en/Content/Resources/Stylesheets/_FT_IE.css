@@ -1,0 +1,2587 @@
+/*<meta />*/
+
+/* This header may be removed before distributing to customers. 
+
+FILE:         _FT_IE.css
+DESCRIPTION:  Base cascading Style Sheet for Flare Template File Set projects.
+MODIFIED:     March 15, 2018
+VERSION:      FTFS 1.2 
+ 	
+*/
+
+/* Custom Metric Font for web output */
+
+@import url('_FT_Fonts.css');
+
+@namespace MadCap "http://www.madcapsoftware.com/Schemas/MadCap.xsd";
+
+/* Paragraphs */
+
+body
+{
+	font-family: Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	font-size: 1.0em;
+	font-weight: normal;
+	font-style: normal;
+	line-height: normal;
+	margin-bottom: 1.0em;
+	mc-hyphenate: never;
+	color: #000000;
+}
+
+/* Paragraphs */
+
+p
+{
+	margin-top: 0em;
+	margin-bottom: 0.95em;
+}
+
+p.avoidPageBreak
+{
+	page-break-inside: avoid;
+}
+
+p.keepWithNext
+{
+	page-break-after: avoid;
+}
+
+p.hanging_indent
+{
+	text-indent: -25px;
+	padding-left: 25px;
+}
+
+p.intro_phrase	/* Fix for TPS-45 */
+{
+	font-family: 'FT-MetricLocal_semi'; 
+	font-size: 1.1em;
+	color: #333333;
+	page-break-after: avoid;
+	padding-top: 0.75em;
+	margin-bottom: 0.75em;
+}
+
+/* Paragraph Classes */
+
+p.Index1,
+p.Index2,
+p.Index3,
+p.Index4
+{
+	margin-bottom: 0em;
+	margin-top: 0em;
+	white-space: normal;
+}
+
+/* Links */
+
+a
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+a:link
+{
+	color: #0073e7;
+}
+
+span.MCPopup > a:link
+{
+	color: #0073e7;
+	text-decoration: none;
+	content: "\0000a0";
+	padding-right: 18px;
+	display: inline;
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-image: url('./_FT_DropDownClosed.png');
+}
+
+a:visited
+{
+	color: #0073e7;
+}
+
+a:hover
+{
+	color: #3baeda;
+}
+
+span.MCPopup > a:hover
+{
+	color: #3baeda;
+}
+
+a.avoidPrint
+{
+	
+}
+
+a.MiniTOC1:link,
+a.MiniTOC2:link,
+a.MiniTOC3:link,
+a.MiniTOC4:link,
+a.MiniTOC5:link,
+a.MiniTOC6:link,
+a.MiniTOC7:link,
+a.MiniTOC8:link
+{
+	font-weight: normal;
+	color: #0073e7;
+	text-decoration: none;
+	margin-top: 0px;
+}
+
+a.MiniTOC1:visited,
+a.MiniTOC2:visited,
+a.MiniTOC3:visited,
+a.MiniTOC4:visited,
+a.MiniTOC5:visited,
+a.MiniTOC6:visited,
+a.MiniTOC7:visited,
+a.MiniTOC8:visited
+{
+	color: #0073e7;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+a.MiniTOC1:hover,
+a.MiniTOC2:hover,
+a.MiniTOC3:hover,
+a.MiniTOC4:hover,
+a.MiniTOC5:hover,
+a.MiniTOC6:hover,
+a.MiniTOC7:hover,
+a.MiniTOC8:hover
+{
+	color: #3baeda;
+}
+
+MadCap|miniTocProxy
+{
+	margin-top: 0px;
+	padding-top: 0px;
+	border-top-style: none;
+	mc-output-support: all;
+}
+
+/* td.GenMiniTOCText is required to add a bullet to the list of entries in PDF miniTOC, see @media print */
+
+td.GenMiniTOCText1,
+td.GenMiniTOCText2,
+td.GenMiniTOCText3,
+td.GenMiniTOCText4,
+td.GenMiniTOCText5,
+td.GenMiniTOCText6,
+td.GenMiniTOCText7,
+td.GenMiniTOCText8
+{
+	margin-top: 0px;
+	mc-auto-number-format: '• ';
+	margin-left: 8px;
+	margin-right: 16px;
+	padding-left: 9px;
+	padding-right: 9px;
+}
+
+/* p.MiniTOC1_0 is required to add a bullet to the list of entries in WebHelp and HTML5 miniTOC */
+
+p.MiniTOC1_0,
+p.MiniTOC2_0,
+p.MiniTOC3_0,
+p.MiniTOC4_0,
+p.MiniTOC5_0,
+p.MiniTOC6_0,
+p.MiniTOC7_0,
+p.MiniTOC8_0,
+p.MiniTOC9_0
+{
+	margin-top: 0px;
+	margin-bottom: 0.95em;
+	display: list-item;
+	list-style-type: disc;
+}
+
+a.pop
+{
+	color: #0073e7;
+}
+
+a.pop:visited
+{
+	color: #0073e7;
+}
+
+a.pop:hover
+{
+	color: #3baeda;
+}
+
+a.Popup
+{
+	text-decoration: none;
+	content: "\0000a0";
+	padding-right: 18px;
+	background-repeat: no-repeat;
+	background-position: right center;
+	background-image: url('./_FT_DropDownClosed.png');
+	display: inline;
+}
+
+a.Popup:hover
+{
+	color: #3baeda;
+}
+
+/* HTML5: Links to close dropddowns and togglers. */
+/* Requires _FT_closeDDsAndTogglers.js script.    */
+
+a.dropDownClose,
+a.togglerClose
+{
+	display: block;
+}
+
+a.dropDownClose::after,
+a.togglerClose::after
+{
+	/* Localizable */
+	content: "^ Close";
+}
+
+a.togglerClose
+{
+	margin-top: 0.5em;
+	margin-bottom: 0.75em;
+}
+
+MadCap|dropDownBody.CloseLink,
+MadCap|toggler.CloseLink
+{
+	
+}
+
+/* Miscellaneous Styles */
+
+abbr
+{
+	font-variant: normal;
+}
+
+acronym
+{
+	font-variant: normal;
+}
+
+address
+{
+	font-style: inherit;
+}
+
+blockquote	/* Fix for TPS-56 where blockquotes did not have an indent */
+{
+	margin-left: 25px;
+}
+
+/* Admonitions */
+/* div.Admonition_Deprecated - indicates deprecation of methods in APIs and command line tools */
+
+div.Admonition_Caution,
+div.Admonition_Important,
+div.Admonition_Note,
+div.Admonition_Tip,
+div.Admonition_Deprecated
+{
+	padding-top: 4px;
+	padding-left: 17px;
+	padding-bottom: 6px;
+	margin-bottom: 10px;
+	border: none;
+	background-color: #f3f3f3;
+	padding-right: 20px;
+}
+
+table div.Admonition_Caution,
+table div.Admonition_Important,
+table div.Admonition_Note,
+table div.Admonition_Tip,
+table div.Admonition_Deprecated
+{
+	padding-top: 0px;
+	padding-left: 10px;
+	padding-bottom: 4px;
+}
+
+div.Admonition_Note span.autonumber,
+div.Admonition_Caution span.autonumber,
+div.Admonition_Tip span.autonumber,
+div.Admonition_Deprecated span.autonumber,
+div.Admonition_Important span.autonumber
+{
+	font-family: FT-MetricLocal_semi;
+}
+
+div.Admonition_Caution
+{
+	border-left: solid 5px #E5004C;
+	mc-auto-number-format: 'CAUTION: ';
+	/* Localizable */
+}
+
+table div.Admonition_Caution
+{
+	border-left: solid 3px #E5004C;
+}
+
+div.Admonition_Important
+{
+	border-left: solid 5px #F48834;
+	mc-auto-number-format: 'IMPORTANT: ';
+	/* Localizable */
+}
+
+table div.Admonition_Important
+{
+	border-left: solid 3px #F48834;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+div.Admonition_Note
+{
+	border-left: solid 5px #0073e7;
+	mc-auto-number-format: 'NOTE: ';
+	/* Localizable */
+}
+
+table div.Admonition_Note
+{
+	border-left: solid 3px #0073e7;
+}
+
+div.Admonition_Tip
+{
+	border-left: solid 5px #00A989;
+	mc-auto-number-format: 'TIP: ';
+	/* Localizable */
+}
+
+table div.Admonition_Tip
+{
+	border-left: solid 3px #00A989;
+}
+
+div.Admonition_Deprecated
+{
+	border-left: solid 5px #F48834;
+	mc-auto-number-format: 'DEPRECATED: ';
+	/* Localizable */
+}
+
+table div.Admonition_Deprecated
+{
+	border-left: solid 3px #F48834;
+}
+
+div.Admonition_Caution .autonumber:before
+{
+	content: "\e913";
+	font-family: font_icon;
+	color: #E5004C;
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
+	font-size: 28px;
+}
+
+table div.Admonition_Caution .autonumber:before
+{
+	top: 5px;
+	font-size: 22px;
+}
+
+div.Admonition_Important .autonumber:before
+{
+	content: "\e91b";
+	font-family: font_icon;
+	color: #F48834;
+	margin-right: 12px;
+	position: relative;
+	top: 5px;
+	font-size: 22px;
+}
+
+table div.Admonition_Important .autonumber:before
+{
+	top: 3px;
+	font-size: 17px;
+}
+
+div.Admonition_Note .autonumber:before
+{
+	content: "\e916";
+	font-family: font_icon;
+	color: #0073e7;
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
+	font-size: 28px;
+}
+
+table div.Admonition_Note .autonumber:before
+{
+	top: 5px;
+	font-size: 22px;
+}
+
+div.Admonition_Tip .autonumber:before
+{
+	content: "\e917";
+	font-family: font_icon;
+	color: #00A989;
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
+	font-size: 28px;
+}
+
+table div.Admonition_Tip .autonumber:before
+{
+	top: 5px;
+	font-size: 22px;
+}
+
+div.Admonition_Deprecated .autonumber:before
+{
+	content: "\e915";
+	font-family: font_icon;
+	color: #F48834;
+	margin-right: 10px;
+	position: relative;
+	top: 7px;
+	font-size: 28px;
+}
+
+table div.Admonition_Deprecated .autonumber:before
+{
+	top: 5px;
+	font-size: 22px;
+}
+
+/* background of admonitions within admonitions */
+
+div.Admonition_Deprecated div.Admonition_Caution,
+div.Admonition_Deprecated div.Admonition_Important,
+div.Admonition_Deprecated div.Admonition_Note,
+div.Admonition_Deprecated div.Admonition_Tip,
+div.Admonition_Deprecated div.Admonition_Deprecated,
+div.Admonition_Tip div.Admonition_Caution,
+div.Admonition_Tip div.Admonition_Important,
+div.Admonition_Tip div.Admonition_Note,
+div.Admonition_Tip div.Admonition_Tip,
+div.Admonition_Tip div.Admonition_Deprecated,
+div.Admonition_Important div.Admonition_Caution,
+div.Admonition_Important div.Admonition_Important,
+div.Admonition_Important div.Admonition_Note,
+div.Admonition_Important div.Admonition_Tip,
+div.Admonition_Important div.Admonition_Deprecated,
+div.Admonition_Caution div.Admonition_Caution,
+div.Admonition_Caution div.Admonition_Important,
+div.Admonition_Caution div.Admonition_Note,
+div.Admonition_Caution div.Admonition_Tip,
+div.Admonition_Caution div.Admonition_Deprecated,
+div.Admonition_Note div.Admonition_Caution,
+div.Admonition_Note div.Admonition_Important,
+div.Admonition_Note div.Admonition_Note,
+div.Admonition_Note div.Admonition_Tip,
+div.Admonition_Note div.Admonition_Deprecated
+{
+	background-color: #e5e8e8;
+}
+
+/* Adjust space of first item in admonition */
+
+.Admonition_Tip .autonumber + *,
+.Admonition_Note .autonumber + *,
+.Admonition_Caution .autonumber + *,
+.Admonition_Important .autonumber + *,
+.Admonition_Deprecated .autonumber + *
+{
+	margin-top: 8px;
+}
+
+/* Adjust space after last item in admonition */
+
+.Admonition_Tip *:last-child,
+.Admonition_Note *:last-child,
+.Admonition_Caution *:last-child,
+.Admonition_Important *:last-child,
+.Admonition_Deprecated *:last-child
+{
+	/* margin-bottom: 4px; */
+}
+
+/* backgrounds for examples */
+/* fixing bottom padding in div.example */
+
+div.example
+{
+	margin-bottom: 10px;
+	margin-left: 0px;
+	margin-right: 5px;
+	overflow: auto;
+	overflow-Y: hidden;
+	padding-top: 11px;
+	padding-left: 9px;
+	padding-right: 9px;
+	/* padding-bottom: 9px; */
+	background-color: #f3f3f3;
+	border: none;
+}
+
+div.avoidPageBreak
+{
+	page-break-inside: avoid;
+}
+
+div.keepWithNext
+{
+	page-break-after: avoid;
+}
+
+div.frontMatter
+{
+	font-size: 0.8em;
+}
+
+/* Headings */
+
+h1
+{
+	font-size: 150%;
+	line-height: normal;
+	font-family: 'FT-MetricLocal_semi', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	color: #333333;
+	font-weight: normal;
+	font-style: normal;
+}
+
+h1.appendix
+{
+	mc-disabled: true;
+}
+
+h1.chapternum
+{
+	mc-disabled: true;
+}
+
+h1.partnum
+{
+	mc-disabled: true;
+}
+
+h1.frontMatter
+{
+	font-size: 1.3em;
+	color: #333333;
+}
+
+h2	/* fix for TPS-27 font size problem between Arial body text and Metric headers*/
+{
+	color: #333333;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 130%;
+	line-height: normal;
+	font-family: 'FT-MetricLocal_semi', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+}
+
+h2.appendix
+{
+	mc-disabled: true;
+}
+
+h2.chapternum
+{
+	mc-disabled: true;
+}
+
+h2.frontMatter
+{
+	font-size: 1.1em;
+	color: #333333;
+}
+
+h2.noTOC
+{
+	color: #333333;
+}
+
+h3	/* Fix for TPS-45 */
+{
+	color: #333333;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 120%;
+	line-height: normal;
+	font-family: 'FT-MetricLocal_semi', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+}
+
+h3.noTOC
+{
+	color: #333333;
+}
+
+h4
+{
+	mc-disabled: true;
+}
+
+h5
+{
+	mc-disabled: true;
+}
+
+h6
+{
+	mc-disabled: true;
+}
+
+/* Rules */
+
+hr
+{
+	color: #B9B8BB;
+	height: 0.05em;
+	width: 100%;
+}
+
+/* Images */
+
+img
+{
+	border: none;
+}
+
+img.floatLeft
+{
+	border: none;
+	display: inline;
+	float: left;
+	margin-top: 5px;
+	margin-bottom: 2px;
+	margin-right: 10px;
+}
+
+img.floatRight
+{
+	border: none;
+	display: inline;
+	float: right;
+	margin-top: 5px;
+	margin-bottom: 2px;
+}
+
+/* Definition list tags, used in API docs */
+
+dl
+{
+	margin: 0;
+}
+
+dt
+{
+	margin-top: 0.8em;
+}
+
+dd
+{
+	margin-left: 20px;
+}
+
+/* Lists */
+
+ol
+{
+	margin-left: 20px;
+	margin-top: 0.75em;
+	padding: 0px;
+	padding-left: 0.2em;
+	margin-bottom: 0.75em;
+}
+
+ul
+{
+	margin-left: 8px;
+	margin-top: 0.75em;
+	padding: 0px;
+	padding-left: 0.2em;
+	margin-bottom: 0.75em;
+}
+
+ol li
+{
+	margin-left: 8px;
+	margin-bottom: 0.75em;
+}
+
+ul li
+{
+	margin-left: 8px;
+	margin-bottom: 0.75em;
+}
+
+ol li p,
+ul li p
+{
+	margin-left: 0pt;
+	margin-bottom: 0.75em;
+}
+
+ul ul li p,
+ul ol li p,
+ol ul li p,
+ol ol li p
+{
+	margin-left: 0pt;
+	margin-bottom: 0.75em;
+}
+
+ol ol ul ol li,
+ul ul ul li p,
+ul ol ol li p,
+ul ul ol li p,
+ul ol ul li p,
+ol ul ul li p,
+ol ol ol li p,
+ol ul ol li p,
+ol ol ul li p
+{
+	margin-left: 0pt;
+	margin-bottom: 0.75em;
+}
+
+ol ul li,
+ul ul li
+{
+	margin-left: 6px;
+	margin-bottom: 0.75em;
+}
+
+ol ol li,
+ul ol li
+{
+	margin-left: 4px;
+	margin-bottom: 0.75em;
+}
+
+ol ol ol li,
+ol ul ol li,
+ul ol ol li,
+ul ul ol li
+{
+	margin-left: 8px;
+}
+
+ol ol ol ol li,
+ol ol ul ol li,
+ol ul ol ol li,
+ul ol ol ol li,
+ol ul ul ol li,
+ul ul ol ol li,
+ul ol ul ol li,
+ul ul ul ol li
+{
+	margin-left: 8px;
+}
+
+ul ul ul ul li,
+ul ul ol ul li,
+ul ol ul ul li,
+ol ul ul ul li,
+ul ol ol ul li,
+ol ol ul ul li,
+ol ul ol ul li,
+ol ol ol ul li
+{
+	margin-left: 8px;
+}
+
+ol ul ul li,
+ol ol ul li,
+ul ul ul li,
+ul ol ul li
+{
+	margin-left: 8px;
+}
+
+/*******************************************************
+  Ordered lists   
+    -- 1st or 4th level in any list: decimal (1,2,3)
+	-- 2nd or 5th level in any list: lower-alpha (a,b,c)
+	-- 3rd level in any list: lower-roman (i, ii, iii)
+	-- 6th level or deeper: 
+			based on pattern of last 5 <ol> / <ul> tags
+********************************************************/
+
+ol > li,
+ul ol > li,
+ul ul ol > li,
+ol ol ol ol > li,
+ul ul ul ol > li,
+ol ol ol ul ol > li,
+ol ol ul ol ol > li,
+ol ul ol ol ol > li,
+ul ol ol ol ol > li,
+ul ul ul ul ol > li
+{
+	list-style-type: decimal;
+}
+
+ol ol > li,
+ul ol ol > li,
+ol ul ol > li,
+ol ul ul ol > li,
+ul ol ul ol > li,
+ul ul ol ol > li,
+ol ol ol ol ol > li,
+ol ul ul ul ol > li,
+ul ol ul ul ol > li,
+ul ul ol ul ol > li,
+ul ul ul ol ol > li
+{
+	list-style-type: lower-alpha;
+}
+
+ol ol ol > li,
+ol ol ul ol > li,
+ol ul ol ol > li,
+ul ol ol ol > li,
+ul ul ol ol ol > li,
+ul ol ul ol ol > li,
+ul ol ol ul ol > li,
+ol ol ul ul ol > li,
+ol ul ol ul ol > li,
+ol ul ul ol ol > li
+{
+	list-style-type: lower-roman;
+}
+
+/*****************************************************
+  Unordered lists   
+    -- 1st or 4th level in any list: disc 
+	-- 2nd or 5th level in any list: circle
+	-- 3rd level in any list: square
+	-- 6th level or deeper: 
+		based on pattern of last 5 <ol> / <ul> tags
+*****************************************************/
+
+ul > li,
+ol ul > li,
+ol ol ul > li,
+ol ol ol ul > li,
+ul ul ul ul > li,
+ol ol ol ol ul > li,
+ol ul ul ul ul > li,
+ul ol ul ul ul > li,
+ul ul ol ul ul > li,
+ul ul ul ol ul > li
+{
+	list-style-type: disc;
+}
+
+ul ul > li,
+ol ul ul > li,
+ul ol ul > li,
+ol ol ul ul > li,
+ol ul ol ul > li,
+ul ol ol ul > li,
+ol ol ol ul ul > li,
+ol ol ul ol ul > li,
+ol ul ol ol ul > li,
+ul ol ol ol ul > li,
+ul ul ul ul ul > li
+{
+	list-style-type: circle;
+}
+
+ul ul ul > li,
+ol ul ul ul > li,
+ul ol ul ul > li,
+ul ul ol ul > li,
+ol ol ul ul ul > li,
+ol ul ol ul ul > li,
+ol ul ul ol ul > li,
+ul ol ol ul ul > li,
+ul ol ul ol ul > li,
+ul ul ol ol ul > li
+{
+	list-style-type: square;
+}
+
+menu
+{
+	margin: 0;
+}
+
+/* Table styles */
+
+table
+{
+	color: #000000;
+	background-color: transparent;
+	border: solid 1pt #dcdedf;
+	border-collapse: collapse;
+	caption-side: top;
+	font-size: 100%;
+	line-height: normal;
+	margin-bottom: 1.1em;
+	mc-caption-continuation: ', continued';
+	/* Localizable */
+	mc-caption-repeat: true;
+	text-align: left;
+	mc-hide-bottom-ruling: true;
+	margin-bottom: 0.95em;
+}
+
+table.no_lines,
+table.no_lines td,
+table.no_lines th
+{
+	border: none;
+	border-collapse: collapse;
+	background-color: transparent;
+	color: #000000;
+}
+
+caption	/* TPS-62 - caption is very bold in IE11 */
+{
+	color: #000000;
+	text-align: left;
+	font-weight: bold;
+	font-family: 'FT-MetricLocal', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	margin-bottom: 0.4em;
+	margin-top: 0.25em;
+}
+
+th
+{
+	background-color: #dcdedf;
+	border: solid 1pt #dcdedf;
+	border-bottom: solid 1px #dcdedf;
+	border-right-style: solid;
+	border-right-color: #dcdedf;
+	border-right-width: 1px;
+	border-top: .1em solid #dcdedf;
+	color: #000000;
+	font-weight: bold;
+	padding: 0.5em;
+	vertical-align: bottom;
+	text-align: left;
+}
+
+/* header background of tables in admonitions */
+
+div.Admonition_Caution th,
+div.Admonition_Important th,
+div.Admonition_Note th,
+div.Admonition_Tip th,
+div.Admonition_Deprecated th
+{
+	background-color: #e5e8e8;
+}
+
+th.center
+{
+	text-align: center;
+}
+
+tr
+{
+	page-break-inside: auto;
+}
+
+tr.allowBreak
+{
+	page-break-inside: auto;
+}
+
+td
+{
+	background-color: transparent;
+	border-top-style: solid;
+	border-top-color: #dcdedf;
+	border-top-width: 1px;
+	border-right-style: solid;
+	border-right-color: #dcdedf;
+	border-right-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #dcdedf;
+	border-bottom-width: 1px;
+	border-spacing: 0px 0px;
+	color: #000000;
+	padding: 0.5em;
+	vertical-align: top;
+	text-align: left;
+}
+
+td.center
+{
+	text-align: center;
+}
+
+th.null
+{
+	border: none;
+	color: #000000;
+}
+
+td.null
+{
+	border: none;
+	border-collapse: collapse;
+}
+
+td ul
+{
+	margin-left: 8px;
+	margin-top: 0px;
+	padding: 0px;
+	padding-left: 0.2em;
+}
+
+td ol
+{
+	margin-left: 14px;
+	margin-top: 0px;
+	padding: 0px;
+	padding-left: 0.2em;
+}
+
+/* Paragraph Tag for Code */
+
+pre
+{
+	color: #333333;
+	font-family: 'Consolas', 'Courier New';
+	font-size: 95%;
+	line-height: 1.25em;
+}
+
+pre.hanging_indent
+{
+	text-indent: -25px;
+	padding-left: 25px;
+}
+
+/* Character Tag for Code  */
+
+code
+{
+	color: #333333;
+	font-family: 'Consolas', 'Courier New';
+	/* font-size: 100%; */
+	font-size: 95%;
+}
+
+/* Responsive styles */
+/* Wrapper for wide images that adds scrollbar, if needed. */
+
+div.rd_scroll
+{
+	width: 100%;
+	overflow: auto;
+	margin-bottom: 0.65em;
+}
+
+div.rd_scroll img
+{
+	max-width: 150%;
+}
+
+/* MadCap Flare Styles */
+
+MadCap|breadcrumbsProxy
+{
+	margin-bottom: 4px;
+	padding-bottom: 4px;
+	color: #0073e7;
+	mc-breadcrumbs-count: 5;
+	mc-breadcrumbs-prefix: ' ';
+	mc-label: '';
+	border-bottom: 1px solid #999999;
+}
+
+MadCap|breadcrumbsProxy:visited
+{
+	color: #0073e7;
+}
+
+span.MCBreadcrumbsDivider,
+span.MCBreadcrumbs
+{
+	color: #000000;
+}
+
+MadCap|conceptLink
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+MadCap|conceptLink:link
+{
+	color: #0073e7;
+}
+
+MadCap|conceptLink:visited
+{
+	color: #0073e7;
+}
+
+MadCap|conceptLink:hover
+{
+	color: #3baeda;
+	mc-format: '{quote}{para}{quote}';
+	/* Localizable */
+}
+
+MadCap|conceptLink.ListFormatHeader
+{
+	color: #000000;
+	mc-help-control-display: list;
+	mc-image: none;
+	mc-label: 'See also';
+	/* Localizable */
+	font-weight: bold;
+}
+
+MadCap|conceptLinkControlListItemLink,
+MadCap|keywordLinkControlListItemLink,
+MadCap|relatedTopicsControlListItemLink
+{
+	font-weight: normal;
+}
+
+MadCap|conceptLinkControlListItemLink:hover
+{
+	color: #3baeda;
+}
+
+MadCap|dropDown
+{
+	margin-bottom: .8em;
+}
+
+MadCap|dropDownHead
+{
+	margin-bottom: 0.95em;
+	page-break-after: avoid;
+}
+
+MadCap|dropDownHead.boldPrint
+{
+	margin-bottom: 0.95em;
+	page-break-after: avoid;
+}
+
+MadCap|dropDownBody
+{
+	margin-left: 1.2em;
+	margin-top: 0.5em;
+}
+
+MadCap|dropDownHotspot:hover,
+MadCap|dropDownHead.boldPrint:hover
+{
+	color: #3baeda;
+}
+
+MadCap|expanding
+{
+	mc-image-position: right;
+}
+
+MadCap|expandingHead:hover
+{
+	color: #3baeda;
+}
+
+div.GlossaryPageEntry
+{
+	padding-bottom: 0.5em;
+}
+
+div.GlossaryPageDefinition
+{
+	padding-bottom: 0.5em;
+}
+
+MadCap|glossaryTerm
+{
+	color: #0073e7;
+	font-weight: bold;
+	mc-image-position: right;
+	text-decoration: none;
+	mc-closed-image: url('./_FT_Experience_Glossary.png');
+	mc-open-image: url('./_FT_Experience_Glossary.png');
+}
+
+MadCap|glossaryTerm:hover
+{
+	color: #3baeda;
+}
+
+MadCap|glossaryTerm.Expanding
+{
+	color: #0073e7;
+	font-weight: normal;
+}
+
+MadCap|glossaryTerm.Expanding:hover
+{
+	color: #3baeda;
+}
+
+MadCap|glossaryTerm.Hyperlink
+{
+	color: #0073e7;
+}
+
+MadCap|glossaryTerm.Hyperlink:hover
+{
+	color: #3baeda;
+}
+
+MadCap|glossaryTerm.Popup
+{
+	color: #0073e7;
+}
+
+MadCap|glossaryTerm.Popup:hover
+{
+	color: #3baeda;
+}
+
+MadCap|helpControlMenu
+{
+	background-color: #ffffff;
+	border-bottom-color: #ffffff;
+	border-color: #ffffff;
+}
+
+MadCap|helpControlMenuItem
+{
+	background-color: #ffffff;
+	background-position: right;
+	border: 1px solid #999999;
+	padding: 2px 2px 2px 2px;
+	color: #3baeda;
+	border-color: #ffffff;
+	margin-bottom: 0em;
+	/* last 3 required to get HTML5 Help's Concept Link popup formatted correctly */
+	list-style-type: none;
+	margin-left: 0.50em;
+}
+
+MadCap|helpControlMenuItem.Highlighted
+{
+	background-color: #ffffff;
+	border-bottom-color: #ffffff;
+	border-top-color: #ffffff;
+	color: #3baeda;
+	text-decoration: underline;
+}
+
+MadCap|indexProxy
+{
+	border-top-style: none;
+	border-top-width: 0px;
+}
+
+MadCap|keywordLink:link
+{
+	color: #0073e7;
+}
+
+MadCap|keywordLink:visited
+{
+	color: #0073e7;
+}
+
+MadCap|keywordLink:hover
+{
+	color: #3baeda;
+}
+
+MadCap|keywordLink.ListFormatHeader
+{
+	color: #000000;
+	mc-help-control-display: list;
+	mc-image: none;
+	font-weight: bold;
+}
+
+MadCap|keywordLinkControlListItemLink:hover
+{
+	color: #3baeda;
+}
+
+MadCap|popup:link
+{
+	color: #0073e7;
+}
+
+MadCap|popup:visited
+{
+	color: #0073e7;
+}
+
+MadCap|popup:hover
+{
+	color: #3baeda;
+}
+
+MadCap|popupBody
+{
+	clear: both;
+	float: right;
+	height: auto;
+	border-color: #999999;
+	text-indent: 0;
+}
+
+MadCap|popupHead
+{
+	color: #0073e7;
+	text-decoration: none;
+	content: "\0000a0";
+	padding-right: 18px;
+	display: inline;
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-image: url('./_FT_DropDownClosed.png');
+}
+
+MadCap|popupHead:hover
+{
+	color: #3baeda;
+}
+
+MadCap|relatedTopics
+{
+	color: #0073e7;
+	mc-label: 'Related information';
+	/* Localizable */
+	mc-use-custom-sort-order: true;
+	text-decoration: none;
+}
+
+MadCap|relatedTopics:hover
+{
+	color: #3baeda;
+}
+
+MadCap|relatedTopics.ListFormatHeader
+{
+	color: #000000;
+	font-weight: bold;
+	mc-help-control-display: list;
+	/* Fix for TPS-55 - bad alignment of the icon vs. the header text in several output formats */
+	/* mc-image: none; */
+	mc-label: 'Related topics';
+	/* Localizable */
+}
+
+MadCap|relationshipsProxy
+{
+	font-size: 1.0em;
+}
+
+MadCap|relationshipsHeading
+{
+	font-size: 1.0em;
+	margin-bottom: 0.3em;
+	margin-top: 1.0em;
+}
+
+MadCap|relationshipsHeading.concept
+{
+	font-size: 1.0em;
+	mc-label: 'Related information';
+	/* Localizable */
+}
+
+MadCap|relationshipsHeading.reference
+{
+	font-size: 1.0em;
+	mc-label: 'Reference materials';
+	/* Localizable */
+}
+
+MadCap|relationshipsHeading.task
+{
+	font-size: 1.0em;
+	mc-label: 'Related tasks';
+	/* Localizable */
+}
+
+MadCap|relationshipsItem
+{
+	font-size: 1.0em;
+	margin-bottom: 0em;
+	margin-left: 1.2em;
+	display: list-item;
+	list-style-type: disc;
+}
+
+MadCap|tocProxy
+{
+	mc-output-support: pdf;
+}
+
+MadCap|toggler
+{
+	mc-image-position: right;
+	mc-open-image: url('_FT_checked.png');
+	mc-closed-image: url('_FT_unchecked.png');
+}
+
+MadCap|toggler:link
+{
+	color: #0073e7;
+}
+
+MadCap|toggler:visited
+{
+	color: #0073e7;
+}
+
+MadCap|toggler:hover
+{
+	color: #3baeda;
+}
+
+MadCap|xref
+{
+	color: #0073e7;
+	text-decoration: none;
+	mc-format: '{para}';
+}
+
+MadCap|xref:link
+{
+	color: #0073e7;
+	text-decoration: none;
+}
+
+MadCap|xref:visited
+{
+	color: #0073e7;
+}
+
+MadCap|xref:hover
+{
+	color: #3baeda;
+}
+
+MadCap|xref.noNum
+{
+	color: #0073e7;
+	mc-format: '{para}';
+}
+
+MadCap|xref.noNum:visited
+{
+	color: #0073e7;
+	mc-format: '{para}';
+}
+
+MadCap|xref.pageNumOnly
+{
+	mc-format: '{page}';
+}
+
+span.noGlossary
+{
+	mc-disable-glossary-terms: true;
+}
+
+.hyphenate
+{
+	mc-hyphenate: always;
+}
+
+/* using for Flare workaround to include banner files in output files */
+/* when Target,Advanced tab, Exclude content not linked directly or indirectly from the target is set */
+
+ins
+{
+	background-image: url("../MasterPages/_FTb_banner_graphic.png");
+}
+
+/* for bi-directional text */
+
+/*
+dir
+{
+	margin: 0;
+	display: none;
+}
+*/
+
+/* hides character styles in the XML editor */
+
+abbr,
+acronym,
+big,
+cite,
+em,
+ins,
+samp,
+small,
+strong,
+tt,
+u,
+var
+{
+	mc-disabled: true;
+}
+
+p.Index6
+{
+	text-decoration: underline;
+}
+
+/**** Captions ****/
+
+p.FigCaptionNoNum,
+p.FigCaptionByChap,
+p.FigCaptionByDoc
+{
+	font-family: 'FT-MetricLocal', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	font-weight: bold;
+	page-break-before: avoid;
+	margin-left: 0;
+	padding-top: 0;
+	margin-top: -0.75em;
+	margin-bottom: 1.25em;
+}
+
+p.TblCaptionByChap,
+p.TblCaptionByDoc
+{
+	font-family: 'FT-MetricLocal', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	font-weight: bold;
+	page-break-after: avoid;
+	margin-left: 0;
+	padding-bottom: 0;
+	margin-top: 1.25em;	
+	margin-bottom: 0.5em;
+}
+
+MadCap|xref.FullCaption
+{
+	mc-format: '{paranum} {paratext}';
+}
+
+/* fallback to no page ref because online 
+   output doesn't support page numbers */
+MadCap|xref.FullCaptionWithPage
+{
+	mc-format: '{paranum} {paratext}';
+}
+
+/* fallback to caption text because online 
+   output doesn't support caption numbers */
+MadCap|xref.NumOnlyCaption
+{
+	mc-format: '{paratext} ';
+}
+
+MadCap|listOfProxy.CaptionList
+{
+	margin-bottom: 1em;
+}
+
+p.Captions  /* individual ListOf items */
+{
+	margin-top: 0pt;
+	margin-bottom: 0pt;
+	border:none; 
+}
+
+div.ListOfProxy_CaptionList_0 td 
+{
+	border: none; 
+	padding:0;
+}
+
+a.GenListOfTextCaptions
+{
+	display:list-item; 
+}
+
+a.GenListOfTextCaptions:link
+{
+	color: #0073e7;
+}
+
+		
+/* ****************************************************** */
+
+/* Print Output */
+/* PDF output requires OTF fonts that are installed on the Flare build computer, local fonts won't work */
+
+@media print
+{
+	/* Paragraphs */
+
+	body
+	{
+		color: #000000;
+		font-size: 10pt;
+		line-height: normal;
+		margin-bottom: 12pt;
+		mc-hyphenate: never;
+		font-family: Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	}
+
+	/* Paragraphs */
+
+	p
+	{
+		orphans: 2;
+		widows: 2;
+	}
+
+	/* formatting miniTOC to look like a bullet list */
+
+	MadCap|miniTocProxy
+	{
+		margin-top: 0px;
+		margin-bottom: 12pt;
+		padding-left: 0px;
+		border-top-style: none;
+		mc-output-support: all;
+	}
+
+	/* td.GenMiniTOCText is required to add a bullet to the list of entries in PDF miniTOC */
+
+	td.GenMiniTOCText1,
+	td.GenMiniTOCText2,
+	td.GenMiniTOCText3,
+	td.GenMiniTOCText4,
+	td.GenMiniTOCText5,
+	td.GenMiniTOCText6,
+	td.GenMiniTOCText7,
+	td.GenMiniTOCText8
+	{
+		mc-auto-number-format: '•  ';
+		mc-auto-number-class: miniTOC_bullet;
+		margin-left: 8px;
+		margin-right: 16px;
+		padding-left: 9px;
+		padding-right: 9px;
+		margin-top: 0px;
+	}
+
+	span.miniTOC_bullet
+	{
+		color: #000000;
+		font-size: 14pt;
+		vertical-align: middle;
+	}
+
+	/* p.MiniTOC = all sorts of formatting for miniTOC */
+
+	p.MiniTOC1,
+	p.MiniTOC2,
+	p.MiniTOC3,
+	p.MiniTOC4,
+	p.MiniTOC5,
+	p.MiniTOC6,
+	p.MiniTOC7,
+	p.MiniTOC8,
+	p.MiniTOC9
+	{
+		color: #0073e7;
+		font-weight: normal;
+		font-size: 10pt;
+		display: list-item;
+		list-style-type: disc;
+		margin-top: 0pt;
+		margin-bottom: 0pt;
+	}
+
+	/* p.MiniTOC1_0 is required to add a bullet to the list of entries in WebHelp and HTML5 miniTOC	*/
+
+	p.MiniTOC1_0,
+	p.MiniTOC2_0,
+	p.MiniTOC3_0,
+	p.MiniTOC4_0,
+	p.MiniTOC5_0,
+	p.MiniTOC6_0,
+	p.MiniTOC7_0,
+	p.MiniTOC8_0,
+	p.MiniTOC9_0
+	{
+		margin-top: 0px;
+		margin-bottom: 0pt;
+		display: list-item;
+		list-style-type: disc;
+	}
+
+	p.pdf
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+	}
+
+	p.PDFheader
+	{
+		padding-left: -16pt;
+		margin-top: 6pt;
+		margin-bottom: 6pt;
+		color: #767676;
+	}
+
+	p.intro_phrase
+	{
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-size: 12pt;
+		color: #000000;
+		padding-top: 10pt;
+	}
+
+	/* Links */
+
+	a
+	{
+		color: #0073e7;
+	}
+
+	a:link
+	{
+		text-decoration: none;
+		color: #0073e7;
+	}
+
+	a:focus
+	{
+		text-decoration: underline;
+	}
+
+	a.avoidPrint
+	{
+		display: none;
+	}
+
+	a.pop
+	{
+		color: #000000;
+		text-decoration: none;
+	}
+
+	a.Popup
+	{
+		text-decoration: none;
+	}
+
+	/* Headings */
+
+	h1
+	{
+		font-weight: normal;
+		font-style: normal;
+		line-height: normal;
+		page-break-after: avoid;
+		margin-top: 28pt;
+		margin-bottom: 14pt;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		color: #000000;
+		font-size: 26pt;
+	}
+
+	h1.appendix
+	{
+		mc-auto-number-format: 'Appendix {chapnum}: ';
+		/* Localizable */
+		page-break-after: avoid;
+	}
+
+	h1.chapternum
+	{
+		mc-auto-number-format: 'Chapter {chapnum}: ';
+		/* Localizable */
+		page-break-after: avoid;
+	}
+
+	h1.partnum
+	{
+		mc-auto-number-format: 'Part {volnum}: ';
+		/* Localizable */
+		page-break-after: avoid;
+		padding-left: 0pt;
+	}
+
+	h1.frontMatter
+	{
+		font-weight: bold;
+		font-style: normal;
+		font-size: 16pt;
+		page-break-before: auto;
+		margin-top: 10pt;
+		margin-bottom: 5pt;
+		mc-heading-level: 0;
+		color: #000000;
+	}
+
+	h2
+	{
+		color: #000000;
+		font-weight: normal;
+		font-style: normal;
+		font-size: 21pt;
+		page-break-after: avoid;
+		margin-top: 24pt;
+		margin-bottom: 10pt;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+	}
+
+	h2.appendix
+	{
+		color: #333333;
+		mc-auto-number-format: 'Appendix {chapnum}: ';
+		/* Localizable */
+		page-break-after: avoid;
+		padding-left: 0pt;
+	}
+
+	h2.chapternum
+	{
+		color: #333333;
+		mc-auto-number-format: 'Chapter {chapnum}: ';
+		/* Localizable */
+		page-break-after: avoid;
+		padding-left: 0pt;
+	}
+
+	h2.frontMatter
+	{
+		font-weight: bold;
+		font-style: normal;
+		font-size: 12pt;
+		page-break-after: avoid;
+		page-break-before: auto;
+		margin-top: 10pt;
+		margin-bottom: 5pt;
+		mc-heading-level: 0;
+		color: #000000;
+	}
+
+	h3
+	{
+		color: #000000;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-size: 19pt;
+		font-weight: normal;
+		font-style: normal;
+		page-break-after: avoid;
+		margin-top: 20pt;
+		margin-bottom: 10pt;
+	}
+
+	h4
+	{
+		color: #000000;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-size: 17pt;
+		font-weight: normal;
+		font-style: normal;
+		margin-top: 16pt;
+		margin-bottom: 10pt;
+		page-break-after: avoid;
+		/*	margin-left: -14pt */
+	}
+
+	h5
+	{
+		color: #000000;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-size: 15pt;
+		font-weight: normal;
+		font-style: normal;
+		margin-top: 15pt;
+		margin-bottom: 10pt;
+		page-break-after: avoid;
+	}
+
+	h6
+	{
+		color: #000000;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-size: 13pt;
+		font-weight: normal;
+		font-style: normal;
+		margin-top: 12pt;
+		margin-bottom: 10pt;
+		line-height: normal;
+		page-break-after: avoid;
+	}
+
+	h1.noTOC,
+	h2.noTOC,
+	h3.noTOC,
+	h4.noTOC,
+	h5.noTOC,
+	h6.noTOC
+	{
+		mc-heading-level: 0;
+	}
+
+	/* Rules */
+
+	hr
+	{
+		color: #B9B8BB;
+		height: 1pt;
+	}
+
+	hr.pdfTitle
+	{
+		background-color: #0073e7;
+		height: 9pt;
+		width: 504pt;
+	}
+
+	/* Images */
+
+	img
+	{
+		orphans: 2;
+		widows: 2;
+		float: none;
+		page-break-inside: auto;
+		/* max-width: 100%;   removing due to MadCap defect 88519*/
+	}
+
+	/* Lists */
+
+	li.pdf
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		list-style-type: disc;
+		margin-left: 10pt;
+		mc-hyphenate: inherit;
+	}
+
+	ol
+	{
+		margin-bottom: 9pt;
+		margin-top: 5pt;
+	}
+
+	ul
+	{
+		margin-bottom: 9pt;
+		margin-top: 5pt;
+	}
+
+	ol li p,
+	ul li p
+	{
+		margin-left: 0pt;
+		margin-bottom: 8pt;
+	}
+
+	ul ul li p,
+	ul ol li p,
+	ol ul li p,
+	ol ol li p
+	{
+		margin-left: 0pt;
+		margin-bottom: 8pt;
+	}
+
+	ul ul ul li p,
+	ul ol ol li p,
+	ul ul ol li p,
+	ul ol ul li p,
+	ol ul ul li p,
+	ol ol ol li p,
+	ol ul ol li p,
+	ol ol ul li p
+	{
+		margin-left: 0pt;
+		margin-bottom: 8pt;
+	}
+
+	ol li
+	{
+		margin-bottom: 8pt;
+		margin-left: 5pt;
+	}
+
+	ul li
+	{
+		margin-bottom: 8pt;
+		margin-left: 5pt;
+	}
+
+	ul ol li,
+	ol ol li
+	{
+		margin-bottom: 8pt;
+		margin-left: 2pt;
+	}
+
+	/* fixing problem of unordered sublists having larger bullet than main list */
+
+	ul ul li,
+	ol ul li
+	{
+		margin-bottom: 8pt;
+		margin-left: 6pt;
+	}
+
+	ol ol ol li,
+	ol ul ol li,
+	ul ol ol li,
+	ul ul ol li
+	{
+		margin-bottom: 8pt;
+		margin-left: 8pt;
+	}
+
+	ul ul ul li,
+	ul ol ul li,
+	ol ul ul li,
+	ol ol ul li
+	{
+		margin-bottom: 8pt;
+		margin-left: 8pt;
+	}
+
+	/* Admonitions in print media*/
+
+	div.Admonition_Caution
+	{
+		mc-auto-number-format: '{b}CAUTION: {/b}';
+		/* Localizable */
+	}
+
+	div.Admonition_Important
+	{
+		mc-auto-number-format: '{b}IMPORTANT: {/b}';
+		/* Localizable */
+	}
+
+	div.Admonition_Note
+	{
+		mc-auto-number-format: '{b}NOTE: {/b}';
+		/* Localizable */
+	}
+
+	div.Admonition_Tip
+	{
+		mc-auto-number-format: '{b}TIP: {/b}';
+		/* Localizable */
+	}
+
+	div.Admonition_Deprecated
+	{
+		mc-auto-number-format: '{b}DEPRECATED: {/b}';
+		/* Localizable */
+	}
+
+	table div.Admonition_Caution,
+	table div.Admonition_Important,
+	table div.Admonition_Note,
+	table div.Admonition_Tip,
+	table div.Admonition_Deprecated
+	{
+		padding-top: 4px;
+	}
+
+	/* ------ End Admonitions for print ---- */
+	/* backgrounds for examples */
+
+	div.example
+	{
+		border-color: #f3f3f3;
+		padding-top: 5pt;
+		padding-bottom: 5pt;
+	}
+
+	div.frontMatter
+	{
+		font-size: 9pt;
+	}
+
+	/* Table styles */
+
+	table
+	{
+		border-collapse: collapse;
+		border: solid 1px #dcdedf;
+		margin-bottom: 14pt;
+		background-color: transparent;
+		mc-hyphenate: inherit;
+		/* mc-hide-bottom-ruling: true;*/
+	}
+
+	td
+	{
+		border-right: solid 1px #dcdedf;
+		border-top: solid 1px #dcdedf;
+		border-bottom: solid 1px #dcdedf;
+		background-color: transparent;
+		color: #000000;
+		mc-hyphenate: inherit;
+	}
+
+	td.null
+	{
+		border: none;
+		border-collapse: collapse;
+		background-color: transparent;
+	}
+
+	th
+	{
+		border-bottom: solid 1px #dcdedf;
+		border-right: solid 1px #dcdedf;
+		border-top: none;
+		color: #000000;
+		font-size: 100%;
+		background-color: #f3f3f3;
+		vertical-align: top;
+	}
+
+	table.no_lines,
+	table.no_lines td
+	{
+		color: #000000;
+	}
+
+	table.no_lines th
+	{
+		color: #000000;
+	}
+
+	/**** Captions ****/
+	
+	p.FigCaptionNoNum,
+	p.FigCaptionByChap,
+	p.FigCaptionByDoc
+	{
+		padding-bottom: 1.25em;
+		margin-top: 0;
+	}
+
+	p.FigCaptionByChap
+	{
+		mc-auto-number-format: 'CF:Figure {chapnum}-{n+}: ';
+		/* Localizable */
+	}
+
+	p.FigCaptionByDoc
+	{
+		mc-auto-number-format: 'GF:Figure {n+}: ';
+		/* Localizable */
+	}
+
+	p.TblCaptionByChap
+	{
+		mc-auto-number-format: 'CT:Table {chapnum}-{n+}: ';
+		/* Localizable */
+		padding-top: 0.95em;
+	}
+
+	p.TblCaptionByDoc
+	{
+		mc-auto-number-format: 'GT:Table {n+}: ';
+		/* Localizable */
+		padding-top: 0.95em;
+	}
+
+	caption /* default table caption */
+	{
+		padding-top: 1.25em;	
+		padding-bottom: 4pt;
+	}
+	
+	caption,
+	p.TblCaptionByChap,
+	p.TblCaptionByDoc,
+	p.FigCaptionByChap,
+	p.FigCaptionByDoc,
+	p.FigCaptionNoNum
+	{
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		font-weight: normal;
+		font-size: 11pt; 
+	}
+
+	MadCap|xref.NumOnlyCaption
+	{
+		mc-format: '{paranumonly} ';
+	}
+
+	MadCap|xref.FullCaptionWithPage
+	{
+		mc-format: '{paranum} {paratext}, {pageref}';
+	}
+	
+	p.Captions /* individual ListOf items */
+	{
+		text-align: left;
+		text-align-last: left;
+		mc-leader-indent: 1em;
+		mc-leader-offset: 0.5em;
+		mc-leader-format: 'dot';
+		mc-leader-align: right;
+		margin-left: 0;
+	}
+
+	a.GenListOfTextCaptions
+	{
+		display:table; 
+	}
+
+	/* Responsive styles */
+	/* Wrapper for wide images that adds scrollbar, if needed. */
+
+	div.rd_scroll
+	{
+		
+	}
+
+	div.rd_scroll img
+	{
+		
+	}
+
+	/* MadCap Flare Styles */
+
+	MadCap|footnotesBlock
+	{
+		border: none;
+	}
+
+	a.MCDropDownHotSpot_0:link
+	{
+		color: #000000;
+	}
+
+	MadCap|dropDownHead.boldPrint
+	{
+		font-size: 120%;
+		font-family: 'MetricNEW Semibold', Arial, Tahoma, 'Lucida Sans Unicode', sans-serif;
+		margin-top: 12pt;
+		margin-bottom: 5pt;
+	}
+
+	MadCap|dropDownHotspot
+	{
+		font-style: italic;
+	}
+
+	h1 MadCap|dropDownHotspot,
+	h2 MadCap|dropDownHotspot,
+	h3 MadCap|dropDownHotspot,
+	h4 MadCap|dropDownHotspot,
+	h5 MadCap|dropDownHotspot,
+	h6 MadCap|dropDownHotspot,
+	p.intro_phrase MadCap|dropDownHotspot
+	{
+		font-style: normal;
+	}
+
+	MadCap|dropDownBody
+	{
+		margin-left: 2em;
+	}
+
+	MadCap|xref
+	{
+		/* Localizable */
+		mc-format: '{para}, {pageref}';
+	}
+
+	MadCap|xref
+	{
+		color: #0073e7;
+	}
+
+	MadCap|xref.noNum
+	{
+		color: #0073e7;
+		/* Localizable */
+		mc-format: '{para}';
+	}
+
+	MadCap|popup
+	{
+		color: #000000;
+	}
+
+	MadCap|popupHead
+	{
+		color: #000000;
+		text-decoration: none;
+	}
+
+	MadCap|toggler
+	{
+		color: #000000;
+	}
+
+	/* Modifications to MadCap Flare styles to show drop-down text  */
+
+	div.MCDropDownBody,
+	div.MCDropDownBody_0
+	{
+		display: block !important;
+	}
+
+	img.MCDropDownIcon,
+	img.MCDropDownBody_0
+	{
+		display: none !important;
+	}
+
+	/* TOC */
+
+	MadCap|tocProxy
+	{
+		border-top-style: none;
+	}
+
+	p.toc1
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 12pt;
+		line-height: normal;
+		margin-left: 0in;
+		orphans: 2;
+		widows: 2;
+		margin-top: 20pt;
+		margin-bottom: 2pt;
+	}
+
+	p.toc2
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		orphans: 2;
+		widows: 2;
+		margin-left: 0.2in;
+		margin-top: 6pt;
+		margin-bottom: 2pt;
+	}
+
+	p.toc3
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		orphans: 2;
+		widows: 2;
+		margin-left: 0.40in;
+		margin-top: 2pt;
+		margin-bottom: 2pt;
+	}
+
+	p.toc4
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		orphans: 2;
+		widows: 2;
+		margin-left: 0.6in;
+		margin-top: 2pt;
+		margin-bottom: 2pt;
+	}
+
+	p.toc5
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		orphans: 2;
+		widows: 2;
+		margin-left: 0.8in;
+		margin-top: 2pt;
+		margin-bottom: 2pt;
+	}
+
+	p.toc6
+	{
+		color: #000000;
+		font-weight: normal;
+		font-size: 10pt;
+		line-height: normal;
+		margin-left: 1.0in;
+		orphans: 2;
+		widows: 2;
+		margin-top: 2pt;
+		margin-bottom: 2pt;
+	}
+
+	/* Glossary and Index Page Styles */
+
+	MadCap|indexProxy
+	{
+		border-top-style: none;
+		border-top-width: 0px;
+	}
+
+	p.IndexHeading
+	{
+		border: none;
+		color: #0073e7;
+		text-align: left;
+	}
+
+	MadCap|glossaryProxy
+	{
+		border-top-style: none;
+		border-top-width: 0px;
+		font-size: 10pt;
+		font-weight: normal;
+	}
+
+	div.GlossaryPageHeading
+	{
+		border: none;
+		color: #0073e7;
+		font-size: 14pt;
+		font-weight: bold;
+		line-height: normal;
+		margin-bottom: 12pt;
+		border-bottom-style: solid;
+		border-bottom-color: #0073e7;
+		border-bottom-width: 1px;
+		mc-hyphenate: never;
+	}
+
+	div.GlossaryPageEntry
+	{
+		padding-bottom: 0pt;
+	}
+
+	div.GlossaryPageDefinition
+	{
+		color: #000000;
+		font-size: 10pt;
+		font-weight: normal;
+		line-height: normal;
+		margin-bottom: 5pt;
+		margin-left: 10pt;
+		mc-hyphenate: never;
+		padding-bottom: 5pt;
+	}
+
+	div.GlossaryPageTerm
+	{
+		color: #000000;
+		font-size: 10pt;
+		font-weight: bold;
+		line-height: normal;
+		margin-bottom: 0pt;
+		mc-hyphenate: never;
+	}
+
+	/* old dropdown head style to be deprecated */
+
+	MadCap|dropDownHead.z_migration_tba_PDF
+	{
+		font-size: 120%;
+		font-weight: bold;
+		margin-bottom: 5pt;
+		page-break-after: avoid;
+	}
+
+	/* end of deprecated section */
+
+	p.avoidPageBreak
+	{
+		
+	}
+}
+
+@media PartChapNum
+{
+	h1.appendix
+	{
+		mc-disabled: false;
+	}
+
+	h1.chapternum
+	{
+		mc-disabled: false;
+	}
+
+	h1.partnum
+	{
+		mc-disabled: false;
+	}
+}
+
+@media non-print
+{
+	a
+	{
+		color: #0073e7;
+	}
+
+	MadCap|conceptLink
+	{
+		color: #0073e7;
+	}
+
+	MadCap|keywordLink
+	{
+		color: #0073e7;
+	}
+
+	MadCap|relatedTopics
+	{
+		color: #0073e7;
+	}
+
+	MadCap|shortcut
+	{
+		color: #0073e7;
+	}
+
+	MadCap|xref
+	{
+		color: #0073e7;
+	}
+
+	caption
+	{
+		font-weight: normal;
+	}
+}
+

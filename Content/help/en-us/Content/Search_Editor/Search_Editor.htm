@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:MadCap="http://www.madcapsoftware.com/Schemas/MadCap.xsd" lang="en-us" xml:lang="en-us" data-mc-search-type="Stem" data-mc-help-system-file-name="WebClient.xml" data-mc-path-to-help-system="../../" data-mc-target-type="WebHelp2" data-mc-runtime-file-type="Topic" data-mc-preload-images="false" data-mc-in-preview-mode="false" data-mc-toc-path="Content Manager Web Client Help|Searching">
+    <!-- saved from url=(0016)http://localhost -->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Search Editor</title>
+        <link href="../../Skins/Default/Stylesheets/Slideshow.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/TextEffects.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Topic.css" rel="stylesheet" />
+        <link href="../../Skins/Default/Stylesheets/Components/Styles.css" rel="stylesheet" />
+        <style>p.footerlink
+{
+	font-size: 85%;
+	text-align: right;
+}
+
+</style>
+        <link href="../Resources/Stylesheets/_FT_IE_Experience.css" rel="stylesheet" />
+        <script src="../../Resources/Scripts/custom.modernizr.js">
+        </script>
+        <script src="../../Resources/Scripts/jquery.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.min.js">
+        </script>
+        <script src="../../Resources/Scripts/require.config.js">
+        </script>
+        <script src="../../Resources/Scripts/foundation.min.js">
+        </script>
+        <script src="../../Resources/Scripts/plugins.min.js">
+        </script>
+        <script src="../../Resources/Scripts/MadCapAll.js">
+        </script>
+    </head>
+    <body>
+        <div class="nocontent">
+            <div class="MCBreadcrumbsBox_0 breadcrumbs" data-mc-breadcrumbs-divider=" &gt; " data-mc-breadcrumbs-count="5" data-mc-toc="True"><span class="MCBreadcrumbsPrefix">  <![CDATA[ ]]></span>
+            </div>
+        </div>
+        <h1>Search Editor</h1>
+        <p>The Content Manager Search Editor provides an user interface to allow users to build both simple and complex searches using a single editor.</p>
+        <h2>Creating a Single Clause Search</h2>
+        <p>To create a simple single clause search using the Search Editor:</p>
+        <ol>
+            <li value="1">From the global Search panel, using the Search Object Selection drop-down list, select the Content Manager object type to be searched on, e.g. Records, Locations, User Labels.</li>
+            <li value="2">From the global Search panel, click <b>Options</b> and then click <b>Search Editor</b>.</li>
+        </ol>
+        <p>The <b>&lt;ObjectType&gt;&#160;Search</b> dialog appears.</p>
+        <ol data-mc-continue="true">
+            <li style="font-weight: normal;" value="3">From the list of displayed methods, select the method to be searched for, or search for the method by typing in the <b>Select Method</b> field, then select the required method from the displayed results.</li>
+        </ol>
+        <p style="font-weight: normal;">The <b>Add new search clause</b> details will appear on the Search Editor.</p>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>The list of methods can be displayed either Alphabetically or by their Category, to swap between the display styles, click the display type name. <br /><br />If the method is unknown, in the <b>Select Method</b> field, type in a word that is related to what the Search Method is about and then select the method from the displayed list. For example,  if you want to search for the location of a record but are unsure of the correct Search Method name, you can type in <i>location</i> and a list of Location type Search Methods, as well as Search Methods containing the word Location will be displayed. This reduces the displayed list of search methods enabling you to find the required one.</div>
+        <p style="font-weight: normal;">The <b>Add new search clause</b> section will appear on the <b>Search Editor</b>.</p>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>for information about the selected search method, in the <b>Add new search clause</b> section, click <b>Help</b> <img src="../Resources/Images/SeachMethod_Info.png" /></div>
+        <ol data-mc-continue="true">
+            <li value="4">If the search method requires it, from the drop-down list, select the type of search to be run. Depending on the type of search method selected, these options can include:<ul><li value="1"><b>Date range</b> - search items using a single date or a range of dates. Dates can be typed in or selected using the Calendar.</li><li value="2"><b>String format</b> - search for items using a string type date, e.g. today, last week, this year, or a typed in date format, e.g. 10/10/2010-30/10/2010; or </li><li value="3"><b>Select single item</b> - type in the required search criteria.</li><li value="4"><b>Select all items that match a search</b> - select this option to create a sub-search (see <a href="Advanced_Searching.htm#Creating_Sub-Searches">Creating <a href="Advanced_Searching.htm#Creating_Sub-Searches">Sub-Searches</a></a> for details).</li></ul></li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="5">Type your search criteria/parameter into the search method field.</li>
+        </ol>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>for text type search methods, to match the exact search criteria, select <b>Group words as a phrase</b> and only records that match that exact phrase will be returned. This phrase will be passed to the search engine in the required format, that is, &lt;searchmethod&gt;:"\"A B&#160;C\""<br /><br />When using the IDOL search method to search Additional Fields, the search criteria must be entered enclosed in quotation marks, e.g. idol:"(searched word/phrase):TS_UDF", with the UDF name prefixed with TS_</div>
+        <ol data-mc-continue="true">
+            <li value="6">Select <a href="Advanced_Searching.htm#Boolean_Operators">Not</a> or <a href="Advanced_Searching.htm#Recursiv">Recursive</a> or <a href="Advanced_Searching.htm#Phrase">Phrase searching</a>, if required (see links for additional details).</li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="7">Click <b>Add search clause</b>.</li>
+        </ol>
+        <p>The <b>Search Clause</b> will be added to the <b>Build Query</b> field.</p>
+        <ol data-mc-continue="true">
+            <li value="8">Click <b>Search</b>.</li>
+        </ol>
+        <p>The search results will be displayed on the relevant Content Manager object panel.</p>
+        <h2><a name="Creating_a_Multiple_Clause_Search"></a>Creating a Multiple Clause Search</h2>
+        <p>To build a search that has more than one search clause:</p>
+        <ol>
+            <li value="1">From the global Search panel, using the Search Object Selection drop-down list, select the Content Manager object type to be searched on, e.g. Records, Locations, User Labels.</li>
+            <li value="2">From the global Search panel, click <b>Options</b> and then click <b>Search Editor</b>.</li>
+        </ol>
+        <p>The <b>&lt;ObjectType&gt;&#160;Search</b> dialog appears.</p>
+        <ol data-mc-continue="true">
+            <li style="font-weight: normal;" value="3">From the list of displayed methods, select the method to be searched for, or search for the method by typing in the <b>Select Method</b> field, then select the required method from the displayed results.</li>
+        </ol>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>The list of methods can be displayed either Alphabetically or by their Category, to swap between the display styles, click the display type name. <br /><br />If the method is unknown, in the <b>Select Method</b> field, type in a word that is related to what the Search Method is about and then select the method from the displayed list. For example,  if you want to search for the location of a record but are unsure of the correct Search Method name, you can type in <i>location</i> and a list of Location type Search Methods, as well as Search Methods containing the word Location will be displayed. This reduces the displayed list of search methods enabling you to find the required one.</div>
+        <p style="font-weight: normal;">The <b>Add new search clause</b> section will appear on the <b>Search Editor</b>.</p>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>for information about the selected search method, in the Add new search clause section, click <b>Help</b> <img src="../Resources/Images/SeachMethod_Info.png" /></div>
+        <ol data-mc-continue="true">
+            <li value="4">If the search method requires it, from the drop-down list, select the type of search to be run. Depending on the type of search method selected, these options can include:<ul><li value="1"><b>Date range</b> - search items using a single date or a range of dates. Dates can be typed in or selected using the Calendar.</li><li value="2"><b>String format</b> - search for items using a string type date, e.g. today, last week, this year, or a typed in date format, e.g. 10/10/2010-30/10/2010; or </li><li value="3"><b>Select single item</b> - type in the required search criteria.</li><li value="4"><b>Select all items that match a search</b> - select this option to create a sub-search (see <a href="Advanced_Searching.htm#Creating_Sub-Searches">Creating <a href="Advanced_Searching.htm#Creating_Sub-Searches">Sub-Searches</a></a> for details).</li></ul></li>
+        </ol>
+        <ol data-mc-continue="true">
+            <li value="5">Type your search criteria/parameter into the search method field.</li>
+            <li value="6">Select <a href="Advanced_Searching.htm#Boolean_Operators">Not</a> or <a href="Advanced_Searching.htm#Recursiv">Recursive</a> or <a href="Advanced_Searching.htm#Phrase">Phrase Searching</a>, if required (see links for additional details).</li>
+            <li value="7">Click <b>Add search clause</b>.</li>
+        </ol>
+        <p>The <b>Search Clause</b> will be added to the <b>Build Query</b> field.</p>
+        <p>Repeat steps 3 to 7 for each additional search clause that is to be added to the search.</p>
+        <p>Each search clause will be joined by an <b>AND</b> Boolean operator, by default. To change this to an <b>OR</b> Boolean operator, click the Boolean&#160;pill and click <b>Or</b> from the displayed list. See <a href="Advanced_Searching.htm#Boolean_Operators">Boolean Operators</a> for additional information.</p>
+        <ol data-mc-continue="true">
+            <li value="8">Click <b>Search</b>.</li>
+        </ol>
+        <p>The search results will be displayed on the relevant Content Manager object panel.</p>
+        <div class="Admonition_Note" data-mc-autonum="NOTE: "><span class="autonumber"><span>NOTE: </span></span>the search clauses are passed to the global Search panel when a search is run. A search can be edited using this panel or by using the Search Editor, see <a href="../Searching/Editing_Searches.htm">Editing Searches</a> for details.<br />Please be aware that if you change the Content Manager object type to be searched on, the search clauses relevant to the previously selected object type will be retained within the global Search panel and  within the Search Editor if you open it to edit or amend the search. To remove these clauses, on the <b>Build Query</b> field, click <b>Clear</b>, or individually clear the clause(s) by clicking the delete X option in the search clause pill.</div>
+        <h2>Filtering and Sorting</h2>
+        <p>Search results can be filtered and/or sorted before the search is run using the <b>Filter</b> and <b>Sort</b> tabs on the <b>Search Editor</b> dialog, or search results can be filtered and/or sorted after the search has been run. See <a href="../Searching/Filter_Sort.htm">Filtering and Sorting</a> for details.</p>
+        <h2>Saving Searches</h2>
+        <p>Searches built using the <b>Search Editor</b> can be saved, see <a href="../Saved Searches/Creating_a_Saved_Search.htm">Creating a Saved Search</a> for details.</p>
+        <!-- hr = horizontal rule -->
+        <hr width="100%" size="0" align="center" padding-bottom="0" style="clear:both" />
+        <table style="border: none; border-collapse: collapse; width: 100%; margin-left: 0; margin-right: auto; margin-top: 0; padding-top: 0">
+            <col />
+            <col />
+            <tbody>
+                <tr>
+                    <td style="border: none; border-collapse: collapse;">
+                        <p id="Copyright" style="font-size: 85%; text-align: left;direction: ltr;"><a href="../Resources/MasterPages/_FT_Legal_Notices.htm#1">© Copyright <span class="_FTc_Basic_Variables_FT_Copyright_Date_Range">2008-2019</span>&#160;<span class="_FTb_Branding_Variables_FT_Company_Legal_Name">Micro Focus or one of its affiliates</span></a>
+                        </p>
+                    </td>
+                    <td style="border: none;">
+                        <div id="Feedback">
+                            <p class="footerlink"><a href="javascript:sendFeedback();" class="avoidPrint">Send documentation feedback</a>
+                            </p>
+                            <!-- Localizable -->
+                            <div id="ft-feedbackDiv" class="MCTextPopupBody" style="display:none; word-wrap:break-word;">
+                                <div style="position: absolute;top: 2px;right: 2px;text-align: right;"><a href="javascript:closeFeedback();" id="ft-feedbackClose">Close</a>
+                                </div>
+                                <!-- Localizable -->
+                                <p style="font-weight: bold; margin-top: 1.5em;">Send documentation feedback</p>
+                                <!-- Localizable -->
+                                <p>To open the configured email client on this computer, <a name="ft-feedbackOpen" id="ft-feedbackOpen">open an email window</a>.</p>
+                                <!-- Localizable -->
+                                <p>Otherwise, copy the information below to a web mail client, and send this email to <span class="_FTc_Basic_Variables_FT_Product_IE_Team_PDL">hprmdocumentation@microfocus.com</span>.</p>
+                                <p style="margin-top: 1.5em;">We appreciate your feedback!</p>
+                                <!-- Localizable -->
+                                <hr />
+                                <div id="ft-feedbackBody">
+                                    <br />Product: <span id="ft-feedbackProduct"></span><span id="ft-feedbackAcronym"></span>&#160;<span id="ft-feedbackVersion"></span><br /><br />Topic Title: <span id="ft-feedbackTopic"></span><br /><br />Help Topic: <span id="ft-feedbackURL"></span><br /><br />Feedback:<br /><br /><br /></div>
+                                <!-- Localizable -->
+                            </div>
+                            <div style="display:none;" id="ft-feedback-variables" companyName="Micro Focus" productName="Content Manager" productVersion="9.4" commentsEmailAddress="hprmdocumentation@microfocus.com" productAcronym="CM" topicTitle="Search Editor" skinLine1="Micro Focus Content Manager" skinLine2="Web Client">&#160;
+        <p style="display:none;"><script src="../Resources/MasterPages/_FT_Feedback.js"></script></p></div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table><a href="../Resources/MasterPages/_FT_HTML5_bannerTitle.htm" style="visibility: hidden;">_FT_HTML5_bannerTitle.htm</a>
+        <div style="display:none;" id="FTb-Branding-Variables" Footer="Yes" Feedback="Yes">&#160;
+        </div>
+        <script>/* <![CDATA[ */
+			var BrandingVariables = document.getElementById("FTb-Branding-Variables");
+			if(BrandingVariables.getAttribute('Footer')=="No"){document.getElementById('Copyright').style.display = 'none';}
+			if(BrandingVariables.getAttribute('Feedback')=="No"){document.getElementById('Feedback').style.display = 'none';}
+		/* ]]> */</script>
+        <script src="../Resources/MasterPages/_FT_prism.js">
+        </script>
+    </body>
+</html>
